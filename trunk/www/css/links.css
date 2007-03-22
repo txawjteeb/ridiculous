@@ -1,0 +1,13 @@
+#navlist li
+{
+display: inline;
+list-style-type: none;
+padding-right: 20px;
+
+}
+
+#navlist li a img {
+	border: 0;
+
+}
+
