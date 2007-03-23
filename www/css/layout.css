@@ -1,35 +1,77 @@
 #centercontent {
-background:#fff;
-margin-left: 199px;
-margin-right:199px;
-border:1px solid #000;
+background:#000;
+color:#fff;
+margin-left: 500px;
+margin-right:100px;
+
 voice-family: "\"}\"";
 voice-family: inherit;
-margin-left: 201px;
-margin-right:201px;
+margin-left: 150px;
+margin-right:355px;
+margin-top:204px;
+height:510px;
 	}
 html>body #centercontent {
-margin-left: 201px;
-margin-right:201px;
+margin-left: 500px;
+margin-right:100px;
+color:#fff;
 	}
 
 	
 #leftcontent {
-background: #efefef url('bird_paradice_top_left.png');
-position: absolute;
-left:10px;
-top:50px;
-width:200px;
-background:#fff;
-border:1px solid #000;
+	background: #fff;
+	position: absolute;
+	left:10px;
+	top:20px;
+	height:700px;
+	width:150px;
+	background:#fff;
+	
+	color: #000000;
+	background-color: #FFFFFF;
+	background-image: url(../img/background_panel_left.gif);
 	}
 
 	
 #rightcontent {
-position: absolute;
-right:10px;
-top:50px;
-width:200px;
-background:#fff;
-border:1px solid #000;
+	position: absolute;
+	right:225px;
+	top:70px;
+	height:785px;
+	width:140px;
+	background:#fff;
+	
+	color: #000000;
+		background-color: #FFFFFF;
+		background-image: url(../img/background_panel_right.gif);
 	}
+
+#topcontent {
+	background: #fff;
+	position: absolute;
+	top:20px;
+	height:188px;
+	width:1025px;
+	background:#000;
+	
+	color: #fff;
+	background-color: #FFFFFF;
+	background-image: url(../img/background_panel_top.gif);
+	}
+
+#bottomcontent {
+	background: #fff;
+	position: absolute;
+	bottom:10px;
+	height:144px;
+	width:1025px;
+	background:#fff;
+	
+	color: #000000;
+	background-color: #FFFFFF;
+	background-image: url(../img/background_panel_bottom.gif);
+	}
+
+
+
+
