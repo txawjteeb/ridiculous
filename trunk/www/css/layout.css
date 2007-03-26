@@ -15,7 +15,17 @@ html>body #centercontent {
 margin-left: 500px;
 margin-right:100px;
 color:#fff;
-	}
+}
+	#topleftcorner {
+	background: #fff;
+	position: absolute;
+	left:200px;
+	top:300px;
+	height:100px;
+	width:300px;
+	background:#fff;
+}
+
 
 	
 #leftcontent {
@@ -71,7 +81,6 @@ color:#fff;
 	background-color: #FFFFFF;
 	background-image: url(../img/background_panel_bottom.gif);
 	}
-
 
 
 
