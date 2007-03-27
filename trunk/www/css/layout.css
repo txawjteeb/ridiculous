@@ -9,7 +9,7 @@ voice-family: inherit;
 margin-left: 150px;
 margin-right:355px;
 margin-top:204px;
-height:510px;
+height:520px;
 	}
 html>body #centercontent {
 margin-left: 500px;
@@ -17,17 +17,52 @@ margin-right:100px;
 color:#fff;
 }
 	#topleftcorner {
+padding:20px;
 	background: #fff;
 	position: absolute;
-	left:200px;
+	left:160px;
 	top:300px;
-	height:100px;
-	width:300px;
+	height:165px;
+	width:340px;
 	background:#fff;
+	color: #000000;
+	background-color: #000000;
+	background-image: url(../img/text_box_blue.gif);
 }
+#bottomleftcorner {
+	background: #000;
+	position: absolute;
+	left:160px;
+	top:475px;
+	height:200px;
+	width:300px;
+	background:#000;
+
+}
+#bottomrightcorner {
+	background: #000;
+	position: absolute;
+	left:540px;
+	top:475px;
+	height:175px;
+	width:300px;
+	background:#000;
 
 
-	
+}
+#toprightcorner {
+padding:20px;
+	background: #000;
+	position: absolute;
+	left:540px;
+	top:300px;
+	height:165px;
+	width:340px;
+	background:#000;
+color: #000000;
+	background-color: #000000;
+	background-image: url(../img/text_box_blue.gif);
+}	
 #leftcontent {
 	background: #fff;
 	position: absolute;
