@@ -78,17 +78,15 @@ var menuItems =
     ["||Utilities","#.html","img/#","img/#"],
     ["||Book","#.html","img/#","img/#"],
     ["||Psycology","#.html","img/#","img/#"],
-    ["|||Parameters","testlink.html","img/b021.gif","img/b02.gif"],
-    ["|||Tutorial","testlink.html","img/b021.gif","img/b02.gif"],
-    ["||Help","testlink.html","img/b061.gif","img/b06.gif"],
-    ["|Product 6","testlink.html","img/b011.gif","img/b01.gif","Product 6 Tip"],
-    ["More Info","testlink.html","img/new4-0985.gif"],
-    ["|You can place <b>any HTML code</b><br> to item, for example <u>image</u>:<br><img src=img/logo.gif>","testlink.html"],
-    ["Javascript calls","","img/new4-038.gif"],
-    ["|Click to call<br>message box","javascript:alert('Hello world!')","img/b09.gif","img/b092.gif"],
-    ["|Click to call<br>confirmation<br>dialog","javascript:confirm('Do you want to confirm?')","img/b09.gif","img/b092.gif"],
-    ["|Open 'Testlink'<br>page in 680x600<br>window","javascript:open('testlink.html','_blank','scrollbars,width=680,height=600')","img/b09.gif","img/b092.gif"],
-    ["Contact Us","mailto:support@apycom.com","img/new4-098.gif","img/new4-098.gif","Contact Us Tip"]
+    ["||Artists","#.html","img/#","img/#"],
+    ["||Documentaion","#.html","img/#","img/#"],
+    ["||programmers","#.html","img/#","img/#"],
+    ["|Cart","#.html","#","#","Cart Tip"],
+    ["|Source & Code Control","#.html","img/#"],
+    ["|Standards & Conventions","#.html"," img/#"],
+    ["Story","#.html","img/#"],
+    ["Characters","#.html","img/#","img/#"],
+    ["Links",""#.html","img/b09.gif","img/b092.gif"],
 ];
 
 //
