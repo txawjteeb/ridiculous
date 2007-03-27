@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace>
+	<settings>
+		<label>Ridiculous</label>
+	</settings>
+	<users>
+		<user>
+			<path>Ridiculous.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>Ridiculous.jcp</path>
+		</project>
+	</projects>
+</workspace>
