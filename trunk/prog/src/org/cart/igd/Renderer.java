@@ -131,36 +131,46 @@ public class Renderer implements GLEventListener
 			}
 		}
 		
+		/* Setup Camera */
 		camera.lookAt(glu, player);
 		
+		/* Render Player Model */
 		gl.glPushMatrix();
 		gl.glTranslatef(player.position.x, player.position.y, player.position.z);
 		gl.glRotatef(0f, 1f, 0f, player.facingDirection);
 		martin.draw(gl);
 		gl.glPopMatrix();
 
-		gl.glDisable(GL.GL_CULL_FACE);
-		skyDome.render(gl);
-		gl.glDisable(GL.GL_CULL_FACE);
-
+		/* Render SkyDome */
 		gl.glPushMatrix();
+		gl.glDisable(GL.GL_TEXTURE_2D);
+		//gl.glDisable(GL.GL_FOG);
+		gl.glDisable(GL.GL_LIGHTING);
+		gl.glDisable(GL.GL_LIGHT0);
+		gl.glDisable(GL.GL_CULL_FACE);
+		gl.glTranslatef(0f, 0f, 0f);
+			skyDome.render(gl);
+		gl.glEnable(GL.GL_CULL_FACE);
+		gl.glEnable(GL.GL_TEXTURE_2D);
+		//gl.glEnable(GL.GL_FOG);
 		gl.glEnable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_LIGHT0);
+		gl.glPopMatrix();
+
+		/* Render Land Map */
+		gl.glPushMatrix();
 		gl.glDisable(GL.GL_TEXTURE_2D);
-		
 		gl.glTranslatef(0f, 0f, 0f);
 		gl.glScalef(100f, 100f, 100f);
 		gl.glColor3f(1f, 1f, 1f);
-		land.draw(gl);
-		
+			land.draw(gl);
 		gl.glEnable(GL.GL_TEXTURE_2D);
-		gl.glDisable(GL.GL_LIGHTING);
-		gl.glDisable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
-		//heightMap.render(gl);
 		
+		/* Render GUI */
 		gui.render(g);
 		
+		/* Render Running stats */
 		renderStats(gl);
 	}
 	
@@ -212,6 +222,8 @@ public class Renderer implements GLEventListener
 	    gl.glEnable(GL.GL_CULL_FACE); 
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		gl.glEnable(GL.GL_TEXTURE_2D);
+		gl.glEnable(GL.GL_AUTO_NORMAL);
+		gl.glEnable(GL.GL_NORMALIZE);
 		gl.glShadeModel(GL.GL_SMOOTH);
 		//gl.glEnable(GL.GL_POLYGON_SMOOTH);
 		//gl.glHint(GL.GL_POLYGON_SMOOTH_HINT, GL.GL_NICEST);
@@ -225,9 +237,6 @@ public class Renderer implements GLEventListener
 		{
 			g = new GLGraphics(gl, glu);
 			gui = new InGameGUI();
-			org.cart.igd.ui.UIButton.texture = Display.renderer.textureLoader.getTexture("data/images/uibutton.png", gl, Display.renderer.glu);
-			skyTex = Display.renderer.textureLoader.getTexture("data/images/sky.png", gl, Display.renderer.glu);
-			landTex = Display.renderer.textureLoader.getTexture("data/images/land.jpg", gl, Display.renderer.glu);
 		}
 		catch(java.io.IOException e)
 		{
