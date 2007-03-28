@@ -25,7 +25,7 @@ public class UILabel extends UIComponent
 		Display.renderer.g.drawBitmapStringStroke( value, x+rel_x, y+rel_y, 1, new float[] {rgb[0],rgb[1],rgb[2],alpha}, ColorRGBA.White.getRGBA() );
 	}
 	
-	public void get_focus() {  }
+	public void getFocus() {  }
 	
-	public void drop_focus() {  }
+	public void dropFocus() {  }
 }

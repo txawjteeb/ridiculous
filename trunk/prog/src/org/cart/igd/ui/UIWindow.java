@@ -22,7 +22,7 @@ public class UIWindow
 	
 	public UIWindow(String title, int x, int y, boolean draggable)
 	{
-		this(title, x, y, draggable, 150, 180, 150, 65);
+		this(title, x, y, draggable, 0, 0, 0, 0);
 	}
 	
 	public UIWindow(String title, int x, int y, boolean draggable, Texture[] tex, int colbreak)
@@ -48,7 +48,7 @@ public class UIWindow
 		this.paddingTop = paddingTop;
 	}
 	
-	public boolean is_visible() { return (alpha==1f); }
+	public boolean isVisible() { return (alpha==1f); }
 	
 	public void close() { if(!opening) closing = true; }
 	public void open() { if(!closing) opening = true; }
@@ -61,11 +61,11 @@ public class UIWindow
 		this.paddingTop = paddingTop;
 	}
 	
-	public void UpdateAndDraw()
+	public void updateAndDraw()
 	{
 		if(closing && alpha<=0f) { closing = false; alpha = 0f; }
 		if(opening && alpha>=1f) { opening = false; alpha = 1f; }
-		if(is_visible())
+		if(isVisible())
 		{
 			//update
 			float mod = 0f;
@@ -73,7 +73,7 @@ public class UIWindow
 			if(opening) mod = 1f;
 			if(mod!=0f) alpha+=(fade_vel*mod);
 			
-			//draw
+			/*
 			int k = 0;
 			for(int i=0; i<tex.length/colbreak; i++)
 			{
@@ -82,21 +82,23 @@ public class UIWindow
 					Display.renderer.g.drawImageAlpha(tex[k], x+j*tex[k].imageWidth, y, 1f);
 					k++;
 				}
-			}					
+			}
+							
 			Display.renderer.g.drawBitmapString( title, x+paddingLeft, y+(tex[0].imageHeight*(tex.length/colbreak))-paddingTop, new float[] {1f,1f,1f,1f} );
-			
+			*/
+				
 			for(int i=0; i<components.size(); i++)
 			components.get(i).draw(x+paddingLeft, y+paddingBottom, alpha);
 		}
 	}
 	
-	public void mouse_released(int mx, int my)
+	public void mouseReleased(int mx, int my)
 	{
 		my = Display.getScreenHeight()-my;
 		if(dragEnabled) dragEnabled = false;
 	}
 	
-	public void mouse_moved(int mx, int my)
+	public void mouseMoved(int mx, int my)
 	{
 		if(draggable) return;
 		my = Display.getScreenHeight()-my;
@@ -109,7 +111,7 @@ public class UIWindow
 		}
 	}
 	
-	public void mouse_pressed(int mx, int my)
+	public void mousePressed(int mx, int my)
 	{
 		my = Display.getScreenHeight()-my;
 		if(mx>x && mx<x+1024 && my>y && my<y+512)
@@ -135,8 +137,8 @@ public class UIWindow
 					my<y+paddingBottom+c.rel_y+c.height)
 				{
 					focused_component = i;
-					c.get_focus();
-					if(tmp!=-1&&tmp!=i) components.get(tmp).drop_focus();
+					c.getFocus();
+					if(tmp!=-1&&tmp!=i) components.get(tmp).dropFocus();
 					earlyExit = true;
 				}
 			}
@@ -145,7 +147,7 @@ public class UIWindow
 			{
 				for(int i=0; i<components.size(); i++)
 				{
-					components.get(i).drop_focus();
+					components.get(i).dropFocus();
 				}
 			}
 		}
