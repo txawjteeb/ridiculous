@@ -41,7 +41,7 @@ public class SkyDome
 	    this.divisions = divisions;
 	    
 	    ColorRGBA startColor = new ColorRGBA( 70, 100, 128 );
-	    ColorRGBA endColor = new ColorRGBA( 0, 0, 0 );
+	    ColorRGBA endColor = new ColorRGBA( 0, 0, 255 );
 	    
 	    float colorSteps = 40.0f;
 	    float[] colorChange = new float[]
@@ -134,12 +134,6 @@ public class SkyDome
 	{
 		displayList = gl.glGenLists(1);
 		gl.glNewList(displayList, GL.GL_COMPILE);
-		
-		gl.glPushMatrix();
-		gl.glDisable(GL.GL_TEXTURE_2D);
-		gl.glDisable(GL.GL_FOG);
-		gl.glDisable(GL.GL_LIGHTING);
-		gl.glDisable(GL.GL_LIGHT0);
 		for(int i=divisions; i>0; i--)
 		{
 			gl.glBegin(GL.GL_QUAD_STRIP);
@@ -155,12 +149,6 @@ public class SkyDome
 			}
 			gl.glEnd();
 		}
-		gl.glEnable(GL.GL_LIGHT0);
-		gl.glEnable(GL.GL_LIGHTING);
-		gl.glEnable(GL.GL_TEXTURE_2D);
-		gl.glEnable(GL.GL_FOG);
-		
-		gl.glPopMatrix();
 		gl.glEndList();
 	}
 }

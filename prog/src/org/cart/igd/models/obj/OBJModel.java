@@ -279,7 +279,6 @@ public class OBJModel
 		modelDispList = gl.glGenLists(1);
 		gl.glNewList(modelDispList, GL.GL_COMPILE);
 		
-		gl.glPushMatrix();
 		String faceMat;
 		for(int i = 0; i < faces.getNumFaces(); i++)
 		{
@@ -289,7 +288,6 @@ public class OBJModel
 		}
 		if(materials!=null)
 			materials.switchOffTex(gl);
-		gl.glPopMatrix();
 		
 		gl.glEndList();
 	}
