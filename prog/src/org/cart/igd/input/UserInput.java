@@ -11,6 +11,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 {
 	public static boolean[] keys = new boolean[256];
 	public static int[] mousePos = new int[] { 0, 0 };
+	public static int[] mousePress = new int[]{0,0	};
 	public static boolean typingEnabled = false;
 	
 	public static Robot robot;
@@ -30,6 +31,25 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public static  boolean isSquareButtonPressed(int bx, int by, int r,int mx, int my)
+	{
+		if( bx<mx && bx+(r*2)>mx && by<my && (by+(r*2))>my )
+		{
+			return true;
+		}
+		return false;
+	}	
+	
+	/** test whether a circular button is pressed */
+	public static boolean isRoundButtonPressed(int xb, int yb, int br,int xm, int ym)
+	{
+		if( br > Math.sqrt( ((double)((xm-xb)*(xm-xb))+ ((ym-yb)*(ym-yb)))) )
+		{
+			return true;
+		}
+		return false;
 	}
 	
 	public static boolean isKeyPressed(int vk) { return keys[vk]; }
@@ -53,7 +73,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	
 	public void mousePressed(MouseEvent e)
 	{
-		updateMousePos(e.getX(), e.getY());
+		updateMousePress(e.getX(), e.getY());
 	}
 	
 	public void mouseReleased(MouseEvent e)
@@ -84,6 +104,11 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public void mouseExited(MouseEvent e)
 	{
 		updateMousePos(e.getX(), e.getY());
+	}
+	
+	private void updateMousePress(int x,int y){
+		mousePress[0] = x;
+		mousePress[1] = Display.getScreenHeight()-y;
 	}
 	
 	private void updateMousePos(int x, int y)

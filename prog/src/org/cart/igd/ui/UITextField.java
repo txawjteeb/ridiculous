@@ -57,7 +57,7 @@ public class UITextField extends UIComponent
 		}
 	}
 	
-	public void get_focus() { focused=true; fontColor = new float[] {1f,1f,1f}; rgb = new float[] { (0f/255f), (16f/255f), (51f/255f) }; }
+	public void getFocus() { focused=true; fontColor = new float[] {1f,1f,1f}; rgb = new float[] { (0f/255f), (16f/255f), (51f/255f) }; }
 	
-	public void drop_focus() { focused=false; fontColor = new float[] {0f,0f,0f}; rgb = new float[] {0f,0f,0f}; }
+	public void dropFocus() { focused=false; fontColor = new float[] {0f,0f,0f}; rgb = new float[] {0f,0f,0f}; }
 }

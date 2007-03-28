@@ -9,6 +9,6 @@ public abstract class UIComponent
 	public boolean focused;
 	
 	public abstract void draw(int x, int y, float alpha);
-	public abstract void get_focus();
-	public abstract void drop_focus();
+	public abstract void getFocus();
+	public abstract void dropFocus();
 }
