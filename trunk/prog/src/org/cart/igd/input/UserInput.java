@@ -14,6 +14,13 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public static int[] mousePress = new int[]{0,0	};
 	public static boolean typingEnabled = false;
 	
+	public GameAction keyActions[] = new GameAction[600];
+	public GameAction mouseActions[] = new GameAction[20];
+	public GameAction buttonActions[] = new GameAction[50];
+	
+	public static final int BUTTON_QUEST_LOG = 1;
+
+	
 	public static Robot robot;
 
 	public UserInput(Component comp)
@@ -50,6 +57,14 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 			return true;
 		}
 		return false;
+	}
+	
+	public void bindToKey(GameAction action){
+		keyActions[action.getKey()]=action;
+	}
+	
+	public void bindToButton(GameAction action){
+		buttonActions[action.getKey()] = action;
 	}
 	
 	public static boolean isKeyPressed(int vk) { return keys[vk]; }

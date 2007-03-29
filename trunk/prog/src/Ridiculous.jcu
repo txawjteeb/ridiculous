@@ -57,36 +57,36 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>org\cart\igd\input\GameEventList.java</path>
+			<path>org\cart\igd\InGameGUI.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\Driver.java</path>
+			<path>org\cart\igd\input\GameAction.java</path>
 			<source>true</source>
 			<index>1</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UIButton.java</path>
+			<path>org\cart\igd\input\UserInput.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\InGameGUI.java</path>
+			<path>org\cart\igd\ui\UIButton.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UIWindow.java</path>
+			<path>org\cart\igd\Driver.java</path>
 			<source>true</source>
 			<index>4</index>
 			<active>false</active>
 		</docitem>
-		<docitem>
+<<<<<<< .mine=======		<docitem>
 			<path>org\cart\igd\input\UserInput.java</path>
 			<source>true</source>
 			<index>5</index>
@@ -104,7 +104,7 @@
 			<index>7</index>
 			<active>false</active>
 		</docitem>
-		<docitem>
+>>>>>>> .r80		<docitem>
 			<path>org\cart\igd\models\obj\Materials.java</path>
 			<source>true</source>
 			<index>8</index>
