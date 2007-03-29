@@ -2,11 +2,13 @@ package org.cart.igd.ui;
 
 import org.cart.igd.Display;
 import org.cart.igd.util.Texture;
+import org.cart.igd.input.*;
 
 public class UIButton extends UIComponent
 {
 	public static Texture texture;
 	private boolean pressed = false;
+	private GameAction action;
 	
 	public UIButton(String value, int x, int y)
 	{
@@ -23,9 +25,10 @@ public class UIButton extends UIComponent
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
-	public UIButton(Texture tex, int x, int y, int width, int height)
+	public UIButton(Texture tex, GameAction action, int x, int y, int width, int height)
 	{
 		texture = tex;
+		action =action;
 		this.width = width;
 		this.height = height;
 		this.value = "";

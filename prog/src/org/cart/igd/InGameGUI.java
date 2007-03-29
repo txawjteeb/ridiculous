@@ -3,6 +3,7 @@ package org.cart.igd;
 import org.cart.igd.util.Texture;
 import org.cart.igd.ui.UIButton;
 import org.cart.igd.ui.UIWindow;
+import org.cart.igd.input.*;
 
 public class InGameGUI extends GUI
 {
@@ -11,9 +12,15 @@ public class InGameGUI extends GUI
 	private UIButton questLog;
 	
 	private UIWindow logAndItemsWindow;
+	
+	private GameAction pressQuestLog;
+	private UserInput userInput;
 
     public InGameGUI()
     {
+    	UserInput userInput =Display.userInput;
+    	loadGameActions();
+    	
     	try
     	{
     		loadImages();
@@ -23,6 +30,14 @@ public class InGameGUI extends GUI
     	{
     		e.printStackTrace();
     	}
+    	
+    	
+    	
+    }
+    
+    public void loadGameActions(){
+    	pressQuestLog = new GameAction("open the quest log",UserInput.BUTTON_QUEST_LOG);
+    	userInput.bindToButton(pressQuestLog);
     }
     
     public void render(GLGraphics g)
@@ -60,7 +75,7 @@ public class InGameGUI extends GUI
     	//quest log and items pane
     	logAndItemsWindow = new UIWindow("",0,0,false);
     	
-    	questLog = new UIButton(texUIButton,128,0,32,32){
+    	questLog = new UIButton(texUIButton, pressQuestLog,128,0,32,32){
     		public void action(){
     			System.out.println("quest log open");
     		}
