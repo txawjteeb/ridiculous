@@ -138,6 +138,7 @@ public class Renderer implements GLEventListener
 		gl.glPushMatrix();
 		gl.glTranslatef(player.position.x, player.position.y, player.position.z);
 		gl.glRotatef(0f, 1f, 0f, player.facingDirection);
+		gl.glScalef(2f,2f,2f);
 		martin.draw(gl);
 		gl.glPopMatrix();
 
@@ -148,7 +149,7 @@ public class Renderer implements GLEventListener
 		gl.glDisable(GL.GL_LIGHTING);
 		gl.glDisable(GL.GL_LIGHT0);
 		gl.glDisable(GL.GL_CULL_FACE);
-		gl.glTranslatef(0f, 0f, 0f);
+		gl.glTranslatef(player.position.x, player.position.y, player.position.z);
 			skyDome.render(gl);
 		gl.glEnable(GL.GL_CULL_FACE);
 		gl.glEnable(GL.GL_TEXTURE_2D);
@@ -161,7 +162,7 @@ public class Renderer implements GLEventListener
 		gl.glPushMatrix();
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glTranslatef(0f, 0f, 0f);
-		gl.glScalef(100f, 100f, 100f);
+		gl.glScalef(400f, 400f, 400f);
 		gl.glColor3f(1f, 1f, 1f);
 			land.draw(gl);
 		gl.glEnable(GL.GL_TEXTURE_2D);
@@ -231,8 +232,8 @@ public class Renderer implements GLEventListener
 		gl.glEnable(GL.GL_MULTISAMPLE);
 		
 		player = new Entity(new Vector3f(), 0f, 10f);
-		martin = new OBJModel(gl, "data/models/giraffe_scaled_km");
-		land = new OBJModel(gl, "data/models/zoo_map_km");
+		martin = new OBJModel(gl, "data/models/flamingo_sa");
+		land = new OBJModel(gl, "data/models/zoo_map_km3");
 		try
 		{
 			g = new GLGraphics(gl, glu);
@@ -243,7 +244,7 @@ public class Renderer implements GLEventListener
 			e.printStackTrace();
 		}
 		
-		skyDome = new SkyDome(0, 90, 10000f, new ColorRGBA(70, 100, 128), gl);
+		skyDome = new SkyDome(0, 90, 200f, new ColorRGBA(70, 100, 128), gl);
 		System.out.println("LOG: SkyDome initialized...");
 		heightMap = new HeightMap(gl, "data/models/Terrain.raw", "data/images/land_texture.png", 2048, 12, 0.3f);
 		System.out.println("LOG: HeightMap initialized...");
