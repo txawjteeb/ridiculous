@@ -1,0 +1,1107 @@
+# Max2Mtl Version 4.0 Mar 10th, 2001
+#
+newmtl Ground_Grass
+Ka  0.0 0.0 0.0
+Kd  0.5 0.8 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 02_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__25
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 03_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__47 (2) to come 
+#
+newmtl 02_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 01_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__47 done 
+#
+# Multi/Sub Material__36 (2) to come 
+#
+newmtl Material__25
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 09_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__36 done 
+#
+newmtl mesh
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__25
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 08_-_Default
+Ka  0.0 0.5 0.9
+Kd  0.0 0.5 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 09_-_Default
+Ka  1.0 1.0 1.0
+Kd  1.0 1.0 1.0
+Ks  0.9 0.9 0.9
+d  0.4
+Ns  0.0
+illum 2
+#
+newmtl 04_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__35 (2) to come 
+#
+newmtl 01_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 07_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__35 done 
+#
+newmtl black
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  7.0
+illum 2
+#
+newmtl Wood_Oak
+Ka  0.6 0.4 0.2
+Kd  0.6 0.4 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Metal_ChromeFast
+Ka  0.0 0.0 0.0
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  15.0
+illum 2
+#
+newmtl 20_-_Default
+Ka  0.5 0.0 0.7
+Kd  0.5 0.0 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 19_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 07_-_Default
+Ka  0.1 0.1 0.1
+Kd  0.1 0.1 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__57 (2) to come 
+#
+newmtl 10_-_Default
+Ka  1.0 1.0 1.0
+Kd  1.0 1.0 1.0
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 16_-_Default
+Ka  1.0 0.0 0.0
+Kd  1.0 0.0 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__57 done 
+#
+newmtl 01_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Ground_Water
+Ka  0.1 0.1 0.1
+Kd  0.2 0.3 0.4
+Ks  0.5 0.6 0.6
+d  1.0
+Ns  15.0
+illum 2
+#
+newmtl Ground_Sand
+Ka  0.6 0.5 0.2
+Kd  0.5 0.2 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub BasicSocietyGarlic (4) to come 
+#
+newmtl Fronds
+Ka  0.1 0.1 0.1
+Kd  0.0 0.5 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Stalks
+Ka  0.1 0.1 0.1
+Kd  0.3 0.0 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Flowers
+Ka  0.1 0.1 0.1
+Kd  0.9 0.5 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Canopy
+Ka  0.1 0.1 0.1
+Kd  0.0 0.5 0.2
+Ks  0.9 0.9 0.9
+d  0.5
+Ns  0.5
+illum 2
+#
+# Multi/Sub BasicSocietyGarlic done 
+#
+newmtl 09_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Wood_Old
+Ka  0.2 0.1 0.1
+Kd  0.6 0.4 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 14_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  3.2
+illum 2
+#
+newmtl 13_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub BasicPalm (6) to come 
+#
+newmtl Trunk
+Ka  0.1 0.1 0.1
+Kd  0.7 0.5 0.3
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Frond0
+Ka  0.1 0.1 0.1
+Kd  0.7 0.5 0.3
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Frond1
+Ka  0.1 0.1 0.1
+Kd  0.0 0.4 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl ExpiredFrond0
+Ka  0.1 0.1 0.1
+Kd  0.4 0.2 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl ExpiredFrond1
+Ka  0.1 0.1 0.1
+Kd  0.4 0.2 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Canopy
+Ka  0.1 0.1 0.1
+Kd  0.0 0.4 0.0
+Ks  0.9 0.9 0.9
+d  0.5
+Ns  0.5
+illum 2
+#
+# Multi/Sub BasicPalm done 
+#
+newmtl 02_-_Default
+Ka  0.1 0.1 0.1
+Kd  0.1 0.1 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub BasicYucca (3) to come 
+#
+newmtl Trunk
+Ka  0.1 0.1 0.1
+Kd  0.6 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Fronds
+Ka  0.1 0.1 0.1
+Kd  0.1 0.5 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Canopy
+Ka  0.1 0.1 0.1
+Kd  0.1 0.5 0.0
+Ks  0.9 0.9 0.9
+d  0.5
+Ns  0.5
+illum 2
+#
+# Multi/Sub BasicYucca done 
+#
+newmtl Wood_Old
+Ka  0.2 0.1 0.1
+Kd  0.6 0.4 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 03_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Concrete_Stucco
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Metal_Wall
+Ka  0.0 0.0 0.0
+Kd  0.7 0.6 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  8.0
+illum 2
+#
+newmtl Concrete_Grey2
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Wood_Bark2
+Ka  0.2 0.1 0.1
+Kd  0.3 0.2 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Ground_Grey_Dirt
+Ka  0.0 0.0 0.0
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 15_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  13.7
+illum 2
+#
+# Multi/Sub Material__46 (4) to come 
+#
+newmtl 07_-_Default
+Ka  0.1 0.1 0.1
+Kd  0.1 0.1 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 09_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  0.4
+Ns  0.0
+illum 2
+#
+newmtl 08_-_Default
+Ka  0.0 0.5 0.9
+Kd  0.0 0.5 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 10_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__46 done 
+#
+newmtl 16_-_Default
+Ka  0.0 0.0 1.0
+Kd  0.0 0.0 1.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub BasicSpruce (5) to come 
+#
+newmtl Trunk
+Ka  0.1 0.1 0.1
+Kd  0.3 0.1 0.0
+Ks  0.0 0.0 0.0
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Branch0
+Ka  0.1 0.1 0.1
+Kd  0.3 0.1 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Branch1
+Ka  0.1 0.1 0.1
+Kd  0.3 0.1 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl Needles
+Ka  0.0 0.1 0.1
+Kd  0.0 0.4 0.4
+Ks  0.0 0.0 0.0
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Canopy
+Ka  0.1 0.1 0.1
+Kd  0.0 0.4 0.4
+Ks  0.9 0.9 0.9
+d  0.5
+Ns  0.5
+illum 2
+#
+# Multi/Sub BasicSpruce done 
+#
+newmtl Bricks_Yellow
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__28
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__27
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__26
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Stainless_Steel
+Ka  0.0 0.0 0.1
+Kd  0.6 0.6 0.7
+Ks  0.9 1.0 1.0
+d  1.0
+Ns  1.0
+illum 2
+#
+newmtl Metal_Plate02
+Ka  0.3 0.3 0.3
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  3.0
+illum 2
+#
+newmtl Metal_Chrome
+Ka  0.0 0.0 0.0
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  15.0
+illum 2
+#
+newmtl Pearl
+Ka  0.8 0.8 0.7
+Kd  0.6 0.6 0.4
+Ks  0.9 0.9 0.8
+d  1.0
+Ns  4.8
+illum 2
+#
+newmtl Paint_Metal_Flake
+Ka  1.0 1.0 1.0
+Kd  1.0 1.0 1.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  12.8
+illum 2
+#
+newmtl 09_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__23 (2) to come 
+#
+newmtl 02_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Ground_Evergreen
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__23 done 
+#
+# Multi/Sub Material__34 (8) to come 
+#
+newmtl Material__24
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__25
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__26
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__27
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__28
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Material__29
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 02_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 07_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__34 done 
+#
+newmtl 01_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 08_-_Default
+Ka  0.8 0.9 1.0
+Kd  0.8 0.9 1.0
+Ks  0.9 0.9 0.9
+d  0.6
+Ns  9.7
+illum 2
+#
+newmtl Concrete_Cement
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 09_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Fabric_Blue_Carpet
+Ka  0.0 0.0 0.0
+Kd  0.2 0.2 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Eyeball
+Ka  0.0 0.0 0.0
+Kd  1.0 1.0 0.9
+Ks  1.0 1.0 1.0
+d  1.0
+Ns  25.0
+illum 2
+#
+newmtl Ground_Water
+Ka  0.1 0.1 0.1
+Kd  0.2 0.3 0.4
+Ks  0.5 0.6 0.6
+d  1.0
+Ns  15.0
+illum 2
+#
+newmtl Concrete_Blue_Stucco
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  0.3
+Ns  0.0
+illum 2
+#
+newmtl Metal_Steel
+Ka  0.0 0.0 0.0
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Concrete_Grey
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl SFX_ChainLink
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl water
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  0.6
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__12 (2) to come 
+#
+newmtl dirt
+Ka  0.6 0.4 0.2
+Kd  0.6 0.4 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl grycon
+Ka  0.3 0.3 0.3
+Kd  0.3 0.3 0.3
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__12 done 
+#
+newmtl blue
+Ka  0.6 0.7 0.7
+Kd  0.6 0.7 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  2.2
+illum 2
+#
+newmtl 01_-_windows
+Ka  0.7 0.6 1.0
+Kd  0.7 0.6 1.0
+Ks  0.9 0.9 0.9
+d  0.0
+Ns  8.2
+illum 2
+#
+newmtl 03_-_roof
+Ka  0.6 0.3 0.0
+Kd  0.6 0.3 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 07_-_walls
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 02_-_Default
+Ka  1.0 1.0 1.0
+Kd  1.0 1.0 1.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__80 (2) to come 
+#
+newmtl 08_-_Default
+Ka  0.0 0.5 0.9
+Kd  0.0 0.5 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 04_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__80 done 
+#
+# Multi/Sub Material__69 (2) to come 
+#
+newmtl 07_-_Default
+Ka  0.1 0.1 0.1
+Kd  0.1 0.1 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 04_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__69 done 
+#
+# Multi/Sub Material__58 (2) to come 
+#
+newmtl 07_-_Default
+Ka  0.1 0.1 0.1
+Kd  0.1 0.1 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 04_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__58 done 
+#
+# Multi/Sub Material__91 (2) to come 
+#
+newmtl 08_-_Default
+Ka  0.0 0.5 0.9
+Kd  0.0 0.5 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl 04_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__91 done 
+#
+newmtl red_color_gloss
+Ka  0.9 0.0 0.1
+Kd  0.9 0.0 0.1
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  15.8
+illum 2
+#
+newmtl Color_gloss
+Ka  0.0 0.1 0.9
+Kd  0.0 0.1 0.9
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  17.3
+illum 2
+#
+newmtl green_coloc_gloss
+Ka  0.1 0.8 0.0
+Kd  0.1 0.8 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  15.8
+illum 2
+#
+newmtl 02_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__74 (2) to come 
+#
+newmtl 01_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  10.0
+illum 2
+#
+newmtl 03_-_Default
+Ka  0.6 0.6 0.6
+Kd  0.6 0.6 0.6
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# Multi/Sub Material__74 done 
+#
+newmtl Wood_Walnut
+Ka  0.2 0.1 0.1
+Kd  0.7 0.3 0.2
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Metal_Grey_Plain
+Ka  0.0 0.0 0.0
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  14.1
+illum 2
+#
+newmtl Material__24
+Ka  1.0 1.0 1.0
+Kd  1.0 1.0 1.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Metal_RustRed
+Ka  0.3 0.1 0.0
+Kd  0.3 0.1 0.0
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  1.0
+illum 2
+#
+newmtl Metal_Dark_Gold
+Ka  0.0 0.0 0.0
+Kd  0.9 0.6 0.3
+Ks  0.9 0.8 0.7
+d  1.0
+Ns  15.0
+illum 2
+#
+newmtl Metal_Black_Plain
+Ka  0.0 0.0 0.0
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  14.1
+illum 2
+#
+newmtl Fabric_Tan_Carpet
+Ka  0.8 0.8 0.7
+Kd  0.8 0.8 0.7
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.5
+illum 2
+#
+newmtl SoapBubble
+Ka  0.0 0.0 0.0
+Kd  0.0 0.0 0.0
+Ks  1.0 1.0 1.0
+d  -0.0
+Ns  15.0
+illum 2
+#
+# Multi/Sub Material__38 (3) to come 
+#
+newmtl Stones_Altaqua
+Ka  0.4 0.4 0.4
+Kd  0.4 0.4 0.4
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Concrete_Brown
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+newmtl Concrete_Asphalt
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  5.0
+illum 2
+#
+# Multi/Sub Material__38 done 
+#
+newmtl Concrete_Asphalt
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  5.0
+illum 2
+#
+newmtl Metal_Plate03
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  8.0
+illum 2
+#
+newmtl Material__6
+Ka  0.1 0.1 0.1
+Kd  0.5 0.5 0.5
+Ks  0.9 0.9 0.9
+d  1.0
+Ns  0.0
+illum 2
+#
+# EOF

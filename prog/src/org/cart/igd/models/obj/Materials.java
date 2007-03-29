@@ -17,7 +17,7 @@ public class Materials
 	{
 		materials = new ArrayList<Material>();
 		
-		String mfnm = "models/"+mtlFnm;
+		String mfnm = "data/models/"+mtlFnm;
 		try
 		{
 			System.out.println("Loading material from " + mfnm);

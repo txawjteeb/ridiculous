@@ -27,13 +27,14 @@ public class InGameGUI extends GUI
     
     public void render(GLGraphics g)
     {
+    	/*
     	g.glgBegin();
     	//g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
     	//g.drawBitmapString("Button", 3, 3);
     	//g.drawImage(texAnimalButton, 200,200);
     	//questLog.draw(64,64,1f);
     	logAndItemsWindow.updateAndDraw();
-    	g.glgEnd();
+    	g.glgEnd();*/
     }
     
     public void handleInput()
