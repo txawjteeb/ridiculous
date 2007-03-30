@@ -10,7 +10,7 @@ public class GLGraphics
 	private static Texture[] Font = new Texture[94];
 	
 	public static final int DEFAULT_BLEND = GL.GL_ONE_MINUS_SRC_ALPHA;
-	public static int BLENDING=-1;
+	public static int BLENDING=1;
 	
 	public GLGraphics(GL gl, GLU glu) throws java.io.IOException
 	{
@@ -37,23 +37,18 @@ public class GLGraphics
 		gl.glDepthFunc(GL.GL_ALWAYS);
 		
 		gl.glColor4f(1f, 1f, 1f, 0f);
-		
-		/*gl.glDisable(GL.GL_TEXTURE_2D);
+
 		gl.glDisable(GL.GL_LIGHTING);
 		gl.glDisable(GL.GL_LIGHT0);
-		*/
 	}
 	
 	public void glgEnd()
 	{
 		final GL gl = Display.renderer.gl;
 		
-		/*
-		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glEnable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_LIGHT0);
-		*/
-		
+	
 		gl.glDepthFunc(GL.GL_LESS);
 		gl.glPopMatrix();
 		gl.glMatrixMode(GL.GL_MODELVIEW);

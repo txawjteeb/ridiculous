@@ -40,10 +40,10 @@ public class SkyDome
 	    this.radius = radius;
 	    this.divisions = divisions;
 	    
-	    ColorRGBA startColor = new ColorRGBA( 70, 100, 128 );
-	    ColorRGBA endColor = new ColorRGBA( 0, 0, 255 );
+	    ColorRGBA startColor = new ColorRGBA( 0, 51, 51 );
+	    ColorRGBA endColor = new ColorRGBA( 0, 102, 102 );
 	    
-	    float colorSteps = 40.0f;
+	    float colorSteps = 50.0f;
 	    float[] colorChange = new float[]
 	    {
 	    	(startColor.getRed()-endColor.getRed()) / colorSteps,
