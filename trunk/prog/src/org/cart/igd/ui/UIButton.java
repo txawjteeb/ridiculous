@@ -6,7 +6,7 @@ import org.cart.igd.input.*;
 
 public class UIButton extends UIComponent
 {
-	public static Texture texture;
+	public Texture texture;
 	private boolean pressed = false;
 	private GameAction action;
 	
@@ -50,7 +50,10 @@ public class UIButton extends UIComponent
 	
 	public void action()
 	{
-		//overridable...
+		if(action != null){
+			action.activate();
+		}
+		
 	}
 	
 	public void getFocus()
