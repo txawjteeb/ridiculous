@@ -14,8 +14,8 @@ public class Camera
 	private Vector3f cameraPos = new Vector3f();
 	private Vector3f cameraUp = new Vector3f(0f, 1f, 0f);
 	
-	public float distance = 25.0f;
-	public float cameraHeight = 50f;
+	public float distance = 5.0f;
+	public float cameraHeight = 3.0f;
 	
 	public Camera(Entity player, float distance, float cameraHeight)
 	{

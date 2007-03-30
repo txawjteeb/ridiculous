@@ -22,5 +22,7 @@ public class Driver
 		
 		display = Display.createDisplay("Project Ridiculous");
 		display.start();
+		
+		userInput = new UserInput( display.getGLCanvas() );
 	}
 }
