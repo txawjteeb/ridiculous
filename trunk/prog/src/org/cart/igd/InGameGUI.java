@@ -4,6 +4,7 @@ import org.cart.igd.util.Texture;
 import org.cart.igd.ui.UIButton;
 import org.cart.igd.ui.UIWindow;
 import org.cart.igd.input.*;
+import java.awt.event.*;
 
 public class InGameGUI extends GUI
 {
@@ -14,11 +15,14 @@ public class InGameGUI extends GUI
 	private UIWindow logAndItemsWindow;
 	
 	private GameAction pressQuestLog;
-	private UserInput userInput;
+	
+	private GameAction mouseViewRotate;
+	
+	
 
     public InGameGUI()
     {
-    	UserInput userInput =Display.userInput;
+    	
     	loadGameActions();
     	
     	try
@@ -37,29 +41,50 @@ public class InGameGUI extends GUI
     
     public void loadGameActions(){
     	pressQuestLog = new GameAction("open the quest log",UserInput.BUTTON_QUEST_LOG);
-    	userInput.bindToButton(pressQuestLog);
+    	mouseViewRotate = new GameAction("mouse rotation mode", 0);
+    	
+    	Driver.userInput.bindToButton(pressQuestLog);
+    	Driver.userInput.bindToKey(pressQuestLog, KeyEvent.VK_Q);
+    	Driver.userInput.bindToMouse(mouseViewRotate,MouseEvent.BUTTON3 );
     }
     
     public void render(GLGraphics g)
-    {
-    	/*
+    {    	
     	g.glgBegin();
     	//g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
     	//g.drawBitmapString("Button", 3, 3);
     	//g.drawImage(texAnimalButton, 200,200);
     	//questLog.draw(64,64,1f);
     	logAndItemsWindow.updateAndDraw();
-    	g.glgEnd();*/
+    	g.glgEnd();
+    	
+    	//move this outside to game state are
+    	handleInput();
     }
     
     public void handleInput()
     {
-    	//if(UserInput.isSquareButtonPressed(questLog.x,questLog.y,32,mousePos[0],mousePos[1]) )
-    	//{
-    	//	System.out.println("mouse over");
-    	//}
+    	if(UserInput.isSquareButtonPressed(
+    		logAndItemsWindow.components.get(0).rel_x,
+    		logAndItemsWindow.components.get(0).rel_y,32,
+    		Driver.userInput.mousePos[0],
+    		Driver.userInput.mousePos[1]) )
+    	{
+    		System.out.println("mouse over");
+    	}
     	
-    	
+    	if(pressQuestLog.isPerformed()){
+    		 System.out.println("Q pressed quest log");
+    		 
+    	}
+    	if(mouseViewRotate.isActive() ){
+    		System.out.println("mouseViewRotate"+
+    			(Driver.userInput.getXDif()) +" "+
+    			(Driver.userInput.getYDif())
+    		);
+    		
+    	}
+    
     }
     
     /** load texture for the gui components */

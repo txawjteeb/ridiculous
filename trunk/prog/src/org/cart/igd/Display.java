@@ -1,5 +1,6 @@
 package org.cart.igd;
 
+import java.awt.Component;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -26,7 +27,6 @@ public class Display implements WindowListener
 	private static final int DONT_CARE = -1;
 	
 	public static Renderer renderer;
-	public static UserInput userInput;
 	
 	public static JFrame frame;
 	private GLCanvas glCanvas;
@@ -66,7 +66,7 @@ public class Display implements WindowListener
 		frame.setResizable(false);
 		frame.setLocation(0, 0);
 		
-		userInput = new UserInput( glCanvas );
+	
 		
 //		InvisiCursor
 		/*
@@ -84,6 +84,10 @@ public class Display implements WindowListener
 		
 		animator = new FPSAnimator( glCanvas, 400 );
 		animator.setRunAsFastAsPossible( true );
+	}
+	
+	public Component getGLCanvas(){
+		return glCanvas;
 	}
 	
 	public void start()
