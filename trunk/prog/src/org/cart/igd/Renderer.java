@@ -137,9 +137,9 @@ public class Renderer implements GLEventListener
 		/* Render Player Model */
 		gl.glPushMatrix();
 		gl.glTranslatef(player.position.x, player.position.y, player.position.z);
-		gl.glRotatef(0f, 1f, 0f, player.facingDirection);
+		gl.glRotatef(player.facingDirection+180f, 0f, -1f, 0f);
 		gl.glScalef(2f,2f,2f);
-		martin.draw(gl);
+			martin.draw(gl);
 		gl.glPopMatrix();
 
 		/* Render SkyDome */
@@ -149,7 +149,7 @@ public class Renderer implements GLEventListener
 		gl.glDisable(GL.GL_LIGHTING);
 		gl.glDisable(GL.GL_LIGHT0);
 		gl.glDisable(GL.GL_CULL_FACE);
-		gl.glTranslatef(player.position.x, player.position.y, player.position.z);
+		gl.glTranslatef(player.position.x, player.position.y-30f, player.position.z);
 			skyDome.render(gl);
 		gl.glEnable(GL.GL_CULL_FACE);
 		gl.glEnable(GL.GL_TEXTURE_2D);
@@ -162,7 +162,7 @@ public class Renderer implements GLEventListener
 		gl.glPushMatrix();
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glTranslatef(0f, 0f, 0f);
-		gl.glScalef(400f, 400f, 400f);
+		gl.glScalef(500f, 500f, 500f);
 		gl.glColor3f(1f, 1f, 1f);
 			land.draw(gl);
 		gl.glEnable(GL.GL_TEXTURE_2D);
@@ -244,7 +244,7 @@ public class Renderer implements GLEventListener
 			e.printStackTrace();
 		}
 		
-		skyDome = new SkyDome(0, 90, 200f, new ColorRGBA(70, 100, 128), gl);
+		skyDome = new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		System.out.println("LOG: SkyDome initialized...");
 		heightMap = new HeightMap(gl, "data/models/Terrain.raw", "data/images/land_texture.png", 2048, 12, 0.3f);
 		System.out.println("LOG: HeightMap initialized...");

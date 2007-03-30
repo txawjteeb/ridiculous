@@ -171,7 +171,9 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		
 	}
 	public int getXDif(){
-		return (mousePosPrev[0] - mousePos[0]);
+		int retVal = (mousePosPrev[0] - mousePos[0]);
+		mousePosPrev[0] = mousePos[0];
+		return retVal;
 	}
 	public int getYDif(){
 		return (mousePosPrev[1] - mousePos[1]);
