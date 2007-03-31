@@ -1,6 +1,7 @@
 package org.cart.igd.opengl;
 
 import org.cart.igd.math.*;
+import org.cart.igd.util.ColorRGBA;
 import javax.media.opengl.GL;
 
 public class SkyDome

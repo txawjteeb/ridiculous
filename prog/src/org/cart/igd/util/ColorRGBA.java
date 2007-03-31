@@ -1,4 +1,4 @@
-package org.cart.igd.opengl;
+package org.cart.igd.util;
 
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
