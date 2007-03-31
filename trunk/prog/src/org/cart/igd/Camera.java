@@ -31,7 +31,7 @@ public class Camera
 		this.distance = distance;
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode", 0);
-		Driver.userInput.bindToMouse(mouseCameraRotate, MouseEvent.BUTTON3);
+		Kernel.userInput.bindToMouse(mouseCameraRotate, MouseEvent.BUTTON3);
 	}
 	
 	public void setCameraHeight(float height)
@@ -68,7 +68,7 @@ public class Camera
 	{
 		if(mouseCameraRotate.isActive())
 		{
-			facingOffset -= ( Driver.userInput.getXDif()*0.5f );
+			facingOffset -= ( Kernel.userInput.getXDif()*0.5f );
 		}
 		else if(!mouseCameraRotate.isActive() && facingOffset!=0f)
 		{

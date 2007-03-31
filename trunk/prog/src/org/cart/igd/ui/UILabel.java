@@ -1,7 +1,7 @@
 package org.cart.igd.ui;
 
 import org.cart.igd.Display;
-import org.cart.igd.opengl.ColorRGBA;
+import org.cart.igd.util.ColorRGBA;
 
 public class UILabel extends UIComponent
 {
@@ -22,7 +22,7 @@ public class UILabel extends UIComponent
 	
 	public void draw(int x, int y, float alpha)
 	{
-		Display.renderer.g.drawBitmapStringStroke( value, x+rel_x, y+rel_y, 1, new float[] {rgb[0],rgb[1],rgb[2],alpha}, ColorRGBA.White.getRGBA() );
+		Display.renderer.getGLG().drawBitmapStringStroke( value, x+rel_x, y+rel_y, 1, new float[] {rgb[0],rgb[1],rgb[2],alpha}, ColorRGBA.White.getRGBA() );
 	}
 	
 	public void getFocus() {  }

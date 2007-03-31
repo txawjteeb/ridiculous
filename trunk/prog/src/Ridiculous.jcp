@@ -1,19 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml?>
 <project>
 	<settings>
 		<label>Ridiculous</label>
 		<root_path>\</root_path>
 		<output_path>\</output_path>
 		<source_path>\</source_path>
-		<jdkprofile_ref>JDK version 1.6.0</jdkprofile_ref>
+		<jdkprofile_ref>JDK version 1.5.0_06</jdkprofile_ref>
 		<compiler_ref>&lt;Default&gt;</compiler_ref>
 		<ant_ref/>
 	</settings>
-	<ant_events/>
-	<run_items>
-		<item run="org.cart.igd.Driver"/>
-	</run_items>
 	<runtimes>
 		<runtime>
 			<label>&lt;Default&gt;</label>
@@ -21,7 +16,7 @@
 			<applet_ref/>
 			<debugger_ref/>
 			<param/>
-			<run>org.cart.igd.Driver</run>
+			<run>org.cart.igd.Kernel</run>
 		</runtime>
 	</runtimes>
 	<libraries/>
@@ -64,292 +59,276 @@
 				<path>org\cart\igd\models\obj</path>
 			</folderitem>
 			<folderitem>
-				<path>org\cart\igd\opengl</path>
-			</folderitem>
-			<folderitem>
 				<path>org\cart\igd\ui</path>
 			</folderitem>
 			<folderitem>
 				<path>org\cart\igd\util</path>
 			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\states</path>
+			</folderitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jogl.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\Camera.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\Display.java</path>
-				<folder>org\cart\igd</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\Driver.java</path>
-				<folder>org\cart\igd</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\GLCamera.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\GLGraphics.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\GUI.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\InGameGUI.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\Kernel.java</path>
+				<source>true</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\Renderer.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\World.java</path>
-				<folder>org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\collision\Collision.java</path>
-				<folder>org\cart\igd\collision</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\entity\Entity.java</path>
-				<folder>org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\entity\EntityInterface.java</path>
-				<folder>org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\entity\Node.java</path>
-				<folder>org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\entity\NodeInterface.java</path>
-				<folder>org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\input\GameAction.java</path>
-				<folder>org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\input\GameEvent.java</path>
-				<folder>org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\input\GameEventList.java</path>
-				<folder>org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\input\UserInput.java</path>
-				<folder>org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\ArcBall.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\Matrix4f.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\Point2d.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\Point2f.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\Quat4f.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\Vector3f.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\Vector4f.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\math\VectorTex3f.java</path>
-				<folder>org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\BaseTreeNode.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\FormatFilter.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\FormatTreeNode.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\IBaseTreeNode.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\MeshTreeNode.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\ModelTreeNode.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ml\SkinTreeNode.java</path>
-				<folder>org\cart\igd\ml</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\model\AbstractModelFactory.java</path>
-				<folder>org\cart\igd\model</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\model\Model.java</path>
-				<folder>org\cart\igd\model</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\model\Model3ds.java</path>
-				<folder>org\cart\igd\model</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\model\ModelFactory.java</path>
-				<folder>org\cart\igd\model</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\m3ds\Chunk.java</path>
-				<folder>org\cart\igd\models\m3ds</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\m3ds\Face.java</path>
-				<folder>org\cart\igd\models\m3ds</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\m3ds\Mesh.java</path>
-				<folder>org\cart\igd\models\m3ds</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\FaceMaterials.java</path>
-				<folder>org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\Faces.java</path>
-				<folder>org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\Material.java</path>
-				<folder>org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\Materials.java</path>
-				<folder>org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\ModelDimensions.java</path>
-				<folder>org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\OBJModel.java</path>
-				<folder>org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\models\obj\Tuple3.java</path>
-				<folder>org\cart\igd\models\obj</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\ColorRGBA.java</path>
-				<folder>org\cart\igd\opengl</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\HeightMap.java</path>
-				<folder>org\cart\igd\opengl</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\Multisampling.java</path>
-				<folder>org\cart\igd\opengl</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\Shape3D.java</path>
-				<folder>org\cart\igd\opengl</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\SkyBox.java</path>
-				<folder>org\cart\igd\opengl</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\SkyDome.java</path>
-				<folder>org\cart\igd\opengl</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\opengl\VertexShader.java</path>
-				<folder>org\cart\igd\opengl</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ui\UIButton.java</path>
-				<folder>org\cart\igd\ui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ui\UIComponent.java</path>
-				<folder>org\cart\igd\ui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ui\UILabel.java</path>
-				<folder>org\cart\igd\ui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ui\UITextField.java</path>
-				<folder>org\cart\igd\ui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\ui\UIWindow.java</path>
-				<folder>org\cart\igd\ui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\BitmapLoader.java</path>
-				<folder>org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
-				<path>org\cart\igd\util\Camera.java</path>
-				<folder>org\cart\igd\util</folder>
+				<path>org\cart\igd\util\ColorRGBA.java</path>
+				<source>true</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\ResourceRetriever.java</path>
-				<folder>org\cart\igd\util</folder>
+				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\util\SkyDome.java</path>
+				<source>true</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\Texture.java</path>
-				<folder>org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\TextureLoader.java</path>
-				<folder>org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\TextureReader.java</path>
-				<folder>org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\WinDataInputStream.java</path>
-				<folder>org\cart\igd\util</folder>
+				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\states\GameState.java</path>
+				<source>true</source>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\states\GameStateManager.java</path>
+				<source>true</source>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\states\InGameState.java</path>
+				<source>true</source>
 			</fileitem>
 		</include>
+		<exclude>
+			<folderitem>
+				<path>org\cart\igd\opengl</path>
+			</folderitem>
+		</exclude>
 	</files>
-	<tasks>
-		<todotaskitem>
-			<description>todo: rename to Kernel and make this a starting point for</description>
-			<filepath>org\cart\igd\Driver.java</filepath>
-			<line>7</line>
-			<timestamp>1175210301</timestamp>
-		</todotaskitem>
-	</tasks>
+	<tasks/>
 </project>

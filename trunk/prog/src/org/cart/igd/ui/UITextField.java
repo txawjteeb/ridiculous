@@ -1,7 +1,7 @@
 package org.cart.igd.ui;
 
 import org.cart.igd.Display;
-import org.cart.igd.opengl.ColorRGBA;
+import org.cart.igd.util.ColorRGBA;
 
 public class UITextField extends UIComponent
 {
@@ -36,11 +36,11 @@ public class UITextField extends UIComponent
 		int by = y+rel_y+((int)(((float)height)/2f))-8;
 		//GLEngine.g.drawRect(x+rel_x, y+rel_y, width, height, new float[] {(31f/255f),(83f/255f),(124f/255f)});
 		
-		if(focused) Display.renderer.g.fillRect(x+rel_x, y+rel_y, width, height, new float[]{rgb[0],rgb[1],rgb[2]});
-		Display.renderer.gl.glColor3f(fontColor[0], fontColor[1], fontColor[2]);
-		Display.renderer.gl.glLineWidth(2f);
-		Display.renderer.g.drawLine(x+rel_x, y+rel_y, x+rel_x+width, y+rel_y);
-		Display.renderer.gl.glLineWidth(1f);
+		if(focused) Display.renderer.getGLG().fillRect(x+rel_x, y+rel_y, width, height, new float[]{rgb[0],rgb[1],rgb[2]});
+		Display.renderer.getGL().glColor3f(fontColor[0], fontColor[1], fontColor[2]);
+		Display.renderer.getGL().glLineWidth(2f);
+		Display.renderer.getGLG().drawLine(x+rel_x, y+rel_y, x+rel_x+width, y+rel_y);
+		Display.renderer.getGL().glLineWidth(1f);
 		
 		String newVal = "";
 		if(password)
@@ -49,11 +49,11 @@ public class UITextField extends UIComponent
 			newVal = value;
 		
 		if(!focused)
-			Display.renderer.g.drawBitmapString( value, bx, by, new float[] {fontColor[0],fontColor[1],fontColor[2],1f} );
+			Display.renderer.getGLG().drawBitmapString( value, bx, by, new float[] {fontColor[0],fontColor[1],fontColor[2],1f} );
 		else
 		{
-			int length = Display.renderer.g.drawBitmapStringStroke( value, bx, by, 1, new float[] {fontColor[0],fontColor[1],fontColor[2],1f}, ColorRGBA.Black.getRGBA() );
-			Display.renderer.g.drawBitmapString( "|", bx+length, by, new float[] {1f,1f,1f,1f} );
+			int length = Display.renderer.getGLG().drawBitmapStringStroke( value, bx, by, 1, new float[] {fontColor[0],fontColor[1],fontColor[2],1f}, ColorRGBA.Black.getRGBA() );
+			Display.renderer.getGLG().drawBitmapString( "|", bx+length, by, new float[] {1f,1f,1f,1f} );
 		}
 	}
 	

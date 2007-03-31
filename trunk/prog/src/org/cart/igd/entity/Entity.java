@@ -5,7 +5,7 @@ import java.io.File;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
-import org.cart.igd.opengl.ColorRGBA;
+import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.math.Vector3f;
 //import org.cart.igd.model.Model;
 //import org.cart.igd.model.ModelManager;
@@ -37,11 +37,11 @@ public class Entity
 	
 	public Entity(Vector3f pos, float fD, float bsr)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
-		gl = org.cart.igd.Display.renderer.gl;
+		gl = org.cart.igd.Display.renderer.getGL();
 		/*if(this.gl==null)
 			throw new EntityException("**** No drawable.gl given ****");
 		*/
-		glu = org.cart.igd.Display.renderer.glu;
+		glu = org.cart.igd.Display.renderer.getGLU();
 		/*if(this.glu==null)
 			throw new EntityException("**** No drawable.glu given ****");
 		*/

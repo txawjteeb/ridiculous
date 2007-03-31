@@ -25,32 +25,21 @@ public class InGameGUI extends GUI
 
     public InGameGUI()
     {
-    	
     	loadGameActions();
-    	
-    	try
-    	{
-    		loadImages();
-    		loadGUI();
-    	}
-    	catch(java.io.IOException e)
-    	{
-    		e.printStackTrace();
-    	}
-    	
-    	
-    	
+    	loadImages();
+    	loadGUI();
     }
     
-    public void loadGameActions(){
+    public void loadGameActions()
+    {
     	pressQuestLog = new GameAction("open the quest log",UserInput.BUTTON_QUEST_LOG);
     	mouseViewRotate = new GameAction("mouse rotation mode", 0);
     	mouseSelect = new GameAction("mouse press",0 );
     	
-    	Driver.userInput.bindToButton(pressQuestLog);
-    	Driver.userInput.bindToKey(pressQuestLog, KeyEvent.VK_Q);
-    	Driver.userInput.bindToMouse(mouseViewRotate,MouseEvent.BUTTON3 );
-    	Driver.userInput.bindToMouse(mouseSelect,MouseEvent.BUTTON1 );
+    	Kernel.userInput.bindToButton(pressQuestLog);
+    	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_Q);
+    	Kernel.userInput.bindToMouse(mouseViewRotate,MouseEvent.BUTTON3 );
+    	Kernel.userInput.bindToMouse(mouseSelect,MouseEvent.BUTTON1 );
     }
     
     public void render(GLGraphics g)
@@ -74,8 +63,8 @@ public class InGameGUI extends GUI
     		if(mouseSelect.isPerformed() && UserInput.isSquareButtonPressed(
     			logAndItemsWindow.components.get(i).rel_x,
     			logAndItemsWindow.components.get(i).rel_y,32,
-    			Driver.userInput.mousePos[0],
-    			Driver.userInput.mousePos[1]) )
+    			Kernel.userInput.mousePos[0],
+    			Kernel.userInput.mousePos[1]) )
     		{
     			System.out.println("handle input item window");
     			logAndItemsWindow.components.get(i).action();//triger GameAction with the button
@@ -95,20 +84,22 @@ public class InGameGUI extends GUI
     	
     	if(mouseViewRotate.isActive() ){
     		System.out.println("mouseViewRotate"+
-    			(Driver.userInput.getXDif()) +" "+
-    			(Driver.userInput.getYDif())
+    			(Kernel.userInput.getXDif()) +" "+
+    			(Kernel.userInput.getYDif())
     		);
     		
     	}
     
     }
     
+    
     /** load texture for the gui components */
-    public void loadImages() throws java.io.IOException
+    public void loadImages()
     {
-    	texUIButton = Display.renderer.textureLoader.getTexture("data/images/buttons/questlog_ico.png", Display.renderer.gl, Display.renderer.glu);
-    	texInvButton = Display.renderer.textureLoader.getTexture("data/images/buttons/button_01.png", Display.renderer.gl, Display.renderer.glu);
+    	texUIButton = Display.renderer.loadImage("data/images/buttons/questlog_ico.png");
+    	texInvButton = Display.renderer.loadImage("data/images/buttons/button_01.png");
     }
+    
     
     /** load the gui components after textures are loaded*/
     public void loadGUI()
