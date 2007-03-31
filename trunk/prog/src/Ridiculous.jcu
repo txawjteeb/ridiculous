@@ -656,52 +656,28 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>org\cart\igd\Renderer.java</path>
+			<path>org\cart\igd\model\Model.java</path>
 			<source>true</source>
 			<index>0</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\states\InGameState.java</path>
+			<path>org\cart\igd\model\Model3ds.java</path>
 			<source>true</source>
 			<index>1</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\states\GameStateManager.java</path>
+			<path>org\cart\igd\util\TextureLoader.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\Camera.java</path>
+			<path>org\cart\igd\math\VectorTex3f.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>org\cart\igd\GLGraphics.java</path>
-			<source>true</source>
-			<index>4</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>org\cart\igd\util\Texture.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>org\cart\igd\states\GameState.java</path>
-			<source>true</source>
-			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>org\cart\igd\input\UserInput.java</path>
-			<source>true</source>
-			<index>7</index>
-			<active>true</active>
 		</docitem>
 	</open_files>
 </workspace_user>

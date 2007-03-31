@@ -1,6 +1,5 @@
 package org.cart.igd.model;
 
-/*
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,4 +40,3 @@ public final class ModelFactory implements AbstractModelFactory
 		return model;
 	}	
 }
-*/
