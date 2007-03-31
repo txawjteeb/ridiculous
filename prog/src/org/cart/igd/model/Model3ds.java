@@ -1,6 +1,5 @@
 package org.cart.igd.model;
 
-/*
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +11,10 @@ import java.util.List;
 import javax.media.opengl.GL;
 
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.math.VectorTex3f;
 import org.cart.igd.util.WinDataInputStream;
+import org.cart.igd.util.Texture;
+import org.cart.igd.Display;
 
 public class Model3ds implements Model
 {
@@ -56,12 +58,8 @@ public class Model3ds implements Model
     private Chunk currentChunk;
     private Chunk tempChunk;
     
-    private GL gl;
-    
     public Model3ds(File meshFile)
     {
-    	gl = org.cart.igd.Driver.display.renderer.gl;
-    	
     	materials = new LinkedList<MaterialInfo3ds>();
     	objects = new LinkedList<Object3ds>();
     	
@@ -117,7 +115,6 @@ public class Model3ds implements Model
     
     public Model3ds(Model3ds model)
     {
-    	gl = org.cart.igd.Driver.display.renderer.gl;
     	meshName = model.getName();
     	materials = model.materials;
     	objects = model.objects;
@@ -130,7 +127,7 @@ public class Model3ds implements Model
     	
     	if(objects.size()==0) return;
     	
-    	for(int index=0; index<object.size(); index++)
+    	for(int index=0; index<objects.size(); index++)
     	{
     		Object3ds object = objects.get(index);
     		
@@ -155,8 +152,7 @@ public class Model3ds implements Model
     			v1 = poly[0].subtract(poly[2]);
     			v2 = poly[2].subtract(poly[1]);
     			
-    			Vector3f normal;
-    			Vector3f.cross(normal, v1, v2);
+    			Vector3f normal = Vector3f.cross(v1, v2);
     			tempNormals[i] = new Vector3f(normal);
     			normal.normalize();
     			normals[i] = normal;
@@ -165,7 +161,7 @@ public class Model3ds implements Model
     		Vector3f vSum = new Vector3f(0.0f, 0.0f, 0.0f);
     		int shared = 0;
     		
-    		for(int i=0; i<objects.numberOfVertices; i++)
+    		for(int i=0; i<object.numberOfVertices; i++)
     		{
     			for(int j=0; j<object.numberOfFaces; j++)
     			{
@@ -194,14 +190,13 @@ public class Model3ds implements Model
     {
     	System.out.println("LOG: <fine> createTexture");
     	
-    	if(gl==null)
-    		throw new IllegalStateException("Model3ds.createTexture(): gl is null");
-    	
     	if(textureFile==null)
     		throw new IllegalArgumentException("Model3ds.createTexture(): textureFile is null");
     	
     	System.out.println("LOG: <fine> textureFile: "+textureFile);
     	
+    	return Display.renderer.loadImage(textureFile.toString());
+    	/*
     	try
     	{
     		return TextureManager.getTexture(textureFile);
@@ -215,11 +210,12 @@ public class Model3ds implements Model
     	{
     		ioe.printStackTrace();
     		return null;
-    	}
+    	}*/
     }
     
     public void render(float percent)
     {
+    	final GL gl = Display.renderer.getGL();
     	for(Iterator i = objects.iterator(); i.hasNext();)
     	{
     		Object3ds object = (Object3ds)i.next();
@@ -424,7 +420,7 @@ public class Model3ds implements Model
                     String materialFileName = winDataInputStream.readString(currentChunk.length - currentChunk.bytesRead);
                     materialFileName = materialFileName.toLowerCase();
                     materials.get(materials.size() - 1).file = materialFileName;
-                    LOG.fine("materialFileName: " + materialFileName);
+                    System.out.println("LOG: <fine> materialFileName: " + materialFileName);
                     currentChunk.bytesRead += currentChunk.length - currentChunk.bytesRead;
                 }
                 catch(Exception e)
@@ -670,9 +666,9 @@ public class Model3ds implements Model
     	{
     		e.printStackTrace();
     	}
-    	object.vertices = new Vector3f[object.numberOfVertices];
+    	object.vertices = new VectorTex3f[object.numberOfVertices];
     	for(int i=0; i<object.numberOfVertices; i++)
-    		object.vertices[i] = new Vector3f();
+    		object.vertices[i] = new VectorTex3f();
     	
     	for(int i=0; i<object.numberOfVertices; i++)
     	{
@@ -689,7 +685,7 @@ public class Model3ds implements Model
     	}
     	previousChunk.bytesRead += previousChunk.length - previousChunk.bytesRead;
     	System.out.println("LOG: <fine> bytesRead: "+previousChunk.bytesRead);
-    	System.out.println("LOG: <fine> last Vertex: "+object.vertices[object.numberOfVertices-1].x+" "+object.vertices[object.numberOfVertices-1].y+" "++object.vertices[object.numberOfVertices-1].z);
+    	System.out.println("LOG: <fine> last Vertex: "+object.vertices[object.numberOfVertices-1].x+" "+object.vertices[object.numberOfVertices-1].y+" "+object.vertices[object.numberOfVertices-1].z);
     }
     
     public void setState(int state)
@@ -704,7 +700,7 @@ public class Model3ds implements Model
     public String toString()
     {
     	return	"\nmodelName: "+meshName+
-    			"\nobject.size(): "+object.size()+
+    			"\nobjects.size(): "+objects.size()+
     			"\nobjects: "+objects+
     			"\nmaterials.size(): "+materials.size()+
     			"\nmaterials: "+materials+
@@ -761,7 +757,7 @@ public class Model3ds implements Model
     	public int numberOfFaces;
     	public int numberTextureVertices;
     	public boolean hasTexture;
-    	public Vector3f[] vertices;
+    	public VectorTex3f[] vertices;
     	public Vector3f[] normals;
     	public Face3ds[] faces;
     	
@@ -781,4 +777,3 @@ public class Model3ds implements Model
     	}
     }
 }
-*/

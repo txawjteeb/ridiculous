@@ -44,16 +44,10 @@
 				<path>org\cart\igd\math</path>
 			</folderitem>
 			<folderitem>
-				<path>org\cart\igd\ml</path>
-			</folderitem>
-			<folderitem>
 				<path>org\cart\igd\model</path>
 			</folderitem>
 			<folderitem>
 				<path>org\cart\igd\models</path>
-			</folderitem>
-			<folderitem>
-				<path>org\cart\igd\models\m3ds</path>
 			</folderitem>
 			<folderitem>
 				<path>org\cart\igd\models\obj</path>
@@ -176,34 +170,6 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
-				<path>org\cart\igd\ml\BaseTreeNode.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\ml\FormatFilter.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\ml\FormatTreeNode.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\ml\IBaseTreeNode.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\ml\MeshTreeNode.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\ml\ModelTreeNode.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\ml\SkinTreeNode.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
 				<path>org\cart\igd\model\AbstractModelFactory.java</path>
 				<source>false</source>
 			</fileitem>
@@ -217,18 +183,6 @@
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\model\ModelFactory.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\models\m3ds\Chunk.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\models\m3ds\Face.java</path>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\models\m3ds\Mesh.java</path>
 				<source>false</source>
 			</fileitem>
 			<fileitem>
@@ -325,6 +279,12 @@
 			</fileitem>
 		</include>
 		<exclude>
+			<folderitem>
+				<path>org\cart\igd\ml</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\models\m3ds</path>
+			</folderitem>
 			<folderitem>
 				<path>org\cart\igd\opengl</path>
 			</folderitem>
