@@ -5,26 +5,31 @@ import org.cart.igd.ui.UIButton;
 import org.cart.igd.ui.UIWindow;
 import org.cart.igd.input.*;
 import java.awt.event.*;
+import org.cart.igd.states.InGameState;
+import org.cart.igd.input.GUIEvent;
 
 public class InGameGUI extends GUI
 {
-	private Texture texUIButton;
+	private Texture texBush;
 	private Texture texInvButton;
+	private Texture texUIButton;
+	
+	private UIWindow hudBottom;
+	
+	private UIButton bush;
 	private UIButton questLog;
-	
-	private UIWindow logAndItemsWindow;
-	
-	private GameAction pressQuestLog;
-	private GameAction mouseViewRotate;
-	
-	private GameAction mouseSelect;
 	
 	private UIButton inventoryButton[] = new UIButton[5];
 	
-	
+	private GameAction mouseSelect;
+	private GameAction pressQuestLog;
+	private GameAction mouseViewRotate;
 
-    public InGameGUI()
+	private InGameState inGameState;
+
+    public InGameGUI(InGameState igs)
     {
+    	inGameState = igs;
     	loadGameActions();
     	loadImages();
     	loadGUI();
@@ -32,7 +37,7 @@ public class InGameGUI extends GUI
     
     public void loadGameActions()
     {
-    	pressQuestLog = new GameAction("open the quest log",UserInput.BUTTON_QUEST_LOG);
+    	pressQuestLog = new GameAction("open the quest log",GUIEvent.BT_QUEST_LOG);
     	mouseViewRotate = new GameAction("mouse rotation mode", 0);
     	mouseSelect = new GameAction("mouse press",0 );
     	
@@ -43,50 +48,55 @@ public class InGameGUI extends GUI
     }
     
     public void render(GLGraphics g)
-    {    	
+    {    
+    	//move this outside to game state are
+    	handleInput();
+    		
     	g.glgBegin();
+    	
     	//g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
     	//g.drawBitmapString("Button", 3, 3);
     	//g.drawImage(texAnimalButton, 200,200);
-    	//questLog.draw(64,64,1f);
-    	logAndItemsWindow.updateAndDraw();
-    	g.glgEnd();
+    	hudBottom.updateAndDraw();
+    	g.drawImage(texInvButton,200,200,64,64);
     	
-    	//move this outside to game state are
-    	handleInput();
+    	g.glgEnd();
     }
     
     public void handleInput()
     {
     	//chekck for press
-    	for(int i = 0;i<logAndItemsWindow.components.size();i++ ){
-    		if(mouseSelect.isPerformed() && UserInput.isSquareButtonPressed(
-    			logAndItemsWindow.components.get(i).rel_x,
-    			logAndItemsWindow.components.get(i).rel_y,32,
+    	for(int i = 0;i<hudBottom.components.size();i++ ){
+    		if(mouseSelect.isPerformed() && Kernel.userInput.isSquareButtonPressed(
+    			hudBottom.components.get(i).rel_x,
+    			hudBottom.components.get(i).rel_y,
+    			64,64,
     			Kernel.userInput.mousePos[0],
     			Kernel.userInput.mousePos[1]) )
     		{
     			System.out.println("handle input item window");
-    			logAndItemsWindow.components.get(i).action();//triger GameAction with the button
+    			hudBottom.components.get(i).action();//triger GameAction with the button
     		}
     	}
     	
-    	for(int i = 0;i<logAndItemsWindow.components.size();i++ ){
+    	for(int i = 0;i<hudBottom.components.size();i++ ){
     		
-    		logAndItemsWindow.components.get(i).action();//triger GameAction with the button
+    		hudBottom.components.get(i).action();//triger GameAction with the button
     		
     	}
     	
-    	//
+    	// check game action for activity
     	if(pressQuestLog.isPerformed()){
     		 System.out.println("Q pressed quest log");
     	}
     	
+    	// mouse rotation
     	if(mouseViewRotate.isActive() ){
     		System.out.println("mouseViewRotate"+
     			(Kernel.userInput.getXDif()) +" "+
     			(Kernel.userInput.getYDif())
     		);
+    		inGameState.rotateCamera(Kernel.userInput.getXDif());
     		
     	}
     
@@ -98,6 +108,7 @@ public class InGameGUI extends GUI
     {
     	texUIButton = Display.renderer.loadImage("data/images/buttons/questlog_ico.png");
     	texInvButton = Display.renderer.loadImage("data/images/buttons/button_01.png");
+    	texBush = Display.renderer.loadImage("data/images/buttons/bush_big.png");
     }
     
     
@@ -106,19 +117,21 @@ public class InGameGUI extends GUI
     {
     	/**** init gui elements ****/
     	// invisible pane that holds the elements
-    	logAndItemsWindow = new UIWindow("",0,0,false);
+    	hudBottom = new UIWindow("",0,0,false);
+    	
     	// add buttons
-    	questLog = new UIButton(texUIButton, pressQuestLog,128,0,32,32);
+    	bush = new UIButton(texBush, pressQuestLog, 0,0,128,128);
+    	questLog = new UIButton(texUIButton, pressQuestLog,128,0,64,64);
     	
     	for(int i = 0;i<inventoryButton.length; i++){
     		inventoryButton[i]= new UIButton(texInvButton, pressQuestLog, 192+(64*i),0, 64, 64);
     	}
     	
     	// add gui elements 
-    	logAndItemsWindow.add(questLog);
+    	hudBottom.add(questLog);
     	
     	for(int i = 0;i<inventoryButton.length; i++){
-    		logAndItemsWindow.add(inventoryButton[i]);
+    		hudBottom.add(inventoryButton[i]);
     	}
     }// end load gui
 }

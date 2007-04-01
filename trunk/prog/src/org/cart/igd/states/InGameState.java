@@ -31,7 +31,11 @@ public class InGameState extends GameState
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_km3");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		camera			= new Camera(player, 10f, 4f);
-		gui				= new InGameGUI();
+		gui				= new InGameGUI(this);
+	}
+	
+	public void rotateCamera(float amt){
+		camera.facingOffset += amt;
 	}
 	
 	public void update(long elapsedTime)
