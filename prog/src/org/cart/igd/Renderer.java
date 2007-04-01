@@ -2,8 +2,8 @@
  * Renderer
  *
  * {version info}
- *
- * March 31, 2007
+ * March 31, 2007 Spencer Allen  (major revision, comments, general function )
+ * April 01, 2007 Vitaly Maximov (comments/suggestions(NOTE) for future revision)
  *
  * {copyright}
  */
@@ -30,7 +30,7 @@ public class Renderer implements GLEventListener
 	
 	private float lightAmbient[] = {0.2f, 0.2f, 0.2f};		// Ambient Light is 20% white
     private float lightDiffuse[] = {1.0f, 1.0f, 1.0f};		// Diffuse Light is white
-    private float lightPosition[] = {0.0f, 10.0f, 0.0f};		// Position is somewhat in front of screen
+    private float lightPosition[] = {0.0f, 10.0f, 0.0f};	// Position is somewhat in front of screen
 	
 	public int frameCount = 0;
 	public int fps = 0;
@@ -88,15 +88,18 @@ public class Renderer implements GLEventListener
 		gl.glEnable(GL.GL_LIGHTING);
 		
 		
-		/* Initialize Game States */
+		/* Initialize Game States 
+		 * NOTE: should be initialized outside of renderer class and before it 
+		 * or check for completion of game state before attempting to update*/
 		stateManager.addGameState(new InGameState(gl),"InGameState");
 		stateManager.setCurrentState("InGameState");
 		stateManager.initStates(gl, glu);
 		
-		/* Create the GLGraphics object. */
+		/* Create the GLGraphics object for rendering 2D GUI. */
 		g = new GLGraphics();
 		
-		/* Set initial time variable for FPS calculations. */
+		/* Set initial time variable for FPS calculations. 
+		 * NOTE: this should go into profiler class*/
 		lastFPSCheck = System.currentTimeMillis();
 	}
 	
@@ -176,7 +179,7 @@ public class Renderer implements GLEventListener
 	
 	
 	/*
-	 * printAAStates
+	 * printAAStats
 	 *
 	 * Expected Input: GL reference object.
 	 *
