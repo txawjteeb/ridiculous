@@ -37,11 +37,11 @@ public class InGameGUI extends GUI
     
     public void loadGameActions()
     {
-    	pressQuestLog = new GameAction("open the quest log",GUIEvent.BT_QUEST_LOG);
-    	mouseViewRotate = new GameAction("mouse rotation mode", 0);
-    	mouseSelect = new GameAction("mouse press",0 );
+    	pressQuestLog = new GameAction("open the quest log");
+    	mouseViewRotate = new GameAction("mouse rotation mode");
+    	mouseSelect = new GameAction("mouse press");
     	
-    	Kernel.userInput.bindToButton(pressQuestLog);
+    	Kernel.userInput.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
     	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_Q);
     	Kernel.userInput.bindToMouse(mouseViewRotate,MouseEvent.BUTTON3 );
     	Kernel.userInput.bindToMouse(mouseSelect,MouseEvent.BUTTON1 );

@@ -2,7 +2,7 @@ package org.cart.igd.states;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 import org.cart.igd.*;
 import org.cart.igd.entity.Entity;
@@ -10,6 +10,7 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.opengl.SkyDome;
+import org.cart.igd.input.*;
 
 public class InGameState extends GameState
 {
@@ -24,6 +25,11 @@ public class InGameState extends GameState
 	
 	private int playerState = 0;
 	
+	private GameAction mouseCameraRotate;
+	
+	private GameAction incCameraH;
+	private GameAction decCameraH;
+	
 	public InGameState(GL gl)
 	{
 		player			= new Entity(new Vector3f(), 0f, 10f);
@@ -32,6 +38,14 @@ public class InGameState extends GameState
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		camera			= new Camera(player, 10f, 4f);
 		gui				= new InGameGUI(this);
+		
+		mouseCameraRotate = new GameAction("mouse rotation mode");
+		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );
+		
+		incCameraH = new GameAction("camera h++");
+		decCameraH = new GameAction("camera h--");
+		Kernel.userInput.bindToKey(incCameraH, KeyEvent.VK_UP);
+		Kernel.userInput.bindToKey(decCameraH, KeyEvent.VK_DOWN);
 	}
 	
 	public void rotateCamera(float amt){
@@ -117,7 +131,7 @@ public class InGameState extends GameState
 		else if(Kernel.userInput.keys[KeyEvent.VK_S])
 			player.walkBackward(elapsedTime);
 		
-		/* D/A - Rotate the camera around the player. */
+		/* D/A - Rotate the player on y axis */
 		if(Kernel.userInput.keys[KeyEvent.VK_D])
 			player.turnRight(elapsedTime);
 		else if(Kernel.userInput.keys[KeyEvent.VK_A])
@@ -139,6 +153,24 @@ public class InGameState extends GameState
 		{
 			if(playerState==0)
 				playerState=1;
+		}
+		
+		/** tap once actions */
+		if(incCameraH.isActive()){
+			camera.cameraHeight+=.5f;
+		}
+		if(decCameraH.isActive()){
+			camera.cameraHeight-=.5f;
+		}
+		
+		/** camera mouse rotation */
+		if(mouseCameraRotate.isActive())
+		{
+			camera.arcRotateY( - Kernel.userInput.getXDif()*0.5f );
+		} //camera snap back action
+		else if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
+		{
+			camera.moveToBackView(8f);
 		}
 	}
 }
