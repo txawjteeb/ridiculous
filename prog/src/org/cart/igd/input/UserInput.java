@@ -1,3 +1,8 @@
+/**
+ * UserInput
+ * in its current state its a hybrid and can be used to check global input events
+ * or local events via GameEvent classes
+ **/
 package org.cart.igd.input;
 
 import java.awt.Component;
@@ -7,6 +12,8 @@ import javax.swing.SwingUtilities;
 
 import org.cart.igd.Display;
 
+
+
 public class UserInput implements KeyListener, MouseListener, MouseMotionListener
 {
 	public static boolean[] keys = new boolean[256];
@@ -14,19 +21,9 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public static int[] mousePosPrev = new int[] { 0, 0 };
 	public static int[] mousePress = new int[]{0,0	};
 	
-	public int mouseCurMoveX=0;
-	public int mouseCurMoveY=0;
-	public int mousePrevX=0;
-	public int mousePrevY=0;
-	
-	public static boolean typingEnabled = false;
-	
 	public GameAction keyActions[] = new GameAction[600];
 	public GameAction mouseActions[] = new GameAction[20];
 	public GameAction buttonActions[] = new GameAction[50];
-	
-	
-
 	
 	public static Robot robot;
 
@@ -80,8 +77,8 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	}
 	
 	/** add action event to a custom button code */
-	public void bindToButton(GameAction action){
-		buttonActions[action.getKey()] = action;
+	public void bindToButton(GameAction action, int guiCode){
+		buttonActions[guiCode] = action;
 	}
 	
 	/** add action event to a predefined mouse button code */
@@ -98,15 +95,16 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	{
 		if(keyActions[e.getKeyCode()]!= null){
 			keyActions[e.getKeyCode()].activate();
-			System.out.println("UserINput call to activate key action");
 		}
-		System.out.println("UserInput key pressed");
 		keys[e.getKeyCode()] = true;
 		e.consume();
 	}
 	
 	public void keyReleased(KeyEvent e)
 	{
+		if(keyActions[e.getKeyCode()]!= null){
+			keyActions[e.getKeyCode()].deactivate();
+		}
 		keys[e.getKeyCode()] = false;
 		e.consume();
 	}
@@ -121,9 +119,6 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		if(mouseActions[e.getButton()]!= null){
 			mouseActions[e.getButton()].activate();
 		}
-		
-		if(e.getButton() == MouseEvent.BUTTON3)
-		System.out.println(e.getButton()+"");
 		updateMousePress(e.getX(), e.getY());
 	}
 	

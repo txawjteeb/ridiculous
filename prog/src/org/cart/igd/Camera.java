@@ -21,7 +21,7 @@ public class Camera
 	public float cameraHeight = 3.0f;
 	public float facingOffset = 0.0f;
 	
-	private GameAction mouseCameraRotate;
+	
 	
 	public Camera(Entity player, float distance, float cameraHeight)
 	{
@@ -29,9 +29,40 @@ public class Camera
 		cameraUp = new Vector3f(0f, 1f, 0f);
 		this.cameraHeight = cameraHeight;
 		this.distance = distance;
+	}
+	
+	/** rotate the camera around the charater*/
+	public void arcRotateY(float amt)
+	{
+		facingOffset+=amt;
+	}
+	
+	/** return the camera to player's back view position*/
+	public void moveToBackView(float speed)
+	{
+		if(facingOffset>0f && facingOffset<180f)
+		{
+			facingOffset-=speed;
+		}
+		else if(facingOffset>180f && facingOffset<360f)
+		{
+			facingOffset+=speed;
+		}
+		if(facingOffset<speed && facingOffset>-speed)
+		{
+			facingOffset = 0f;
+		}
 		
-		mouseCameraRotate = new GameAction("mouse rotation mode", 0);
-		Kernel.userInput.bindToMouse(mouseCameraRotate, MouseEvent.BUTTON3);
+		/** Clamp facing offset */
+		if(facingOffset<0f)
+		{
+			facingOffset+=360f;
+		}
+		else if(facingOffset>=360f)
+		{
+			facingOffset-=360f;
+		}
+		
 	}
 	
 	public void setCameraHeight(float height)
@@ -66,25 +97,7 @@ public class Camera
 	
 	public void lookAt(GLU glu, Entity player)
 	{
-		if(mouseCameraRotate.isActive())
-		{
-			facingOffset -= ( Kernel.userInput.getXDif()*0.5f );
-		}
-		else if(!mouseCameraRotate.isActive() && facingOffset!=0f)
-		{
-			if(facingOffset>0f && facingOffset<180f)
-			{
-				facingOffset-=8f;
-			}
-			else if(facingOffset>180f && facingOffset<360f)
-			{
-				facingOffset+=8f;
-			}
-			if(facingOffset<8f && facingOffset>-8f)
-			{
-				facingOffset = 0f;
-			}
-		}
+		
 		
 		cameraPos.x = player.position.x + ( distance * (float)Math.cos((player.facingDirection+facingOffset-180f) * 0.0174f) );
 		cameraPos.y = cameraHeight;
@@ -100,15 +113,5 @@ public class Camera
 			);
 		}
 		catch(Exception e) {}
-		
-		/* Clamp facing offset */
-		if(facingOffset<0f)
-		{
-			facingOffset+=360f;
-		}
-		else if(facingOffset>=360f)
-		{
-			facingOffset-=360f;
-		}
 	}
 }
