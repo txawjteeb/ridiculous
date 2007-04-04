@@ -64,6 +64,9 @@
 			<folderitem>
 				<path>org\cart\igd\states</path>
 			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\core</path>
+			</folderitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
 				<source>false</source>
@@ -96,10 +99,6 @@
 				<path>org\cart\igd\InGameGUI.java</path>
 				<folder>org\cart\igd</folder>
 				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\Kernel.java</path>
-				<folder>org\cart\igd</folder>
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\Renderer.java</path>
@@ -329,6 +328,14 @@
 			<fileitem>
 				<path>org\cart\igd\states\InGameState.java</path>
 				<folder>org\cart\igd\states</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\core\Kernel.java</path>
+				<folder>org\cart\igd\core</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\core\Profiler.java</path>
+				<folder>org\cart\igd\core</folder>
 			</fileitem>
 		</include>
 		<exclude>

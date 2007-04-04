@@ -42,8 +42,9 @@ public class InGameState extends GameState
 		mouseCameraRotate = new GameAction("mouse rotation mode");
 		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );
 		
-		incCameraH = new GameAction("camera h++");
-		decCameraH = new GameAction("camera h--");
+		//one press actions continuous = false;
+		incCameraH = new GameAction("camera h++", false);
+		decCameraH = new GameAction("camera h--", false);
 		Kernel.userInput.bindToKey(incCameraH, KeyEvent.VK_UP);
 		Kernel.userInput.bindToKey(decCameraH, KeyEvent.VK_DOWN);
 	}

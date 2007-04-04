@@ -16,10 +16,10 @@ public class GUIEvent
 	
 	/* inventory buttons */
 	public static final int BT_USE_ITEM_01 = 31;
-	public static final int BT_USE_ITEM_02 = 31;
-	public static final int BT_USE_ITEM_03 = 31;
-	public static final int BT_USE_ITEM_04 = 31;
-	public static final int BT_USE_ITEM_05 = 31;
+	public static final int BT_USE_ITEM_02 = 32;
+	public static final int BT_USE_ITEM_03 = 33;
+	public static final int BT_USE_ITEM_04 = 34;
+	public static final int BT_USE_ITEM_05 = 35;
 	
 	/* animal selection from the resque bush*/
 	public static final int BT_SELECT_BUSH_01 = 11;
