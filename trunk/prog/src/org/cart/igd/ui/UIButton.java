@@ -7,8 +7,9 @@ import org.cart.igd.input.*;
 public class UIButton extends UIComponent
 {
 	public Texture texture;
-	private boolean pressed = false;
 	private GameAction action;
+	
+	private boolean pressed = false;
 	
 	public UIButton(String value, int x, int y)
 	{
@@ -28,7 +29,7 @@ public class UIButton extends UIComponent
 	public UIButton(Texture tex, GameAction action, int x, int y, int width, int height)
 	{
 		texture = tex;
-		action =action;
+		this.action =action;
 		this.width = width;
 		this.height = height;
 		this.value = "";
@@ -47,7 +48,12 @@ public class UIButton extends UIComponent
 	public void action()
 	{
 		if(action != null){
+			
+			System.out.println(action.getInfo());
 			action.activate();
+		}
+		if(action == null){
+			System.out.println("UIButton: GameAction action is null");
 		}
 		
 	}

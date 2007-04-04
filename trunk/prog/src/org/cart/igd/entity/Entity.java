@@ -17,7 +17,7 @@ public class Entity
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
-	public float speed = 0.025f;
+	public float speed = 0.01f;
 	public float turnSpeed = 0.1f;
 	
 	/*protected Model model;

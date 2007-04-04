@@ -3,10 +3,12 @@ package org.cart.igd;
 import org.cart.igd.util.Texture;
 import org.cart.igd.ui.UIButton;
 import org.cart.igd.ui.UIWindow;
+import org.cart.igd.ui.UIComponent;
 import org.cart.igd.input.*;
-import java.awt.event.*;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.input.GUIEvent;
+
+import java.awt.event.*;
 
 public class InGameGUI extends GUI
 {
@@ -19,11 +21,11 @@ public class InGameGUI extends GUI
 	private UIButton bush;
 	private UIButton questLog;
 	
+	private GameAction useItem[] = new GameAction[5];
 	private UIButton inventoryButton[] = new UIButton[5];
 	
 	private GameAction mouseSelect;
 	private GameAction pressQuestLog;
-	private GameAction mouseViewRotate;
 
 	private InGameState inGameState;
 
@@ -35,21 +37,9 @@ public class InGameGUI extends GUI
     	loadGUI();
     }
     
-    public void loadGameActions()
-    {
-    	pressQuestLog = new GameAction("open the quest log");
-    	mouseViewRotate = new GameAction("mouse rotation mode");
-    	mouseSelect = new GameAction("mouse press");
-    	
-    	Kernel.userInput.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
-    	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_Q);
-    	Kernel.userInput.bindToMouse(mouseViewRotate,MouseEvent.BUTTON3 );
-    	Kernel.userInput.bindToMouse(mouseSelect,MouseEvent.BUTTON1 );
-    }
-    
     public void render(GLGraphics g)
     {    
-    	//move this outside to game state are
+    	//move this outside to game state input check and render separate process
     	handleInput();
     		
     	g.glgBegin();
@@ -65,43 +55,41 @@ public class InGameGUI extends GUI
     
     public void handleInput()
     {
-    	//chekck for press
-    	for(int i = 0;i<hudBottom.components.size();i++ ){
-    		if(mouseSelect.isPerformed() && Kernel.userInput.isSquareButtonPressed(
-    			hudBottom.components.get(i).rel_x,
-    			hudBottom.components.get(i).rel_y,
-    			64,64,
-    			Kernel.userInput.mousePos[0],
-    			Kernel.userInput.mousePos[1]) )
-    		{
-    			System.out.println("handle input item window");
-    			hudBottom.components.get(i).action();//triger GameAction with the button
+    	//check bottom hud input
+    	if(mouseSelect.isActive())
+    	{
+    	
+    		for(int i = 0;i<hudBottom.components.size();i++ ){
+    			if(Kernel.userInput.isSquareButtonPressed(
+    				hudBottom.components.get(i).rel_x,
+    				hudBottom.components.get(i).rel_y,
+    				64,64,
+    				Kernel.userInput.mousePos[0],
+    				Kernel.userInput.mousePos[1]) )
+    			{
+    				hudBottom.components.get(i).action();//triger GameAction with the button
+    			}
     		}
     	}
-    	
-    	for(int i = 0;i<hudBottom.components.size();i++ ){
-    		
-    		hudBottom.components.get(i).action();//triger GameAction with the button
-    		
-    	}
-    	
-    	// check game action for activity
-    	if(pressQuestLog.isPerformed()){
-    		 System.out.println("Q pressed quest log");
-    	}
-    	
-    	// mouse rotation
-    	if(mouseViewRotate.isActive() ){
-    		System.out.println("mouseViewRotate"+
-    			(Kernel.userInput.getXDif()) +" "+
-    			(Kernel.userInput.getYDif())
-    		);
-    		inGameState.rotateCamera(Kernel.userInput.getXDif());
-    		
-    	}
+    }// end handleInput()
     
-    }
-    
+    /** load game actions before adding them to UIButtons*/
+    public void loadGameActions()
+    {
+    	//GameAction( String details, boolean continuous )
+    	pressQuestLog = new GameAction("open the quest log",false);
+    	mouseSelect = new GameAction("mouse press",false);
+    	
+    	for(int iEvt = 0; iEvt<useItem.length; iEvt++){
+    		useItem[iEvt]= new GameAction("use item: "+(iEvt+1) ,false);
+    		Kernel.userInput.bindToButton(pressQuestLog, 31+iEvt );
+    	}
+    	
+    	Kernel.userInput.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
+    	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_L);
+    	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
+    	Kernel.userInput.bindToMouse(mouseSelect, MouseEvent.BUTTON1 );
+    }// end loadGameActions()
     
     /** load texture for the gui components */
     public void loadImages()
@@ -112,7 +100,7 @@ public class InGameGUI extends GUI
     }
     
     
-    /** load the gui components after textures are loaded*/
+    /** load the gui components after Textures and GameActions are loaded*/
     public void loadGUI()
     {
     	/**** init gui elements ****/
@@ -123,15 +111,16 @@ public class InGameGUI extends GUI
     	bush = new UIButton(texBush, pressQuestLog, 0,0,128,128);
     	questLog = new UIButton(texUIButton, pressQuestLog,128,0,64,64);
     	
-    	for(int i = 0;i<inventoryButton.length; i++){
-    		inventoryButton[i]= new UIButton(texInvButton, pressQuestLog, 192+(64*i),0, 64, 64);
+    	for(int iBt = 0;iBt<inventoryButton.length; iBt++){
+    		inventoryButton[iBt]= new UIButton(texInvButton, useItem[iBt], 192+(64*iBt),0, 64, 64);
     	}
     	
     	// add gui elements 
+    	hudBottom.add(bush);
     	hudBottom.add(questLog);
     	
-    	for(int i = 0;i<inventoryButton.length; i++){
-    		hudBottom.add(inventoryButton[i]);
+    	for(UIButton b: inventoryButton){
+    		hudBottom.add(b);
     	}
     }// end load gui
 }

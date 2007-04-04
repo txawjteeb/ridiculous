@@ -40,7 +40,7 @@ public class Display implements WindowListener
 		boolean fullscreen = false;
 		
 		Object[] p = new Object[] { "640 by 480", "800 by 600", "1024 by 768", "1280 by 960", "1280 by 1024" };
-		String s = (String)JOptionPane.showInputDialog(null, "Preferred Resolution:", "Myriad", JOptionPane.QUESTION_MESSAGE, null, p, p[1] );
+		String s = (String)JOptionPane.showInputDialog(null, "Preferred Resolution:", "Project Ridiculous", JOptionPane.QUESTION_MESSAGE, null, p, p[1] );
 		int w = Integer.parseInt(s.substring(0, s.indexOf(" ")));
 		int h = Integer.parseInt(s.substring(s.indexOf(" ")+4));
 		

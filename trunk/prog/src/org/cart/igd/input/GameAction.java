@@ -7,6 +7,7 @@
  */
 package org.cart.igd.input;
 
+/** use side by side with UserInput */
 public class GameAction
 {
 	public static final int NONE = 0;
@@ -17,32 +18,54 @@ public class GameAction
 	private String info;
 	private boolean active;
 	
+	private boolean pressed;
+	private boolean released;
+	
+	private boolean continuous = false;
+
+	private int type = 0;
+	
     public GameAction(String info) {
     	this.info = info;
     	active = false;
+    	continuous = true;
     }
-    
-    /** use for single actions such as cage activation or button clicking */
-    public boolean isPerformed(){
-    	if(active){
-    		active = false;
-    		return true;
-    	}	 
-    	
-    	return false;
+    public GameAction(String info,boolean cont) {
+    	this.info = info;
+    	active = false;
+    	continuous = cont;
     }
     
     /** use for constant actions such as movement */
     public boolean isActive(){
-    	return active;
+    	if(continuous){
+    		return active;
+    	} else {
+    		if(pressed && released){
+    			active = false;
+    			pressed = false;
+    			released = false;
+    			return true;
+    		}
+    		return false;
+    	}
     }
     
     public void activate(){
     	active = true;
+    	pressed = true;
     }
+    
+    /** caled by UserInput when mouse or key is released*/
     public void deactivate(){
     	active =false;
+    	released = true;
+    	if(!continuous && pressed ){
+    		active = true;
+    	}
     }
     
-    
+    public String getInfo(){
+    	return info;
+    }
 }

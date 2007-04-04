@@ -7,7 +7,10 @@
  */
 package org.cart.igd.input;
 
+/** not directly connected to game input use for general game logic*/
 public class GameEvent {
+	public static final int CONTINUOUS =0;
+	public static final int SINGULAR = 1;
 	/* discriptive name of what the game event does */
 	private String name="";
 	
@@ -16,7 +19,7 @@ public class GameEvent {
 	 * ex: pressing a button to activate something once
 	 **/
 	private int selected = 0;
-	
+	private int type = CONTINUOUS;
 	/** 
 	 * determines if the event is happening 
 	 * ex: continuous event like walking forward 
@@ -25,6 +28,11 @@ public class GameEvent {
 	
     public GameEvent(String name) {
     	this.name=name;
+    }
+    
+    public GameEvent(String name, int type) {
+    	this.name=name;
+    	this.type = type;
     }
     
     /** start either by a mouseclick or a button pressed event */
