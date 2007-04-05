@@ -11,6 +11,7 @@ import java.awt.Robot;
 import javax.swing.SwingUtilities;
 
 import org.cart.igd.Display;
+import org.cart.igd.core.Kernel;
 
 
 
@@ -160,7 +161,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	private void updateMousePress(int x,int y)
 	{
 		mousePress[0] = x;
-		mousePress[1] = Display.getScreenHeight()-y;
+		mousePress[1] = Kernel.display.getScreenHeight()-y;
 	}
 	
 	private void updateMousePos(int x, int y)
@@ -169,7 +170,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		mousePosPrev[1] = mousePos[1];
 		
 		mousePos[0] = x;
-		mousePos[1] = Display.getScreenHeight()-y;
+		mousePos[1] = Kernel.display.getScreenHeight()-y;
 	}
 	
 	/** get amount of x mouse movement used for mouse camera roation */

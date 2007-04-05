@@ -187,9 +187,9 @@ public class Display implements WindowListener
 	
 	public void setTitle( String title ) { frame.setTitle( title ); }
 	
-	public static int getScreenWidth() { return width; }
+	public int getScreenWidth() { return glCanvas.getWidth();}
 	
-	public static int getScreenHeight() { return height; }
+	public int getScreenHeight() { return glCanvas.getHeight();}
 	
 	public void windowActivated(WindowEvent e) {  }
 	public void windowDeactivated(WindowEvent e) {  }
