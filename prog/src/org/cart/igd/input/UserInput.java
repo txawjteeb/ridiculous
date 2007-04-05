@@ -16,6 +16,8 @@ import org.cart.igd.Display;
 
 public class UserInput implements KeyListener, MouseListener, MouseMotionListener
 {
+	public static boolean typingEnabled = false;
+	
 	public static boolean[] keys = new boolean[256];
 	public static int[] mousePos = new int[] { 0, 0 };
 	public static int[] mousePosPrev = new int[] { 0, 0 };

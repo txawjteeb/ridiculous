@@ -62,7 +62,6 @@ public class Camera
 		{
 			facingOffset-=360f;
 		}
-		
 	}
 	
 	public void setCameraHeight(float height)

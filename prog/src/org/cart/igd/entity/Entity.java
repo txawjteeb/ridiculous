@@ -14,6 +14,7 @@ import org.cart.igd.math.Vector3f;
 public class Entity
 {
 	public Vector3f position;
+	public Vector3f lastPosition;
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
@@ -46,6 +47,7 @@ public class Entity
 			throw new EntityException("**** No drawable.glu given ****");
 		*/
 		position = pos;
+		lastPosition = pos;
 		/*if(this.position==null)
 			throw new EntityException("**** No position vector given ****");
 		*/
