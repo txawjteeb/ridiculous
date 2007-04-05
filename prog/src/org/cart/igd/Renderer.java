@@ -87,6 +87,8 @@ public class Renderer implements GLEventListener
 		gl.glEnable(GL.GL_LIGHT0);
 		gl.glEnable(GL.GL_LIGHTING);
 		
+		/* Create the GLGraphics object for rendering 2D GUI. */
+		g = new GLGraphics();
 		
 		/* Initialize Game States 
 		 * NOTE: should be initialized outside of renderer class and before it 
@@ -95,8 +97,7 @@ public class Renderer implements GLEventListener
 		stateManager.setCurrentState("InGameState");
 		stateManager.initStates(gl, glu);
 		
-		/* Create the GLGraphics object for rendering 2D GUI. */
-		g = new GLGraphics();
+		
 		
 		/* Set initial time variable for FPS calculations. 
 		 * NOTE: this should go into profiler class*/
@@ -114,6 +115,8 @@ public class Renderer implements GLEventListener
 		gl = drawable.getGL();	// Update GL instance
 		
 		long elapsedTime = getElapsedTime();	// calculate elapsed time
+		
+		
 		
 		/* Call current game state methods */
 		stateManager.getCurrentState().update(elapsedTime);

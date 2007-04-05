@@ -14,16 +14,27 @@ import java.awt.event.*;
 public class InGameGUI extends GUI
 {
 	private Texture texBush;
-	private Texture texInvButton;
-	private Texture texUIButton;
+	private Texture texQuestLog;
+	private Texture texItemIco[] = new Texture[8];
+	private Texture texAnimalIco[] = new Texture[9];
 	
-	private UIWindow hudBottom;
 	
-	private UIButton bush;
-	private UIButton questLog;
+	private UIWindow hudBottom;//quest log and item buttons
+	private UIWindow hudLeft; //bush button with animals
 	
-	private GameAction useItem[] = new GameAction[5];
-	private UIButton inventoryButton[] = new UIButton[5];
+	private UIButton btBush;
+	private UIButton btQuestLog;
+	
+	private GameAction selectGroupAnimal[] = new GameAction[4];
+	private UIButton btGroupAnimals[] = new UIButton[4];
+	
+	private GameAction useItem[] = new GameAction[8];
+	private UIButton btItems[] = new UIButton[8];
+	
+	private GameAction selectBushAnimal[] = new GameAction[9];
+	private UIButton btBushAnimals[] = new UIButton[9];
+	
+	
 	
 	private GameAction mouseSelect;
 	private GameAction pressQuestLog;
@@ -48,8 +59,8 @@ public class InGameGUI extends GUI
     	//g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
     	//g.drawBitmapString("Button", 3, 3);
     	//g.drawImage(texAnimalButton, 200,200);
+    	hudLeft.updateAndDraw();
     	hudBottom.updateAndDraw();
-    	g.drawImage(texInvButton,200,200,64,64);
     	
     	g.glgEnd();
     }
@@ -59,18 +70,34 @@ public class InGameGUI extends GUI
     	//check bottom hud input
     	if(mouseSelect.isActive())
     	{
-    	
+    		//check for bottom hud buttons
     		for(int i = 0;i<hudBottom.components.size();i++ ){
     			if(Kernel.userInput.isSquareButtonPressed(
     				hudBottom.components.get(i).rel_x,
     				hudBottom.components.get(i).rel_y,
     				64,64,
-    				Kernel.userInput.mousePos[0],
-    				Kernel.userInput.mousePos[1]) )
+    				Kernel.userInput.mousePress[0],
+    				Kernel.userInput.mousePress[1]) )
     			{
     				hudBottom.components.get(i).action();//triger GameAction with the button
     			}
     		}
+    		//check for left bud buttons
+    		for(int i = 0;i<hudLeft.components.size();i++ ){
+    			if(Kernel.userInput.isRoundButtonPressed(
+    				hudLeft.components.get(i).rel_x,
+    				hudLeft.components.get(i).rel_y,
+    				32,
+    				Kernel.userInput.mousePos[0],
+    				Kernel.userInput.mousePos[1]) )
+    			{
+    				hudLeft.components.get(i).action();//triger GameAction with the button
+    			}
+    		}
+    		//check for release over the group buttons
+    		
+    		
+    		
     	}
     }// end handleInput()
     
@@ -86,6 +113,11 @@ public class InGameGUI extends GUI
     		Kernel.userInput.bindToButton(pressQuestLog, 31+iEvt );
     	}
     	
+    	for(int iEvt = 0; iEvt<selectBushAnimal.length; iEvt++){
+    		selectBushAnimal[iEvt]= new GameAction("select animal: "+(iEvt+1) ,false);
+    		Kernel.userInput.bindToButton(pressQuestLog, 11+iEvt );
+    	}
+    	
     	Kernel.userInput.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
     	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_L);
     	Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
@@ -95,9 +127,19 @@ public class InGameGUI extends GUI
     /** load texture for the gui components */
     public void loadImages()
     {
-    	texUIButton = Display.renderer.loadImage("data/images/buttons/questlog_ico.png");
-    	texInvButton = Display.renderer.loadImage("data/images/buttons/button_01.png");
-    	texBush = Display.renderer.loadImage("data/images/buttons/bush_big.png");
+		texBush = Display.renderer.loadImage("data/images/buttons/bush_ico_big.png");
+    	texQuestLog = Display.renderer.loadImage("data/images/buttons/questlog_ico.png");
+    	
+    	for(int iItm = 0; iItm<texItemIco.length; iItm++)
+    	{
+    		texItemIco[iItm] = Display.renderer.loadImage("data/images/buttons/item_ico_0"+(iItm+1)+".png");
+    	}
+    	
+    	for(int iAnm = 0; iAnm<texAnimalIco.length; iAnm++)
+    	{
+    		texAnimalIco[iAnm] = Display.renderer.loadImage("data/images/buttons/animal_ico_0"+(iAnm+1)+".png");
+    	}
+    	
     }
     
     
@@ -107,21 +149,32 @@ public class InGameGUI extends GUI
     	/**** init gui elements ****/
     	// invisible pane that holds the elements
     	hudBottom = new UIWindow("",0,0,false);
+    	hudLeft = new UIWindow("",0,0,false);
     	
     	// add buttons
-    	bush = new UIButton(texBush, pressQuestLog, 0,0,128,128);
-    	questLog = new UIButton(texUIButton, pressQuestLog,128,0,64,64);
+    	btBush = new UIButton(texBush, pressQuestLog, 0,0,128,128);
+    	btQuestLog = new UIButton(texQuestLog, pressQuestLog,128,0,64,64);
     	
-    	for(int iBt = 0;iBt<inventoryButton.length; iBt++){
-    		inventoryButton[iBt]= new UIButton(texInvButton, useItem[iBt], 192+(64*iBt),0, 64, 64);
+    	for(int iItm = 0;iItm<btItems.length; iItm++){
+    		btItems[iItm]= new UIButton( texItemIco[iItm], useItem[iItm], 192+(64*iItm), 0, 64, 64 );
+    	}
+    	
+    	for(int iAnm = 0;iAnm<btBushAnimals.length; iAnm++){
+    		btBushAnimals[iAnm]= new UIButton( texAnimalIco[iAnm], selectBushAnimal[iAnm], 0, 128+(64*iAnm), 64, 64 );
     	}
     	
     	// add gui elements 
-    	hudBottom.add(bush);
-    	hudBottom.add(questLog);
     	
-    	for(UIButton b: inventoryButton){
+    	hudBottom.add(btQuestLog);
+    	
+    	for(UIButton b: btItems){
     		hudBottom.add(b);
+    	}
+    	
+    	hudLeft.add(btBush);
+    	
+    	for(UIButton b: btBushAnimals){
+    		hudLeft.add(b);
     	}
     }// end load gui
 }

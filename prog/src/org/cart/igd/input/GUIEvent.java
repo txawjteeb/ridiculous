@@ -19,7 +19,10 @@ public class GUIEvent
 	public static final int BT_USE_ITEM_02 = 32;
 	public static final int BT_USE_ITEM_03 = 33;
 	public static final int BT_USE_ITEM_04 = 34;
-	public static final int BT_USE_ITEM_05 = 35;
+	public static final int BT_USE_ITEM_05 = 36;
+	public static final int BT_USE_ITEM_06 = 37;
+	public static final int BT_USE_ITEM_07 = 38;
+	public static final int BT_USE_ITEM_08 = 39;
 	
 	/* animal selection from the resque bush*/
 	public static final int BT_SELECT_BUSH_01 = 11;
