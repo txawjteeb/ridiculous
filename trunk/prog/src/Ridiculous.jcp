@@ -486,10 +486,6 @@
 		</include>
 		<exclude>
 			<folderitem>
-				<path>org\cart\igd\loader</path>
-				<dir/>
-			</folderitem>
-			<folderitem>
 				<path>org\cart\igd\model</path>
 				<dir/>
 			</folderitem>

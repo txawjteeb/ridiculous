@@ -30,9 +30,6 @@
 				<path>org\cart\igd\math</path>
 			</folderitem>
 			<folderitem>
-				<path>org\cart\igd\model</path>
-			</folderitem>
-			<folderitem>
 				<path>org\cart\igd\models</path>
 			</folderitem>
 			<folderitem>
@@ -51,43 +48,58 @@
 				<path>org\cart\igd\core</path>
 			</folderitem>
 			<folderitem>
-				<path>org\cart\igd\loader</path>
-			</folderitem>
-			<folderitem>
 				<path>org\cart\igd\discreet</path>
 			</folderitem>
 		</project>
 	</projects>
 	<open_files>
 		<docitem>
-			<path>org\cart\igd\discreet\MaxParser.java</path>
+			<path>org\cart\igd\InGameGUI.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\discreet\MaxUtils.java</path>
+			<path>org\cart\igd\input\GUIEvent.java</path>
 			<source>true</source>
 			<index>1</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\Renderer.java</path>
+			<path>org\cart\igd\input\UserInput.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\states\InGameState.java</path>
+			<path>org\cart\igd\ui\UIButton.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\discreet\ObjectMesh.java</path>
+			<path>org\cart\igd\ui\UIComponent.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>true</active>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>org\cart\igd\input\GameAction.java</path>
+			<source>true</source>
+			<index>5</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>org\cart\igd\ui\UIWindow.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>org\cart\igd\Display.java</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
 </workspace_user>
