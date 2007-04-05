@@ -2,6 +2,7 @@ package org.cart.igd.states;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
+import java.io.*;
 import java.awt.event.*;
 
 import org.cart.igd.*;
@@ -11,6 +12,9 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.opengl.SkyDome;
 import org.cart.igd.input.*;
+import org.cart.igd.core.Kernel;
+
+import org.cart.igd.discreet.*;
 
 public class InGameState extends GameState
 {
@@ -20,6 +24,7 @@ public class InGameState extends GameState
 	private OBJModel worldMap;
 	private SkyDome skyDome;
 	private GUI gui;
+	private MaxParser maxParser;
 	
 	private final float GRAVITY = 0.025f;
 	
@@ -32,6 +37,17 @@ public class InGameState extends GameState
 	
 	public InGameState(GL gl)
 	{
+		try
+		{
+			maxParser = new MaxParser(new FileInputStream("data/models/bounce.3DS"));
+			maxParser.parse();
+		}
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		}
+		System.out.println(maxParser.getObjectMesh().toString());
+		
 		player			= new Entity(new Vector3f(), 0f, 10f);
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_km3");
@@ -55,6 +71,9 @@ public class InGameState extends GameState
 	
 	public void update(long elapsedTime)
 	{
+		player.lastPosition.x = player.position.x;
+		player.lastPosition.y = player.position.y;
+		player.lastPosition.z = player.position.z;
 		if(playerState==1)
 		{
 			if(player.position.y<5f)
@@ -82,6 +101,9 @@ public class InGameState extends GameState
 		
 		/* Setup Camera */
 		camera.lookAt(glu, player);
+		
+		/* Render GUI */
+		gui.render( Display.renderer.getGLG() );
 		
 		/* Render Player Model */
 		gl.glPushMatrix();
@@ -111,9 +133,6 @@ public class InGameState extends GameState
 			gl.glScalef(500f, 500f, 500f);
 			worldMap.draw(gl);
 		gl.glPopMatrix();
-		
-		/* Render GUI */
-		gui.render( Display.renderer.getGLG() );
 	}
 	
 	public void init(GL gl, GLU glu)
@@ -171,7 +190,10 @@ public class InGameState extends GameState
 		} //camera snap back action
 		else if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
 		{
-			camera.moveToBackView(8f);
+			if(player.position.x==player.lastPosition.x && player.position.z==player.lastPosition.z)
+			{
+				camera.moveToBackView(8f);
+			}
 		}
 	}
 }

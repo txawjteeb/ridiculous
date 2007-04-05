@@ -11,7 +11,9 @@
 		<ant_ref/>
 	</settings>
 	<ant_events/>
-	<run_items/>
+	<run_items>
+		<item run="org.cart.igd.core.Kernel"/>
+	</run_items>
 	<runtimes>
 		<runtime>
 			<label>&lt;Default&gt;</label>
@@ -19,7 +21,7 @@
 			<applet_ref/>
 			<debugger_ref/>
 			<param/>
-			<run>org.cart.igd.Kernel</run>
+			<run>org.cart.igd.core.Kernel</run>
 		</runtime>
 	</runtimes>
 	<libraries/>
@@ -47,9 +49,6 @@
 				<path>org\cart\igd\math</path>
 			</folderitem>
 			<folderitem>
-				<path>org\cart\igd\model</path>
-			</folderitem>
-			<folderitem>
 				<path>org\cart\igd\models</path>
 			</folderitem>
 			<folderitem>
@@ -66,6 +65,9 @@
 			</folderitem>
 			<folderitem>
 				<path>org\cart\igd\core</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\discreet</path>
 			</folderitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
@@ -200,26 +202,6 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
-				<path>org\cart\igd\model\AbstractModelFactory.java</path>
-				<folder>org\cart\igd\model</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\model\Model.java</path>
-				<folder>org\cart\igd\model</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\model\Model3ds.java</path>
-				<folder>org\cart\igd\model</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\model\ModelFactory.java</path>
-				<folder>org\cart\igd\model</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
 				<path>org\cart\igd\models\obj\FaceMaterials.java</path>
 				<folder>org\cart\igd\models\obj</folder>
 				<source>false</source>
@@ -285,6 +267,10 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>org\cart\igd\util\BlockDataInputStream.java</path>
+				<folder>org\cart\igd\util</folder>
+			</fileitem>
+			<fileitem>
 				<path>org\cart\igd\util\ColorRGBA.java</path>
 				<folder>org\cart\igd\util</folder>
 			</fileitem>
@@ -337,8 +323,176 @@
 				<path>org\cart\igd\core\Profiler.java</path>
 				<folder>org\cart\igd\core</folder>
 			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\CameraBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\ColorData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\FalloffData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\FieldOfViewData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\HotspotData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeAmbientBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeCameraBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeCameraTargetBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeColorBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeFalloffBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeFOVBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeFrameBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeHotspotBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeLightBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeMorphBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframePositionBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeRollBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeRotationBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeScaleBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeSpotlightBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeSpotlightTargetBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\KeyframeTag.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\LightBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\MaterialBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\MaterialData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\MaxConstants.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\MaxParser.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\MaxUtils.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\MorphData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\NodeHeaderData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\ObjectBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\ObjectMesh.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\PositionData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\RollData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\RotationData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\ScaleData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\TextureBlock.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\TrackData.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
+				<path>org\cart\igd\discreet\TriangleMesh.java</path>
+				<folder>org\cart\igd\discreet</folder>
+			</fileitem>
 		</include>
 		<exclude>
+			<folderitem>
+				<path>org\cart\igd\loader</path>
+				<dir/>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\model</path>
+				<dir/>
+			</folderitem>
 			<folderitem>
 				<path>org\cart\igd\models\m3ds</path>
 				<dir/>
@@ -349,5 +503,18 @@
 			</folderitem>
 		</exclude>
 	</files>
-	<tasks/>
+	<tasks>
+		<todotaskitem>
+			<description>TODO: Stop creating new StringBuffers each time</description>
+			<filepath>org\cart\igd\util\BlockDataInputStream.java</filepath>
+			<line>331</line>
+			<timestamp>1175758613</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: Stop creating bytearr each time</description>
+			<filepath>org\cart\igd\util\BlockDataInputStream.java</filepath>
+			<line>334</line>
+			<timestamp>1175758613</timestamp>
+		</todotaskitem>
+	</tasks>
 </project>

@@ -7,6 +7,7 @@ import org.cart.igd.ui.UIComponent;
 import org.cart.igd.input.*;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.input.GUIEvent;
+import org.cart.igd.core.Kernel;
 
 import java.awt.event.*;
 
