@@ -275,6 +275,10 @@
 				<folder>org\cart\igd\util</folder>
 			</fileitem>
 			<fileitem>
+				<path>org\cart\igd\util\DisplaySettings.java</path>
+				<folder>org\cart\igd\util</folder>
+			</fileitem>
+			<fileitem>
 				<path>org\cart\igd\util\ResourceRetriever.java</path>
 				<folder>org\cart\igd\util</folder>
 				<source>false</source>

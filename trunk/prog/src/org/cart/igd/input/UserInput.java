@@ -17,14 +17,14 @@ import org.cart.igd.core.Kernel;
 
 public class UserInput implements KeyListener, MouseListener, MouseMotionListener
 {
-	public static boolean typingEnabled = false;
+	public boolean[] keys = new boolean[512];
+	public int[] mousePos = new int[] { 0, 0 };
+	public int[] mousePosPrev = new int[] { 0, 0 };
+	public int[] mousePress = new int[] { 0, 0 };
+	public int[] mouseRelease = new int[] { 0, 0 };
+	public int[] mouseDragged = new int[] { 0, 0 };
 	
-	public static boolean[] keys = new boolean[256];
-	public static int[] mousePos = new int[] { 0, 0 };
-	public static int[] mousePosPrev = new int[] { 0, 0 };
-	public static int[] mousePress = new int[]{0,0	};
-	
-	public GameAction keyActions[] = new GameAction[600];
+	public GameAction keyActions[] = new GameAction[512];
 	public GameAction mouseActions[] = new GameAction[20];
 	public GameAction buttonActions[] = new GameAction[50];
 	
@@ -89,7 +89,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		mouseActions[mouseButton] = action;
 	}
 	
-	public static boolean isKeyPressed(int vk)
+	public boolean isKeyPressed(int vk)
 	{
 		return keys[vk]; 
 	}
@@ -130,7 +130,8 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		if(mouseActions[e.getButton()]!= null){
 			mouseActions[e.getButton()].deactivate();
 		}
-		updateMousePos(e.getX(), e.getY());
+		mouseRelease[0] = e.getX();
+		mouseRelease[1] = Kernel.display.getScreenHeight() - e.getY();
 	}
 	
 	public void mouseClicked(MouseEvent e)
@@ -145,6 +146,8 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	
 	public void mouseDragged(MouseEvent e)
 	{
+		mouseDragged[0] = e.getX();
+		mouseDragged[1] = Kernel.display.getScreenHeight() - e.getY();
 		updateMousePos(e.getX(), e.getY());
 	}
 	

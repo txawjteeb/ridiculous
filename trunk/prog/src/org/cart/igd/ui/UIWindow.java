@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import org.cart.igd.util.Texture;
 import org.cart.igd.Display;
 import org.cart.igd.input.UserInput;
+import org.cart.igd.core.*;
 
 public class UIWindow
 {
@@ -19,6 +20,7 @@ public class UIWindow
 	public int charSelected = -1;
 	public Texture[] tex;
 	public int colbreak = 1;
+	public boolean typingEnabled;
 	
 	public UIWindow(String title, int x, int y, boolean draggable)
 	{
@@ -94,14 +96,14 @@ public class UIWindow
 	
 	public void mouseReleased(int mx, int my)
 	{
-		my = Display.getScreenHeight()-my;
+		my = Kernel.display.getScreenHeight()-my;//refference has to be changed
 		if(dragEnabled) dragEnabled = false;
 	}
 	
 	public void mouseMoved(int mx, int my)
 	{
 		if(draggable) return;
-		my = Display.getScreenHeight()-my;
+		my = Kernel.display.getScreenHeight()-my;//refference has to be changed
 		if(dragEnabled)
 		{
 			x+=mx-dragPoint[0];
@@ -113,7 +115,7 @@ public class UIWindow
 	
 	public void mousePressed(int mx, int my)
 	{
-		my = Display.getScreenHeight()-my;
+		my = Kernel.display.getScreenHeight()-my;//refference has to be changed
 		if(mx>x && mx<x+1024 && my>y && my<y+512)
 		{
 			if(draggable && my>y+512-paddingTop) dragEnabled = true;
@@ -142,7 +144,7 @@ public class UIWindow
 					earlyExit = true;
 				}
 			}
-			UserInput.typingEnabled = (focused_component!=-1);
+			typingEnabled = (focused_component!=-1);
 			if(focused_component==-1)
 			{
 				for(int i=0; i<components.size(); i++)

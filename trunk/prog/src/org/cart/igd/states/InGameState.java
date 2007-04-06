@@ -55,7 +55,7 @@ public class InGameState extends GameState
 		camera			= new Camera(player, 10f, 4f);
 		gui				= new InGameGUI(this);
 		
-		mouseCameraRotate = new GameAction("mouse rotation mode");
+		mouseCameraRotate = new GameAction("mouse rotation mode",true);
 		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );
 		
 		//one press actions continuous = false;

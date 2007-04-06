@@ -29,6 +29,10 @@ public class UITextField extends UIComponent
 		this.password = password;
 	}
 	
+	public void activate(){
+		
+	}
+	
 	public void draw(int x, int y, float alpha)
 	{
 		//GLEngine.g.drawImageHue( Images.UITextField, x+rel_x, y+rel_y, new float[]{rgb[0],rgb[1],rgb[2],alpha}, new float[] { ((float)width)/128f, ((float)height)/16f } );
