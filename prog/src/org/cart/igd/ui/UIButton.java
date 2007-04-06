@@ -45,7 +45,23 @@ public class UIButton extends UIComponent
 		Display.renderer.getGLG().drawImage(texture,x+rel_x,y+rel_y);
 	}
 	
-	public void action()
+	public void setTexture(Texture tex){
+		texture = tex;
+	}
+	
+	public Texture getTexture(){
+		return texture;
+	}
+	
+	public void setAction(GameAction act){
+		action = act;
+	}
+	public GameAction getAction(){
+		return action;
+	}
+	
+	
+	public void activate()
 	{
 		if(action != null){
 			

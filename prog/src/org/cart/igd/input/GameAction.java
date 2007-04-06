@@ -15,6 +15,9 @@ public class GameAction
 	public static final int MOUSE = 2;
 	public static final int GUI = 3;
 	
+	public static final int ON_PRESS_ONLY = 10;
+	public static final int ON_RELEASE_ONLY= 11;
+	
 	private String info;
 	private boolean active;
 	
@@ -35,9 +38,26 @@ public class GameAction
     	active = false;
     	continuous = cont;
     }
+    public GameAction(String info,boolean cont,int type) {
+    	this.info = info;
+    	active = false;
+    	continuous = cont;
+    	this.type = type;
+    }
     
     /** use for constant actions such as movement */
     public boolean isActive(){
+    	/*if(type == ON_RELEASE_ONLY ){
+    		boolean retVal = released;
+    		released = false;
+    		return retVal;
+    	}
+    	if(type == ON_PRESS_ONLY){
+    		boolean retVal = pressed;
+    		pressed = false;
+    		return retVal;
+    	}*/
+    	
     	if(continuous){
     		return active;
     	} else {
@@ -63,6 +83,14 @@ public class GameAction
     	if(!continuous && pressed ){
     		active = true;
     	}
+    }
+    
+    public boolean isReleased(){
+    	return released;
+    }
+    
+    public boolean isPressed(){
+    	return pressed;
     }
     
     public String getInfo(){

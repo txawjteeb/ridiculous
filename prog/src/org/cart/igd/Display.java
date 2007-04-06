@@ -21,9 +21,6 @@ import org.cart.igd.input.UserInput;
 
 public class Display implements WindowListener
 {
-	//private static final int DEFAULT_WIDTH = 640;
-	//private static final int DEFAULT_HEIGHT = 480;
-	
 	private static final int DONT_CARE = -1;
 	
 	public static Renderer renderer;
@@ -32,22 +29,20 @@ public class Display implements WindowListener
 	private GLCanvas glCanvas;
 	private FPSAnimator animator;
 	private boolean fullscreen;
-	private static int width, height;
+	private int width, height;
 	private GraphicsDevice usedDevice;
 	
-	public static Display createDisplay( String title )
-	{
-		boolean fullscreen = false;
-		
-		Object[] p = new Object[] { "640 by 480", "800 by 600", "1024 by 768", "1280 by 960", "1280 by 1024" };
-		String s = (String)JOptionPane.showInputDialog(null, "Preferred Resolution:", "Project Ridiculous", JOptionPane.QUESTION_MESSAGE, null, p, p[1] );
-		int w = Integer.parseInt(s.substring(0, s.indexOf(" ")));
-		int h = Integer.parseInt(s.substring(s.indexOf(" ")+4));
-		
-		return new Display( title, w, h, fullscreen );
+	public Display( DisplaySettings disp )
+	{	
+		boolean tmpFs = disp.fullscreen;
+		int tmpW = disp.w;
+		int tmpH = disp.h;
+		disp.setVisible(false);//hide the option frame before loading fullscreen
+			
+		createDisplay( disp.title, tmpW,tmpH, tmpFs );
 	}
 	
-	private Display( String title, int width, int height, boolean fullscreen )
+	private void createDisplay( String title, int width, int height, boolean fullscreen )
 	{
 		GLCapabilities glc = new GLCapabilities();
 		glc.setDoubleBuffered(true);
@@ -77,8 +72,8 @@ public class Display implements WindowListener
 		*/
 		
 		this.fullscreen = fullscreen;
-		Display.width = width;
-		Display.height = height;
+		this.width = width;
+		this.height = height;
 		
 		animator = new FPSAnimator( glCanvas, 60 );
 		animator.setRunAsFastAsPossible( false );
@@ -152,43 +147,85 @@ public class Display implements WindowListener
 		finally { System.exit( 0 ); }
 	}
 	
-	private DisplayMode findDisplayMode( DisplayMode[] displayModes, int requestedWidth, int requestedHeight, int requestedDepth, int requestedRefreshRate )
+	private DisplayMode findDisplayMode( 
+				DisplayMode[] displayModes, 
+				int requestedWidth, 
+				int requestedHeight, 
+				int requestedDepth, 
+				int requestedRefreshRate )
 	{
-		DisplayMode displayMode = findDisplayModeInternal( displayModes, requestedWidth, requestedHeight, requestedDepth, requestedRefreshRate );
+		DisplayMode displayMode = findDisplayModeInternal( 
+				displayModes, 
+				requestedWidth, 
+				requestedHeight, 
+				requestedDepth, 
+				requestedRefreshRate );
 
 		if(displayMode == null)
-			displayMode = findDisplayModeInternal( displayModes, requestedWidth, requestedHeight, DONT_CARE, DONT_CARE );
+			displayMode = findDisplayModeInternal( 
+				displayModes, 
+				requestedWidth, 
+				requestedHeight, 
+				DONT_CARE, 
+				DONT_CARE );
 			
 		if(displayMode == null)
-			displayMode = findDisplayModeInternal( displayModes, requestedWidth, DONT_CARE, DONT_CARE, DONT_CARE );
+			displayMode = findDisplayModeInternal( 
+				displayModes, 
+				requestedWidth, 
+				DONT_CARE, 
+				DONT_CARE, 
+				DONT_CARE );
 		
 		if(displayMode == null)
-			displayMode = findDisplayModeInternal( displayModes, DONT_CARE, DONT_CARE, DONT_CARE, DONT_CARE );
+			displayMode = findDisplayModeInternal( 
+				displayModes, 
+				DONT_CARE, 
+				DONT_CARE, 
+				DONT_CARE, 
+				DONT_CARE );
 		
 		return displayMode;
-	}
+	}// findDisplayMode()
 	
-	private DisplayMode findDisplayModeInternal( DisplayMode[] displayModes, int requestedWidth, int requestedHeight, int requestedDepth, int requestedRefreshRate ) {
+	private DisplayMode findDisplayModeInternal( 
+				DisplayMode[] displayModes, 
+				int requestedWidth, 
+				int requestedHeight, 
+				int requestedDepth, 
+				int requestedRefreshRate ) 
+	{
 		DisplayMode displayModeToUse = null;
 		for(int i=0; i<displayModes.length; i++)
 		{
 			DisplayMode displayMode = displayModes[i];
-			if(	(requestedWidth == DONT_CARE || displayMode.getWidth() == requestedWidth) &&
-				(requestedHeight == DONT_CARE || displayMode.getHeight() == requestedHeight ) &&
-				(requestedHeight == DONT_CARE || displayMode.getRefreshRate() == requestedRefreshRate) &&
-				(requestedDepth == DONT_CARE || displayMode.getBitDepth() == requestedDepth))
-					displayModeToUse = displayMode;
+			if(	(requestedWidth == DONT_CARE || 
+					displayMode.getWidth() == 
+						requestedWidth) &&
+				(requestedHeight == DONT_CARE || 
+					displayMode.getHeight() == 
+						requestedHeight ) &&
+				(requestedHeight == DONT_CARE || 
+					displayMode.getRefreshRate() == 
+						requestedRefreshRate) &&
+				(requestedDepth == DONT_CARE || 
+					displayMode.getBitDepth() == 
+						requestedDepth))
+			{
+				displayModeToUse = displayMode;
+			}
+					
 		}
 		
 		return displayModeToUse;
-	}
+	}// findDisplayModeInternal()
 
 	public String getTitle() { return frame.getTitle(); }
 	
 	public void setTitle( String title ) { frame.setTitle( title ); }
 	
+	/* fixes mouse click position in windowed mode by getting size of drawable canvas*/
 	public int getScreenWidth() { return glCanvas.getWidth();}
-	
 	public int getScreenHeight() { return glCanvas.getHeight();}
 	
 	public void windowActivated(WindowEvent e) {  }

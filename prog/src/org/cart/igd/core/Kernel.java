@@ -8,7 +8,7 @@ public class Kernel
 {
 	public static Display display;
 	public static UserInput userInput;
-	
+	public static DisplaySettings displaySettings;
 	/**
 	 * keep track of time and performance statistics
 	 **/
@@ -27,7 +27,9 @@ public class Kernel
 		
 		gameEventList = new GameEventList();
 		
-		display = Display.createDisplay("Project Ridiculous");
+		displaySettings = new DisplaySettings();
+		
+		display = new Display(displaySettings);
 		display.start();
 		
 		userInput = new UserInput( display.getGLCanvas() );

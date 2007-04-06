@@ -11,6 +11,5 @@ public abstract class UIComponent
 	public abstract void draw(int x, int y, float alpha);
 	public abstract void getFocus();
 	public abstract void dropFocus();
-	public void action(){
-	}
+	public abstract void activate();
 }
