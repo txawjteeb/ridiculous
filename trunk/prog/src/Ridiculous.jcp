@@ -88,6 +88,10 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>org\cart\igd\DisplaySettings.java</path>
+				<folder>org\cart\igd</folder>
+			</fileitem>
+			<fileitem>
 				<path>org\cart\igd\GLGraphics.java</path>
 				<folder>org\cart\igd</folder>
 				<source>false</source>
@@ -272,10 +276,6 @@
 			</fileitem>
 			<fileitem>
 				<path>org\cart\igd\util\ColorRGBA.java</path>
-				<folder>org\cart\igd\util</folder>
-			</fileitem>
-			<fileitem>
-				<path>org\cart\igd\util\DisplaySettings.java</path>
 				<folder>org\cart\igd\util</folder>
 			</fileitem>
 			<fileitem>

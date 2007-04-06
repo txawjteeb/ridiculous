@@ -63,7 +63,7 @@
 			<path>org\cart\igd\input\UserInput.java</path>
 			<source>true</source>
 			<index>1</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>org\cart\igd\Renderer.java</path>
@@ -118,6 +118,12 @@
 			<source>true</source>
 			<index>10</index>
 			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>org\cart\igd\DisplaySettings.java</path>
+			<source>true</source>
+			<index>11</index>
+			<active>true</active>
 		</docitem>
 	</open_files>
 </workspace_user>
