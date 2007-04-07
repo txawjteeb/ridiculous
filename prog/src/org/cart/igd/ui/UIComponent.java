@@ -1,4 +1,5 @@
 package org.cart.igd.ui;
+import org.cart.igd.util.*;
 
 public abstract class UIComponent
 {
@@ -12,4 +13,14 @@ public abstract class UIComponent
 	public abstract void getFocus();
 	public abstract void dropFocus();
 	public abstract void activate();
+	
+	private Texture texture;
+	
+	public void setTexture(){
+		
+	}
+	
+	public Texture getTexture(){
+		return texture;
+	}
 }
