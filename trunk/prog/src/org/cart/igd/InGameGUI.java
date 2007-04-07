@@ -36,6 +36,7 @@ public class InGameGUI extends GUI
 	private GameAction activateGroupAnimal[] = new GameAction[4];
 	private UIButton btGroupAnimals[] = new UIButton[4];
 	
+	//other game actions
 	private GameAction mouseSelect;
 	private GameAction mouseReleased;
 	private GameAction pressQuestLog;
@@ -83,6 +84,9 @@ public class InGameGUI extends GUI
     public void handleInput()
     {
     	boolean animalPickedUp = false;
+    	if(pressQuestLog.isActive()){
+    		textList.addText(pressQuestLog.getInfo());
+    	}
     	
     	if( selectBushAnimal[1].isActive()){
     		textList.addText(activateGroupAnimal[1].getInfo());
@@ -146,8 +150,12 @@ public class InGameGUI extends GUI
     						setTexture(((UIButton)selectedButton).getTexture());
     					((UIButton)hudGroup.components.get(iG)).
     						setAction(((UIButton)selectedButton).getAction());
+    						
+    					textList.addText("animal added to group");
     					selectedButton = null;
+    					
     				}
+    				
     				if(selectedButton == null){
     					hudGroup.components.get(iG).activate();
     				}

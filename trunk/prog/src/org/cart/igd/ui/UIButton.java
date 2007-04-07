@@ -65,7 +65,7 @@ public class UIButton extends UIComponent
 	{
 		if(action != null){
 			
-			System.out.println(action.getInfo());
+			//System.out.println(action.getInfo());
 			action.activate();
 		}
 		if(action == null){
