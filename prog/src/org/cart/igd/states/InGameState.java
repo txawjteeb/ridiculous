@@ -90,7 +90,7 @@ public class InGameState extends GameState
 			if(player.position.y==0f)
 				playerState = 0;
 		}
-		
+		gui.update(elapsedTime);
 		handleInput(elapsedTime);
 	}
 	

@@ -57,7 +57,7 @@
 			<path>org\cart\igd\InGameGUI.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>org\cart\igd\input\UserInput.java</path>
@@ -66,64 +66,64 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\Renderer.java</path>
+			<path>org\cart\igd\ui\UIButton.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UILabel.java</path>
+			<path>org\cart\igd\input\GameEvent.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UITextField.java</path>
+			<path>org\cart\igd\input\GameAction.java</path>
 			<source>true</source>
 			<index>4</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UIWindow.java</path>
+			<path>org\cart\igd\states\InGameState.java</path>
 			<source>true</source>
 			<index>5</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UIButton.java</path>
+			<path>org\cart\igd\util\BitmapLoader.java</path>
 			<source>true</source>
 			<index>6</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\ui\UIComponent.java</path>
+			<path>org\cart\igd\util\TextureLoader.java</path>
 			<source>true</source>
 			<index>7</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\input\GameEvent.java</path>
+			<path>org\cart\igd\DisplaySettings.java</path>
 			<source>true</source>
 			<index>8</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\input\GameAction.java</path>
+			<path>org\cart\igd\Renderer.java</path>
 			<source>true</source>
 			<index>9</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\states\InGameState.java</path>
+			<path>org\cart\igd\ui\UIComponent.java</path>
 			<source>true</source>
 			<index>10</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>org\cart\igd\DisplaySettings.java</path>
+			<path>org\cart\igd\ui\UIWindow.java</path>
 			<source>true</source>
 			<index>11</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 	</open_files>
 </workspace_user>
