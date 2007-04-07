@@ -42,7 +42,7 @@ public class Display implements WindowListener
 		createDisplay( disp.title, tmpW,tmpH, tmpFs );
 	}
 	
-	private void createDisplay( String title, int width, int height, boolean fullscreen )
+	public void createDisplay( String title, int width, int height, boolean fullscreen )
 	{
 		GLCapabilities glc = new GLCapabilities();
 		glc.setDoubleBuffered(true);
