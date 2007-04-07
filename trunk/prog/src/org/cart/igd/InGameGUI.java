@@ -41,6 +41,10 @@ public class InGameGUI extends GUI
 	private GameAction pressQuestLog;
 
 	private InGameState inGameState;
+	//selected animal button
+	private UIComponent selectedButton;
+	
+	private GUITextList textList = new GUITextList(100,600,16,20);
 
     public InGameGUI(InGameState igs)
     {
@@ -57,6 +61,9 @@ public class InGameGUI extends GUI
     		
     	g.glgBegin();
     	
+    	if(selectedButton != null){
+    		selectedButton.draw(0,0,.5f);
+    	}
     	//g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
     	//g.drawBitmapString("Button", 3, 3);
     	//g.drawImage(texAnimalButton, 200,200);
@@ -66,12 +73,27 @@ public class InGameGUI extends GUI
     	hudGroup.x = (Kernel.display.getScreenWidth() - 200);
     	hudGroup.updateAndDraw();
     	
-    	
+    	textList.draw(g);
     	g.glgEnd();
+    }
+    public void update(long elapsedTime){
+    	textList.update(elapsedTime);
     }
     
     public void handleInput()
     {
+    	boolean animalPickedUp = false;
+    	
+    	if( selectBushAnimal[1].isActive()){
+    		textList.addText(activateGroupAnimal[1].getInfo());
+    	}
+    	if( selectBushAnimal[2].isActive()){
+    		textList.addText(activateGroupAnimal[2].getInfo());
+    	}
+    	if( selectBushAnimal[3].isActive()){
+    		textList.addText(activateGroupAnimal[3].getInfo());
+    	}
+    	
     	//check bottom hud input
     	if(mouseSelect.isActive())
     	{
@@ -96,34 +118,60 @@ public class InGameGUI extends GUI
     				Kernel.userInput.mousePos[0],
     				Kernel.userInput.mousePos[1]) )
     			{
-    				hudLeft.components.get(i).activate();//triger GameAction with the button
-    					//check for release over the group buttons
-    				int mdx = Kernel.userInput.mouseDragged[0];
-    				int mdy = Kernel.userInput.mouseDragged[1]; 
-    					
-    				for(int iG = 0 ; iG<hudGroup.components.size();iG++ ){
-    					if(Kernel.userInput.isRoundButtonPressed(
-    						hudGroup.x+hudGroup.components.get(iG).rel_x+32,
-    						hudGroup.y+hudGroup.components.get(iG).rel_y+32,
-    						32,
-    						mdx,
-    						mdy) )
-    					{
-    						addGroupAnimal[iG].activate();
-    						//hudGroup.components.get(iG).activate();
-    						System.out.println(	Kernel.userInput.mouseDragged[0] +" / " +Kernel.userInput.mouseDragged[1]	);
-    					}
-    				}
+    				animalPickedUp = true;
+    				selectedButton = new UIButton(
+    					((UIButton)hudLeft.components.get(i)).getTexture(),
+    					((UIButton)hudLeft.components.get(i)).getAction(),
+    					Kernel.userInput.mousePos[0],
+    					Kernel.userInput.mousePos[1],
+    					64,64
+    				);
+    				
+    			} else {
+    				
     			}
     		}
+    					
+    		for(int iG = 0 ; iG<hudGroup.components.size();iG++ ){
+    			if(Kernel.userInput.isRoundButtonPressed(
+    				hudGroup.x+hudGroup.components.get(iG).rel_x+32,
+    				hudGroup.y+hudGroup.components.get(iG).rel_y+32,
+    				32,
+    				Kernel.userInput.mousePress[0],
+    				Kernel.userInput.mousePress[1]) )
+    			{
+    				addGroupAnimal[iG].activate();
+    				if(selectedButton != null){
+    					((UIButton)hudGroup.components.get(iG)).
+    						setTexture(((UIButton)selectedButton).getTexture());
+    					((UIButton)hudGroup.components.get(iG)).
+    						setAction(((UIButton)selectedButton).getAction());
+    					selectedButton = null;
+    				}
+    				if(selectedButton == null){
+    					hudGroup.components.get(iG).activate();
+    				}
     				
+    				System.out.println(	Kernel.userInput.mouseDragged[0] +" / " +Kernel.userInput.mouseDragged[1]	);
+    			}
+    		}
     		
+    		if(!animalPickedUp){
+    			selectedButton=null;
+    		}		
+    		
+    	} // end if(mouseSelect.isActive())
     	
+    	// move the selected button
+    	if(selectedButton!=null){
+    			selectedButton.rel_x = Kernel.userInput.mousePos[0];
+    			selectedButton.rel_y = Kernel.userInput.mousePos[1];
     	}
-    	
+    		
     	if(addGroupAnimal[1].isActive()){
     		System.out.println("added animal to group slot 1");
     	}
+    	
     	
     	
     	if(mouseReleased.isActive()){
@@ -154,6 +202,11 @@ public class InGameGUI extends GUI
     	addGroupAnimal[1] = new GameAction("activate animal: 1",false,GameAction.ON_RELEASE_ONLY);
     	addGroupAnimal[2] = new GameAction("activate animal: 2",false,GameAction.ON_RELEASE_ONLY);
     	addGroupAnimal[3] = new GameAction("activate animal: 3",false,GameAction.ON_RELEASE_ONLY);
+    	
+    	activateGroupAnimal[0] = new GameAction("activate leader", false,GameAction.ON_RELEASE_ONLY);
+    	activateGroupAnimal[1] = new GameAction("activate animal: 1",false,GameAction.ON_RELEASE_ONLY);
+    	activateGroupAnimal[2] = new GameAction("activate animal: 2",false,GameAction.ON_RELEASE_ONLY);
+    	activateGroupAnimal[3] = new GameAction("activate animal: 3",false,GameAction.ON_RELEASE_ONLY);
     	
     	//activating animal in the group
     	Kernel.userInput.bindToButton(activateGroupAnimal[0],GUIEvent.BT_GROUP_0);

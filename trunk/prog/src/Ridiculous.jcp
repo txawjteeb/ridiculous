@@ -102,6 +102,10 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>org\cart\igd\GUITextList.java</path>
+				<folder>org\cart\igd</folder>
+			</fileitem>
+			<fileitem>
 				<path>org\cart\igd\InGameGUI.java</path>
 				<folder>org\cart\igd</folder>
 				<source>false</source>

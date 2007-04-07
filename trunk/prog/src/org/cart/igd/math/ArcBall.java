@@ -1,5 +1,6 @@
 package org.cart.igd.math;
 
+import org.cart.igd.core.Kernel;
 import java.awt.Point;
 
 public class ArcBall {
@@ -55,7 +56,7 @@ public class ArcBall {
 
     public void drag(Point NewPt, Quat4f NewRot)
     {
-    	NewPt.y = org.cart.igd.Display.getScreenHeight()-NewPt.y;
+    	NewPt.y = Kernel.display.getScreenHeight()-NewPt.y;
         this.mapToSphere(NewPt, EnVec);
         if(NewRot!=null)
         {
