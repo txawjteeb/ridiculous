@@ -57,7 +57,7 @@
 			<path>org\cart\igd\DisplaySettings.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>org\cart\igd\ui\UIComponent.java</path>
@@ -87,7 +87,13 @@
 			<path>org\cart\igd\GUITextList.java</path>
 			<source>true</source>
 			<index>5</index>
-			<active>true</active>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>org\cart\igd\Display.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
 </workspace_user>
