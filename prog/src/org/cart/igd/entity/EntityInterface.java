@@ -1,10 +1,11 @@
 package org.cart.igd.entity;
 
-/*
+
 import org.cart.igd.math.*;
 
 public interface EntityInterface extends NodeInterface
 {
+	/*
 	public abstract void animate(float deltaTime);
 	
 	public abstract void draw(Vector3f cameraPos);
@@ -40,5 +41,5 @@ public interface EntityInterface extends NodeInterface
 	public abstract void setDrawBoundingSphere(boolean drawBoundingSphere);
 	
 	public abstract void setFacingDirection(float facingDirection);
+	*/
 }
-*/

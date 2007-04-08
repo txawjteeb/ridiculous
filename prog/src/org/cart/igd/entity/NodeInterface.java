@@ -1,8 +1,9 @@
 package org.cart.igd.entity;
 
-/*
+
 public interface NodeInterface
 {
+	/*
 	public abstract void attach(Node newChild);
 	
 	public abstract void attachTo(Node newParent);
@@ -20,4 +21,5 @@ public interface NodeInterface
 	public abstract boolean isLastChild();
 	
 	public abstract Node getFirstChild();
-}*/
+	*/
+}

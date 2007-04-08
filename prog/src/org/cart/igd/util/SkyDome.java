@@ -1,4 +1,4 @@
-package org.cart.igd.opengl;
+package org.cart.igd.util;
 
 import org.cart.igd.math.*;
 import org.cart.igd.util.ColorRGBA;

@@ -1,6 +1,6 @@
 package org.cart.igd;
 
-/*
+
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.math.Vector4f;
 
@@ -12,6 +12,7 @@ import java.util.List;
 
 public class World
 {
+	/*
 	private static final float ATTENUATION_CONSTANT = 1.0f;
 	private static final float ATTENUATION_LINEAR = 0.0f;
 	private static final float ATTENUATION_QUADRATIC = 0.0f;
@@ -306,7 +307,5 @@ public class World
 	{
 		return null;
 	}
-	
-	
+	*/
 }
-*/
