@@ -113,7 +113,10 @@ public class GLGraphics
 		
 		gl.glEnd();
 		
+		
 		//tex.delete(gl);
+		
+		
 		gl.glDisable( GL.GL_TEXTURE_2D );
 		gl.glDisable( GL.GL_BLEND );
 		if(mode[1]!=DEFAULT_BLEND) gl.glBlendFunc( GL.GL_SRC_ALPHA, GLGraphics.DEFAULT_BLEND );

@@ -1,7 +1,7 @@
 package org.cart.igd.entity;
-/*
+
 public class Node implements NodeInterface
-{
+{/*
 	protected Node parentNode;
 	protected Node childNode;
 	protected Node previousNode;
@@ -120,5 +120,5 @@ public class Node implements NodeInterface
 	{
 		return childNode;
 	}
+	*/
 }
-*/

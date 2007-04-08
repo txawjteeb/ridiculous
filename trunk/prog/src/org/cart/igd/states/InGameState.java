@@ -9,8 +9,8 @@ import org.cart.igd.*;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
+import org.cart.igd.util.SkyDome;
 import org.cart.igd.util.ColorRGBA;
-import org.cart.igd.opengl.SkyDome;
 import org.cart.igd.input.*;
 import org.cart.igd.core.Kernel;
 

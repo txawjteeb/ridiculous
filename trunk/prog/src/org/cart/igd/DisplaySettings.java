@@ -66,15 +66,20 @@ public class DisplaySettings extends JFrame{
     	);
     	setVisible(true);
     	
+    	//this fixed for full screen selection problem when seting a default
+    	validate();
+    	jcbResolution.validate();
+    	jcbFullscreen.validate();
+    	
     	waitForOk();
     	
-    	//this fixed for full screen selection problem when seting a default
-    	jcbResolution.validate();
     	
-		String s=jcbResolution.getSelectedItem().toString();
+    	
+    	
+		//String s=jcbResolution.getSelectedItem().toString();
 		
 		//this did not fix the full screen resolution problem	
-    	//String s=jcbResolution.getItemAt(jcbResolution.getSelectedIndex()).toString();
+    	String s=jcbResolution.getItemAt(jcbResolution.getSelectedIndex()).toString();
 			
     	w = Integer.parseInt(s.substring(0, s.indexOf(" ")));
     	System.out.println("w"+w);
