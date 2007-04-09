@@ -1,5 +1,7 @@
 package org.cart.igd;
 
+import org.cart.igd.gl2d.GLGraphics;
+
 public abstract class GUI
 {
 	

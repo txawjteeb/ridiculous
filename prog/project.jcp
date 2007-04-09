@@ -70,10 +70,10 @@
 				<path>src\org\cart\igd\states</path>
 			</folderitem>
 			<folderitem>
-				<path>src\org\cart\igd\ui</path>
+				<path>src\org\cart\igd\util</path>
 			</folderitem>
 			<folderitem>
-				<path>src\org\cart\igd\util</path>
+				<path>src\org\cart\igd\gl2d</path>
 			</folderitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
@@ -94,15 +94,7 @@
 				<folder>src\org\cart\igd</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\org\cart\igd\GLGraphics.java</path>
-				<folder>src\org\cart\igd</folder>
-			</fileitem>
-			<fileitem>
 				<path>src\org\cart\igd\GUI.java</path>
-				<folder>src\org\cart\igd</folder>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\GUITextList.java</path>
 				<folder>src\org\cart\igd</folder>
 			</fileitem>
 			<fileitem>
@@ -410,26 +402,6 @@
 				<folder>src\org\cart\igd\states</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\org\cart\igd\ui\UIButton.java</path>
-				<folder>src\org\cart\igd\ui</folder>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\ui\UIComponent.java</path>
-				<folder>src\org\cart\igd\ui</folder>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\ui\UILabel.java</path>
-				<folder>src\org\cart\igd\ui</folder>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\ui\UITextField.java</path>
-				<folder>src\org\cart\igd\ui</folder>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\ui\UIWindow.java</path>
-				<folder>src\org\cart\igd\ui</folder>
-			</fileitem>
-			<fileitem>
 				<path>src\org\cart\igd\util\BitmapLoader.java</path>
 				<folder>src\org\cart\igd\util</folder>
 			</fileitem>
@@ -464,6 +436,34 @@
 			<fileitem>
 				<path>src\org\cart\igd\util\WinDataInputStream.java</path>
 				<folder>src\org\cart\igd\util</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\GUITextList.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\UIButton.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\UIComponent.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\UILabel.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\UITextField.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gl2d\UIWindow.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
 			</fileitem>
 		</include>
 	</files>
