@@ -25,6 +25,7 @@ public class Camera
 	
 	public Camera(Entity player, float distance, float cameraHeight)
 	{
+		this.player = player;
 		cameraPos = new Vector3f();
 		cameraUp = new Vector3f(0f, 1f, 0f);
 		this.cameraHeight = cameraHeight;

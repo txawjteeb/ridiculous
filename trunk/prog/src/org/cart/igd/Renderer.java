@@ -14,6 +14,7 @@ import javax.media.opengl.glu.*;
 import java.awt.event.KeyEvent;
 import com.sun.opengl.util.GLUT;
 
+import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.states.*;
 import org.cart.igd.util.TextureLoader;
 import org.cart.igd.util.Texture;
