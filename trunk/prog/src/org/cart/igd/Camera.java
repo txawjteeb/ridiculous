@@ -100,7 +100,7 @@ public class Camera
 		
 		
 		cameraPos.x = player.position.x + ( distance * (float)Math.cos((player.facingDirection+facingOffset-180f) * 0.0174f) );
-		cameraPos.y = cameraHeight;
+		cameraPos.y = cameraHeight + player.position.y;
 		cameraPos.z = player.position.z + ( distance * (float)Math.sin((player.facingDirection+facingOffset-180f) * 0.0174f) );
 		
 		try
