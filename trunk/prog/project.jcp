@@ -76,6 +76,21 @@
 			<folderitem>
 				<path>src\org\cart\igd\game</path>
 			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\gui</path>
+			</folderitem>
+			<folderitem>
+				<path>org</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\states</path>
+			</folderitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
 				<source>false</source>
@@ -483,6 +498,10 @@
 				<path>src\org\cart\igd\states\InGameState.java</path>
 				<folder>src\org\cart\igd\states</folder>
 				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\states\MenuState.java</path>
+				<folder>src\org\cart\igd\states</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\BitmapLoader.java</path>

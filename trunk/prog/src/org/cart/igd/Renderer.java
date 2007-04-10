@@ -93,8 +93,9 @@ public class Renderer implements GLEventListener
 		/* Initialize Game States 
 		 * NOTE: should be initialized outside of renderer class and before it 
 		 * or check for completion of game state before attempting to update*/
+		stateManager.addGameState(new MenuState(gl),"MenuState");
 		stateManager.addGameState(new InGameState(gl),"InGameState");
-		stateManager.setCurrentState("InGameState");
+		stateManager.setCurrentState("MenuState");
 		stateManager.initStates(gl, glu);
 		
 		
@@ -119,8 +120,14 @@ public class Renderer implements GLEventListener
 		
 		
 		/* Call current game state methods */
-		stateManager.getCurrentState().update(elapsedTime);
-		stateManager.getCurrentState().display(gl, glu);
+		GameState currentState = stateManager.getCurrentState();
+		if(currentState.changeState){
+			currentState.changeState = false;
+			stateManager.setCurrentState(currentState.nextState);
+			currentState = stateManager.getCurrentState();
+		}
+		currentState.update(elapsedTime);
+		currentState.display(gl, glu);
 		
 		/* Render Running stats */
 		renderStats(gl);
