@@ -73,6 +73,9 @@
 			<folderitem>
 				<path>src\org\cart\igd\gl2d</path>
 			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\game</path>
+			</folderitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
 				<source>false</source>
@@ -560,6 +563,18 @@
 				<path>src\org\cart\igd\gl2d\UIWindow.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
 				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\GameObjective.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\PlayerState.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\PlayerStateManager.java</path>
+				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 		</include>
 	</files>
