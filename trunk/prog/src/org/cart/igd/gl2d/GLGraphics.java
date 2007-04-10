@@ -114,12 +114,8 @@ public class GLGraphics
 		
 		gl.glEnd();
 		
-		
-		//tex.delete(gl);
-		
-		
+		gl.glDisable( GL.GL_BLEND );		
 		gl.glDisable( GL.GL_TEXTURE_2D );
-		gl.glDisable( GL.GL_BLEND );
 		if(mode[1]!=DEFAULT_BLEND) gl.glBlendFunc( GL.GL_SRC_ALPHA, GLGraphics.DEFAULT_BLEND );
 		gl.glPopMatrix();
 	}
@@ -500,7 +496,6 @@ public class GLGraphics
 			gl.glVertex3f( x, y, 0.0f );
 		gl.glEnd();
 		
-		tex.delete(gl);
 		gl.glDisable( GL.GL_TEXTURE_2D );
 		gl.glDisable( GL.GL_BLEND );
 	}
@@ -532,7 +527,6 @@ public class GLGraphics
 			gl.glVertex3f( x, y, 0.0f );
 		gl.glEnd();
 		
-		tex.delete(gl);
 		gl.glDisable( GL.GL_TEXTURE_2D );
 		gl.glDisable( GL.GL_BLEND );
 	}

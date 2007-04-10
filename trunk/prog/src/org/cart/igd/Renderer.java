@@ -73,7 +73,6 @@ public class Renderer implements GLEventListener
 	    gl.glCullFace(GL.GL_BACK);
 	    gl.glEnable(GL.GL_CULL_FACE);		// Enable Culling of Faces
 		gl.glEnable(GL.GL_DEPTH_TEST);		// Enable Depth Testing
-		gl.glEnable(GL.GL_TEXTURE_2D);		// Enable 2D Texture Mapping
 		gl.glEnable(GL.GL_AUTO_NORMAL);		// Auto-Normal Lighting
 		gl.glEnable(GL.GL_NORMALIZE);		// Normalize for Lighting
 		gl.glEnable(GL.GL_MULTISAMPLE);		// Enable Multi-Sampling

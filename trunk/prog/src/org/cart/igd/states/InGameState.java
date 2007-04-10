@@ -115,14 +115,12 @@ public class InGameState extends GameState
 
 		/* Render SkyDome */
 		gl.glPushMatrix();
-			gl.glDisable(GL.GL_TEXTURE_2D);
 			gl.glDisable(GL.GL_LIGHTING);
 			gl.glDisable(GL.GL_LIGHT0);
 			gl.glDisable(GL.GL_CULL_FACE);
 			gl.glTranslatef(player.position.x, player.position.y-30f, player.position.z);
 			skyDome.render(gl);
 			gl.glEnable(GL.GL_CULL_FACE);
-			gl.glEnable(GL.GL_TEXTURE_2D);
 			gl.glEnable(GL.GL_LIGHTING);
 			gl.glEnable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
