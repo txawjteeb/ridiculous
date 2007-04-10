@@ -60,9 +60,8 @@ public class Display implements WindowListener
 		frame.getContentPane().add( glCanvas, BorderLayout.CENTER );
 		frame.setResizable(false);
 		frame.setLocation(0, 0);
-
-//		InvisiCursor
-		/*
+		
+		/* InvisiCursor
 		java.awt.image.BufferedImage tmp = frame.getGraphicsConfiguration().createCompatibleImage(1, 1, java.awt.Transparency.BITMASK);
 		java.awt.Graphics2D g2 = tmp.createGraphics();
 		g2.setBackground(new Color(0,0,0,0));
@@ -75,8 +74,13 @@ public class Display implements WindowListener
 		this.width = width;
 		this.height = height;
 		
-		animator = new FPSAnimator( glCanvas, 60 );
-		animator.setRunAsFastAsPossible( false );
+		//make it run at max speed 100fps on pentiums or 64fps on amd64
+		animator = new FPSAnimator( glCanvas, 100 );
+		animator.setRunAsFastAsPossible( true );
+	}
+	
+	public Renderer getRenderer(){
+		return renderer;
 	}
 	
 	public Component getGLCanvas()
