@@ -96,14 +96,14 @@ public class InGameState extends GameState
 	
 	public void display(GL gl, GLU glu)
 	{
+		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
 		
 		/* Setup Camera */
 		camera.lookAt(glu, player);
 		
-		/* Render GUI */
-		gui.render( Display.renderer.getGLG() );
+		
 		
 		/* Render Player Model */
 		gl.glPushMatrix();
@@ -131,6 +131,9 @@ public class InGameState extends GameState
 			gl.glScalef(500f, 500f, 500f);
 			worldMap.draw(gl);
 		gl.glPopMatrix();
+		
+		/* Render GUI */
+		gui.render( Display.renderer.getGLG() );
 	}
 	
 	public void init(GL gl, GLU glu)
