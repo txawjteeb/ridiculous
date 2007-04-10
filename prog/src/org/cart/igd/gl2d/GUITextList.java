@@ -2,21 +2,25 @@
  * @(#)GUITextList.java
  *
  *
- * @author 
- * @version 1.00 2007/4/6
+ * @author Vitaly Maximov
+ * @version 1.01 2007/4/9
+ *
+ * Purpose: This object holds a list of string messages that are printed
+ * to the screen and are removed after a period of time, or when list overflows
  */
 package org.cart.igd.gl2d;
 
 import java.util.LinkedList;
 
 
-public class GUITextList {
+public class GUITextList
+{
 	int x;
 	int y;
 	int hSpace;
 	int size;
 	long textFadeTime =6000;
-	long timeBeforeFade = 6000;
+	long timeBeforeFade = textFadeTime;
 	
 	private LinkedList<String> text = new LinkedList<String>();
 	
@@ -28,15 +32,22 @@ public class GUITextList {
     	this.size=size;
     }
     
+    public GUITextList(int x,int y, int h,int size,int time) {
+    	this(x,y,h,size);
+    	this.textFadeTime=time;
+    }
+    
     public void addText(String txt){
     	text.addFirst(txt);
-    	timeBeforeFade = textFadeTime*2;
+    	timeBeforeFade = textFadeTime;
     }
+    
     public synchronized void cleanUp(){
     	while(text.size()>size){
     		text.removeLast();
     	}
     }
+    
     public synchronized void removeLast(){
     	if(text.size() >= 1){
     		text.removeLast();
@@ -45,23 +56,20 @@ public class GUITextList {
     }
     
     public void draw(GLGraphics g){
-    	
     	int iText=0;
     	for(String t: text){
-    		g.drawBitmapString(t,x,y-(iText*hSpace));
+    		g.drawBitmapString(t,x,y+(iText*hSpace));
     		iText++;
     	}
-    	cleanUp();
-    	
+    	cleanUp();	
     }
+    
     public void update(long elapsedTime){
     	timeBeforeFade = timeBeforeFade - elapsedTime;
     	if(timeBeforeFade <= 0){
-    		removeLast();
+    		addText("");//add blank
     		timeBeforeFade = textFadeTime;
+    		
     	}
-    	System.out.println(timeBeforeFade);
     }
-    
-    
 }
