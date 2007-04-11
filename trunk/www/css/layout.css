@@ -1,121 +1,112 @@
 #centercontent {
 background:#000;
 color:#fff;
-margin-left: 500px;
-margin-right:100px;
+margin-left:90%;
+margin-right: 60%;
 
 voice-family: "\"}\"";
 voice-family: inherit;
-margin-left: 150px;
-margin-right:355px;
-margin-top:204px;
-height:520px;
+margin-left:  9%;
+margin-right: 9%;
+margin-top:7%;
+height: 100%;
 	}
 html>body #centercontent {
-margin-left: 500px;
-margin-right:100px;
+margin-left:  100%;
+margin-right: 100%;
 color:#fff;
 }
 	#topleftcorner {
 padding:20px;
 	background: #fff;
 	position: absolute;
-	left:160px;
-	top:300px;
-	height:165px;
-	width:340px;
+	left:15%;
+	top:30%;
+	height:20%;
+	width:33.7%;
 	background:#fff;
 	color: #000000;
 	background-color: #000000;
 	background-image: url(../img/text_box_blue.gif);
 }
+#toprightcorner {
+padding:20px;
+	background: #000;
+	position: absolute;
+	left:50%;
+	top:30%;
+	height:20%;
+	width:33.7%;
+	background:#000;
+color: #000000;
+	background-color: #000000;
+	background-image: url(../img/text_box_blue.gif);
+}	
 #bottomleftcorner {
 	background: #000;
 	position: absolute;
-	left:160px;
-	top:475px;
-	height:200px;
-	width:300px;
+	left:15%;
+	top:60%;
+	height:20%;
+	width:33%;
 	background:#000;
 
 }
 #bottomrightcorner {
 	background: #000;
 	position: absolute;
-	left:540px;
-	top:475px;
-	height:175px;
-	width:300px;
+	left:50%;
+	top:60%;
+	height:20%;
+	width:33%;
 	background:#000;
 
 
 }
-#toprightcorner {
-padding:20px;
-	background: #000;
-	position: absolute;
-	left:540px;
-	top:300px;
-	height:165px;
-	width:340px;
-	background:#000;
-color: #000000;
-	background-color: #000000;
-	background-image: url(../img/text_box_blue.gif);
-}	
+	
 #leftcontent {
 	background: #fff;
 	position: absolute;
-	left:10px;
-	top:20px;
-	height:700px;
-	width:150px;
+	left:0%;
+	top:0%;
+	height:2000px;
+	width:10%;
 	background:#fff;
 	
 	color: #000000;
 	background-color: #FFFFFF;
-	background-image: url(../img/background_panel_left.gif);
+	background-image: url(../img/green_panel_right.gif);
 	}
 
 	
 #rightcontent {
 	position: absolute;
-	right:225px;
-	top:70px;
-	height:785px;
-	width:140px;
+	right:0%;
+	top:0%;
+	height:2000px;
+	width:10%;
 	background:#fff;
 	
 	color: #000000;
 		background-color: #FFFFFF;
-		background-image: url(../img/background_panel_right.gif);
+		background-image: url(../img/green_panel_right.gif);
 	}
 
 #topcontent {
 	background: #fff;
 	position: absolute;
-	top:20px;
-	height:188px;
-	width:1025px;
+	top:0%;
+	left:0%;
+	height:10%;
+	width:2000px;
 	background:#000;
 	
 	color: #fff;
 	background-color: #FFFFFF;
-	background-image: url(../img/background_panel_top.gif);
+	background-image: url(../img/green_panel_top.gif);
 	}
 
-#bottomcontent {
-	background: #fff;
-	position: absolute;
-	bottom:10px;
-	height:144px;
-	width:1025px;
-	background:#fff;
-	
-	color: #000000;
-	background-color: #FFFFFF;
-	background-image: url(../img/background_panel_bottom.gif);
-	}
+
 
 
 
