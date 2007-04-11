@@ -21,6 +21,8 @@ public class GameAction
 	private String info;
 	private boolean active;
 	
+	public int ammount = 0;
+	
 	private boolean pressed;
 	private boolean released;
 	
@@ -91,6 +93,10 @@ public class GameAction
     
     public boolean isPressed(){
     	return pressed;
+    }
+    public int getAmount(){
+    	int retVal = ammount;
+    	return retVal;
     }
     
     public String getInfo(){
