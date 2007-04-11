@@ -12,15 +12,15 @@ import javax.swing.SwingUtilities;
 
 import org.cart.igd.Display;
 import org.cart.igd.core.Kernel;
-
+import org.cart.igd.gl2d.UIComponent;
 
 
 public class UserInput implements KeyListener, MouseListener, MouseMotionListener
 {
-	public boolean[] keys = new boolean[512];
-	public int[] mousePos = new int[] { 0, 0 };
+	public boolean[] keys     = new boolean[600];
+	public int[] mousePos     = new int[] { 0, 0 };
 	public int[] mousePosPrev = new int[] { 0, 0 };
-	public int[] mousePress = new int[] { 0, 0 };
+	public int[] mousePress   = new int[] { 0, 0 };
 	public int[] mouseRelease = new int[] { 0, 0 };
 	public int[] mouseDragged = new int[] { 0, 0 };
 	
@@ -28,7 +28,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public GameAction mouseActions[] = new GameAction[20];
 	public GameAction buttonActions[] = new GameAction[50];
 	
-	public static Robot robot;
+	public Robot robot;
 
 	public UserInput(Component comp)
 	{
@@ -44,27 +44,9 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		}
 	}
 	
-	/** test whether a square button is pressed*/
-	public boolean isSquareButtonPressed(int bx, int by,int bw, int bh,int mx, int my)
-	{
-		if( bx<mx && (bx+bw)>mx && by<my && (by+bh)>my )
-		{
-			return true;
-		}
-		return false;
-	}
-	
-	/** test whether a square button is pressed if button is centered*/
-	public boolean isSquareButtonPressed(int bx, int by, int r,int mx, int my)
-	{
-		if( bx<mx && bx+(r*2)>mx && by<my && (by+(r*2))>my )
-		{
-			return true;
-		}
-		return false;
-	}	
-	
-	/** test whether a circular button is pressed */
+	/** 
+	 * test whether a circular button is pressed 
+	 **/
 	public boolean isRoundButtonPressed(int xb, int yb, int br,int xm, int ym)
 	{
 		if( br > Math.sqrt( ((double)((xm-xb)*(xm-xb))+ ((ym-yb)*(ym-yb)))) )
@@ -74,6 +56,39 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		return false;
 	}
 	
+	/** 
+	 * test whether a square button is pressed
+	 **/
+	public boolean isSquareButtonPressed(UIComponent c)
+	{
+		if( c.getX()<mousePress[0] && (c.getX()+c.getWidth())>mousePress[0] && 
+			c.getY()<mousePress[1] && (c.getY()+c.getHeight())>mousePress[1] )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isSquareButtonPressed(int bx, int by,int bw, int bh,int mx, int my)
+	{
+		if( bx<mx && (bx+bw)>mx && by<my && (by+bh)>my )
+		{
+			return true;
+		}
+		return false;
+	}
+			
+	/** test whether a square button is pressed*/
+	public boolean isSquareButtonPressed(UIComponent c,int mx, int my)
+	{
+		if( c.getX()<mx && (c.getX()+c.getWidth())>mx && 
+			c.getY()<my && (c.getY()+c.getHeight())>my )
+		{
+			return true;
+		}
+		return false;
+	}	
+
 	/** add action event to a predifined virtual key code */
 	public void bindToKey(GameAction action, int vkey){
 		keyActions[vkey]=action;
