@@ -13,6 +13,9 @@ import org.cart.igd.util.SkyDome;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.input.*;
 import org.cart.igd.core.Kernel;
+import org.cart.igd.gui.GUI;
+import org.cart.igd.gui.InGameGUI;
+import java.util.ArrayList;
 
 import org.cart.igd.discreet.*;
 
@@ -23,7 +26,7 @@ public class InGameState extends GameState
 	private OBJModel playerSprite;
 	private OBJModel worldMap;
 	private SkyDome skyDome;
-	private GUI gui;
+	
 	private MaxParser maxParser;
 	
 	private final float GRAVITY = 0.025f;
@@ -35,8 +38,16 @@ public class InGameState extends GameState
 	private GameAction incCameraH;
 	private GameAction decCameraH;
 	
+	public static final int GUI_GAME = 0;
+	public static final int GUI_DIALOGUE = 1;
+	
+	private ArrayList<GUI> gui = new ArrayList<GUI>();
+	int currentGuiState = GUI_GAME;
+	
+	
 	public InGameState(GL gl)
 	{
+		super(gl);
 		try
 		{
 			maxParser = new MaxParser(new FileInputStream("data/models/bounce.3DS"));
@@ -53,7 +64,12 @@ public class InGameState extends GameState
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_km3");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		camera			= new Camera(player, 10f, 4f);
-		gui				= new InGameGUI(this);
+		
+		/** 
+		 * add new gui subsets here 
+		 **/
+		gui.add(new InGameGUI(this));
+		//ex: gui.add(new DialogueGUI());				
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode",true);
 		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );
@@ -90,8 +106,19 @@ public class InGameState extends GameState
 			if(player.position.y==0f)
 				playerState = 0;
 		}
-		gui.update(elapsedTime);
+		
+		gui.get(currentGuiState).update(elapsedTime);
 		handleInput(elapsedTime);
+	}
+	
+	/** safely change gui defaul gui to dialogue gui and viasa versa */
+	public void changeGuiState( int guiState){
+		if(gui.size()<= guiState){
+			currentGuiState =guiState;
+		} else {
+			System.out.println(
+				"InGameState.changeGuiState(int guiState) ->no such guiState");
+		}
 	}
 	
 	public void display(GL gl, GLU glu)
@@ -133,7 +160,7 @@ public class InGameState extends GameState
 		gl.glPopMatrix();
 		
 		/* Render GUI */
-		gui.render( Display.renderer.getGLG() );
+		gui.get(currentGuiState).render( Display.renderer.getGLG() );
 	}
 	
 	public void init(GL gl, GLU glu)

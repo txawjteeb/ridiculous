@@ -27,7 +27,7 @@ public abstract class GameState
 		initialized = true;
 	}
 	
-	public void changeState(String nextState)
+	public void changeGameState(String nextState)
 	{
 		this.changeState = true;
 		this.nextState = nextState;
