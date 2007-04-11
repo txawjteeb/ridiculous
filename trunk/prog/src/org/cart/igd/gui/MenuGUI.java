@@ -24,16 +24,19 @@ public class MenuGUI extends GUI
 		menuSelection[2] = new UILabel("Quit", 200, 260, 200, 16);
 	}
 	
-	public void loadImages(){
+	public void loadImages()
+	{
 		texStartButton = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/bush_ico_big.png");
 	}
 	
-	public void update(long elapsedTime){
+	public void update(long elapsedTime)
+	{
 		handleInput();
 	}
 	
-	public void handleInput(){
+	public void handleInput()
+	{
 		if(input.isSquareButtonPressed( menuSelection[0] ) )
 		{
 			System.out.println();
@@ -41,7 +44,8 @@ public class MenuGUI extends GUI
 		}
 	}
 	
-	public void render(GLGraphics g){
+	public void render(GLGraphics g)
+	{
 		g.glgBegin();
 		menuSelection[0].draw(g,0,0,1f);
 		menuSelection[1].draw(g,0,0,.5f);

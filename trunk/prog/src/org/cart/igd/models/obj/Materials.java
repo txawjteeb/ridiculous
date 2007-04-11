@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import javax.media.opengl.*;
-import com.sun.opengl.util.texture.*;
+import org.cart.igd.util.Texture;
 
 
 public class Materials
@@ -161,16 +161,14 @@ public class Materials
 		{
 			gl.glDisable(GL.GL_TEXTURE_2D);
 			usingTexture = false;
-			gl.glEnable(GL.GL_LIGHTING);
 		}
 	}
 
 	private void switchOnTex(GL gl, Texture tex)
 	{
-		gl.glDisable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		usingTexture = true;
-		tex.bind();
+		tex.bind(gl);
 	}
 
 	private Texture getTexture(String matName) 

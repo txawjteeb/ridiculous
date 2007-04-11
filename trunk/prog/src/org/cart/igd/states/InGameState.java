@@ -61,7 +61,7 @@ public class InGameState extends GameState
 		
 		player			= new Entity(new Vector3f(), 0f, 10f);
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
-		worldMap		= new OBJModel(gl, "data/models/zoo_map_km3");
+		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		camera			= new Camera(player, 10f, 4f);
 		
@@ -130,13 +130,11 @@ public class InGameState extends GameState
 		/* Setup Camera */
 		camera.lookAt(glu, player);
 		
-		
-		
 		/* Render Player Model */
 		gl.glPushMatrix();
-			gl.glTranslatef(player.position.x, player.position.y, player.position.z);
+			gl.glTranslatef(player.position.x, player.position.y-3f, player.position.z);
 			gl.glRotatef(player.facingDirection+180f, 0f, -1f, 0f);
-			gl.glScalef(2f,2f,2f);
+			gl.glScalef(4f,4f,4f);
 			playerSprite.draw(gl);
 		gl.glPopMatrix();
 
