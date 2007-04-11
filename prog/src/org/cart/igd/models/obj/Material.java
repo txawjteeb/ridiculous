@@ -2,8 +2,8 @@ package org.cart.igd.models.obj;
 
 import java.io.*;
 import javax.media.opengl.*;
-import com.sun.opengl.util.texture.*;
-
+import org.cart.igd.core.Kernel;
+import org.cart.igd.util.Texture;
 
 public class Material
 {
@@ -98,10 +98,7 @@ public class Material
 	{
 		try
 		{
-			texFnm = fnm;
-			texture = TextureIO.newTexture( new File(texFnm), false);
-			texture.setTexParameteri(GL.GL_TEXTURE_MAG_FILTER, GL.GL_NEAREST);
-			texture.setTexParameteri(GL.GL_TEXTURE_MIN_FILTER, GL.GL_NEAREST);
+			texture = Kernel.display.getRenderer().loadImage("data/images/"+fnm);
 		}
 		catch(Exception e)
 		{

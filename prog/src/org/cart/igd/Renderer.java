@@ -80,12 +80,7 @@ public class Renderer implements GLEventListener
 		gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 		
 		/* Enable and setup lighting */
-		gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, lightAmbient, 0);
-		gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, lightDiffuse, 0);
-		gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, lightPosition, 0);
-		
-		gl.glEnable(GL.GL_LIGHT0);
-		gl.glEnable(GL.GL_LIGHTING);
+		initLighting(gl);
 		
 		/* Create the GLGraphics object for rendering 2D GUI. */
 		g = new GLGraphics();
@@ -106,6 +101,23 @@ public class Renderer implements GLEventListener
 	}
 	
 	
+	private void initLighting(GL gl)
+	{
+		gl.glEnable(GL.GL_LIGHT0);
+		gl.glEnable(GL.GL_LIGHTING);
+		
+		float[] ambientLight	= new float[] { 0.2f, 0.2f, 0.2f, 1.0f };
+		float[] diffuseLight	= new float[] { 0.8f, 0.8f, 0.8f, 1.0f };
+		float[] specularLight	= new float[] { 0.5f, 0.5f, 0.5f, 1.0f };
+		float[] position		= new float[] { -1.5f, 1.0f, -4.0f, 1.0f };
+		
+		gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0);
+		gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0);
+		gl.glLightfv(GL.GL_LIGHT0, GL.GL_SPECULAR, specularLight, 0);
+		gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
+	}
+	
+	
 	/*
 	 * display
 	 *
@@ -116,8 +128,6 @@ public class Renderer implements GLEventListener
 		gl = drawable.getGL();	// Update GL instance
 		
 		long elapsedTime = getElapsedTime();	// calculate elapsed time
-		
-		
 		
 		/* Call current game state methods */
 		GameState currentState = stateManager.getCurrentState();
@@ -299,7 +309,8 @@ public class Renderer implements GLEventListener
 		}
 		catch(java.io.IOException e)
 		{
-			e.printStackTrace();
+			System.out.println("err "+resourceName);
+			//e.printStackTrace();
 		}
 		return null;
 	}

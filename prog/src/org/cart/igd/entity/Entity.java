@@ -7,6 +7,7 @@ import javax.media.opengl.glu.GLU;
 
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.core.Kernel;
 //import org.cart.igd.model.Model;
 //import org.cart.igd.model.ModelManager;
 //import org.cart.igd.bsp.BSPObject;
@@ -18,7 +19,7 @@ public class Entity
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
-	public float speed = 0.01f;
+	public float speed = 0.05f;
 	public float turnSpeed = 0.1f;
 	
 	/*protected Model model;
@@ -38,11 +39,11 @@ public class Entity
 	
 	public Entity(Vector3f pos, float fD, float bsr)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
-		gl = org.cart.igd.Display.renderer.getGL();
+		gl = Kernel.display.getRenderer().getGL();
 		/*if(this.gl==null)
 			throw new EntityException("**** No drawable.gl given ****");
 		*/
-		glu = org.cart.igd.Display.renderer.getGLU();
+		glu = Kernel.display.getRenderer().getGLU();
 		/*if(this.glu==null)
 			throw new EntityException("**** No drawable.glu given ****");
 		*/
