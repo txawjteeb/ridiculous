@@ -15,7 +15,7 @@ import org.cart.igd.core.Kernel;
 import org.cart.igd.gl2d.UIComponent;
 
 
-public class UserInput implements KeyListener, MouseListener, MouseMotionListener
+public class UserInput implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener
 {
 	public boolean[] keys     = new boolean[600];
 	public int[] mousePos     = new int[] { 0, 0 };
@@ -29,6 +29,9 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public GameAction buttonActions[] = new GameAction[50];
 	
 	public Robot robot;
+	
+	public static final int MOUSE_WHEEL_UP = 4;
+    public static final int MOUSE_WHEEL_DOWN = 5;
 
 	public UserInput(Component comp)
 	{
@@ -175,6 +178,18 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	{
 		updateMousePos(e.getX(), e.getY());
 	}
+	
+//	 from the MouseWheelListener interface
+    public void mouseWheelMoved(MouseWheelEvent e) {
+    	 if (e.getWheelRotation() < 0) {
+             mouseActions[MOUSE_WHEEL_DOWN].activate();
+             mouseActions[MOUSE_WHEEL_DOWN].ammount=e.getWheelRotation();
+         }
+         else {
+             mouseActions[MOUSE_WHEEL_UP].activate();
+             mouseActions[MOUSE_WHEEL_UP].ammount=e.getWheelRotation();
+         }
+    }
 	
 	private void updateMousePress(int x,int y)
 	{

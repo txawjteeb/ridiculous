@@ -61,6 +61,9 @@ public class InGameGUI extends GUI
 	private UIComponent selectedButton;
 
 	private GUITextList textList = new GUITextList(100, 600, 16, 20);
+	
+	private GameAction mouseWheelUp;
+	private GameAction mouseWheelDown;
 
 	public InGameGUI(GameState igs) {
 		super(igs);
@@ -101,6 +104,15 @@ public class InGameGUI extends GUI
 		if (pressQuestLog.isActive()) {
 			textList.addText(pressQuestLog.getInfo());
 		}
+		if(mouseWheelUp.isActive()){
+			
+		}
+		
+		if(mouseWheelDown.isActive()){
+			((InGameState)gameState).camera.distance-=mouseWheelDown.getAmount();
+			System.out.println("ljkasdf");
+		}
+		
 
 		if (selectBushAnimal[1].isActive()) {
 			textList.addText(activateGroupAnimal[1].getInfo());
@@ -202,6 +214,13 @@ public class InGameGUI extends GUI
 		mouseSelect = new GameAction("mouse press", false);
 		mouseReleased = new GameAction("mouse release", false,
 				GameAction.ON_RELEASE_ONLY);
+		
+		mouseWheelUp = new GameAction("zoom in", false, UserInput.MOUSE_WHEEL_UP);
+		mouseWheelDown = new GameAction("zoom out", false, UserInput.MOUSE_WHEEL_DOWN);
+		
+		
+		Kernel.userInput.bindToMouse(mouseWheelUp,  UserInput.MOUSE_WHEEL_UP);
+		Kernel.userInput.bindToMouse(mouseWheelDown,UserInput.MOUSE_WHEEL_DOWN);
 
 		for (int iEvt = 0; iEvt < useItem.length; iEvt++) {
 			useItem[iEvt] = new GameAction("use item: " + (iEvt + 1), false);
