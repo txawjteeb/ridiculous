@@ -67,6 +67,7 @@ public class Renderer implements GLEventListener
 		gl.glClearDepth(1.0f);				// Depth Buffer Setup
 		gl.glClearStencil(0);				// Clear the Stencil Buffer to 0
 		
+		gl.glLightModelfv(GL.GL_LIGHT_MODEL_AMBIENT, new float[] {0.25f,0.25f,0.25f,1f}, 0 );
 		gl.glShadeModel(GL.GL_SMOOTH);		// Enable Smooth Shading
 		gl.glDepthFunc(GL.GL_LEQUAL);		// Depth Testing Type
 		gl.glFrontFace(GL.GL_CCW);
