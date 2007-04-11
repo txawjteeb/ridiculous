@@ -336,6 +336,10 @@
 				<folder>src\org\cart\igd\gl2d</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\gui\Dialogue.java</path>
+				<folder>src\org\cart\igd\gui</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\gui\GUI.java</path>
 				<folder>src\org\cart\igd\gui</folder>
 			</fileitem>
