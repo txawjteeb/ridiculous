@@ -8,7 +8,7 @@ Add your content here.
 = Details =
 
 Add your content here.  Format your content with:
+|| [http://code.google.com/p/ridiculous/w/edit/main_menu Main Menu] ||
 || [http://code.google.com/p/ridiculous/wiki/contents Contents] ||
 || [http://code.google.com/p/ridiculous/wiki/pitch Pich Document] ||
-
 
