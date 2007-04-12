@@ -1,4 +1,4 @@
-#summary The Main Page for all Documentation
+#summary Home Page
 
 = Introduction =
 
