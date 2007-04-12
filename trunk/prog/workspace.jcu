@@ -66,196 +66,34 @@
 	</projects>
 	<open_files>
 		<docitem>
-<<<<<<< .mine			<path>src\org\cart\igd\gui\MenuGUI.java</path>=======			<path>..\..\..\..\Program Files\Xinox Software\JCreatorV4LE\start.zip</path>
-			<source>false</source>
+			<path>src\org\cart\igd\gui\InGameGUI.java</path>
+			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\gui\GUI.java</path>>>>>>>> .r146
+			<path>src\org\cart\igd\input\UserInput.java</path>
 			<source>true</source>
 			<index>1</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\gui\InGameGUI.java</path>
+			<path>src\org\cart\igd\input\GameAction.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\states\GameState.java</path>
+			<path>src\org\cart\igd\Camera.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\states\InGameState.java</path>
+			<path>src\org\cart\igd\gui\Dialogue.java</path>
 			<source>true</source>
 			<index>4</index>
 			<active>false</active>
 		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\Renderer.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\input\UserInput.java</path>
-			<source>true</source>
-			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeFrameBlock.java</path>
-			<source>true</source>
-			<index>7</index>
-			<active>false</active>
-		</docitem>
-<<<<<<< .mine		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeFalloffBlock.java</path>
-			<source>true</source>
-			<index>7</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeFOVBlock.java</path>
-			<source>true</source>
-			<index>8</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeColorBlock.java</path>
-			<source>true</source>
-			<index>9</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeCameraTargetBlock.java</path>
-			<source>true</source>
-			<index>10</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeCameraBlock.java</path>
-			<source>true</source>
-			<index>11</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\KeyframeBlock.java</path>
-			<source>true</source>
-			<index>12</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\RollData.java</path>
-			<source>true</source>
-			<index>13</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\discreet\PositionData.java</path>
-			<source>true</source>
-			<index>14</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\game\GameObjective.java</path>
-			<source>true</source>
-			<index>15</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\game\PlayerState.java</path>
-			<source>true</source>
-			<index>16</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\gl2d\UITextField.java</path>
-			<source>true</source>
-			<index>17</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\gl2d\UIWindow.java</path>
-			<source>true</source>
-			<index>18</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\math\Vector4f.java</path>
-			<source>true</source>
-			<index>19</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\math\VectorTex3f.java</path>
-			<source>true</source>
-			<index>20</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\states\GameStateManager.java</path>
-			<source>true</source>
-			<index>21</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\gui\Dialogue.java</path>
-			<source>true</source>
-			<index>22</index>
-			<active>true</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
-			<source>true</source>
-			<index>23</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\..\..\..\Program Files\Xinox Software\JCreatorV4\start.zip</path>
-			<source>false</source>
-			<index>24</index>
-			<active>false</active>
-		</docitem>
-=======		<docitem>
-			<path>src\org\cart\igd\entity\Entity.java</path>
-			<source>true</source>
-			<index>8</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\models\obj\OBJModel.java</path>
-			<source>true</source>
-			<index>9</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\models\obj\Materials.java</path>
-			<source>true</source>
-			<index>10</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\models\obj\Material.java</path>
-			<source>true</source>
-			<index>11</index>
-			<active>true</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\ResourceRetriever.java</path>
-			<source>true</source>
-			<index>12</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\TextureLoader.java</path>
-			<source>true</source>
-			<index>13</index>
-			<active>false</active>
-		</docitem>
->>>>>>> .r146	</open_files>
+	</open_files>
 </workspace_user>

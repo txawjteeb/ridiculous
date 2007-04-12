@@ -1,6 +1,7 @@
 package org.cart.igd.gui;
 
 import java.util.*;
+import java.awt.event.*;
 import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
 import org.cart.igd.core.*;
@@ -15,12 +16,26 @@ public class Dialogue extends GUI {
 	Texture[] animalIcons = new Texture[10];
 	Texture dialogueBackground;
 	
-	/** pass in a refference from game state that contains this gui class 
-	 * to allow for game state change and gui state change*/
+	/**
+	 * param1 informative string
+	 * param2 continuous action
+	 **/
+	private GameAction testChangeGui = new GameAction("test swap",false);
+	
+	/** 
+	 * pass in a refference from game state that contains this gui class 
+	 * to allow for game state change and gui state change
+	 * @param GameState refference to container
+	 **/
 	public Dialogue(GameState gameState){
 		super(gameState);//superclass GUI contain ref to GameState
 		input = Kernel.userInput;
+		initInput();
 		loadImages();
+	}
+	public void initInput()
+	{
+		input.bindToKey(testChangeGui, KeyEvent.VK_T);
 	}
 	
 	public void loadImages(){		
@@ -38,7 +53,9 @@ public class Dialogue extends GUI {
 	}
 	
 	public void handleInput(){
-		
+		if(testChangeGui.isActive()){
+			((InGameState)gameState).changeGuiState(0);
+		}
 	}
 
 	public void render(GLGraphics g){

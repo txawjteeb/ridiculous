@@ -32,12 +32,15 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	
 	public static final int MOUSE_WHEEL_UP = 4;
     public static final int MOUSE_WHEEL_DOWN = 5;
+    
+    public int mouseWheelMoved = 0;
 
 	public UserInput(Component comp)
 	{
 		comp.addKeyListener(this);
 		comp.addMouseListener(this);
 		comp.addMouseMotionListener(this);
+		comp.addMouseWheelListener(this);
 		comp.setFocusTraversalKeysEnabled(false);
 		
 		try {
@@ -181,14 +184,22 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	
 //	 from the MouseWheelListener interface
     public void mouseWheelMoved(MouseWheelEvent e) {
-    	 if (e.getWheelRotation() < 0) {
-             mouseActions[MOUSE_WHEEL_DOWN].activate();
-             mouseActions[MOUSE_WHEEL_DOWN].ammount=e.getWheelRotation();
-         }
-         else {
-             mouseActions[MOUSE_WHEEL_UP].activate();
-             mouseActions[MOUSE_WHEEL_UP].ammount=e.getWheelRotation();
-         }
+    	 //if (e.getWheelRotation() < 0) {
+        //     mouseActions[MOUSE_WHEEL_UP].activate(e.getWheelRotation());
+        // }
+         //else {
+         //    mouseActions[MOUSE_WHEEL_DOWN].activate(e.getWheelRotation());
+         //}
+         mouseActions[MOUSE_WHEEL_DOWN].activate(e.getWheelRotation());
+         
+         mouseWheelMoved += e.getWheelRotation();
+         e.consume();
+    }
+    
+    public int getMouseWheelMovement(){
+    	int mwm = mouseWheelMoved;
+    	mouseWheelMoved = 0;
+    	return mwm;
     }
 	
 	private void updateMousePress(int x,int y)

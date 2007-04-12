@@ -17,18 +17,21 @@ public class Camera
 	private Vector3f cameraPos = new Vector3f();
 	private Vector3f cameraUp = new Vector3f(0f, 1f, 0f);
 	
-	public float distance = 5.0f;
-	public float cameraHeight = 3.0f;
+	public float distance = 3f;
+	public float posHeight = 0f;
+	public float posDistance = 0f;
+	
 	public float facingOffset = 0.0f;
+	public float verticalAngle = .785f;//aprox 45degrees
 	
 	
 	
-	public Camera(Entity player, float distance, float cameraHeight)
+	public Camera(Entity player, float distance, float degCameraAngle)
 	{
 		this.player = player;
 		cameraPos = new Vector3f();
 		cameraUp = new Vector3f(0f, 1f, 0f);
-		this.cameraHeight = cameraHeight;
+		this.verticalAngle = degCameraAngle*.0174532925f;
 		this.distance = distance;
 	}
 	
@@ -36,6 +39,10 @@ public class Camera
 	public void arcRotateY(float amt)
 	{
 		facingOffset+=amt;
+	}
+	
+	public void zoom(float amt){
+		distance += amt;
 	}
 	
 	/** return the camera to player's back view position*/
@@ -67,12 +74,12 @@ public class Camera
 	
 	public void setCameraHeight(float height)
 	{
-		cameraHeight = height;
+		posHeight = height;
 	}
 	
 	public float getCameraHeight()
 	{
-		return cameraHeight;
+		return posHeight;
 	}
 	
 	public void setDistance(float distance)
@@ -95,13 +102,23 @@ public class Camera
 		return facingOffset;
 	}
 	
+	/** change the verticalAngle by given amount of degrees */
+	public void changeVerticalAngleDeg(float changeDeg){
+		verticalAngle += changeDeg*.0174532925f;
+	}
+	
+	public void setVerticalAngleDeg(float setDeg){
+		verticalAngle = setDeg*.0174532925f;
+	}
+	
 	public void lookAt(GLU glu, Entity player)
 	{
+		posHeight = (float)Math.sin(verticalAngle)*distance;
+		posDistance = (float)Math.cos(verticalAngle)*distance;
 		
-		
-		cameraPos.x = player.position.x + ( distance * (float)Math.cos((player.facingDirection+facingOffset-180f) * 0.0174f) );
-		cameraPos.y = cameraHeight + player.position.y;
-		cameraPos.z = player.position.z + ( distance * (float)Math.sin((player.facingDirection+facingOffset-180f) * 0.0174f) );
+		cameraPos.x = player.position.x + ( posDistance * (float)Math.cos((player.facingDirection+facingOffset-180f) * 0.0174f) );
+		cameraPos.y = posHeight + player.position.y;
+		cameraPos.z = player.position.z + ( posDistance * (float)Math.sin((player.facingDirection+facingOffset-180f) * 0.0174f) );
 		
 		try
 		{

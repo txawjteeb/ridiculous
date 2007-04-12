@@ -21,7 +21,7 @@ public class GameAction
 	private String info;
 	private boolean active;
 	
-	public int ammount = 0;
+	private int ammount = 0;
 	
 	private boolean pressed;
 	private boolean released;
@@ -77,6 +77,11 @@ public class GameAction
     	active = true;
     	pressed = true;
     }
+    public void activate(int amt){
+    	active = true;
+    	pressed = true;
+    	ammount = amt;
+    }
     
     /** caled by UserInput when mouse or key is released*/
     public void deactivate(){
@@ -96,6 +101,7 @@ public class GameAction
     }
     public int getAmount(){
     	int retVal = ammount;
+    	int ammount = 0;
     	return retVal;
     }
     
