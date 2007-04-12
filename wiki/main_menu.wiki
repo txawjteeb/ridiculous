@@ -9,5 +9,5 @@ Add your content here.
 
 Add your content here.  Format your content with:
 || [main_menu] ||
-|| [http://code.google.com/p/ridiculous/wiki/contents Contents] ||
+|| [contents] ||
 || [pitch] ||
