@@ -1,4 +1,4 @@
-#labels Deprecated,Phase-Requirements,Phase-QA
+#labels Deprecated
 Main page for C.A.R.T.'s 2006-2007 Interactive Game Design class' project.
 
 = Introduction =
@@ -12,7 +12,6 @@ Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
-
 
 
 
