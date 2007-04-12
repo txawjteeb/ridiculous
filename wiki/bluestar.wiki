@@ -1,0 +1,21 @@
+#labels Deprecated,Phase-Requirements,Phase-QA
+Main page for C.A.R.T.'s 2006-2007 Interactive Game Design class' project.
+
+= Introduction =
+
+We are team blue star, and we are creating a video game.
+
+
+= Details =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
+
+
+
+
+
+
+
