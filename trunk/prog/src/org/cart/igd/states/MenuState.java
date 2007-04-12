@@ -18,8 +18,6 @@ public class MenuState extends GameState
 	private GameAction selectOption = new GameAction("select", false);
 	private GUI gui;
 	
-	
-	
 	public MenuState(GL gl)
 	{
 		gui = new MenuGUI(this);
