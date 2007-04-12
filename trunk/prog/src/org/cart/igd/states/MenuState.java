@@ -10,6 +10,9 @@ import java.awt.event.KeyEvent;
 import org.cart.igd.gui.*;
 
 
+import org.cart.igd.Display;
+import org.cart.igd.gl2d.GLGraphics;
+
 public class MenuState extends GameState
 {
 	private GameAction selectOption = new GameAction("select", false);
@@ -39,6 +42,10 @@ public class MenuState extends GameState
 	public void display(GL gl,GLU glu)
 	{
 		gui.render( Kernel.display.getRenderer().getGLG() );
+		GLGraphics glg = Display.renderer.getGLG();
+		glg.glgBegin();
+		glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]);
+		glg.glgEnd();
 	}
 	
 	

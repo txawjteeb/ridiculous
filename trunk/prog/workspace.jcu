@@ -69,7 +69,7 @@
 			<path>src\org\cart\igd\gui\InGameGUI.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\input\UserInput.java</path>
@@ -94,6 +94,36 @@
 			<source>true</source>
 			<index>4</index>
 			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\Renderer.java</path>
+			<source>true</source>
+			<index>5</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\states\InGameState.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\Display.java</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
+			<source>true</source>
+			<index>8</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\states\MenuState.java</path>
+			<source>true</source>
+			<index>9</index>
+			<active>true</active>
 		</docitem>
 	</open_files>
 </workspace_user>

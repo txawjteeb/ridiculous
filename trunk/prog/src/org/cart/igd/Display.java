@@ -61,14 +61,12 @@ public class Display implements WindowListener
 		frame.setResizable(false);
 		frame.setLocation(0, 0);
 		
-		/* InvisiCursor
 		java.awt.image.BufferedImage tmp = frame.getGraphicsConfiguration().createCompatibleImage(1, 1, java.awt.Transparency.BITMASK);
 		java.awt.Graphics2D g2 = tmp.createGraphics();
 		g2.setBackground(new Color(0,0,0,0));
 		g2.clearRect(0,0,1,1);
 		java.awt.Cursor invisibleCursor = frame.getToolkit().createCustomCursor(tmp, new java.awt.Point(0,0), "Invisible");
 		glCanvas.setCursor(invisibleCursor);
-		*/
 		
 		this.fullscreen = fullscreen;
 		this.width = width;
