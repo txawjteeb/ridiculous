@@ -1,4 +1,4 @@
-#summary One-sentence summary of this page.
+#The Main Page for all Documentation
 
 = Introduction =
 
@@ -8,6 +8,7 @@ Add your content here.
 = Details =
 
 Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
+  * [http://code.google.com/p/ridiculous/wiki/contents Contents]
+  * [http://code.google.com/p/ridiculous/wiki/pitch Pich Document]
   * Automatic links to other wiki pages
+
