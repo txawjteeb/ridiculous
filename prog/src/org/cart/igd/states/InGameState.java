@@ -32,16 +32,23 @@ public class InGameState extends GameState
 	
 	private int playerState = 0;
 	
+	
+	
+	public static final int GUI_GAME = 1;
+	public static final int GUI_DIALOGUE = 0;
+	
+	/** Contain different gui states */
+	private ArrayList<GUI> gui = new ArrayList<GUI>();
+	int currentGuiState = GUI_GAME;
+	
 	private GameAction mouseCameraRotate;
 	
 	private GameAction incCameraH;
 	private GameAction decCameraH;
 	
-	public static final int GUI_GAME = 1;
-	public static final int GUI_DIALOGUE = 0;
+	private GameAction mouseWheelUp;
+	private GameAction mouseWheelDown;
 	
-	private ArrayList<GUI> gui = new ArrayList<GUI>();
-	int currentGuiState = GUI_GAME;
 	
 	
 	public InGameState(GL gl)
@@ -79,6 +86,16 @@ public class InGameState extends GameState
 		decCameraH = new GameAction("camera h--", false);
 		Kernel.userInput.bindToKey(incCameraH, KeyEvent.VK_UP);
 		Kernel.userInput.bindToKey(decCameraH, KeyEvent.VK_DOWN);
+		
+		
+		mouseWheelUp = new GameAction("zoom in", false);
+		mouseWheelDown = new GameAction("zoom out", false);
+		
+		Kernel.userInput.bindToMouse(mouseWheelUp,  UserInput.MOUSE_WHEEL_UP);
+		Kernel.userInput.bindToMouse(mouseWheelDown,UserInput.MOUSE_WHEEL_DOWN);
+		
+		
+		
 	}
 	
 	public void rotateCamera(float amt){
@@ -113,11 +130,12 @@ public class InGameState extends GameState
 	
 	/** safely change gui defaul gui to dialogue gui and viasa versa */
 	public void changeGuiState( int guiState){
-		if(gui.size()<= guiState){
+		if(gui.size()>= guiState){
 			currentGuiState =guiState;
 		} else {
 			System.out.println(
-				"InGameState.changeGuiState(int guiState) ->no such guiState");
+				"InGameState.changeGuiState(int guiState) ->no such guiState"
+					+ gui.size());
 		}
 	}
 	
@@ -170,6 +188,14 @@ public class InGameState extends GameState
 	
 	public void handleInput(long elapsedTime)
 	{
+		camera.zoom((float)Kernel.userInput.getMouseWheelMovement());
+		
+		
+		
+		if(mouseWheelDown.isActive()){
+			camera.zoom(mouseWheelDown.getAmount());
+		}
+		
 		/* Check for Escape key to end program */
 		if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
 		
@@ -187,15 +213,15 @@ public class InGameState extends GameState
 		
 		/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
 		if(Kernel.userInput.keys[KeyEvent.VK_PAGE_UP])
-			camera.cameraHeight--;
+			camera.changeVerticalAngleDeg( 1);
 		else if(Kernel.userInput.keys[KeyEvent.VK_PAGE_DOWN])
-			camera.cameraHeight++;
+			camera.changeVerticalAngleDeg(-1);
 		
 		/* HOME/END - Inc./Dec. distance from camera to player. */
 		if(Kernel.userInput.keys[KeyEvent.VK_HOME])
-			camera.distance--;
+			camera.zoom(-1);
 		else if(Kernel.userInput.keys[KeyEvent.VK_END])
-			camera.distance++;
+			camera.zoom( 1);
 			
 		if(Kernel.userInput.keys[KeyEvent.VK_SPACE])
 		{
@@ -203,18 +229,12 @@ public class InGameState extends GameState
 				playerState=1;
 		}
 		
-		/** tap once actions */
-		if(incCameraH.isActive()){
-			camera.cameraHeight+=.5f;
-		}
-		if(decCameraH.isActive()){
-			camera.cameraHeight-=.5f;
-		}
-		
 		/** camera mouse rotation */
 		if(mouseCameraRotate.isActive())
 		{
 			camera.arcRotateY( - Kernel.userInput.getXDif()*0.5f );
+			/** camera angle change */
+			camera.changeVerticalAngleDeg( Kernel.userInput.getYDif()*0.5f );
 		} //camera snap back action
 		else if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
 		{

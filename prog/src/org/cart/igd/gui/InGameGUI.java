@@ -61,12 +61,13 @@ public class InGameGUI extends GUI
 	private UIComponent selectedButton;
 
 	private GUITextList textList = new GUITextList(100, 600, 16, 20);
+	private UserInput input;
 	
-	private GameAction mouseWheelUp;
-	private GameAction mouseWheelDown;
+	private GameAction testChangeGui = new GameAction("test swap",false);
 
 	public InGameGUI(GameState igs) {
 		super(igs);
+		input = Kernel.userInput;
 		loadGameActions();
 		loadImages();
 		loadGUI();
@@ -101,16 +102,13 @@ public class InGameGUI extends GUI
 
 	public void handleInput() {
 		boolean animalPickedUp = false;
-		if (pressQuestLog.isActive()) {
-			textList.addText(pressQuestLog.getInfo());
-		}
-		if(mouseWheelUp.isActive()){
-			
+		
+		if(testChangeGui.isActive()){
+			((InGameState)gameState).changeGuiState(1);
 		}
 		
-		if(mouseWheelDown.isActive()){
-			((InGameState)gameState).camera.distance-=mouseWheelDown.getAmount();
-			System.out.println("ljkasdf");
+		if (pressQuestLog.isActive()) {
+			textList.addText(pressQuestLog.getInfo());
 		}
 		
 
@@ -128,13 +126,9 @@ public class InGameGUI extends GUI
 		if (mouseSelect.isActive()) {
 			// check for bottom hud buttons
 			for (int i = 0; i < hudBottom.components.size(); i++) {
-				if (Kernel.userInput.isSquareButtonPressed(
-						hudBottom.components.get(i).getX(), 
-						hudBottom.components.get(i).getY(), 64, 64,
-						Kernel.userInput.mousePress[0],
-						Kernel.userInput.mousePress[1])) {
-					hudBottom.components.get(i).activate();// triger GameAction
-															// with the button
+				if(input.isSquareButtonPressed(hudBottom.components.get(i)))
+				{
+					hudBottom.components.get(i).activate();// triger GameAction										// with the button
 				}
 			}
 			// check for left bud buttons
@@ -214,13 +208,9 @@ public class InGameGUI extends GUI
 		mouseSelect = new GameAction("mouse press", false);
 		mouseReleased = new GameAction("mouse release", false,
 				GameAction.ON_RELEASE_ONLY);
+				
+		input.bindToKey(testChangeGui, KeyEvent.VK_G);
 		
-		mouseWheelUp = new GameAction("zoom in", false, UserInput.MOUSE_WHEEL_UP);
-		mouseWheelDown = new GameAction("zoom out", false, UserInput.MOUSE_WHEEL_DOWN);
-		
-		
-		Kernel.userInput.bindToMouse(mouseWheelUp,  UserInput.MOUSE_WHEEL_UP);
-		Kernel.userInput.bindToMouse(mouseWheelDown,UserInput.MOUSE_WHEEL_DOWN);
 
 		for (int iEvt = 0; iEvt < useItem.length; iEvt++) {
 			useItem[iEvt] = new GameAction("use item: " + (iEvt + 1), false);
