@@ -13,6 +13,7 @@ import org.cart.igd.util.SkyDome;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.input.*;
 import org.cart.igd.core.Kernel;
+import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.gui.*;
 import java.util.ArrayList;
 
@@ -79,7 +80,7 @@ public class InGameState extends GameState
 		//ex: gui.add(new DialogueGUI());				
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode",true);
-		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );
+		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON2 );
 		
 		//one press actions continuous = false;
 		incCameraH = new GameAction("camera h++", false);
@@ -93,9 +94,6 @@ public class InGameState extends GameState
 		
 		Kernel.userInput.bindToMouse(mouseWheelUp,  UserInput.MOUSE_WHEEL_UP);
 		Kernel.userInput.bindToMouse(mouseWheelDown,UserInput.MOUSE_WHEEL_DOWN);
-		
-		
-		
 	}
 	
 	public void rotateCamera(float amt){
@@ -104,6 +102,7 @@ public class InGameState extends GameState
 	
 	public void update(long elapsedTime)
 	{
+		handleInput(elapsedTime);
 		player.lastPosition.x = player.position.x;
 		player.lastPosition.y = player.position.y;
 		player.lastPosition.z = player.position.z;
@@ -125,7 +124,6 @@ public class InGameState extends GameState
 		}
 		
 		gui.get(currentGuiState).update(elapsedTime);
-		handleInput(elapsedTime);
 	}
 	
 	/** safely change gui defaul gui to dialogue gui and viasa versa */
@@ -178,7 +176,13 @@ public class InGameState extends GameState
 		/* Render GUI */
 		gui.get(currentGuiState).render( Display.renderer.getGLG() );
 		
-		
+		if(!mouseCameraRotate.isActive())
+		{
+			GLGraphics glg = Display.renderer.getGLG();
+			glg.glgBegin();
+			glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]);
+			glg.glgEnd();
+		}
 	}
 	
 	public void init(GL gl, GLU glu)
@@ -188,11 +192,10 @@ public class InGameState extends GameState
 	
 	public void handleInput(long elapsedTime)
 	{
-		camera.zoom((float)Kernel.userInput.getMouseWheelMovement());
+		camera.zoom((float)Kernel.userInput.getMouseWheelMovement()*2f);
 		
-		
-		
-		if(mouseWheelDown.isActive()){
+		if(mouseWheelDown.isActive())
+		{
 			camera.zoom(mouseWheelDown.getAmount());
 		}
 		

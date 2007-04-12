@@ -3,12 +3,13 @@ package org.cart.igd.gl2d;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
-import org.cart.igd.Display;
+import org.cart.igd.core.Kernel;
 import org.cart.igd.util.Texture;
 
 public class GLGraphics
 {
 	private static Texture[] Font = new Texture[94];
+	public static Texture Cursor;
 	
 	public static final int DEFAULT_BLEND = GL.GL_ONE_MINUS_SRC_ALPHA;
 	public static int BLENDING=1;
@@ -17,14 +18,15 @@ public class GLGraphics
 	{
 		for(int i=0; i<94; i++)
 		{
-			Font[i] = Display.renderer.loadImage("data/images/font/"+(i+2)+".png");
+			Font[i] = Kernel.display.getRenderer().loadImage("data/images/font/"+(i+2)+".png");
 		}
+		GLGraphics.Cursor = Kernel.display.getRenderer().loadImage("data/images/cursor.png");
 	}
 	
 	public void glgBegin()
 	{
-		final GL gl = Display.renderer.getGL();
-		final GLU glu = Display.renderer.getGLU();
+		final GL gl = Kernel.display.getRenderer().getGL();
+		final GLU glu = Kernel.display.getRenderer().getGLU();
 		
 		int viewport[] = new int[4];
 		gl.glPushMatrix();
@@ -45,7 +47,7 @@ public class GLGraphics
 	
 	public void glgEnd()
 	{
-		final GL gl = Display.renderer.getGL();
+		final GL gl = Kernel.display.getRenderer().getGL();
 		
 		gl.glEnable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_LIGHT0);
@@ -80,7 +82,7 @@ public class GLGraphics
 
 	private void drawImage( Texture tex, float[] xyza, float[] size, float[] rgb, int[] mode )
 	{
-		final GL gl = Display.renderer.getGL();
+		final GL gl = Kernel.display.getRenderer().getGL();
 		if(size.length!=2) size = new float[] {1f,1f};
 		if(rgb.length<3) rgb = new float[] {1f,1f,1f,0f};
 		
@@ -183,25 +185,25 @@ public class GLGraphics
 
 	public void drawLine( int x1, int y1, int x2, int y2 )
 	{
-		Display.renderer.getGL().glBegin(GL.GL_LINES);
-		Display.renderer.getGL().glVertex2i( x1, y1 );
-		Display.renderer.getGL().glVertex2i( x2, y2 );
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glBegin(GL.GL_LINES);
+		Kernel.display.getRenderer().getGL().glVertex2i( x1, y1 );
+		Kernel.display.getRenderer().getGL().glVertex2i( x2, y2 );
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void drawLineStrip( int[][] i )
 	{
-		Display.renderer.getGL().glBegin( GL.GL_LINE_STRIP );
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_LINE_STRIP );
 		for( int a=0; a<i.length; a++ )
 		{
-			Display.renderer.getGL().glVertex2i( i[ a ][ 0 ], i[ a ][ 1 ] );
+			Kernel.display.getRenderer().getGL().glVertex2i( i[ a ][ 0 ], i[ a ][ 1 ] );
 		}
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void drawPoint( float x, float y, float z, float size )
 	{
-		final GL gl = Display.renderer.getGL();
+		final GL gl = Kernel.display.getRenderer().getGL();
 		gl.glEnable( GL.GL_POINT_SMOOTH );
 		gl.glPointSize( size );
 		gl.glBegin( GL.GL_POINTS );
@@ -234,44 +236,44 @@ public class GLGraphics
 	{
 		if(rgb.length==3)
 		{
-			Display.renderer.getGL().glColor3f( rgb[0], rgb[1], rgb[2] );
+			Kernel.display.getRenderer().getGL().glColor3f( rgb[0], rgb[1], rgb[2] );
 		}
 		else if(rgb.length==4)
 		{
-			Display.renderer.getGL().glColor4f( rgb[0], rgb[1], rgb[2], rgb[3] );
+			Kernel.display.getRenderer().getGL().glColor4f( rgb[0], rgb[1], rgb[2], rgb[3] );
 		}
 		drawPoint( x, y, GEO_Z, size );
 	}
 
 	public void drawPointOld( int x, int y, float size )
 	{
-		Display.renderer.getGL().glPointSize( size );
-		Display.renderer.getGL().glBegin( GL.GL_POINTS );
-		Display.renderer.getGL().glVertex3f( ( float ) x, ( float ) y, 0.0f );
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glPointSize( size );
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_POINTS );
+		Kernel.display.getRenderer().getGL().glVertex3f( ( float ) x, ( float ) y, 0.0f );
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void drawPointOld( float x, float y, float size )
 	{
-		Display.renderer.getGL().glPointSize( size );
-		Display.renderer.getGL().glBegin( GL.GL_POINTS );
-		Display.renderer.getGL().glVertex3f(  x,  y, 0.0f );
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glPointSize( size );
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_POINTS );
+		Kernel.display.getRenderer().getGL().glVertex3f(  x,  y, 0.0f );
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void drawLineLoop( double[][] i )
 	{
-		Display.renderer.getGL().glBegin( GL.GL_LINE_LOOP );
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_LINE_LOOP );
 		for( int a=0; a<i.length; a++ )
 		{
-			Display.renderer.getGL().glVertex2d( i[ a ][ 0 ], i[ a ][ 1 ] );
+			Kernel.display.getRenderer().getGL().glVertex2d( i[ a ][ 0 ], i[ a ][ 1 ] );
 		}
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void fillCircle( double x, double y, int radius )
 	{
-		Display.renderer.getGL().glBegin( GL.GL_TRIANGLE_STRIP );
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_TRIANGLE_STRIP );
 		double lastVX = ( double ) x;
 		double lastVY = ( double ) y;
 		for( int i=0; i<360; i++ )
@@ -279,13 +281,13 @@ public class GLGraphics
 			float angle = ( float ) ( ( ( double ) i ) / 57.29577957795135 );
 			double vx = x + (radius * ( float ) Math.sin( ( double ) angle ) );
 			double vy = y + (radius * ( float ) Math.cos( ( double ) angle ) );
-			Display.renderer.getGL().glVertex2d( ( double ) x, ( double ) y );
-			Display.renderer.getGL().glVertex2d( lastVX, lastVY );
-			Display.renderer.getGL().glVertex2d( vx, vy );
+			Kernel.display.getRenderer().getGL().glVertex2d( ( double ) x, ( double ) y );
+			Kernel.display.getRenderer().getGL().glVertex2d( lastVX, lastVY );
+			Kernel.display.getRenderer().getGL().glVertex2d( vx, vy );
 			lastVX = vx;
 			lastVY = vy;
 		}
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void drawCircle( double x, double y, int radius )
@@ -310,17 +312,17 @@ public class GLGraphics
 
 	public void fillRect( int x, int y, int w, int h )
 	{
-		Display.renderer.getGL().glBegin( GL.GL_QUADS );
-		Display.renderer.getGL().glVertex2i( x, y );
-		Display.renderer.getGL().glVertex2i( x + w, y );
-		Display.renderer.getGL().glVertex2i( x + w, y + h );
-		Display.renderer.getGL().glVertex2i( x, y + h );
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_QUADS );
+		Kernel.display.getRenderer().getGL().glVertex2i( x, y );
+		Kernel.display.getRenderer().getGL().glVertex2i( x + w, y );
+		Kernel.display.getRenderer().getGL().glVertex2i( x + w, y + h );
+		Kernel.display.getRenderer().getGL().glVertex2i( x, y + h );
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 	
 	public void fillRect(int x, int y, int w, int h, float[] rgb)
 	{
-		Display.renderer.getGL().glColor3f(rgb[0], rgb[1], rgb[2]);
+		Kernel.display.getRenderer().getGL().glColor3f(rgb[0], rgb[1], rgb[2]);
 		fillRect(x,y,w,h);
 	}
 
@@ -331,17 +333,17 @@ public class GLGraphics
 	
 	public void drawRect(int x, int y, int w, int h, float[] rgb)
 	{
-		Display.renderer.getGL().glColor3f(rgb[0], rgb[1], rgb[2]);
+		Kernel.display.getRenderer().getGL().glColor3f(rgb[0], rgb[1], rgb[2]);
 		drawRect(x,y,w,h);
 	}
 
 	public void fillTri( int oX, int oY, int lX, int lY, int rX, int rY )
 	{
-		Display.renderer.getGL().glBegin( GL.GL_TRIANGLES );
-		Display.renderer.getGL().glVertex3i( oX, oY, 0 );
-		Display.renderer.getGL().glVertex3i( lX, lY, 0 );
-		Display.renderer.getGL().glVertex3i( rX, rY, 0 );
-		Display.renderer.getGL().glEnd();
+		Kernel.display.getRenderer().getGL().glBegin( GL.GL_TRIANGLES );
+		Kernel.display.getRenderer().getGL().glVertex3i( oX, oY, 0 );
+		Kernel.display.getRenderer().getGL().glVertex3i( lX, lY, 0 );
+		Kernel.display.getRenderer().getGL().glVertex3i( rX, rY, 0 );
+		Kernel.display.getRenderer().getGL().glEnd();
 	}
 
 	public void drawTri( int x1, int y1, int x2, int y2, int x3, int y3 )
@@ -351,8 +353,8 @@ public class GLGraphics
 
 	public void drawString( String str, int x, int y, int font )
 	{
-		Display.renderer.getGL().glRasterPos2i( x, y );
-		Display.renderer.getGLUT().glutBitmapString( font, str );
+		Kernel.display.getRenderer().getGL().glRasterPos2i( x, y );
+		Kernel.display.getRenderer().getGLUT().glutBitmapString( font, str );
 	}
 
 	public int drawBitmapString(String text, int x, int y)
@@ -451,27 +453,27 @@ public class GLGraphics
 	
 	public void setColor( int r, int g, int b )
 	{
-		Display.renderer.getGL().glColor3i( r, g, b );
+		Kernel.display.getRenderer().getGL().glColor3i( r, g, b );
 	}
 	
 	public void setColor( int r, int g, int b, int a )
 	{
-		Display.renderer.getGL().glColor4i( r, g, b, a );
+		Kernel.display.getRenderer().getGL().glColor4i( r, g, b, a );
 	}
 	
 	public void setColor( float r, float g, float b )
 	{
-		Display.renderer.getGL().glColor3f( r, g, b );
+		Kernel.display.getRenderer().getGL().glColor3f( r, g, b );
 	}
 	
 	public void setColor( float r, float g, float b, float a )
 	{
-		Display.renderer.getGL().glColor4f( r, g, b, a );
+		Kernel.display.getRenderer().getGL().glColor4f( r, g, b, a );
 	}
 
 	public void drawImageHueRandomAlpha( Texture tex, float x, float y, float[] rgb )
 	{
-		final GL gl = Display.renderer.getGL();
+		final GL gl = Kernel.display.getRenderer().getGL();
 		float[] rgba = new float[]{rgb[0],rgb[1],rgb[2],1.0f-((float)Math.random())/4};
 		gl.glEnable( GL.GL_TEXTURE_2D );
 		gl.glEnable( GL.GL_BLEND );
@@ -502,7 +504,7 @@ public class GLGraphics
 	
 	public void drawImageRandomAlpha( Texture tex, float x, float y)
 	{
-		final GL gl = Display.renderer.getGL();
+		final GL gl = Kernel.display.getRenderer().getGL();
 		float[] rgba = new float[]{1f,1f,1f,1.0f-((float)Math.random())/4};
 		gl.glEnable( GL.GL_TEXTURE_2D );
 		gl.glEnable( GL.GL_BLEND );
@@ -567,30 +569,30 @@ public class GLGraphics
 
 	public void drawImageRotateBlendZ(Texture text, float x, float y, float z, float degree, float[] rgba, int blend)
 	{
-		Display.renderer.getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
-		Display.renderer.getGL().glRotatef(degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
+		Kernel.display.getRenderer().getGL().glRotatef(degree,0,0,1);
 		
 		drawImage( text, new float[] {-text.imageHeight/2,-text.imageWidth/2,z}, DEFAULT, rgba, 0 );
 
-		Display.renderer.getGL().glRotatef(-degree,0,0,1);
-		Display.renderer.getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
+		Kernel.display.getRenderer().getGL().glRotatef(-degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
 	}
 
 	public void drawImageRotateZ(Texture text, float x, float y, float z, float degree, float[] rgba)
 	{
-		Display.renderer.getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
-		Display.renderer.getGL().glRotatef(degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
+		Kernel.display.getRenderer().getGL().glRotatef(degree,0,0,1);
 
 		drawImage( text, new float[] {-text.imageHeight/2,-text.imageWidth/2,z}, DEFAULT, rgba, 0 );
 
-		Display.renderer.getGL().glRotatef(-degree,0,0,1);
-		Display.renderer.getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
+		Kernel.display.getRenderer().getGL().glRotatef(-degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
 	}
 
 	public void drawImageRotate(Texture text, float x, float y, int degree, float[] rgba,float alpha, int blend, int type)
 	{
-		Display.renderer.getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
-		Display.renderer.getGL().glRotatef(degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
+		Kernel.display.getRenderer().getGL().glRotatef(degree,0,0,1);
 
 		switch(type)
 		{
@@ -614,8 +616,8 @@ public class GLGraphics
 			break;
 		}
 
-		Display.renderer.getGL().glRotatef(-degree,0,0,1);
-		Display.renderer.getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
+		Kernel.display.getRenderer().getGL().glRotatef(-degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
 	}
 
 	public void drawImageRotateHuef(Texture text, float x, float y, float degree, float[] rgba)
@@ -640,29 +642,29 @@ public class GLGraphics
 
 	public void drawImageRotatef(Texture text, float x, float y, float degree, float[] rgba,float alpha, int blend)
 	{
-		Display.renderer.getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
-		Display.renderer.getGL().glRotatef(degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
+		Kernel.display.getRenderer().getGL().glRotatef(degree,0,0,1);
 		
 		if(blend!=0)
 			drawImage( text, new float[] {-text.imageHeight/2,-text.imageWidth/2,TEX_Z}, DEFAULT, rgba, new int[] {GL.GL_MODULATE,blend} );
 		else
 			drawImageHue(text,-text.imageHeight/2,-text.imageWidth/2,rgba);	
 		
-		Display.renderer.getGL().glRotatef(-degree,0,0,1);
-		Display.renderer.getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
+		Kernel.display.getRenderer().getGL().glRotatef(-degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
 	}
 
 	public void drawImageRotatefZ(Texture text, float x, float y,float z, float degree, float[] rgba,float alpha, int blend)
 	{
-		Display.renderer.getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
-		Display.renderer.getGL().glRotatef(degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
+		Kernel.display.getRenderer().getGL().glRotatef(degree,0,0,1);
 		
 		if(blend!=0)
 			drawImage( text, new float[] {-text.imageHeight/2,-text.imageWidth/2,z}, DEFAULT, rgba, new int[] {GL.GL_MODULATE,blend} );
 		else
 			drawImageHue(text,-text.imageHeight/2,-text.imageWidth/2,z,rgba);	
 
-		Display.renderer.getGL().glRotatef(-degree,0,0,1);
-		Display.renderer.getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
+		Kernel.display.getRenderer().getGL().glRotatef(-degree,0,0,1);
+		Kernel.display.getRenderer().getGL().glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
 	}
 }
