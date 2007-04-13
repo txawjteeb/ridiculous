@@ -47,6 +47,9 @@ public class InGameGUI extends GUI
 	private GameAction activateGroupAnimal[] = new GameAction[4];
 
 	private UIButton btGroupAnimals[] = new UIButton[4];
+	
+	private Texture texButtonFlamingo;
+	
 
 	// other game actions
 	private GameAction mouseSelect;
@@ -110,7 +113,6 @@ public class InGameGUI extends GUI
 		if (pressQuestLog.isActive()) {
 			textList.addText(pressQuestLog.getInfo());
 		}
-		
 
 		if (selectBushAnimal[1].isActive()) {
 			textList.addText(activateGroupAnimal[1].getInfo());
@@ -133,30 +135,20 @@ public class InGameGUI extends GUI
 			}
 			// check for left bud buttons
 			for (int i = 0; i < hudLeft.components.size(); i++) {
-				if (Kernel.userInput.isRoundButtonPressed(
-						hudLeft.components.get(i).getX() + 32, 
-						hudLeft.components.get(i).getY() + 32,
-						32, Kernel.userInput.mousePos[0],
-						Kernel.userInput.mousePos[1])) {
+				if (Kernel.userInput.isSquareButtonPressed(hudLeft.components.get(i))) 
+				{
 					animalPickedUp = true;
 					selectedButton = new UIButton(
-							((UIButton) hudLeft.components.get(i)).getTexture(),
-							((UIButton) hudLeft.components.get(i)).getAction(),
-							Kernel.userInput.mousePos[0] - 32,
-							Kernel.userInput.mousePos[1] - 32, 64, 64);
-
-				} else {
-
+						((UIButton) hudLeft.components.get(i)).getTexture(),
+						((UIButton) hudLeft.components.get(i)).getAction(),
+						Kernel.userInput.mousePos[0] - 32,
+						Kernel.userInput.mousePos[1] - 32, 64, 64);
 				}
 			}
 
-			for (int iG = 0; iG < hudGroup.components.size(); iG++) {
-				if (Kernel.userInput.isRoundButtonPressed(
-						hudGroup.components.get(iG).getX() + 32,
-						hudGroup.components.get(iG).getY() + 32, 
-						32,
-						Kernel.userInput.mousePress[0],
-						Kernel.userInput.mousePress[1])) {
+			for (int iG = 1; iG < hudGroup.components.size(); iG++) {
+				if (Kernel.userInput.isSquareButtonPressed(hudGroup.components.get(iG)))
+				{
 					addGroupAnimal[iG].activate();
 					if (selectedButton != null) {
 						((UIButton) hudGroup.components.get(iG))
@@ -168,22 +160,21 @@ public class InGameGUI extends GUI
 
 						textList.addText("animal added to group");
 						selectedButton = null;
-
 					}
 
 					if (selectedButton == null) {
 						hudGroup.components.get(iG).activate();
 					}
-
-					System.out.println(Kernel.userInput.mouseDragged[0] + " / "
-							+ Kernel.userInput.mouseDragged[1]);
 				}
 			}
-
+			
+			/**
+			 * make sure the button is not still attached when its not dropped off at
+			 * a proper location in the paw button 
+			 **/
 			if (!animalPickedUp) {
 				selectedButton = null;
 			}
-
 		} // end if(mouseSelect.isActive())
 
 		// move the selected button
@@ -269,6 +260,10 @@ public class InGameGUI extends GUI
 			
 		texQuestLog = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/questlog_ico.png");
+		
+		texButtonFlamingo = Kernel.display.getRenderer().loadImage(
+			"img/gui/questlog_ico.png");
+		
 
 		for (int iItm = 0; iItm < texItemIco.length; iItm++) {
 			texItemIco[iItm] = Kernel.display.getRenderer().loadImage(

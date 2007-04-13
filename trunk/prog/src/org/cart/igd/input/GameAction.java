@@ -47,19 +47,11 @@ public class GameAction
     	this.type = type;
     }
     
-    /** use for constant actions such as movement */
-    public boolean isActive(){
-    	/*if(type == ON_RELEASE_ONLY ){
-    		boolean retVal = released;
-    		released = false;
-    		return retVal;
-    	}
-    	if(type == ON_PRESS_ONLY){
-    		boolean retVal = pressed;
-    		pressed = false;
-    		return retVal;
-    	}*/
-    	
+    /** 
+     * use for constant actions such as movement.   
+     * Deactivates the action when called 
+     **/
+    public boolean isActive(){   	
     	if(continuous){
     		return active;
     	} else {
@@ -83,7 +75,9 @@ public class GameAction
     	ammount = amt;
     }
     
-    /** caled by UserInput when mouse or key is released*/
+    /** 
+     * Caled by UserInput when mouse or key is released
+     **/
     public void deactivate(){
     	active =false;
     	released = true;

@@ -101,6 +101,9 @@ public class Renderer implements GLEventListener
 		lastFPSCheck = System.currentTimeMillis();
 	}
 	
+	public GameStateManager getStateManager(){
+		return stateManager;
+	}
 	
 	private void initLighting(GL gl)
 	{
