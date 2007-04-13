@@ -18,7 +18,7 @@ public class GLGraphics
 	{
 		for(int i=0; i<94; i++)
 		{
-			Font[i] = Kernel.display.getRenderer().loadImage("data/images/font/"+(i+2)+".png");
+			Font[i] = Kernel.display.getRenderer().loadImage("data/images/new font/"+(i+2)+".png");
 		}
 		GLGraphics.Cursor = Kernel.display.getRenderer().loadImage("data/images/cursor.png");
 	}
@@ -426,7 +426,7 @@ public class GLGraphics
 				int c = text.charAt(i);
 				if(c==' ') { x+=spacing; continue; }		//if space continue
 				if(c<33||c>126) c='?';		//unknown character
-				//if(c>=97&&c<=122) c-=32;
+				if(c>=97&&c<=122) c-=32;
 				
 				if(i>0)
 				{
@@ -434,6 +434,7 @@ public class GLGraphics
 					if(isCompressed(c)) x-=4;
 				}
 				c-=33;
+
 	 
 				if(flash)
 					drawImageHue( GLGraphics.Font[c], x, y, new float[]{rgba[0],rgba[1],rgba[2], 1.0f - ((float)Math.random())/4} , size);
