@@ -1,23 +1,29 @@
 package org.cart.igd.states;
 
-import javax.media.opengl.GL;
-import javax.media.opengl.glu.GLU;
-import java.io.*;
-import java.awt.event.*;
-
-import org.cart.igd.*;
-import org.cart.igd.entity.Entity;
-import org.cart.igd.math.Vector3f;
-import org.cart.igd.models.obj.OBJModel;
-import org.cart.igd.util.SkyDome;
-import org.cart.igd.util.ColorRGBA;
-import org.cart.igd.input.*;
-import org.cart.igd.core.Kernel;
-import org.cart.igd.gl2d.GLGraphics;
-import org.cart.igd.gui.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
-import org.cart.igd.discreet.*;
+import javax.media.opengl.GL;
+import javax.media.opengl.glu.GLU;
+
+import org.cart.igd.Camera;
+import org.cart.igd.Display;
+import org.cart.igd.core.Kernel;
+import org.cart.igd.discreet.MaxParser;
+import org.cart.igd.entity.Entity;
+import org.cart.igd.gl2d.GLGraphics;
+import org.cart.igd.gui.Dialogue;
+import org.cart.igd.gui.GUI;
+import org.cart.igd.gui.InGameGUI;
+import org.cart.igd.input.GameAction;
+import org.cart.igd.input.UserInput;
+import org.cart.igd.math.Vector3f;
+import org.cart.igd.models.obj.OBJModel;
+import org.cart.igd.util.ColorRGBA;
+import org.cart.igd.util.SkyDome;
 
 public class InGameState extends GameState
 {
@@ -180,7 +186,9 @@ public class InGameState extends GameState
 		{
 			GLGraphics glg = Display.renderer.getGLG();
 			glg.glgBegin();
-			glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]);
+			glg.drawImage(
+					GLGraphics.Cursor, Kernel.userInput.mousePos[0], 
+					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
 			glg.glgEnd();
 		}
 	}

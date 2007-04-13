@@ -9,6 +9,7 @@ public class Kernel
 	public static Display display;
 	public static UserInput userInput;
 	public static DisplaySettings displaySettings;
+	private InputHandler inputHandler;
 	/**
 	 * keep track of time and performance statistics
 	 **/
@@ -31,6 +32,12 @@ public class Kernel
 		
 		display = new Display(displaySettings);
 		display.start();
+		
+		inputHandler = new InputHandler();
+		inputHandler.start();
+		
+		
+		
 		
 		userInput = new UserInput( display.getGLCanvas() );
 	}
