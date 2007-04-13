@@ -62,6 +62,10 @@
 			<folderitem>
 				<path>src\org\cart\igd\util</path>
 			</folderitem>
+			<fileitem>
+				<path>src\org\cart\igd\gui\Dialogue.java</path>
+				<collapsedfolds>101</collapsedfolds>
+			</fileitem>
 		</project>
 	</projects>
 	<open_files>
@@ -93,13 +97,13 @@
 			<path>src\org\cart\igd\gui\Dialogue.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\Renderer.java</path>
 			<source>true</source>
 			<index>5</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\states\InGameState.java</path>
@@ -123,6 +127,18 @@
 			<path>src\org\cart\igd\states\MenuState.java</path>
 			<source>true</source>
 			<index>9</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\GUI.java</path>
+			<source>true</source>
+			<index>10</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\MenuGUI.java</path>
+			<source>true</source>
+			<index>11</index>
 			<active>false</active>
 		</docitem>
 	</open_files>
