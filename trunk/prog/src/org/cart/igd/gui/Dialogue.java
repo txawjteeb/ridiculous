@@ -42,10 +42,10 @@ public class Dialogue extends GUI {
 	
 	public void loadImages(){		
 		for(int i = 0;i<animalIcons.length;i++){
-			animalIcons[i] = Kernel.display.getRenderer().loadImage("img/dialogue/" + i + ".png");
+			animalIcons[i] = Kernel.display.getRenderer().loadImage("data/images/dialogue/" + i + ".png");
 		}
-		dialogueBackground = Kernel.display.getRenderer().loadImage("img/dialogue/background.png");
-		border = Kernel.display.getRenderer().loadImage("img/dialogue/border.png");
+		dialogueBackground = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
+		border = Kernel.display.getRenderer().loadImage("data/images/dialogue/border.png");
 	}
 	
 	boolean t = true;

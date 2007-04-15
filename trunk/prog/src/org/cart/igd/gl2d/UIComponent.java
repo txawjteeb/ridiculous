@@ -1,4 +1,5 @@
 package org.cart.igd.gl2d;
+import org.cart.igd.input.GameAction;
 import org.cart.igd.util.*;
 
 public abstract class UIComponent
@@ -14,8 +15,11 @@ public abstract class UIComponent
 	public abstract void dropFocus();
 	public abstract void activate();
 	
-	private Texture texture;
 	private UIComponent parent;
+	
+	private Texture texture;
+	private GameAction gameAction;
+	
 	
 	public UIComponent(int x,int y, int w,int h){
 		this.x = x;
@@ -30,6 +34,13 @@ public abstract class UIComponent
 	
 	public Texture getTexture(){
 		return texture;
+	}
+	
+	public void setAction(GameAction act){
+		gameAction = act;
+	}
+	public GameAction getAction(){
+		return gameAction;
 	}
 	
 	/** returns x location relative to the canvas takes 
