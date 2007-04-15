@@ -44,15 +44,7 @@ public class UIButton extends UIComponent
 	
 	public Texture getTexture(){
 		return texture;
-	}
-	
-	public void setAction(GameAction act){
-		action = act;
-	}
-	public GameAction getAction(){
-		return action;
-	}
-	
+	}	
 	
 	public void activate()
 	{

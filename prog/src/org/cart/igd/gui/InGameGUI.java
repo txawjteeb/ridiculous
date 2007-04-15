@@ -58,8 +58,6 @@ public class InGameGUI extends GUI
 
 	private GameAction pressQuestLog;
 
-	private InGameState inGameState;
-
 	// selected animal button
 	private UIComponent selectedButton;
 
@@ -146,24 +144,30 @@ public class InGameGUI extends GUI
 				}
 			}
 
+			/* flamingo select */
+			if (Kernel.userInput.isSquareButtonPressed(hudGroup.components.get(0)))
+			{
+				addGroupAnimal[0].activate();
+				textList.addText("flamingo selected");
+			}
+			
+			/* check for selected animal dropoff*/
 			for (int iG = 1; iG < hudGroup.components.size(); iG++) {
 				if (Kernel.userInput.isSquareButtonPressed(hudGroup.components.get(iG)))
 				{
 					addGroupAnimal[iG].activate();
 					if (selectedButton != null) {
-						((UIButton) hudGroup.components.get(iG))
-								.setTexture(((UIButton) selectedButton)
-										.getTexture());
-						((UIButton) hudGroup.components.get(iG))
-								.setAction(((UIButton) selectedButton)
-										.getAction());
+						(hudGroup.components.get(iG))
+								.setTexture(( selectedButton).getTexture());
+						(hudGroup.components.get(iG))
+								.setAction(( selectedButton).getAction());
 
 						textList.addText("animal added to group");
-						selectedButton = null;
 					}
 
-					if (selectedButton == null) {
+					else if (!animalPickedUp) {
 						hudGroup.components.get(iG).activate();
+						textList.addText("animal selected");
 					}
 				}
 			}
@@ -262,7 +266,7 @@ public class InGameGUI extends GUI
 			"data/images/buttons/questlog_ico.png");
 		
 		texButtonFlamingo = Kernel.display.getRenderer().loadImage(
-			"img/gui/questlog_ico.png");
+			"data/images/gui/button_flamingo.png");
 		
 
 		for (int iItm = 0; iItm < texItemIco.length; iItm++) {
@@ -292,14 +296,14 @@ public class InGameGUI extends GUI
 			btItems[iItm] = new UIButton(texItemIco[iItm], useItem[iItm],
 					192 + (64 * iItm), 0, 64, 64);
 		}
-
+		
 		for (int iAnm = 0; iAnm < btBushAnimals.length; iAnm++) {
 			btBushAnimals[iAnm] = new UIButton(texAnimalIco[iAnm],
 					selectBushAnimal[iAnm], 0, 128 + (64 * iAnm), 64, 64);
 		}
 
-		btGroupAnimals[0] = new UIButton(texItemIco[0], activateGroupAnimal[0],
-				32, 0, 128, 128);
+		btGroupAnimals[0] = new UIButton(texButtonFlamingo, activateGroupAnimal[0],
+				0, 0, 128, 128);
 		btGroupAnimals[1] = new UIButton(texItemIco[0], activateGroupAnimal[1],
 				-32, 120, 64, 64);
 		btGroupAnimals[2] = new UIButton(texItemIco[0], activateGroupAnimal[2],
