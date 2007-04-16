@@ -1,4 +1,4 @@
-#_This page is dedicated to describing the characters from our project game "Zoo Escape"_
+_This page is dedicated to describing the characters from our project game "Zoo Escape"_
 
 = Introduction =
 
