@@ -1,6 +1,6 @@
 Meet the Team behind Zoo Escape
 
-+ = Needs Team Goals
++ = Still needs team goals
 
 [Core]
   * Ian Kensey
@@ -43,6 +43,5 @@ Meet the Team behind Zoo Escape
   * Christopher Flynn
   * Juan Lopez +
   * Ker Thao
-
 
 
