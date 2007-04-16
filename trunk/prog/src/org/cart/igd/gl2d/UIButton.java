@@ -5,8 +5,6 @@ import org.cart.igd.input.*;
 
 public class UIButton extends UIComponent
 {
-	public Texture texture;
-	private GameAction action;
 	
 	private boolean pressed = false;
 	
@@ -25,8 +23,8 @@ public class UIButton extends UIComponent
 	public UIButton(Texture tex, GameAction action, int x, int y, int width, int height)
 	{
 		super(x,y,width,height);
-		texture = tex;
-		this.action =action;
+		setTexture( tex );
+		setAction( action );
 		this.value = "";
 		this.rgb = new float[] { 1f,1f,1f };
 	}
@@ -35,25 +33,17 @@ public class UIButton extends UIComponent
 	{
 		//Display.renderer.g.drawImageHue( UIButton.texture, x+rel_x, y+rel_y, new float[]{rgb[0],rgb[1],rgb[2],alpha}, new float[] { ((float)width)/128f, ((float)height)/20f } );
 		//Display.renderer.g.drawBitmapString( value, x+rel_x+5, y+rel_y+((int)(((float)height)/2f))-6, new float[] {0f,0f,0f,1f} );
-		g.drawImage(texture,getX(),getY());
+		g.drawImage(getTexture(),getX(),getY());
 	}
-	
-	public void setTexture(Texture tex){
-		texture = tex;
-	}
-	
-	public Texture getTexture(){
-		return texture;
-	}	
 	
 	public void activate()
 	{
-		if(action != null){
+		if(getAction() != null){
 			
 			//System.out.println(action.getInfo());
-			action.activate();
+			getAction().activate();
 		}
-		if(action == null){
+		if(getAction() == null){
 			System.out.println("UIButton: GameAction action is null");
 		}
 		

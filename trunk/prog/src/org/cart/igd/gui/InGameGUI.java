@@ -16,53 +16,43 @@ import java.awt.event.*;
 
 public class InGameGUI extends GUI
 {
+	private UserInput input;
+	
+	/* textures */
 	private Texture texBush;
-
 	private Texture texQuestLog;
-
+	private Texture texButtonFlamingo;
 	private Texture texItemIco[] = new Texture[8];
-
 	private Texture texAnimalIco[] = new Texture[9];
 
+	/* button containers */
 	private UIWindow hudBottom;// quest log and item buttons
-
 	private UIWindow hudLeft; // bush button with animals
-
 	private UIWindow hudGroup;
-
+	
+	/* buttons */
 	private UIButton btBush;
-
 	private UIButton btQuestLog;
-
-	private GameAction useItem[] = new GameAction[8];
-
-	private UIButton btItems[] = new UIButton[8];
-
-	private GameAction selectBushAnimal[] = new GameAction[9];
-
 	private UIButton btBushAnimals[] = new UIButton[9];
-
-	private GameAction addGroupAnimal[] = new GameAction[4];
-
-	private GameAction activateGroupAnimal[] = new GameAction[4];
-
+	private UIButton btItems[] = new UIButton[8];
 	private UIButton btGroupAnimals[] = new UIButton[4];
-	
-	private Texture texButtonFlamingo;
-	
+
+	/* game actions */
+	private GameAction useItem[] = new GameAction[8];
+	private GameAction selectBushAnimal[] = new GameAction[9];
+	private GameAction addGroupAnimal[] = new GameAction[4];
+	private GameAction activateGroupAnimal[] = new GameAction[4];
 
 	// other game actions
 	private GameAction mouseSelect;
-
 	private GameAction mouseReleased;
-
 	private GameAction pressQuestLog;
 
-	// selected animal button
+	/* other gui components */
 	private UIComponent selectedButton;
 
 	private GUITextList textList = new GUITextList(100, 600, 16, 20);
-	private UserInput input;
+	
 	
 	private GameAction testChangeGui = new GameAction("test swap",false);
 
@@ -145,7 +135,7 @@ public class InGameGUI extends GUI
 			}
 
 			/* flamingo select */
-			if (Kernel.userInput.isSquareButtonPressed(hudGroup.components.get(0)))
+			if (input.isSquareButtonPressed(hudGroup.components.get(0)))
 			{
 				addGroupAnimal[0].activate();
 				textList.addText("flamingo selected");
@@ -153,12 +143,11 @@ public class InGameGUI extends GUI
 			
 			/* check for selected animal dropoff*/
 			for (int iG = 1; iG < hudGroup.components.size(); iG++) {
-				if (Kernel.userInput.isSquareButtonPressed(hudGroup.components.get(iG)))
+				if (input.isSquareButtonPressed(hudGroup.components.get(iG)))
 				{
 					addGroupAnimal[iG].activate();
 					if (selectedButton != null) {
-						(hudGroup.components.get(iG))
-								.setTexture(( selectedButton).getTexture());
+						(hudGroup.components.get(iG)).setTexture( selectedButton.getTexture());
 						(hudGroup.components.get(iG))
 								.setAction(( selectedButton).getAction());
 
@@ -183,8 +172,8 @@ public class InGameGUI extends GUI
 
 		// move the selected button
 		if (selectedButton != null) {
-			selectedButton.setXY(Kernel.userInput.mousePos[0] - 32,
-				Kernel.userInput.mousePos[1] - 32);
+			selectedButton.setXY(input.mousePos[0] - 32,
+				input.mousePos[1] - 32);
 		}
 
 		if (addGroupAnimal[1].isActive()) {
@@ -209,14 +198,14 @@ public class InGameGUI extends GUI
 
 		for (int iEvt = 0; iEvt < useItem.length; iEvt++) {
 			useItem[iEvt] = new GameAction("use item: " + (iEvt + 1), false);
-			Kernel.userInput.bindToButton(useItem[iEvt], 31 + iEvt);
+			input.bindToButton(useItem[iEvt], 31 + iEvt);
 		}
 
 		// select animal on press
 		for (int iEvt = 0; iEvt < selectBushAnimal.length; iEvt++) {
 			selectBushAnimal[iEvt] = new GameAction("select animal: "
 					+ (iEvt + 1), false, GameAction.ON_PRESS_ONLY);
-			Kernel.userInput.bindToButton(selectBushAnimal[iEvt], 11 + iEvt);
+			input.bindToButton(selectBushAnimal[iEvt], 11 + iEvt);
 		}
 
 		addGroupAnimal[0] = new GameAction("activate leader", false,
@@ -238,21 +227,21 @@ public class InGameGUI extends GUI
 				GameAction.ON_RELEASE_ONLY);
 
 		// activating animal in the group
-		Kernel.userInput.bindToButton(activateGroupAnimal[0],
+		input.bindToButton(activateGroupAnimal[0],
 				GUIEvent.BT_GROUP_0);
-		Kernel.userInput.bindToButton(activateGroupAnimal[1],
+		input.bindToButton(activateGroupAnimal[1],
 				GUIEvent.BT_GROUP_1);
-		Kernel.userInput.bindToButton(activateGroupAnimal[2],
+		input.bindToButton(activateGroupAnimal[2],
 				GUIEvent.BT_GROUP_2);
-		Kernel.userInput.bindToButton(activateGroupAnimal[3],
+		input.bindToButton(activateGroupAnimal[3],
 				GUIEvent.BT_GROUP_3);
 
-		Kernel.userInput.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
+		input.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
 
-		Kernel.userInput.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
-		Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_L);
-		Kernel.userInput.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
-		Kernel.userInput.bindToMouse(mouseSelect, MouseEvent.BUTTON1);
+		input.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
+		input.bindToKey(pressQuestLog, KeyEvent.VK_L);
+		input.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
+		input.bindToMouse(mouseSelect, MouseEvent.BUTTON1);
 		// Kernel.userInput.bindToMouse(mouseReleased, MouseEvent.BUTTON1 );
 	}// end loadGameActions()
 
