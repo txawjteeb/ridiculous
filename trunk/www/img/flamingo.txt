@@ -1,0 +1,8 @@
+character_page=Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean et lacus. 
+Nam venenatis tempus tortor. Nulla fringilla quam at leo. Suspendisse lorem. 
+Nam semper, velit vel pellentesque tincidunt, felis elit pellentesque lorem, 
+et convallis sem lectus vitae augue. Vestibulum quis lacus. In sit amet tellus. 
+Integer feugiat lectus id lectus. Nulla facilisi. Mauris posuere. Suspendisse 
+dignissim arcu ac turpis. Nunc sapien. Nulla tempor luctus turpis. Suspendisse 
+potenti. Quisque interdum libero non urna. Vivamus id velit ac arcu ultricies
+ interdum. Vestibulum eu arcu.  
