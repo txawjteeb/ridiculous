@@ -33,17 +33,11 @@ public class Kernel
 		display = new Display(displaySettings);
 		display.start();
 		
+		userInput = new UserInput( display.getGLCanvas() );
+		
 		inputHandler = new InputHandler();
 		inputHandler.start();
-		
-		
-		
-		
-		userInput = new UserInput( display.getGLCanvas() );
 	}
-	
-	
-	
 	
 	public static void main(String[] args)
 	{
