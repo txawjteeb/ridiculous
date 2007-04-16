@@ -1,13 +1,45 @@
-#summary One-sentence summary of this page.
-
-= Introduction =
-
-Add your content here.
+Meet the Team behind Zoo Escape
 
 
-= Details =
+[Core]
+     Ian Kensey
+     Jesse Martinez
+     William Harshbarger
+     James Williams
+[Programming]
+     Spencer Allen
+     Cameron Catterfeld
+     Vitaly Maximov
+[Utilities]
+     Ryan Williams
+     Jacob Placensia
+     Ryan Bates
+     Rob Burt
+     Shane Yarbrough
+[Worlds]
+     Cindy Swift
+     Alex Whitbey
+     Kim Mann
+     Kyle Corcoran
+[Documentation]
+     Jeff Clark
+     Tim Potesan
+     Sean Coffman
+     Sarah Otto
+[Psychology]
+     Robert Criswell
+     David Armi
+     Matt Pettersen
+     Liz Anderson
+[Book]
+     Shannon Gleghorn
+     Sabrina Romero
+[Art]
+     Crystal Williams
+     Justin Her
+     Shaylee Pizana
+[Cutscenes]
+     Christopher Flynn
+     Juan Lopez
+     Ker Thao
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
