@@ -1,5 +1,6 @@
 Meet the Team behind Zoo Escape
 
++ = Needs Team Goals
 
 [Core]
   * Ian Kensey
@@ -29,8 +30,8 @@ Meet the Team behind Zoo Escape
 [Psychology]
   * Robert Criswell
   * David Armi
-  * Matt Pettersen
-  * Liz Anderson
+  * Matt Pettersen +
+  * Liz Anderson +
 [Book]
   * Shannon Gleghorn
   * Sabrina Romero
@@ -40,9 +41,8 @@ Meet the Team behind Zoo Escape
   * Shaylee Pizana
 [Cutscenes]
   * Christopher Flynn
-  * Juan Lopez
+  * Juan Lopez +
   * Ker Thao
-
 
 
 
