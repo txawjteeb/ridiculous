@@ -1,8 +1,8 @@
-#summary One-sentence summary of this page.
+#_This page is dedicated to describing the characters from our project game "Zoo Escape"_
 
 = Introduction =
 
-Add your content here.
+The game is made up of 10 main characters of different species and personalities all coming together to escape certain death.
 
 
 = Details =
@@ -11,4 +11,3 @@ Add your content here.  Format your content with:
   * Text in *bold* or _italic_
   * Headings, paragraphs, and lists
   * Automatic links to other wiki pages
-
