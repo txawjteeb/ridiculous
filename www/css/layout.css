@@ -35,9 +35,11 @@ padding:20px;
 #toprightcorner {
 padding:20px;
 	background: #000;
-	position: absolute;
+	position:absolute ;
 	left:50%;
 	top:30%;
+z-index:1;
+
 	height:165px;
 	width:340px;
 	background:#000;
@@ -98,16 +100,16 @@ color: #000000;
 
 #topcontent {
 	background: #fff;
-	position: absolute;
+	position:absolute;
 	top:0%;
 	left:0%;
 	height:10%;
-	width:100%;
+	width:101.5%;
 	background:#000;
 	
 	color: #fff;
 	background-color: #FFFFFF;
-	background-image: url(../img/background_panel_top.gif);
+	background-image: url(../img/fluid_panel_top.png);
 	}
 
 
