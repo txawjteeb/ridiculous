@@ -156,6 +156,7 @@ public class InGameGUI extends GUI
 
 					else if (!animalPickedUp) {
 						hudGroup.components.get(iG).activate();
+						//hudGroup.components.get(iG)
 						textList.addText("animal selected");
 					}
 				}
@@ -183,6 +184,8 @@ public class InGameGUI extends GUI
 		if (mouseReleased.isActive()) {
 			System.out.println("release");
 		}
+		
+		
 	}// end handleInput()
 
 	/** load game actions before adding them to UIButtons */
