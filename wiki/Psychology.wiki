@@ -1,13 +1,7 @@
-#summary One-sentence summary of this page.
+Criswell, Robert- Basically, I want to learn how a real game is made so I will be more prepared in the future if I decide to make a career out of it. Learning SVN and other such skills would also be important for many other jobs in a growing technological society and I want to keep up with the world.
 
-= Introduction =
+Armi, David- My goal within this project is to better understand the overall psychology behind the making of video games for future application within the psychology aspect of the gaming industry.
 
-Add your content here.
+Matt P.????????
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Liz A.????????
