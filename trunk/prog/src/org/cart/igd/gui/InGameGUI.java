@@ -83,6 +83,8 @@ public class InGameGUI extends GUI
 		hudLeft.updateAndDraw(g);
 		hudBottom.updateAndDraw(g);
 
+		g.drawImage( texQuestLog, 300f,300f,2f,2f );
+
 		hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
 		hudGroup.updateAndDraw(g);
 
@@ -215,13 +217,28 @@ public class InGameGUI extends GUI
 		texQuestLog = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/questlog_ico.png");
 		
-		texEmptySlot = texQuestLog = Kernel.display.getRenderer().loadImage(
+		texEmptySlot = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/button_slot_empty.png");
 		
-		for (int iItm = 0; iItm < texItemIco.length; iItm++) {
-			texItemIco[iItm] = Kernel.display.getRenderer().loadImage(
-				"data/images/buttons/item_ico_0" + (iItm + 1)+ ".png");
-		}
+	
+		texItemIco[0] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		texItemIco[1] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/toothpaste_sp.png");
+		texItemIco[2] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		texItemIco[3] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		texItemIco[4] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		texItemIco[5] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		texItemIco[6] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		texItemIco[7] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/paddleball_sp.png");
+		
+		
 
 		texAnimalIco[0] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/flamingo_vm.png");
@@ -263,9 +280,14 @@ public class InGameGUI extends GUI
 					192 + (64 * iItm), 0, 64, 64);
 		}
 		
-		for (int iAnm = 0; iAnm < btBushAnimals.length; iAnm++) {
+		/* make animal buttons */
+		for (int iAnm = 0; iAnm < btBushAnimals.length; iAnm+=2)
+		{
 			btBushAnimals[iAnm] = new UIButton(texAnimalIco[iAnm],
-					selectBushAnimal[iAnm], 0, 128 + (64 * iAnm), 64, 64);
+					selectBushAnimal[iAnm], 64, 128 + (40 * iAnm), 64, 64);
+					
+			btBushAnimals[iAnm+1] = new UIButton(texAnimalIco[iAnm+1],
+					selectBushAnimal[iAnm], 0, 160 + (40 * iAnm), 64, 64);
 		}
 
 		btGroupAnimals[0] = new UIButton(texAnimalIco[0], 
@@ -281,9 +303,10 @@ public class InGameGUI extends GUI
 
 		hudBottom.add(btQuestLog);
 
-		for (UIButton b : btItems) {
-			hudBottom.add(b);
-		}
+
+		//addd some test items
+		hudBottom.add(btItems[0]);
+		hudBottom.add(btItems[1]);
 
 		hudLeft.add(btBush);
 

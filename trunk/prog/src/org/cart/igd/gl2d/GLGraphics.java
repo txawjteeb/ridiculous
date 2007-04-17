@@ -65,9 +65,11 @@ public class GLGraphics
 	public static final float 	PART_Z = 0.1f;
 	public static final float	SHIP_Z = 1.f;
 
-	public void drawImageHue(Texture tex, float x, float y, float z, float[] rgba, int blend)
+	public void drawImageHue(Texture tex, float x, float y, float z, 
+		float[] rgba, int blend)
 	{
-		drawImage( tex, new float[] {x,y,z}, DEFAULT, rgba, new int[] {GL.GL_MODULATE,blend} );
+		drawImage( tex, new float[] {x,y,z}, DEFAULT, rgba, 
+			new int[] {GL.GL_MODULATE,blend} );
 	}
 	
 	public void drawImageHue(Texture tex, int x, int y, float z, float[] rgba,int blend)
