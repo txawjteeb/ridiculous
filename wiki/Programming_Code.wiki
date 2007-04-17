@@ -1,0 +1,8 @@
+This page will cover a short back ground about the programming that went into the game
+
+A short paragraph or two about what was used to program the game etc...
+
+Also, a few screenshots of our code (Maybe a link to view the source code etc...)
+
+
+
