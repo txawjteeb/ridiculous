@@ -82,6 +82,9 @@
 				<path>src\org\cart\igd\util</path>
 			</folderitem>
 			<fileitem>
+				<path>build.xml</path>
+			</fileitem>
+			<fileitem>
 				<path>gluegen-rt.jar</path>
 			</fileitem>
 			<fileitem>
