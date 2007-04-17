@@ -295,7 +295,7 @@ public class OBJModel
 	public void draw(GL gl)
 	{
 		gl.glCallList(modelDispList);
-		org.cart.igd.Display.renderer.polyCount += faces.getNumFaces();
+		org.cart.igd.core.Kernel.display.getRenderer().polyCount += faces.getNumFaces();
 	}
 	
 	private void reportOnModel()

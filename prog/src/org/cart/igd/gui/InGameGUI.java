@@ -21,9 +21,9 @@ public class InGameGUI extends GUI
 	/* textures */
 	private Texture texBush;
 	private Texture texQuestLog;
-	private Texture texButtonFlamingo;
+	private Texture texEmptySlot;
 	private Texture texItemIco[] = new Texture[8];
-	private Texture texAnimalIco[] = new Texture[9];
+	private Texture texAnimalIco[] = new Texture[10];
 
 	/* button containers */
 	private UIWindow hudBottom;// quest log and item buttons
@@ -33,15 +33,13 @@ public class InGameGUI extends GUI
 	/* buttons */
 	private UIButton btBush;
 	private UIButton btQuestLog;
-	private UIButton btBushAnimals[] = new UIButton[9];
+	private UIButton btBushAnimals[] = new UIButton[10];
 	private UIButton btItems[] = new UIButton[8];
 	private UIButton btGroupAnimals[] = new UIButton[4];
 
 	/* game actions */
 	private GameAction useItem[] = new GameAction[8];
-	private GameAction selectBushAnimal[] = new GameAction[9];
-	private GameAction addGroupAnimal[] = new GameAction[4];
-	private GameAction activateGroupAnimal[] = new GameAction[4];
+	private GameAction selectBushAnimal[] = new GameAction[10];
 
 	// other game actions
 	private GameAction mouseSelect;
@@ -55,6 +53,10 @@ public class InGameGUI extends GUI
 	
 	
 	private GameAction testChangeGui = new GameAction("test swap",false);
+	
+	public String renderTime="";
+	public String updateTime="";
+	public String inputTime="";
 
 	public InGameGUI(GameState igs) {
 		super(igs);
@@ -64,10 +66,11 @@ public class InGameGUI extends GUI
 		loadGUI();
 	}
 
+	/** renders gui, called by Renderer thread*/
 	public void render(GLGraphics g) {
 		// move this outside to game state input check and render separate
 		// process
-		handleInput();
+		//handleInput();
 
 		g.glgBegin();
 
@@ -87,11 +90,13 @@ public class InGameGUI extends GUI
 		g.glgEnd();
 	}
 
+	/** updates gui, called by Renderer thread*/
 	public void update(long elapsedTime) {
 		textList.update(elapsedTime);
 	}
 
-	public void handleInput() {
+	/** handle input, called by the InputHandler thread*/
+	public void handleInput(long elapsedTime) {
 		boolean animalPickedUp = false;
 		
 		if(testChangeGui.isActive()){
@@ -102,17 +107,7 @@ public class InGameGUI extends GUI
 			textList.addText(pressQuestLog.getInfo());
 		}
 
-		if (selectBushAnimal[1].isActive()) {
-			textList.addText(activateGroupAnimal[1].getInfo());
-		}
-		if (selectBushAnimal[2].isActive()) {
-			textList.addText(activateGroupAnimal[2].getInfo());
-		}
-		if (selectBushAnimal[3].isActive()) {
-			textList.addText(activateGroupAnimal[3].getInfo());
-		}
-
-		// check bottom hud input
+		/* check for click on the gui elements once */
 		if (mouseSelect.isActive()) {
 			// check for bottom hud buttons
 			for (int i = 0; i < hudBottom.components.size(); i++) {
@@ -137,7 +132,6 @@ public class InGameGUI extends GUI
 			/* flamingo select */
 			if (input.isSquareButtonPressed(hudGroup.components.get(0)))
 			{
-				addGroupAnimal[0].activate();
 				textList.addText("flamingo selected");
 			}
 			
@@ -145,7 +139,6 @@ public class InGameGUI extends GUI
 			for (int iG = 1; iG < hudGroup.components.size(); iG++) {
 				if (input.isSquareButtonPressed(hudGroup.components.get(iG)))
 				{
-					addGroupAnimal[iG].activate();
 					if (selectedButton != null) {
 						(hudGroup.components.get(iG)).setTexture( selectedButton.getTexture());
 						(hudGroup.components.get(iG))
@@ -177,17 +170,12 @@ public class InGameGUI extends GUI
 				input.mousePos[1] - 32);
 		}
 
-		if (addGroupAnimal[1].isActive()) {
-			System.out.println("added animal to group slot 1");
-		}
-
 		if (mouseReleased.isActive()) {
 			System.out.println("release");
 		}
-		
-		
 	}// end handleInput()
 
+	
 	/** load game actions before adding them to UIButtons */
 	public void loadGameActions() {
 		// GameAction( String details, boolean continuous )
@@ -211,36 +199,6 @@ public class InGameGUI extends GUI
 			input.bindToButton(selectBushAnimal[iEvt], 11 + iEvt);
 		}
 
-		addGroupAnimal[0] = new GameAction("activate leader", false,
-				GameAction.ON_RELEASE_ONLY);
-		addGroupAnimal[1] = new GameAction("activate animal: 1", false,
-				GameAction.ON_RELEASE_ONLY);
-		addGroupAnimal[2] = new GameAction("activate animal: 2", false,
-				GameAction.ON_RELEASE_ONLY);
-		addGroupAnimal[3] = new GameAction("activate animal: 3", false,
-				GameAction.ON_RELEASE_ONLY);
-
-		activateGroupAnimal[0] = new GameAction("activate leader", false,
-				GameAction.ON_RELEASE_ONLY);
-		activateGroupAnimal[1] = new GameAction("activate animal: 1", false,
-				GameAction.ON_RELEASE_ONLY);
-		activateGroupAnimal[2] = new GameAction("activate animal: 2", false,
-				GameAction.ON_RELEASE_ONLY);
-		activateGroupAnimal[3] = new GameAction("activate animal: 3", false,
-				GameAction.ON_RELEASE_ONLY);
-
-		// activating animal in the group
-		input.bindToButton(activateGroupAnimal[0],
-				GUIEvent.BT_GROUP_0);
-		input.bindToButton(activateGroupAnimal[1],
-				GUIEvent.BT_GROUP_1);
-		input.bindToButton(activateGroupAnimal[2],
-				GUIEvent.BT_GROUP_2);
-		input.bindToButton(activateGroupAnimal[3],
-				GUIEvent.BT_GROUP_3);
-
-		input.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
-
 		input.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
 		input.bindToKey(pressQuestLog, KeyEvent.VK_L);
 		input.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
@@ -257,19 +215,35 @@ public class InGameGUI extends GUI
 		texQuestLog = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/questlog_ico.png");
 		
-		texButtonFlamingo = Kernel.display.getRenderer().loadImage(
-			"data/images/gui/button_flamingo.png");
+		texEmptySlot = texQuestLog = Kernel.display.getRenderer().loadImage(
+			"data/images/buttons/button_slot_empty.png");
 		
-
 		for (int iItm = 0; iItm < texItemIco.length; iItm++) {
 			texItemIco[iItm] = Kernel.display.getRenderer().loadImage(
 				"data/images/buttons/item_ico_0" + (iItm + 1)+ ".png");
 		}
 
-		for (int iAnm = 0; iAnm < texAnimalIco.length; iAnm++) {
-			texAnimalIco[iAnm] = Kernel.display.getRenderer().loadImage(
-				"data/images/buttons/animal_ico_0" + (iAnm + 1)+ ".png");
-		}
+		texAnimalIco[0] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/flamingo_vm.png");
+		texAnimalIco[1] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/turtle_sp.png");
+		texAnimalIco[2] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/woodpecker_sp.png");
+		texAnimalIco[3] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/meerkat_sp.png");
+		texAnimalIco[4] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/panda_sp.png");
+		texAnimalIco[5] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/tiger_sp.png");
+		texAnimalIco[6] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/kangaroo_sp.png");
+		texAnimalIco[7] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/giraffe_sp.png");
+		texAnimalIco[8] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/penguin_sp.png");
+		texAnimalIco[9] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/elephant_sp.png");
+		
 	}
 
 	/** load the gui components after Textures and GameActions are loaded */
@@ -294,14 +268,14 @@ public class InGameGUI extends GUI
 					selectBushAnimal[iAnm], 0, 128 + (64 * iAnm), 64, 64);
 		}
 
-		btGroupAnimals[0] = new UIButton(texButtonFlamingo, activateGroupAnimal[0],
-				0, 0, 128, 128);
-		btGroupAnimals[1] = new UIButton(texItemIco[0], activateGroupAnimal[1],
-				-32, 120, 64, 64);
-		btGroupAnimals[2] = new UIButton(texItemIco[0], activateGroupAnimal[2],
-				32, 130, 64, 64);
-		btGroupAnimals[3] = new UIButton(texItemIco[0], activateGroupAnimal[3],
-				96, 120, 64, 64);
+		btGroupAnimals[0] = new UIButton(texAnimalIco[0], 
+			new GameAction("activate flaming",false),0, 0, 128, 128);
+		btGroupAnimals[1] = new UIButton(texEmptySlot, 
+			new GameAction("empty",false),-32, 120, 64, 64);
+		btGroupAnimals[2] = new UIButton(texEmptySlot, 
+			new GameAction("empty",false),32, 130, 64, 64);
+		btGroupAnimals[3] = new UIButton(texEmptySlot, 
+			new GameAction("empty",false),96, 120, 64, 64);
 
 		// add gui elements
 
@@ -313,10 +287,11 @@ public class InGameGUI extends GUI
 
 		hudLeft.add(btBush);
 
-		for (UIButton b : btBushAnimals) {
-			hudLeft.add(b);
+		/* add all buttons except the first, which is flamingo */
+		for(int ibt = 1; ibt< btBushAnimals.length;ibt++){
+			hudLeft.add(btBushAnimals[ibt]);
 		}
-
+		
 		for (UIButton b : btGroupAnimals) {
 			hudGroup.add(b);
 		}

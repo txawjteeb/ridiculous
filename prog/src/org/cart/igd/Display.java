@@ -23,7 +23,7 @@ public class Display implements WindowListener
 {
 	private static final int DONT_CARE = -1;
 	
-	public static Renderer renderer;
+	public Renderer renderer;
 	
 	public static JFrame frame;
 	private GLCanvas glCanvas;

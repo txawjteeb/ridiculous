@@ -13,7 +13,7 @@ public abstract class UIComponent
 	public abstract void draw(GLGraphics g,int x, int y, float alpha);
 	public abstract void getFocus();
 	public abstract void dropFocus();
-	public abstract void activate();
+	
 	
 	private UIComponent parent;
 	
@@ -41,6 +41,12 @@ public abstract class UIComponent
 	}
 	public GameAction getAction(){
 		return gameAction;
+	}
+	
+	public void activate(){
+		if(gameAction != null){
+			gameAction.activate();
+		}
 	}
 	
 	/** returns x location relative to the canvas takes 

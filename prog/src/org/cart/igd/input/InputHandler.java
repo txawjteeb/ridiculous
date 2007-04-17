@@ -13,22 +13,39 @@ public class InputHandler extends Thread{
 	public boolean running = false;
 	private GameState gameState;
 	
-	public InputHandler(){
-	
-		
+	public InputHandler(Profiler profiler){
+		this.profiler = profiler;
+		lastTime = profiler.currentTime;
+		currentTime = profiler.currentTime;
+		running = true;
 	}
 	
 	public void run(){
-		
 		while(running)
     	{
-    		currentTime = System.currentTimeMillis();
+    		currentTime = profiler.currentTime;
     		long elapsedTime = currentTime - lastTime;
     		
-    		Kernel.display.getRenderer().getStateManager().
-   		 		getCurrentState().handleInput(elapsedTime);
-    		System.out.println(elapsedTime);
-    		lastTime = System.currentTimeMillis();
+    		/* prevent unnecesary updates*/
+    		if(elapsedTime > 0){
+    			try{
+    				if(Kernel.display.getRenderer().getStateManager().
+   		 					getCurrentState()!= null)
+   		 			{
+   		 						
+    					Kernel.display.getRenderer().getStateManager().
+   		 						getCurrentState().handleInput(elapsedTime);
+   		 				
+   		 				profiler.ihTimedHits ++;
+   		 			}
+    			} catch (Exception e){
+    				e.printStackTrace();
+    			}
+    		}
+    		
+    		profiler.ihAllHits++;
+    		
+    		lastTime = profiler.currentTime;
     		
     		try {
     			Thread.sleep(sleepTime);
