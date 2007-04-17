@@ -7,6 +7,7 @@ public class UIButton extends UIComponent
 {
 	
 	private boolean pressed = false;
+	private float scale = 1f;
 	
 	public UIButton(String value, int x, int y)
 	{
@@ -33,7 +34,7 @@ public class UIButton extends UIComponent
 	{
 		//Display.renderer.g.drawImageHue( UIButton.texture, x+rel_x, y+rel_y, new float[]{rgb[0],rgb[1],rgb[2],alpha}, new float[] { ((float)width)/128f, ((float)height)/20f } );
 		//Display.renderer.g.drawBitmapString( value, x+rel_x+5, y+rel_y+((int)(((float)height)/2f))-6, new float[] {0f,0f,0f,1f} );
-		g.drawImage(getTexture(),getX(),getY());
+		g.drawImage(getTexture(),getX(),getY(),scale,scale);
 	}
 	
 	public void activate()
