@@ -1,1 +1,10 @@
 Click on a Link to go to that characters page containing a pic of the character along with a back ground story.
+
+  * [Poncho the Flamingo]
+  * [The Turtles (Jorge, Miercoles, Santiago)]
+  * [Jerry the Woodpecker]
+  * [Abella the Tiger]
+  * [Marvin the Giraffe]
+  * [Rodger the Kangaroo]
+  * [Daisy the Meerkat]
+  * [Mei Ling the Panda]
