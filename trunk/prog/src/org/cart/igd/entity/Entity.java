@@ -11,6 +11,7 @@ import org.cart.igd.core.Kernel;
 //import org.cart.igd.model.Model;
 //import org.cart.igd.model.ModelManager;
 //import org.cart.igd.bsp.BSPObject;
+import org.cart.igd.models.obj.OBJModel;
 
 public class Entity
 {
@@ -22,6 +23,7 @@ public class Entity
 	public float speed = 0.05f;
 	public float turnSpeed = 0.1f;
 	
+	public OBJModel model;
 	/*protected Model model;
 	protected float deltaTime;
 	protected float animationSpeed = 7.0f;
@@ -39,6 +41,34 @@ public class Entity
 	
 	public Entity(Vector3f pos, float fD, float bsr)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
+		gl = Kernel.display.getRenderer().getGL();
+		/*if(this.gl==null)
+			throw new EntityException("**** No drawable.gl given ****");
+		*/
+		glu = Kernel.display.getRenderer().getGLU();
+		/*if(this.glu==null)
+			throw new EntityException("**** No drawable.glu given ****");
+		*/
+		position = pos;
+		lastPosition = pos;
+		/*if(this.position==null)
+			throw new EntityException("**** No position vector given ****");
+		*/
+		
+		this.facingDirection = fD;
+		//this.id = id;
+		this.boundingSphereRadius = bsr;
+		
+		/*
+		if(meshFile!=null)
+			loadModel(meshFile, skinFile);
+		*/
+	}
+	
+	public Entity(Vector3f pos, float fD, float bsr, OBJModel model)//, int id, File meshFile, File skinFile)// throws EntityException
+	{
+		this.model = model;
+		
 		gl = Kernel.display.getRenderer().getGL();
 		/*if(this.gl==null)
 			throw new EntityException("**** No drawable.gl given ****");
@@ -144,4 +174,12 @@ public class Entity
 	{
 		facingDirection -= ((float)elapsedTime * turnSpeed);
 	}
+	
+	public void update(long elapsedTime){
+		
+	}
+	public void draw(GL gl){
+		
+	}
+	
 }

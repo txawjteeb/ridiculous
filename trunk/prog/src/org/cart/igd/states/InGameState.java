@@ -23,10 +23,16 @@ import org.cart.igd.input.UserInput;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.util.ColorRGBA;
-import org.cart.igd.util.SkyDome;
+import org.cart.igd.util.*;
+import org.cart.igd.math.*;
+import org.cart.igd.entity.*;
 
 public class InGameState extends GameState
 {
+	ArrayList<Entity> entities = new ArrayList<Entity>();
+	
+	private OBJModel partySnapper;
+	
 	private Camera camera;
 	private Entity player;
 	private OBJModel playerSprite;
@@ -77,6 +83,7 @@ public class InGameState extends GameState
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		camera			= new Camera(player, 10f, 4f);
+		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		
 		/** 
 		 * add new gui subsets here 
@@ -108,6 +115,11 @@ public class InGameState extends GameState
 	
 	public void update(long elapsedTime)
 	{
+		for(int i = 0; i<entities.size(); i++){
+			Entity entity = entities.get(i);
+			entity.update(elapsedTime);
+		}
+		
 		handleInput(elapsedTime);
 		player.lastPosition.x = player.position.x;
 		player.lastPosition.y = player.position.y;
@@ -179,6 +191,14 @@ public class InGameState extends GameState
 			worldMap.draw(gl);
 		gl.glPopMatrix();
 		
+		/* render all entities */
+		gl.glPushMatrix();
+		for(int i = 0; i<entities.size(); i++){
+			Entity entity = entities.get(i);
+			entity.draw(gl);
+		}
+		gl.glPopMatrix();
+		
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		
@@ -240,6 +260,17 @@ public class InGameState extends GameState
 			if(playerState==0)
 				playerState=1;
 		}
+		
+		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL])
+		{
+			entities.add(new PartySnapper(
+				new Vector3f(player.position.x, player.position.y, player.position.z),
+				player.facingDirection, 
+				0f,
+				partySnapper)
+			);
+		}
+		
 		
 		/** camera mouse rotation */
 		if(mouseCameraRotate.isActive())

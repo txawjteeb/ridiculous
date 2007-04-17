@@ -296,6 +296,10 @@
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\PartySnapper.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\game\GameObjective.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
