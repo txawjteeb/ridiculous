@@ -1,0 +1,4 @@
+Controls 
+Camera Perspective
+Game Type
+Interaction with mouse keyboard etc
