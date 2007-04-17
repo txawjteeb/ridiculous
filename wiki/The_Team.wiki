@@ -1,7 +1,7 @@
 *Meet the Team behind Zoo Escape*
 
 [Core]
-  * Ian Kensey
+  * Ian Kinsey
   * Jesse Martinez
   * William Harshbarger
   * James Williams
@@ -41,4 +41,3 @@
   * Christopher Flynn
   * Juan Lopez 
   * Ker Thao
-
