@@ -11,7 +11,7 @@ The purpose of this wiki is to give a basic overview of the who, what, and how r
   * [http://code.google.com/p/ridiculous/wiki/Programming_Code Programming & Code]
   * [http://code.google.com/p/ridiculous/wiki/Story_Board?updated=Story_Board&ts=1176843619 Story Board]
   * [http://code.google.com/p/ridiculous/wiki/Characters?updated=Characters&ts=1176843709 Characters]
-
+  * [http://code.google.com/p/ridiculous/wiki/Story?updated=Story&ts=1176845745 Story]
 
 
 
