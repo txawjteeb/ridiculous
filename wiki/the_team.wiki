@@ -1,7 +1,5 @@
 Meet the Team behind Zoo Escape
 
-+ = Still needs team goals
-
 [Core]
   * Ian Kensey
   * Jesse Martinez
