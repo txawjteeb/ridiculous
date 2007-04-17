@@ -30,7 +30,7 @@ Meet the Team behind Zoo Escape
 [Psychology]
   * Robert Criswell
   * David Armi
-  * Matt Pettersen +
+  * Matt Pettersen
   * Liz Anderson 
 [Book]
   * Shannon Gleghorn
@@ -43,4 +43,3 @@ Meet the Team behind Zoo Escape
   * Christopher Flynn
   * Juan Lopez 
   * Ker Thao
-
