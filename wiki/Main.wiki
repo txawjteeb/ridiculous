@@ -4,7 +4,7 @@ The purpose of this wiki is to give a basic overview of the who, what, and how r
                                        Blue Star Logo
 
   * [http://code.google.com/p/ridiculous/wiki/The_Team?updated=The_Team&ts=1176841320 The Team]
-  * [Art]
+  * [http://code.google.com/p/ridiculous/wiki/Concept_Art?updated=Concept_Art&ts=1176843100 Concept Art]
   * [Environment]
   * [Story]
   * [Game Play]
@@ -13,4 +13,5 @@ The purpose of this wiki is to give a basic overview of the who, what, and how r
   * [Programming & Code]
   * [Story Board]
   * [Characters]
+
 
