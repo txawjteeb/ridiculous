@@ -17,5 +17,7 @@ public abstract class GUI
 	
 	public abstract void render(GLGraphics g);
 	
+	public abstract void handleInput(long elapsedTime);
+	
 	public abstract void loadImages() throws java.io.IOException;
 }

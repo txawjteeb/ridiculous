@@ -51,11 +51,10 @@ public class Dialogue extends GUI {
 	boolean t = true;
 	public void update(long elapsedTime){
 		if(t)new ActiveDialogue().start();
-		handleInput();
 		t = false;
 	}
 	
-	public void handleInput(){
+	public void handleInput(long elapsedTime){
 		if(testChangeGui.isActive()){
 			((InGameState)gameState).changeGuiState(0);
 		}

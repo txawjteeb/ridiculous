@@ -308,6 +308,10 @@
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\gl2d\ButtonSlot.java</path>
+				<folder>src\org\cart\igd\gl2d</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
 			</fileitem>
@@ -365,6 +369,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\GUIEvent.java</path>
+				<folder>src\org\cart\igd\input</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\input\InputHandler.java</path>
 				<folder>src\org\cart\igd\input</folder>
 			</fileitem>
 			<fileitem>

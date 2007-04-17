@@ -35,8 +35,9 @@ public class Kernel
 		
 		userInput = new UserInput( display.getGLCanvas() );
 		
-		inputHandler = new InputHandler();
+		inputHandler = new InputHandler(profiler);
 		inputHandler.start();
+		
 	}
 	
 	public static void main(String[] args)

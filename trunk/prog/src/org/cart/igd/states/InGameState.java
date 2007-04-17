@@ -180,11 +180,11 @@ public class InGameState extends GameState
 		gl.glPopMatrix();
 		
 		/* Render GUI */
-		gui.get(currentGuiState).render( Display.renderer.getGLG() );
+		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		
 		if(!mouseCameraRotate.isActive())
 		{
-			GLGraphics glg = Display.renderer.getGLG();
+			GLGraphics glg = Kernel.display.getRenderer().getGLG();
 			glg.glgBegin();
 			glg.drawImage(
 					GLGraphics.Cursor, Kernel.userInput.mousePos[0], 
@@ -200,6 +200,7 @@ public class InGameState extends GameState
 	
 	public void handleInput(long elapsedTime)
 	{
+		gui.get(currentGuiState).handleInput(elapsedTime);
 		camera.zoom((float)Kernel.userInput.getMouseWheelMovement()*2f);
 		
 		if(mouseWheelDown.isActive())

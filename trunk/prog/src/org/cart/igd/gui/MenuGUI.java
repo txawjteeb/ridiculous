@@ -32,10 +32,10 @@ public class MenuGUI extends GUI
 	
 	public void update(long elapsedTime)
 	{
-		handleInput();
+		
 	}
 	
-	public void handleInput()
+	public void handleInput(long elapsedTime)
 	{
 		if(input.isSquareButtonPressed( menuSelection[0] ) )
 		{

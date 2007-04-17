@@ -9,32 +9,19 @@ public class UITextField extends UIComponent
 {
 	private float[] fontColor = new float[] {0f,0f,0f};
 	private boolean password = false;
+	private GL gl;
 	
-	public UITextField(String value, int x, int y)
-	{
-		this(value,x,y,128,16,false);
-	}
-	
-	public UITextField(String value, int x, int y, int width, int height)
-	{
-		this(value,x,y,width,height,false);
-	}
-	
-	public UITextField(String value, int x, int y, int width, int height, boolean password)
+	public UITextField(GL gl, String value, int x, int y, int width, int height, boolean password)
 	{
 		super(x,y,width,height);
+		this.gl = gl;
 		this.value = value;
 		this.rgb = new float[] { 0f,0f,0f };
 		this.password = password;
 	}
 	
-	public void activate(){
-		
-	}
-	
 	public void draw(GLGraphics g,int x, int y, float alpha)
 	{
-		GL gl =Display.renderer.getGL();
 		//GLEngine.g.drawImageHue( Images.UITextField, x+rel_x, y+rel_y, new float[]{rgb[0],rgb[1],rgb[2],alpha}, new float[] { ((float)width)/128f, ((float)height)/16f } );
 		int bx = getX();
 		int by = getY()+((int)(((float)getHeight())/2f))-8;

@@ -26,6 +26,7 @@ public class MenuState extends GameState
 	
 	public void handleInput(long elapsedTime)
 	{
+		gui.handleInput(elapsedTime);
 		if(selectOption.isPressed()){
 			changeGameState("InGameState");
 		}
@@ -40,7 +41,7 @@ public class MenuState extends GameState
 	public void display(GL gl,GLU glu)
 	{
 		gui.render( Kernel.display.getRenderer().getGLG() );
-		GLGraphics glg = Display.renderer.getGLG();
+		GLGraphics glg = Kernel.display.getRenderer().getGLG();
 		glg.glgBegin();
 		glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]);
 		glg.glgEnd();

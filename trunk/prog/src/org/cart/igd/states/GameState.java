@@ -12,15 +12,13 @@ public abstract class GameState
 
 	public GameState()
 	{
+		
 	}
 	
 	public GameState(GL gl)
 	{
+		
 	}
-	
-	public abstract void display(GL gl, GLU glu);
-	
-	public abstract void update(long elapsedTime);
 	
 	public void init(GL gl, GLU glu)
 	{
@@ -33,5 +31,14 @@ public abstract class GameState
 		this.nextState = nextState;
 	}
 	
+	public abstract void display(GL gl, GLU glu);
+	
+	public abstract void update(long elapsedTime);
+	
 	public abstract void handleInput(long elapsedTime);
+	
+	
+
+	
+	
 }
