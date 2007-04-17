@@ -16,7 +16,7 @@ public class Dialogue extends GUI {
 	private Texture[] animalIcons = new Texture[10];
 	private Texture dialogueBackground;
 	private Texture border;
-	
+	private Texture leaves1024,background1024;
 	/**
 	 * param1 informative string
 	 * param2 continuous action
@@ -46,6 +46,10 @@ public class Dialogue extends GUI {
 		}
 		dialogueBackground = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
 		border = Kernel.display.getRenderer().loadImage("data/images/dialogue/border.png");
+		
+		leaves1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaves1024_cw.png");
+		background1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/dialogue_background1024_cw.png");
+		
 	}
 	
 	boolean t = true;
@@ -62,7 +66,10 @@ public class Dialogue extends GUI {
 
 	public void render(GLGraphics g){
 		g.glgBegin();
-			g.drawImageAlpha(dialogueBackground,0,400,1f);
+
+			g.drawImageAlpha(background1024,0,0,1f);
+			g.drawImageHue(leaves1024,0,0,new float[]{1f,1f,1f,.94f+new Random().nextFloat()/20});
+
 			for(int i = 0;i<renderDialogue.size();i++){
 				DialogueInfo di = renderDialogue.get(i);
 				di.update();
@@ -78,26 +85,16 @@ public class Dialogue extends GUI {
 	private class DialogueInfo{
 		int id,animal,type,x,y;
 		String words;
-		boolean mouseover = false;
 		
-		int degreesLeft=0;
-		int degreesRight=0;
-		int degreesCurrent=0;
-	//	int degreeProgress[] = new int[]{50,30,20,15,12,9,7,5,3,2,1,0};
-		int degreeProgress[] = new int[]{50,40,30,20,10,5};
-		int progress=0;
-		boolean swinging = false;
+		boolean mouseOver = false;
+		int degree = 0; // positive turns it counterclockwise
+		int mathDegrees[] = new int[]{20,10,8,5,2,1};
+		int velDegrees[] = new int[]{12,10,8,6,4,2};
+		int counter = 0;
+		float alphaSwing = 1f;
 		boolean left = false;
-		
-	//	public DialogueInfo(int id, int animal, int type, String words, int x, int y){
-	//		this.id = id;
-	//		this.animal = animal;
-	//		this.type = type;
-	//		this.words = words;
-	//		this.x = x;
-	//		this.y = y;
-	//	}
-		
+		boolean swinging;
+
 		public DialogueInfo(int id, int animal, int type, String words, int place){
 			this.id = id;
 			this.animal = animal;
@@ -128,18 +125,19 @@ public class Dialogue extends GUI {
 		}
 		
 		public void update(){
-			mouseover = false;
-			if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64){
-				swinging = true;
-				left = true;
-				progress = 0;
-				degreesCurrent = 0;
-				degreesLeft = degreeProgress[progress];
+			mouseOver = false;
+			if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64&&type==1){
+				mouseOver = true;
+				if(!swinging){
+					degree = 0;
+					left = true;
+					swinging = true;	
+				} 
+					counter = 0;
+					alphaSwing = .6f;
 			}
-			//mouseover = false;
-		//	if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64) mouseover = true;
 		}
-		
+
 		
 		public void draw(GLGraphics g){
 			switch(type){
@@ -147,7 +145,38 @@ public class Dialogue extends GUI {
 				break;
 				case 1:
 					if(swinging){
+						if(left){
+							degree+=velDegrees[counter];
+							if(degree>mathDegrees[counter]){
+								counter++;
+								left = false;
+							}
+						}else{
+							degree-=velDegrees[counter];
+							if(degree<-mathDegrees[counter]){
+								counter++;
+								left = true;
+							}
+						}
+						if(counter>mathDegrees.length-1){
+							swinging = false;
+							degree = 0;
+						}
+					}
+					
 						
+					if(mouseOver){
+						g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{1f,alphaSwing,alphaSwing,1f});
+						g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,1f});
+					} else{
+						alphaSwing +=.05f;
+						g.drawImageRotateHue(animalIcons[animal],x,y,degree,new float[]{1f,alphaSwing,alphaSwing,1f});
+						g.drawImageRotate(border,x,y,degree);
+					}
+					
+					
+					/*
+					if(swinging){
 						if(left){
 							degreesCurrent+=20;
 							g.drawImageRotate(animalIcons[animal],x,y,degreesCurrent);
@@ -228,15 +257,9 @@ public class Dialogue extends GUI {
 								break;
 							}
 							break;
-					}
-					
-					
-							
+					}			
 			}
-	//	public void ActiveDialogue(Dialogue dialogue){
-	//		this.dialogue = dialogue;
-	//	}
-		
+
 		public void pause(int miliseconds){
 			try{
 				this.sleep(miliseconds);			
