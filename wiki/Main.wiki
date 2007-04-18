@@ -14,12 +14,11 @@
   * [http://code.google.com/p/ridiculous/wiki/Characters?updated=Characters&ts=1176843709 Characters]
   * [http://code.google.com/p/ridiculous/wiki/Story?updated=Story&ts=1176845745 Story]
 
- *[art]
+ * [art]
 
- *[characters]
+ * [characters]
 
- *[story]
-
+ * [story]
 
 
 
