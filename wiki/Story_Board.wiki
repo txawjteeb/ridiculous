@@ -1,1 +1,8 @@
-This page is for the story board created early on in production showing how the game will progress
+Click on a link to follow the story for our game *"Zoo Escape"*
+
+  * [ It Begins]
+  * [ If player chooses to free Kangaroo first]
+  * [ If player chooses to free Panda first]
+  * [ If player chooses to free Giraffe first]
+  * [ FREEDOM!!!]
+
