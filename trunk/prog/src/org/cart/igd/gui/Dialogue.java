@@ -11,7 +11,7 @@ import org.cart.igd.states.*;
 public class Dialogue extends GUI {
 	
 	static ArrayList <DialogueInfo> renderDialogue = new ArrayList <DialogueInfo>();
-//	private UserInput input;
+//	private UserInput input;s
 	private UserInput input;
 	private Texture[] animalIcons = new Texture[10];
 	private Texture dialogueBackground;
@@ -86,6 +86,7 @@ public class Dialogue extends GUI {
 		int id,animal,type,x,y;
 		String words;
 		
+		int mouseOverTime = 0;
 		boolean mouseOver = false;
 		int degree = 0; // positive turns it counterclockwise
 		int mathDegrees[] = new int[]{20,10,8,5,2,1};
@@ -103,31 +104,33 @@ public class Dialogue extends GUI {
 			switch(place){
 				case 0:
 					x = 200;
-					y = 600;
+					y = 500;
 				break;
 				case 1:
 					x = 270;
-					y = 520;
+					y = 420;
 				break;
 				case 2:
 					x = 270;
-					y = 440;
+					y = 340;
 				break;
 				case 3:
 					x = 270;
-					y = 360;
+					y = 260;
 				break;
 				case 4:
 					x = 270;
-					y = 280;
+					y = 180;
 				break;
 			}
 		}
 		
 		public void update(){
 			mouseOver = false;
-			if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64&&type==1){
+		//	if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64&&type==1){
+			if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64){
 				mouseOver = true;
+				mouseOverTime++;
 				if(!swinging){
 					degree = 0;
 					left = true;
@@ -135,6 +138,8 @@ public class Dialogue extends GUI {
 				} 
 					counter = 0;
 					alphaSwing = .6f;
+			} else{
+				mouseOverTime = 0;
 			}
 		}
 
@@ -142,6 +147,49 @@ public class Dialogue extends GUI {
 		public void draw(GLGraphics g){
 			switch(type){
 				case 0:
+					if(swinging){
+						if(left){
+							degree+=velDegrees[counter];
+							if(degree>mathDegrees[counter]){
+								counter++;
+								left = false;
+							}
+						}else{
+							degree-=velDegrees[counter];
+							if(degree<-mathDegrees[counter]){
+								counter++;
+								left = true;
+							}
+						}
+						if(counter>mathDegrees.length-1){
+							swinging = false;
+							degree = 0;
+						}
+					}
+					
+						
+					if(mouseOver){
+		
+							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{alphaSwing,1f,alphaSwing,1f});	
+					
+						
+						if(mouseOverTime > 5){
+								g.drawImageRotateHue(border,x,y,degree,new float[]{.2f,.2f,1f,1f});
+						} else {
+								g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,1f});
+						}
+					
+					} else{
+						alphaSwing +=.05f;
+				
+							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{alphaSwing,1f,alphaSwing,1f});	
+				
+						
+						g.drawImageRotate(border,x,y,degree);
+					}
+					
+					
+					g.drawBitmapString(words,x+76,y+20);	
 				break;
 				case 1:
 					if(swinging){
@@ -166,54 +214,26 @@ public class Dialogue extends GUI {
 					
 						
 					if(mouseOver){
-						g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{1f,alphaSwing,alphaSwing,1f});
-						g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,1f});
+			
+							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{1f,alphaSwing,alphaSwing,1f});
+
+						if(mouseOverTime > 5){
+								g.drawImageRotateHue(border,x,y,degree,new float[]{.2f,.2f,1f,1f});
+						} else {
+								g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,1f});
+						}
+					
 					} else{
 						alphaSwing +=.05f;
-						g.drawImageRotateHue(animalIcons[animal],x,y,degree,new float[]{1f,alphaSwing,alphaSwing,1f});
+
+							g.drawImageRotateHue(animalIcons[animal],x,y,degree,new float[]{1f,alphaSwing,alphaSwing,1f});
+					
+						
 						g.drawImageRotate(border,x,y,degree);
 					}
-					
-					
-					/*
-					if(swinging){
-						if(left){
-							degreesCurrent+=20;
-							g.drawImageRotate(animalIcons[animal],x,y,degreesCurrent);
-							g.drawImageRotate(border,x,y,degreesCurrent);
-							if(degreesCurrent>=degreesLeft){
-								left = false;
-								degreesRight = -degreeProgress[progress];
-							}
-						} else {
-							degreesCurrent-=20;
-							g.drawImageRotate(animalIcons[animal],x,y,degreesCurrent);
-							g.drawImageRotate(border,x,y,degreesCurrent);
-							if(degreesCurrent<=degreesRight){
-								left = true;
-								progress++;
-								
-								degreesLeft = degreeProgress[progress];
-							}
-						}
-						
-						if(progress==degreeProgress.length-1){
-							swinging = false;
-						}
-					} else{
-						g.drawImageAlpha(animalIcons[animal],x,y,1f);
-						g.drawImageAlpha(border,x,y,1f);
-					}
-					g.drawBitmapString(words,x+76,y+20);
-					/*if(mouseover){
-						g.drawImageRotate(animalIcons[animal],x,y,6);
-						g.drawImageRotate(border,x,y,6);
-					} else{
-						g.drawImageAlpha(animalIcons[animal],x,y,1f);
-						g.drawImageAlpha(border,x,y,1f);
-					}
+
 					g.drawBitmapString(words,x+76,y+20);	
-					*/
+					
 				break;
 				case 2:
 				break;
@@ -226,14 +246,14 @@ public class Dialogue extends GUI {
 
 		public void run(){
 			
-					Dialogue.renderDialogue.add(new DialogueInfo(0,1,1,"Oh hey flamingo... uhgg",0));
+					Dialogue.renderDialogue.add(new DialogueInfo(0,1,0,"Oh hey flamingo... uhgg",0));
 					Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I escaped, and you need to too",1));
 					Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Hey Giraffe, ill be right back",2));
 					Dialogue.renderDialogue.add(new DialogueInfo(3,0,1,"Is something wrong?",3));
 					switch(getSelection()){
 						case 1:
 							Dialogue.clearDialogue();
-							Dialogue.renderDialogue.add(new DialogueInfo(4,1,1,"Alright, these trees are to low for me to eat off of. It makes my neck hurt, I could use a vacation.",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(4,1,0,"Alright, these trees are to low for me to eat off of. It makes my neck hurt, I could use a vacation.",0));
 							pause(5000);
 							break;
 						case 2:
@@ -241,18 +261,18 @@ public class Dialogue extends GUI {
 							break;
 						case 3:
 							Dialogue.clearDialogue();
-							Dialogue.renderDialogue.add(new DialogueInfo(5,1,1,"Its just my neck. What are you doing out of your cage?",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(5,1,0,"Its just my neck. What are you doing out of your cage?",0));
 							Dialogue.renderDialogue.add(new DialogueInfo(6,0,1,"Oh yea, it doesn't look so good. You need to get yourself out of this cage",1));
 							Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"I can tell you are in pain, but no time for that, you have to escape and save your life",2));
 							switch(getSelection()){
 								case 6:
 									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(8,1,1,"You don't look so good yourself. Well until my neck feels better, I'm not leaving.",0));
+									Dialogue.renderDialogue.add(new DialogueInfo(8,1,0,"You don't look so good yourself. Well until my neck feels better, I'm not leaving.",0));
 									pause(5000);
 								break;
 								case 7:
 									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(9,1,1,"Yea, of course there is no time for my pain. You are just like the zookeepers.",0));
+									Dialogue.renderDialogue.add(new DialogueInfo(9,1,0,"Yea, of course there is no time for my pain. You are just like the zookeepers.",0));
 									pause(5000);
 								break;
 							}
