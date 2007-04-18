@@ -12,7 +12,7 @@ import javax.media.opengl.glu.GLU;
 import org.cart.igd.Camera;
 import org.cart.igd.Display;
 import org.cart.igd.core.Kernel;
-import org.cart.igd.discreet.MaxParser;
+import org.cart.igd.discreet.*;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.gui.Dialogue;
@@ -40,6 +40,7 @@ public class InGameState extends GameState
 	private SkyDome skyDome;
 	
 	private MaxParser maxParser;
+	private ObjectMesh mesh;
 	
 	private final float GRAVITY = 0.025f;
 	
@@ -69,14 +70,15 @@ public class InGameState extends GameState
 		super(gl);
 		try
 		{
-			maxParser = new MaxParser(new FileInputStream("data/models/bounce.3DS"));
+			maxParser = new MaxParser(new FileInputStream("data/models/walk.3DS"));
 			maxParser.parse();
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
-		System.out.println(maxParser.getObjectMesh().toString());
+		mesh = maxParser.getObjectMesh();
+		mesh.printData();
 		
 		player			= new Entity(new Vector3f(), 0f, 10f);
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
@@ -166,10 +168,19 @@ public class InGameState extends GameState
 		
 		/* Render Player Model */
 		gl.glPushMatrix();
+		gl.glDisable(GL.GL_CULL_FACE);
 			gl.glTranslatef(player.position.x, player.position.y-3f, player.position.z);
 			gl.glRotatef(player.facingDirection+180f, 0f, -1f, 0f);
-			gl.glScalef(4f,4f,4f);
-			playerSprite.draw(gl);
+			gl.glScalef(0.05f,0.05f,0.05f);
+			for(int i=0; i<mesh.getNumBlocks(); i++)
+			{
+				ObjectBlock block = mesh.blocks.get(i);
+				gl.glBegin(GL.GL_TRIANGLES);
+				block.renderMeshes(gl);
+				gl.glEnd();
+			}
+			//playerSprite.draw(gl);
+		gl.glEnable(GL.GL_CULL_FACE);
 		gl.glPopMatrix();
 
 		/* Render SkyDome */

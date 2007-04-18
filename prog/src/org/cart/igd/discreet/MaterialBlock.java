@@ -93,4 +93,9 @@ public class MaterialBlock
         additiveBlend = false;
         transparency = 1;
     }
+    
+    public String toString()
+    {
+    	return "name: "+name;
+    }
 }
