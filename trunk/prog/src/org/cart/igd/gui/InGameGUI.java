@@ -83,8 +83,6 @@ public class InGameGUI extends GUI
 		hudLeft.updateAndDraw(g);
 		hudBottom.updateAndDraw(g);
 
-		g.drawImage( texQuestLog, 300f,300f,2f,2f );
-
 		hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
 		hudGroup.updateAndDraw(g);
 
@@ -274,7 +272,8 @@ public class InGameGUI extends GUI
 		// add buttons
 		btBush = new UIButton(texBush, pressQuestLog, 0, 0, 128, 128);
 		btQuestLog = new UIButton(texQuestLog, pressQuestLog, 128, 0, 64, 64);
-
+		btQuestLog.scale = 1.2f;
+		
 		for (int iItm = 0; iItm < btItems.length; iItm++) {
 			btItems[iItm] = new UIButton(texItemIco[iItm], useItem[iItm],
 					192 + (64 * iItm), 0, 64, 64);
