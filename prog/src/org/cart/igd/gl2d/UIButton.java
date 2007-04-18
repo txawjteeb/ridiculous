@@ -7,7 +7,7 @@ public class UIButton extends UIComponent
 {
 	
 	private boolean pressed = false;
-	private float scale = 1f;
+	public float scale = 1f;
 	
 	public UIButton(String value, int x, int y)
 	{

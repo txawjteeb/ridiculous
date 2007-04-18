@@ -428,12 +428,14 @@ public class GLGraphics
 				int c = text.charAt(i);
 				if(c==' ') { x+=spacing; continue; }		//if space continue
 				if(c<33||c>126) c='?';		//unknown character
-				if(c>=97&&c<=122) c-=32;
+				
+				//all capital letters
+				//if(c>=97&&c<=122) c-=32;
 				
 				if(i>0)
 				{
-					if(isCompressed(text.charAt(i-1))) x-=4;
-					if(isCompressed(c)) x-=4;
+					if(isCompressed(text.charAt(i-1))) x-=3;
+					if(isCompressed(c)) x-=3;
 				}
 				c-=33;
 

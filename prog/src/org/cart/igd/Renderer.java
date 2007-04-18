@@ -259,6 +259,17 @@ public class Renderer implements GLEventListener
 		gl.glRasterPos2f(15, 36);
 		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "Polygon(s): " + polyCount);
 		
+		gl.glRasterPos2f(15, 54);
+		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "ENTER: start game");
+		
+		gl.glRasterPos2f(15, 72);
+		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "T: open GameGui");
+		
+		gl.glRasterPos2f(15, 90);
+		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "G: open Dialogue");
+		
+		
+		
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glEnable(GL.GL_LIGHTING);
 		gl.glEnable(GL.GL_LIGHT0);
