@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.IOException;
 import java.io.Reader;
 
+import java.util.ArrayList;
+
 import org.cart.igd.util.BlockDataInputStream;
 
 public class MaxParser
@@ -22,6 +24,7 @@ public class MaxParser
 
     /** The mesh that was last parsed */
     private ObjectMesh decodedMesh;
+    private MaxUtils maxUtils;
 
     /** The version of the mesh structures we're reading */
     private int releaseVersion;
@@ -32,6 +35,7 @@ public class MaxParser
     public MaxParser()
     {
         dataReady = false;
+        maxUtils = new MaxUtils();
     }
 
     /**
@@ -90,8 +94,7 @@ public class MaxParser
      *
      * @return A completed object mesh representative of the file
      */
-    public ObjectMesh parse()
-        throws IOException
+    public ObjectMesh parse() throws IOException
     {
         if(dataReady)
             throw new IOException("Data has already been read from this stream");
@@ -106,8 +109,7 @@ public class MaxParser
     /**
      * Parse the main chunk of the file now.
      */
-    private void parseMain()
-        throws IOException
+    private void parseMain() throws IOException
     {
         int type = readUnsignedShort();
         int size = readInt();
@@ -119,6 +121,7 @@ public class MaxParser
         readMain(size - 6, mesh);
 
         decodedMesh = mesh;
+        maxUtils.calcAllNormals(decodedMesh);
     }
 
     /**
@@ -127,8 +130,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The mesh object to put everything into
      */
-    private void readMain(int bytesToRead, ObjectMesh data)
-        throws IOException
+    private void readMain(int bytesToRead, ObjectMesh data) throws IOException
     {
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -172,8 +174,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The mesh object to put everything into
      */
-    private void readMeshChunk(int bytesToRead, ObjectMesh data)
-        throws IOException
+    private void readMeshChunk(int bytesToRead, ObjectMesh data) throws IOException
     {
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -367,19 +368,9 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The object block to put everything into
      */
-    private void readObjectBlock(int bytesToRead, ObjectMesh data)
-        throws IOException
+    private void readObjectBlock(int bytesToRead, ObjectMesh data) throws IOException
     {
-        if(data.blocks.length == data.numBlocks)
-        {
-            ObjectBlock[] tmp = new ObjectBlock[data.numBlocks + 8];
-            System.arraycopy(data.blocks, 0, tmp, 0, data.numBlocks);
-            data.blocks = tmp;
-        }
-
         ObjectBlock block = new ObjectBlock();
-        data.blocks[data.numBlocks] = block;
-        data.numBlocks++;
 
         // Read the object block's name.
         block.name = readString();
@@ -422,6 +413,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.blocks.add(block);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for object block. " +
@@ -434,19 +427,9 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The mesh object to put everything into
      */
-    private void readTriMesh(int bytesToRead, ObjectBlock data)
-        throws IOException
+    private void readTriMesh(int bytesToRead, ObjectBlock data) throws IOException
     {
-        if(data.meshes.length == data.numMeshes)
-        {
-            TriangleMesh[] tmp = new TriangleMesh[data.numMeshes + 8];
-            System.arraycopy(data.meshes, 0, tmp, 0, data.numMeshes);
-            data.meshes = tmp;
-        }
-
         TriangleMesh mesh = new TriangleMesh();
-        data.meshes[data.numMeshes] = mesh;
-        data.numMeshes++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -511,6 +494,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.meshes.add(mesh);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for triangle mesh. " +
@@ -523,8 +508,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The mesh object to put everything into
      */
-    private void readFaceList(int bytesToRead, TriangleMesh data)
-        throws IOException
+    private void readFaceList(int bytesToRead, TriangleMesh data) throws IOException
     {
         int cnt = 0;
         data.numFaces = readUnsignedShort();
@@ -585,22 +569,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The mesh object to put everything into
      */
-    private void readMaterialList(int bytesToRead, TriangleMesh data)
-        throws IOException
+    private void readMaterialList(int bytesToRead, TriangleMesh data) throws IOException
     {
-        if((data.materials == null) || (data.materials.length == data.numMaterials))
-        {
-            MaterialData[] tmp = new MaterialData[data.numMaterials + 4];
-
-            if(data.numMaterials != 0)
-                System.arraycopy(data.materials, 0, tmp, 0, data.numMaterials);
-
-            data.materials = tmp;
-        }
+    	if(data.materials==null)
+    	{
+    		data.materials = new ArrayList<MaterialData>();
+    	}
 
         MaterialData mat = new MaterialData();
-        data.materials[data.numMaterials] = mat;
-        data.numMaterials++;
 
         mat.materialName = readString();
         mat.numFaces = readUnsignedShort();
@@ -615,8 +591,8 @@ public class MaxParser
              System.out.println("Incorrect bytes read from file for material " +
                                 "list. Read: " + bytes_read + " required " +
                                 bytesToRead);
-
-
+        
+        data.materials.add(mat);
     }
 
 
@@ -626,21 +602,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The mesh object to put everything into
      */
-    private void readLightBlock(int bytesToRead, ObjectBlock data)
-        throws IOException
+    private void readLightBlock(int bytesToRead, ObjectBlock data) throws IOException
     {
-        if((data.lights == null) || (data.lights.length == data.numLights))
+        if(data.lights == null)
         {
-            LightBlock[] tmp = new LightBlock[data.numLights + 8];
-
-            if(data.numLights != 0)
-                System.arraycopy(data.lights, 0, tmp, 0, data.numLights);
-            data.lights = tmp;
+           data.lights = new ArrayList<LightBlock>(); 
         }
 
         LightBlock light = new LightBlock();
-        data.lights[data.numLights] = light;
-        data.numLights++;
 
         readPoint(light.direction, 0);
 
@@ -693,6 +662,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.lights.add(light);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for lights chunk. " +
@@ -705,8 +676,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The light object to put everything into
      */
-    private void readSpotlightBlock(int bytesToRead, LightBlock light)
-        throws IOException
+    private void readSpotlightBlock(int bytesToRead, LightBlock light) throws IOException
     {
         light.type = LightBlock.SPOT_LIGHT;
         light.target = new float[3];
@@ -775,21 +745,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The object mesh object to put everything into
      */
-    private void readCameraBlock(int bytesToRead, ObjectBlock data)
-        throws IOException
+    private void readCameraBlock(int bytesToRead, ObjectBlock data) throws IOException
     {
-        if((data.cameras == null) || (data.cameras.length == data.numCameras))
+        if(data.cameras == null)
         {
-            CameraBlock[] tmp = new CameraBlock[data.numCameras + 8];
-
-            if(data.numCameras != 0)
-                System.arraycopy(data.cameras, 0, tmp, 0, data.numCameras);
-            data.cameras = tmp;
+            data.cameras = new ArrayList<CameraBlock>();
         }
 
         CameraBlock camera = new CameraBlock();
-        data.cameras[data.numCameras] = camera;
-        data.numCameras++;
 
         readPoint(camera.location, 0);
         readPoint(camera.target, 0);
@@ -824,6 +787,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.cameras.add(camera);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for camera block. " +
@@ -838,20 +803,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The object block to put everything into
      */
-    private void readMaterialBlock(int bytesToRead, ObjectMesh data)
-        throws IOException
+    private void readMaterialBlock(int bytesToRead, ObjectMesh data) throws IOException
     {
-        if((data.materials == null) || (data.materials.length == data.numMaterials))
+        if(data.materials == null)
         {
-            MaterialBlock[] tmp = new MaterialBlock[data.numMaterials + 8];
-            if(data.numMaterials != 0)
-                System.arraycopy(data.materials, 0, tmp, 0, data.numMaterials);
-            data.materials = tmp;
+            data.materials = new ArrayList<MaterialBlock>();
         }
 
         MaterialBlock mat = new MaterialBlock();
-        data.materials[data.numMaterials] = mat;
-        data.numMaterials++;
 
         int bytes_read = 0;
         int read;
@@ -977,6 +936,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.materials.add(mat);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for material block. " +
@@ -990,10 +951,7 @@ public class MaxParser
      * @param data The object block to put everything into
      * @param textureType the ID of the texture to read and assign
      */
-    private void readTextureBlock(int bytesToRead,
-                                  MaterialBlock data,
-                                  int textureType)
-        throws IOException
+    private void readTextureBlock(int bytesToRead, MaterialBlock data, int textureType) throws IOException
     {
         TextureBlock tex = new TextureBlock();
 
@@ -1191,22 +1149,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The object block to put everything into
      */
-    private void readKeyframeChunk(int bytesToRead, ObjectMesh data)
-        throws IOException
+    private void readKeyframeChunk(int bytesToRead, ObjectMesh data) throws IOException
     {
-        if((data.keyframes == null) ||
-            data.keyframes.length == data.numKeyframes)
+        if(data.keyframes == null)
         {
-            KeyframeBlock[] tmp = new KeyframeBlock[data.numKeyframes + 8];
-
-            if(data.numKeyframes != 0)
-                System.arraycopy(data.keyframes, 0, tmp, 0, data.numKeyframes);
-            data.keyframes = tmp;
+            data.keyframes = new ArrayList<KeyframeBlock>();
         }
 
         KeyframeBlock keyframe = new KeyframeBlock();
-        data.keyframes[data.numKeyframes] = keyframe;
-        data.numKeyframes++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1273,6 +1223,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.keyframes.add(keyframe);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe chunk. " +
@@ -1285,22 +1237,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readObjectNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readObjectNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.frames == null) ||
-            data.frames.length == data.numFrames)
+        if(data.frames == null)
         {
-            KeyframeFrameBlock[] tmp = new KeyframeFrameBlock[data.numFrames + 8];
-
-            if(data.numFrames != 0)
-                System.arraycopy(data.frames, 0, tmp, 0, data.numFrames);
-            data.frames = tmp;
+            data.frames = new ArrayList<KeyframeFrameBlock>();
         }
 
         KeyframeFrameBlock frame = new KeyframeFrameBlock();
-        data.frames[data.numFrames] = frame;
-        data.numFrames++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1369,6 +1313,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.frames.add(frame);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe frame. " +
@@ -1381,22 +1327,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readCameraNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readCameraNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.cameraInfo == null) ||
-            data.cameraInfo.length == data.numCameras)
+        if(data.cameraInfo == null)
         {
-            KeyframeCameraBlock[] tmp = new KeyframeCameraBlock[data.numCameras + 8];
-
-            if(data.numCameras != 0)
-                System.arraycopy(data.cameraInfo, 0, tmp, 0, data.numCameras);
-            data.cameraInfo = tmp;
+            data.cameraInfo = new ArrayList<KeyframeCameraBlock>();
         }
 
         KeyframeCameraBlock camera = new KeyframeCameraBlock();
-        data.cameraInfo[data.numCameras] = camera;
-        data.numCameras++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1437,6 +1375,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.cameraInfo.add(camera);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe camera. " +
@@ -1449,23 +1389,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readCameraTargetNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readCameraTargetNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.cameraTargetInfo == null) ||
-            data.cameraTargetInfo.length == data.numCameraTargets)
+        if(data.cameraTargetInfo == null)
         {
-            KeyframeCameraTargetBlock[] tmp =
-                new KeyframeCameraTargetBlock[data.numCameraTargets + 8];
-
-            if(data.numCameraTargets != 0)
-                System.arraycopy(data.cameraTargetInfo, 0, tmp, 0, data.numCameraTargets);
-            data.cameraTargetInfo = tmp;
+            data.cameraTargetInfo = new ArrayList<KeyframeCameraTargetBlock>();
         }
 
         KeyframeCameraTargetBlock target = new KeyframeCameraTargetBlock();
-        data.cameraTargetInfo[data.numCameraTargets] = target;
-        data.numCameraTargets++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1496,6 +1427,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.cameraTargetInfo.add(target);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe camera target. " +
@@ -1508,22 +1441,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readAmbientNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readAmbientNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.ambientInfo == null) ||
-            data.ambientInfo.length == data.numAmbients)
+        if(data.ambientInfo == null)
         {
-            KeyframeAmbientBlock[] tmp = new KeyframeAmbientBlock[data.numAmbients + 8];
-
-            if(data.numAmbients != 0)
-                System.arraycopy(data.ambientInfo, 0, tmp, 0, data.numAmbients);
-            data.ambientInfo = tmp;
+            data.ambientInfo = new ArrayList<KeyframeAmbientBlock>();
         }
 
         KeyframeAmbientBlock light = new KeyframeAmbientBlock();
-        data.ambientInfo[data.numAmbients] = light;
-        data.numAmbients++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1554,6 +1479,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.ambientInfo.add(light);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe ambient. " +
@@ -1566,22 +1493,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readLightNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readLightNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.lightInfo == null) ||
-            data.lightInfo.length == data.numLights)
+        if(data.lightInfo == null)
         {
-            KeyframeLightBlock[] tmp = new KeyframeLightBlock[data.numLights + 8];
-
-            if(data.numLights != 0)
-                System.arraycopy(data.lightInfo, 0, tmp, 0, data.numLights);
-            data.lightInfo = tmp;
+            data.lightInfo = new ArrayList<KeyframeLightBlock>();
         }
 
         KeyframeLightBlock light = new KeyframeLightBlock();
-        data.lightInfo[data.numLights] = light;
-        data.numLights++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1617,6 +1536,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.lightInfo.add(light);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe light. " +
@@ -1629,23 +1550,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readSpotlightNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readSpotlightNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.spotlightInfo == null) ||
-            data.spotlightInfo.length == data.numSpotlights)
+        if(data.spotlightInfo == null)
         {
-            KeyframeSpotlightBlock[] tmp =
-                new KeyframeSpotlightBlock[data.numSpotlights + 8];
-
-            if(data.numSpotlights != 0)
-                System.arraycopy(data.spotlightInfo, 0, tmp, 0, data.numSpotlights);
-            data.spotlightInfo = tmp;
+            data.spotlightInfo = new ArrayList<KeyframeSpotlightBlock>();
         }
 
         KeyframeSpotlightBlock light = new KeyframeSpotlightBlock();
-        data.spotlightInfo[data.numSpotlights] = light;
-        data.numSpotlights++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1696,6 +1608,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.spotlightInfo.add(light);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe spotlight. " +
@@ -1708,23 +1622,14 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param data The keyframe block to put everything into
      */
-    private void readSpotlightTargetNodeTag(int bytesToRead, KeyframeBlock data)
-        throws IOException
+    private void readSpotlightTargetNodeTag(int bytesToRead, KeyframeBlock data) throws IOException
     {
-        if((data.spotlightTargetInfo == null) ||
-            data.spotlightTargetInfo.length == data.numSpotlightTargets)
+        if(data.spotlightTargetInfo == null)
         {
-            KeyframeSpotlightTargetBlock[] tmp =
-                new KeyframeSpotlightTargetBlock[data.numSpotlightTargets + 8];
-
-            if(data.numSpotlightTargets != 0)
-                System.arraycopy(data.spotlightTargetInfo, 0, tmp, 0, data.numSpotlightTargets);
-            data.spotlightTargetInfo = tmp;
+            data.spotlightTargetInfo = new ArrayList<KeyframeSpotlightTargetBlock>();
         }
 
         KeyframeSpotlightTargetBlock target = new KeyframeSpotlightTargetBlock();
-        data.spotlightTargetInfo[data.numSpotlightTargets] = target;
-        data.numSpotlightTargets++;
 
         int bytes_read = 0;
         while(bytes_read < bytesToRead)
@@ -1755,6 +1660,8 @@ public class MaxParser
 
             bytes_read += size;
         }
+        
+        data.spotlightTargetInfo.add(target);
 
         if(bytes_read != bytesToRead)
              System.out.println("Incorrect bytes read from file for keyframe spotlight target. " +
@@ -1767,8 +1674,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readNodeHeader(int bytesToRead, KeyframeTag frame)
-        throws IOException
+    private void readNodeHeader(int bytesToRead, KeyframeTag frame) throws IOException
     {
         frame.nodeHeader = new NodeHeaderData();
         frame.nodeHeader.name = readString();
@@ -1789,8 +1695,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readPositionTag(int bytesToRead, KeyframePositionBlock pos)
-        throws IOException
+    private void readPositionTag(int bytesToRead, KeyframePositionBlock pos) throws IOException
     {
         pos.flags = readUnsignedShort();
         readInt();
@@ -1818,8 +1723,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readRotationTag(int bytesToRead, KeyframeRotationBlock rot)
-        throws IOException
+    private void readRotationTag(int bytesToRead, KeyframeRotationBlock rot) throws IOException
     {
         rot.flags = readUnsignedShort();
         readInt();
@@ -1848,8 +1752,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readScaleTag(int bytesToRead, KeyframeScaleBlock scale)
-        throws IOException
+    private void readScaleTag(int bytesToRead, KeyframeScaleBlock scale) throws IOException
     {
         scale.flags = readUnsignedShort();
         readInt();
@@ -1877,8 +1780,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readFieldOfViewTag(int bytesToRead, KeyframeFOVBlock fov)
-        throws IOException
+    private void readFieldOfViewTag(int bytesToRead, KeyframeFOVBlock fov) throws IOException
     {
         fov.flags = readUnsignedShort();
         readInt();
@@ -1903,8 +1805,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readRolloffTag(int bytesToRead, KeyframeRollBlock rolloff)
-        throws IOException
+    private void readRolloffTag(int bytesToRead, KeyframeRollBlock rolloff) throws IOException
     {
         rolloff.flags = readUnsignedShort();
         readInt();
@@ -1929,8 +1830,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readColorTag(int bytesToRead, KeyframeColorBlock color)
-        throws IOException
+    private void readColorTag(int bytesToRead, KeyframeColorBlock color) throws IOException
     {
         color.flags = readUnsignedShort();
         readInt();
@@ -1957,8 +1857,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readMorphTag(int bytesToRead, KeyframeMorphBlock morph)
-        throws IOException
+    private void readMorphTag(int bytesToRead, KeyframeMorphBlock morph) throws IOException
     {
         morph.flags = readUnsignedShort();
         readInt();
@@ -1987,8 +1886,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readHotspotTag(int bytesToRead, KeyframeHotspotBlock hotspot)
-        throws IOException
+    private void readHotspotTag(int bytesToRead, KeyframeHotspotBlock hotspot) throws IOException
     {
         hotspot.flags = readUnsignedShort();
         readInt();
@@ -2013,8 +1911,7 @@ public class MaxParser
      * @param bytesToRead number of bytes requiring processing
      * @param frame The frame to put everything into
      */
-    private void readFalloffTag(int bytesToRead, KeyframeFalloffBlock falloff)
-        throws IOException
+    private void readFalloffTag(int bytesToRead, KeyframeFalloffBlock falloff) throws IOException
     {
         falloff.flags = readUnsignedShort();
         readInt();
@@ -2039,8 +1936,7 @@ public class MaxParser
      * @param data The TrackData instance to read stuff into
      * @return The number of bytes read
      */
-    private int readTrackData(TrackData data)
-        throws IOException
+    private int readTrackData(TrackData data) throws IOException
     {
         data.frameNumber = readInt();
         data.splineFlags = readUnsignedShort();
@@ -2098,8 +1994,7 @@ public class MaxParser
      *
      * @return The converted percentage value
      */
-    private float readPercentage()
-        throws IOException
+    private float readPercentage() throws IOException
     {
         int type = readUnsignedShort();
         int size = readInt();
@@ -2132,8 +2027,7 @@ public class MaxParser
      * @param vec The array to copy the values into
      * @param offset The offset into the array to start at
      */
-    private void readPoint(float[] vec, int offset)
-        throws IOException
+    private void readPoint(float[] vec, int offset) throws IOException
     {
         vec[offset] = readFloat();
         vec[offset + 2] = readFloat();
@@ -2147,8 +2041,7 @@ public class MaxParser
      * @param target An array to copy the read values into
      * @return The number of bytes read
      */
-    private int readColor(float[] target)
-        throws IOException
+    private int readColor(float[] target) throws IOException
     {
         int type = readUnsignedShort();
         int size = readInt();
@@ -2190,8 +2083,7 @@ public class MaxParser
      *
      * @return The next collection of bytes read as a string
      */
-    private String readString()
-        throws IOException
+    private String readString() throws IOException
     {
         StringBuffer buf = new StringBuffer();
 
@@ -2212,8 +2104,7 @@ public class MaxParser
      *
      * @return The next 4 bytes read as an int
      */
-    private int readInt()
-        throws IOException
+    private int readInt() throws IOException
     {
         int ch1 = inputStream.readUnsignedByte();
         int ch2 = inputStream.readUnsignedByte();
@@ -2232,8 +2123,7 @@ public class MaxParser
      *
      * @return The next 2 bytes read as a short
      */
-    private int readUnsignedShort()
-        throws IOException
+    private int readUnsignedShort() throws IOException
     {
         int ch1 = inputStream.readUnsignedByte();
         int ch2 = inputStream.readUnsignedByte();
@@ -2250,8 +2140,7 @@ public class MaxParser
      *
      * @return The next 4 bytes read as a float
      */
-    private float readFloat()
-        throws IOException
+    private float readFloat() throws IOException
     {
         int ch1 = inputStream.readUnsignedByte();
         int ch2 = inputStream.readUnsignedByte();
@@ -2273,8 +2162,7 @@ public class MaxParser
      *
      * @param numBytes The number of bytes to skip
      */
-    private void skipBytes(int numBytes)
-        throws IOException
+    private void skipBytes(int numBytes) throws IOException
     {
         if(numBytes == 0)
             return;

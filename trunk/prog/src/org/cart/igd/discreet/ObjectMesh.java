@@ -1,5 +1,8 @@
 package org.cart.igd.discreet;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class ObjectMesh
 {
     /** Flag instructing use of the bitmap background */
@@ -28,22 +31,32 @@ public class ObjectMesh
     public int meshVersion;
 
     /** Listing of all the sub-objects in the mesh */
-    public ObjectBlock[] blocks;
+    public ArrayList<ObjectBlock> blocks;
 
     /** Number of valid blocks available */
-    public int numBlocks;
+    public int getNumBlocks()
+    {
+    	return (blocks==null?0:blocks.size());
+    }
 
     /** Listing of all material information */
-    public MaterialBlock[] materials;
+    //public MaterialBlock[] materials;
+    public ArrayList<MaterialBlock> materials;
 
     /** The number of valid materials available */
-    public int numMaterials;
+    public int getNumMaterials()
+    {
+    	return (materials==null?0:materials.size());
+    }
 
     /** Listing of all keyframe blocks available */
-    public KeyframeBlock[] keyframes;
+    public ArrayList<KeyframeBlock> keyframes;
 
     /** The number of valid keyframe blocks available */
-    public int numKeyframes;
+    public int getNumKeyframes()
+    {
+    	return (keyframes==null?0:keyframes.size());
+    }
 
     /** Ambient light setting. Null if not set */
     public float[] ambientLight;
@@ -115,8 +128,10 @@ public class ObjectMesh
      */
     public ObjectMesh()
     {
-        blocks = new ObjectBlock[8];
-        materials = new MaterialBlock[4];
+    	blocks = new ArrayList<ObjectBlock>();
+    	materials = new ArrayList<MaterialBlock>();
+        //blocks = new ObjectBlock[8];
+        //materials = new MaterialBlock[4];
         masterScale = 1;
 
         selectedBackground = USE_SOLID_BG;
@@ -124,12 +139,41 @@ public class ObjectMesh
         fogBackground = false;
     }
     
-    public String toString()
+    public ObjectBlock getObjectByName(String name)
     {
-    	return "org.cart.igd.discreet.ObjectMesh" +
-    			"\nmeshVersion: "+meshVersion+
-    			"\nnumBlocks: "+numBlocks+
-    			"\nnumMaterials: "+numMaterials+
-    			"\nnumKeyframes: "+numKeyframes;
+    	Iterator<ObjectBlock> it = blocks.iterator();
+    	while(it.hasNext())
+    	{
+    		ObjectBlock tmpBlock = it.next();
+    		if(tmpBlock.name.equals(name))
+    		{
+    			return tmpBlock;
+    		}
+    	}
+    	return null;
+    }
+    
+    public void printData()
+    {
+    	for(int i=0; i<blocks.size(); i++)
+    	{
+    		System.out.println("-[Start Object]-----------");
+    		System.out.println(blocks.get(i).toString());
+    		System.out.println("-[End Object]-------------\n");
+    	}
+    	
+    	for(int i=0; i<materials.size(); i++)
+    	{
+    		System.out.println("-[Start Material]-----------");
+    		System.out.println(materials.get(i).toString());
+    		System.out.println("-[End Material]-------------\n");
+    	}
+    	
+    	for(int i=0; i<keyframes.size(); i++)
+    	{
+    		System.out.println("-[Start Keyframe]-----------");
+    		System.out.println(keyframes.get(i).toString());
+    		System.out.println("-[End Keyframe]-------------\n");
+    	}
     }
 }

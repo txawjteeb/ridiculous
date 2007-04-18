@@ -1,5 +1,8 @@
 package org.cart.igd.discreet;
 
+import java.util.ArrayList;
+import javax.media.opengl.GL;
+
 public class TriangleMesh
 {
     /** Vertex coordinates, flat style */
@@ -36,10 +39,13 @@ public class TriangleMesh
     public float[] localCoords;
 
     /** Listing of the material groups needed */
-    public MaterialData[] materials;
+    public ArrayList<MaterialData> materials;
 
     /** Number of valid material groups available */
-    public int numMaterials;
+    public int getNumMaterials()
+    {
+    	return (materials==null?0:materials.size());
+    }
 
     /**
      * Names of the materials used for a cubic environment map. This will be
@@ -47,4 +53,24 @@ public class TriangleMesh
      * if nothing declared.
      */
     public String[] boxMapMaterials;
+    
+    public void render(GL gl)
+    {
+        for(int i = 0; i < numFaces; i++)
+        {
+            int v0 = faces[i * 3];
+            int v1 = faces[i * 3 + 1];
+            int v2 = faces[i * 3 + 2];
+            
+            //gl.glNormal3f( normals[v0 * 3], normals[v0 * 3 + 1], normals[v0 * 3 + 2] );
+            //gl.glTexCoord2f( texCoords[i * 2], texCoords[i * 2 + 1] );
+            gl.glVertex3f( vertices[v0 * 3], vertices[v0 * 3 + 1], vertices[v0 * 3 + 2] );
+            
+            //gl.glNormal3f( normals[v1 * 3], normals[v1 * 3 + 1], normals[v1 * 3 + 2] );
+            gl.glVertex3f( vertices[v1 * 3], vertices[v1 * 3 + 1], vertices[v1 * 3 + 2] );
+            
+            //gl.glNormal3f( normals[v2 * 3], normals[v2 * 3 + 1], normals[v2 * 3 + 2] );
+            gl.glVertex3f( vertices[v2 * 3], vertices[v2 * 3 + 1], vertices[v2 * 3 + 2] );
+        }
+    }
 }

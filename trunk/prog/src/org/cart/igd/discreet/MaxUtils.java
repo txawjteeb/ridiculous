@@ -18,6 +18,10 @@ public class MaxUtils
 
     /** Global set of vertex face lookups for reuse */
     private int[][] vertexFaces;
+    
+    public MaxUtils()
+    {
+    }
 
     /**
      * Do all the parsing work. Convenience method for all meshes to call
@@ -29,11 +33,11 @@ public class MaxUtils
     public void calcAllNormals(ObjectMesh mesh)
     {
         // once parsed, generate all the normals etc
-        for(int i = 0; i < mesh.numBlocks; i++)
+        for(int i = 0; i < mesh.getNumBlocks(); i++)
         {
-            ObjectBlock block = mesh.blocks[i];
-            for(int j = 0; j < block.numMeshes; j++)
-                calcNormals(block.meshes[j]);
+            ObjectBlock block = mesh.blocks.get(i);
+            for(int j = 0; j < block.getNumMeshes(); j++)
+                calcNormals(block.meshes.get(j));
         }
     }
 
