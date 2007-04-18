@@ -1,4 +1,1 @@
-Controls 
-Camera Perspective
-Game Type
-Interaction with mouse keyboard etc
+Zoo Escape is exclusive to the computer, it will be played with a combination of mouse clicks and key presses. The party interface is controlled through a process of drag and dropping characters with a mouse. The game will be viewed in the third-person perspective of the Flamingo, Poncho.
