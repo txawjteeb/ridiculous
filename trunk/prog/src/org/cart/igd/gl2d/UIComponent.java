@@ -10,6 +10,8 @@ public abstract class UIComponent
 	public float[] rgb;
 	public boolean focused;
 	
+	public float scale = 1f;
+	
 	public abstract void draw(GLGraphics g,int x, int y, float alpha);
 	public abstract void getFocus();
 	public abstract void dropFocus();
@@ -47,6 +49,12 @@ public abstract class UIComponent
 		if(gameAction != null){
 			gameAction.activate();
 		}
+	}
+	
+	public void scale(float scale){
+		this.scale = scale;
+		width = width*((int)scale);
+		height = height*((int)scale);
 	}
 	
 	/** returns x location relative to the canvas takes 
