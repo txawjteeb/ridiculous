@@ -1,1 +1,7 @@
-Click on a link to follow each pth a player can take.
+Click on a link to follow each path a player can take.
+
+  *[ It Begins]
+  *[ Giraffe Path]
+  *[ Kangaroo Path]
+  *[ Panda Path]
+  *[ Freedom]
