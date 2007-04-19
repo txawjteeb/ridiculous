@@ -13,4 +13,9 @@ public class RotationData extends TrackData
 
     /** The z axis value */
     public float zAxis;
+    
+    public String toString()
+    {
+    	return "rotation:"+rotation+"; xAxis:"+xAxis+"; yAxis:"+yAxis+"; zAxis:"+zAxis+";";
+    }
 }

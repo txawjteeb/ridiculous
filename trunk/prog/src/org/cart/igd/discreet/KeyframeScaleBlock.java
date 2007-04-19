@@ -10,4 +10,9 @@ public class KeyframeScaleBlock
 
     /** The sets of keyframe/value pairs */
     public ScaleData[] scales;
+    
+    public String toString()
+    {
+    	return "";
+    }
 }

@@ -40,7 +40,7 @@ public class InGameState extends GameState
 	private SkyDome skyDome;
 	
 	private MaxParser maxParser;
-	private ObjectMesh mesh;
+	private Model test3ds;
 	
 	private final float GRAVITY = 0.025f;
 	
@@ -62,23 +62,20 @@ public class InGameState extends GameState
 	
 	private GameAction mouseWheelUp;
 	private GameAction mouseWheelDown;
-	
-	
+
 	
 	public InGameState(GL gl)
 	{
 		super(gl);
 		try
 		{
-			maxParser = new MaxParser(new FileInputStream("data/models/walk.3DS"));
-			maxParser.parse();
+			maxParser = new MaxParser();
+			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
-		mesh = maxParser.getObjectMesh();
-		mesh.printData();
 		
 		player			= new Entity(new Vector3f(), 0f, 10f);
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
@@ -109,6 +106,9 @@ public class InGameState extends GameState
 		
 		Kernel.userInput.bindToMouse(mouseWheelUp,  UserInput.MOUSE_WHEEL_UP);
 		Kernel.userInput.bindToMouse(mouseWheelDown,UserInput.MOUSE_WHEEL_DOWN);
+		
+		/* Test 3ds Data */
+		test3ds.printData();
 	}
 	
 	public void rotateCamera(float amt){
@@ -168,19 +168,11 @@ public class InGameState extends GameState
 		
 		/* Render Player Model */
 		gl.glPushMatrix();
-		gl.glDisable(GL.GL_CULL_FACE);
 			gl.glTranslatef(player.position.x, player.position.y-3f, player.position.z);
 			gl.glRotatef(player.facingDirection+180f, 0f, -1f, 0f);
-			gl.glScalef(0.05f,0.05f,0.05f);
-			for(int i=0; i<mesh.getNumBlocks(); i++)
-			{
-				ObjectBlock block = mesh.blocks.get(i);
-				gl.glBegin(GL.GL_TRIANGLES);
-				block.renderMeshes(gl);
-				gl.glEnd();
-			}
+			gl.glScalef(test3ds.getMasterScale(), test3ds.getMasterScale(), test3ds.getMasterScale());
+			test3ds.render(gl);
 			//playerSprite.draw(gl);
-		gl.glEnable(GL.GL_CULL_FACE);
 		gl.glPopMatrix();
 
 		/* Render SkyDome */

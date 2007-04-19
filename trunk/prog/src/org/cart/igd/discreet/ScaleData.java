@@ -10,4 +10,9 @@ public class ScaleData extends TrackData
 
     /** The z scale value */
     public float zScale;
+    
+    public String toString()
+    {
+    	return "xScale:"+xScale+"; yScale:"+yScale+"; zScale:"+zScale+";";
+    }
 }

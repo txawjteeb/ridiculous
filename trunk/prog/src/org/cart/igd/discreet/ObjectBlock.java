@@ -51,12 +51,4 @@ public class ObjectBlock
     {
     	return "name: "+name+"\nnumMeshes: "+getNumMeshes();
     }
-    
-    public void renderMeshes(GL gl)
-    {
-    	for(int i=0; i<meshes.size(); i++)
-    	{
-    		meshes.get(i).render(gl);
-    	}
-    }
 }

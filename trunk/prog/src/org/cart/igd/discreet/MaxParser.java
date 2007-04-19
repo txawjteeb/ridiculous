@@ -3,6 +3,7 @@ package org.cart.igd.discreet;
 import java.io.BufferedInputStream;
 import java.io.EOFException;
 import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Reader;
 
@@ -87,6 +88,12 @@ public class MaxParser
     public ObjectMesh getObjectMesh()
     {
         return decodedMesh;
+    }
+    
+    public ObjectMesh getObjectMesh(String filename) throws IOException
+    {
+	    reset(new FileInputStream(filename));
+    	return parse();
     }
 
     /**

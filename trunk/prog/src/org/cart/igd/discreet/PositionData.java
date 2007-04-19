@@ -10,4 +10,9 @@ public class PositionData extends TrackData
 
     /** The z axis value */
     public float z;
+    
+    public String toString()
+    {
+    	return "x:"+x+"; y:"+y+"; z:"+z+";";
+    }
 }

@@ -239,23 +239,23 @@ public class InGameGUI extends GUI
 		
 
 		texAnimalIco[0] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/flamingo_vm.png");
+				"data/images/gui/flamingo_sa.png");
 		texAnimalIco[1] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/turtle_sp.png");
+				"data/images/gui/turtle_sa.png");
 		texAnimalIco[2] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/woodpecker_sp.png");
+				"data/images/gui/woodpecker_sa.png");
 		texAnimalIco[3] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/meerkat_sp.png");
+				"data/images/gui/meerkat_sa.png");
 		texAnimalIco[4] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/panda_sp.png");
+				"data/images/gui/panda_sa.png");
 		texAnimalIco[5] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/tiger_sp.png");
+				"data/images/gui/tiger_sa.png");
 		texAnimalIco[6] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/kangaroo_sp.png");
+				"data/images/gui/kangaroo_sa.png");
 		texAnimalIco[7] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/giraffe_sp.png");
+				"data/images/gui/giraffe_sa.png");
 		texAnimalIco[8] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/penguin_sp.png");
+				"data/images/gui/penguin_sa.png");
 		texAnimalIco[9] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/elephant_sp.png");
 		
