@@ -19,7 +19,19 @@ public class UILabel extends UIComponent
 	
 	public void draw(GLGraphics g,int x, int y, float alpha)
 	{
-		g.drawBitmapStringStroke( value, getX(), getY(), 1, new float[] {rgb[0],rgb[1],rgb[2],alpha}, ColorRGBA.White.getRGBA() );
+		if(scale == 1f){
+			g.drawBitmapStringStroke( value, getX(), getY(), 1, 
+					new float[] {rgb[0],rgb[1],rgb[2],alpha}, 
+					ColorRGBA.White.getRGBA() );
+		} else {
+			g.drawBitmapString( value, getX(), getY(), new float[]{1,1,1,}, 
+					new float[]{scale,scale} );
+			
+		}
+		
+		
+		
+		
 	}
 	
 	public void activate(){

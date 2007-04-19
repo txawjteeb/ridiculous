@@ -9,7 +9,6 @@ import org.cart.igd.states.*;
 public class MenuGUI extends GUI
 {
 	UILabel menuSelection[] = new UILabel[3];
-	private Texture texStartButton;
 	
 	/** contains collision detection methods for UIComponents*/
 	private UserInput input;
@@ -19,15 +18,17 @@ public class MenuGUI extends GUI
 	public MenuGUI(GameState gameState){
 		super(gameState);//superclass GUI contain ref to GameState
 		input = Kernel.userInput;
-		menuSelection[0] = new UILabel("Start Game", 200, 300, 200, 16);
-		menuSelection[1] = new UILabel("Options", 200, 280, 200, 16);
-		menuSelection[2] = new UILabel("Quit", 200, 260, 200, 16);
+		loadImages();
 	}
 	
 	public void loadImages()
 	{
-		texStartButton = Kernel.display.getRenderer().loadImage(
-			"data/images/buttons/bush_ico_big.png");
+		menuSelection[0] = new UILabel("Start Game", 200, 400, 200, 16);
+		menuSelection[0].scale(4);
+		menuSelection[1] = new UILabel("Options", 200, 300, 200, 16);
+		menuSelection[1].scale(4);
+		menuSelection[2] = new UILabel("Quit", 200, 200, 200, 16);
+		menuSelection[2].scale(4);
 	}
 	
 	public void update(long elapsedTime)

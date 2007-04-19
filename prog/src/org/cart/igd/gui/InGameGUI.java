@@ -97,6 +97,11 @@ public class InGameGUI extends GUI
 
 	/** handle input, called by the InputHandler thread*/
 	public void handleInput(long elapsedTime) {
+		if(Kernel.userInput.keys[KeyEvent.VK_TAB]){
+			((InGameState)gameState).changeGuiState(2);
+		}
+		
+		
 		boolean animalPickedUp = false;
 		
 		if(testChangeGui.isActive()){
@@ -239,7 +244,7 @@ public class InGameGUI extends GUI
 		
 
 		texAnimalIco[0] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/flamingo_sa.png");
+				"data/images/gui/flamingo_vm.png");
 		texAnimalIco[1] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/turtle_sa.png");
 		texAnimalIco[2] = Kernel.display.getRenderer().loadImage(

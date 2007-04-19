@@ -18,11 +18,11 @@ import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.gui.Dialogue;
 import org.cart.igd.gui.GUI;
 import org.cart.igd.gui.InGameGUI;
+import org.cart.igd.gui.PauseMenu;
 import org.cart.igd.input.GameAction;
 import org.cart.igd.input.UserInput;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
-import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.util.*;
 import org.cart.igd.math.*;
 import org.cart.igd.entity.*;
@@ -89,6 +89,8 @@ public class InGameState extends GameState
 		 **/
 		gui.add(new InGameGUI(this));
 		gui.add(new Dialogue(this));
+	/* add new in game pause menu*/
+		gui.add(new PauseMenu(this));
 		//ex: gui.add(new DialogueGUI());				
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode",true);
@@ -170,7 +172,7 @@ public class InGameState extends GameState
 		gl.glPushMatrix();
 			gl.glTranslatef(player.position.x, player.position.y-3f, player.position.z);
 			gl.glRotatef(player.facingDirection+180f, 0f, -1f, 0f);
-			gl.glScalef(test3ds.getMasterScale(), test3ds.getMasterScale(), test3ds.getMasterScale());
+			gl.glScalef(0.025f, 0.025f, 0.025f);
 			test3ds.render(gl);
 			//playerSprite.draw(gl);
 		gl.glPopMatrix();
