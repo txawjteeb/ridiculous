@@ -1,7 +1,10 @@
 Click on a link to follow each path a player can take.
 
-  *[ It Begins]
-  *[ Giraffe Path]
-  *[ Kangaroo Path]
-  *[ Panda Path]
-  *[ Freedom]
+  * [http://code.google.com/p/ridiculous/wiki/Beginning It Begins]
+  * [http://code.google.com/p/ridiculous/wiki/Path_3 Giraffe Path]
+  * [http://code.google.com/p/ridiculous/wiki/Path_1 Kangaroo Path]
+  * [http://code.google.com/p/ridiculous/wiki/Path_2 Panda Path]
+  * [http://code.google.com/p/ridiculous/wiki/Freedom Freedom]
+
+
+
