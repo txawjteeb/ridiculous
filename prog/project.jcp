@@ -239,6 +239,10 @@
 				<folder>src\org\cart\igd\discreet</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\discreet\Model.java</path>
+				<folder>src\org\cart\igd\discreet</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\discreet\MorphData.java</path>
 				<folder>src\org\cart\igd\discreet</folder>
 			</fileitem>

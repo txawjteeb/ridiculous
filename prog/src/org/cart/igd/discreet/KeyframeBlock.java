@@ -2,6 +2,8 @@ package org.cart.igd.discreet;
 
 import java.util.ArrayList;
 
+import javax.media.opengl.GL;
+
 public class KeyframeBlock
 {
     /** The revision information */
@@ -89,9 +91,19 @@ public class KeyframeBlock
     	return (ambientInfo==null?0:ambientInfo.size());
     }
     
-    public String toString()
+    public void printData()
     {
-    	return "animationLength: "+animationLength
-    		+ "\nnumFrames: "+getNumFrames();
+    	System.out.println("revision: " + revision);
+    	System.out.println("filename: " + filename);
+    	System.out.println("animationLength: " + animationLength);
+    	System.out.println("currentFrame: " + currentFrame);
+    	System.out.println("startFrame: " + startFrame);
+    	System.out.println("endFrame: " + endFrame);
+    	System.out.println("numFrames: " + getNumFrames() );
+    	for(int i=0; i<getNumFrames(); i++)
+    	{
+    		KeyframeFrameBlock kffBlock = frames.get(i);
+    		kffBlock.printData();
+    	}
     }
 }
