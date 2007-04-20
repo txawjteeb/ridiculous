@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
@@ -41,6 +42,7 @@ public class InGameState extends GameState
 	
 	private MaxParser maxParser;
 	private Model test3ds;
+	private Model guard;
 	
 	private final float GRAVITY = 0.025f;
 	
@@ -71,18 +73,25 @@ public class InGameState extends GameState
 		{
 			maxParser = new MaxParser();
 			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
+			guard = new Model(maxParser.getObjectMesh("data/models/guard_aw.3DS"));
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
 		
-		player			= new Entity(new Vector3f(), 0f, 10f);
+		
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
+		player			= new Entity(new Vector3f(), 0f, 10f, test3ds);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
+		
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard));
+		entities.add(new Guard(new Vector3f(30f,0f,0f),0f,20f,guard));
+		entities.add(new Guard(new Vector3f(0f,40f,0f),0f,20f,guard));
+		entities.add(new Guard(new Vector3f(0f,40f,-20f),0f,20f,guard));
 		
 		/** 
 		 * add new gui subsets here 
@@ -124,6 +133,8 @@ public class InGameState extends GameState
 			entity.update(elapsedTime);
 		}
 		
+		entities.get(0).position.z++;
+		
 		handleInput(elapsedTime);
 		player.lastPosition.x = player.position.x;
 		player.lastPosition.y = player.position.y;
@@ -159,7 +170,7 @@ public class InGameState extends GameState
 		}
 	}
 	
-	public void display(GL gl, GLU glu)
+	public synchronized void display(GL gl, GLU glu)
 	{
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
@@ -169,14 +180,26 @@ public class InGameState extends GameState
 		camera.lookAt(glu, player);
 		
 		/* Render Player Model */
-		gl.glPushMatrix();
-			gl.glTranslatef(player.position.x, player.position.y-3f, player.position.z);
-			gl.glRotatef(player.facingDirection+180f, 0f, -1f, 0f);
-			gl.glScalef(0.025f, 0.025f, 0.025f);
-			test3ds.render(gl);
+		
+		test3ds.render(gl);
 			//playerSprite.draw(gl);
-		gl.glPopMatrix();
+		player.render(gl);
 
+		Iterator itr = entities.iterator();
+		/* draw the guards*/
+		while(itr.hasNext()){
+			Entity e = (Entity)itr.next();
+			if(e instanceof Guard){
+				if(e.model3ds!=null){
+					e.render(gl);
+				}
+				else{
+					System.out.println("guard 3ds model is null");
+				}
+			}
+		}
+		
+		
 		/* Render SkyDome */
 		gl.glPushMatrix();
 			gl.glDisable(GL.GL_LIGHTING);
@@ -197,12 +220,11 @@ public class InGameState extends GameState
 		gl.glPopMatrix();
 		
 		/* render all entities */
-		gl.glPushMatrix();
+
 		for(int i = 0; i<entities.size(); i++){
 			Entity entity = entities.get(i);
 			entity.draw(gl);
 		}
-		gl.glPopMatrix();
 		
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
@@ -222,6 +244,16 @@ public class InGameState extends GameState
 	public void init(GL gl, GLU glu)
 	{
 		
+	}
+	
+	public synchronized void throwPartyPopper()
+	{
+		entities.add(new PartySnapper(
+				new Vector3f(player.position.x, player.position.y, player.position.z),
+				player.facingDirection, 
+				0f,
+				partySnapper)
+		);
 	}
 	
 	public void handleInput(long elapsedTime)
@@ -269,12 +301,9 @@ public class InGameState extends GameState
 		
 		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL])
 		{
-			entities.add(new PartySnapper(
-				new Vector3f(player.position.x, player.position.y, player.position.z),
-				player.facingDirection, 
-				0f,
-				partySnapper)
-			);
+		
+			throwPartyPopper();
+
 		}
 		
 		

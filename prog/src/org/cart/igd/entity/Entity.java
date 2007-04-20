@@ -8,6 +8,7 @@ import javax.media.opengl.glu.GLU;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
+import org.cart.igd.discreet.Model;
 //import org.cart.igd.model.Model;
 //import org.cart.igd.model.ModelManager;
 //import org.cart.igd.bsp.BSPObject;
@@ -24,6 +25,7 @@ public class Entity
 	public float turnSpeed = 0.1f;
 	
 	public OBJModel model;
+	public Model model3ds;
 	/*protected Model model;
 	protected float deltaTime;
 	protected float animationSpeed = 7.0f;
@@ -67,30 +69,18 @@ public class Entity
 	
 	public Entity(Vector3f pos, float fD, float bsr, OBJModel model)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
+		this(pos,fD,bsr);
 		this.model = model;
+	}
+	
+	public Entity(Vector3f pos, float fD, float bsr, Model model)//, int id, File meshFile, File skinFile)// throws EntityException
+	{
+		this(pos,fD,bsr);
+		this.model3ds = model;
+	}
+	
+	public void update(long elapseTime){
 		
-		gl = Kernel.display.getRenderer().getGL();
-		/*if(this.gl==null)
-			throw new EntityException("**** No drawable.gl given ****");
-		*/
-		glu = Kernel.display.getRenderer().getGLU();
-		/*if(this.glu==null)
-			throw new EntityException("**** No drawable.glu given ****");
-		*/
-		position = pos;
-		lastPosition = pos;
-		/*if(this.position==null)
-			throw new EntityException("**** No position vector given ****");
-		*/
-		
-		this.facingDirection = fD;
-		//this.id = id;
-		this.boundingSphereRadius = bsr;
-		
-		/*
-		if(meshFile!=null)
-			loadModel(meshFile, skinFile);
-		*/
 	}
 	
 	/*
@@ -175,11 +165,26 @@ public class Entity
 		facingDirection -= ((float)elapsedTime * turnSpeed);
 	}
 	
-	public void update(long elapsedTime){
-		
+	public void render(GL gl){
+		if(model3ds!= null){
+			gl.glPushMatrix();
+			gl.glScalef(0.025f, 0.025f, 0.025f);
+			gl.glRotatef(facingDirection+180f, 0f, -1f, 0f);
+			gl.glTranslatef(position.x, position.y, position.z);
+			model3ds.render(gl);
+			gl.glPopMatrix();
+		}
 	}
+	
 	public void draw(GL gl){
-		
+		if(model!= null){
+			gl.glPushMatrix();
+			gl.glTranslatef(position.x, position.y, position.z);
+			model.draw(gl);
+			gl.glPopMatrix();
+		}
 	}
+	
+	
 	
 }
