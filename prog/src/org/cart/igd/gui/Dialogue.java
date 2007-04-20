@@ -379,6 +379,12 @@ public class Dialogue extends GUI {
 							
 							break;
 						case 2:
+							//JUST THERE FOR SHOW
+							pause(500);
+							Dialogue.clearDialogue();
+							Dialogue.renderDialogue.add(new DialogueInfo(5,1,0,"Its just my neck. What are you doing out of your cage?",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(6,0,1,"Oh yea, it doesn't look so good. You need to get yourself out of this cage",1));
+							Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"I can tell you are in pain, but no time for that, you have to escape and save your life",2));
 							Dialogue.clearDialogue();
 							break;
 						case 3:
