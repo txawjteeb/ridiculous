@@ -62,32 +62,28 @@
 			<folderitem>
 				<path>src\org\cart\igd\util</path>
 			</folderitem>
-			<fileitem>
-				<path>src\org\cart\igd\gui\Dialogue.java</path>
-				<collapsedfolds>97</collapsedfolds>
-			</fileitem>
 		</project>
 	</projects>
 	<open_files>
 		<docitem>
-			<path>src\org\cart\igd\discreet\MaxUtils.java</path>
+			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
 			<source>true</source>
 			<index>0</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\states\InGameState.java</path>
+			<path>src\org\cart\igd\gui\Dialogue.java</path>
 			<source>true</source>
 			<index>1</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\discreet\ObjectMesh.java</path>
+			<path>src\org\cart\igd\states\InGameState.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
-		<docitem>
+<<<<<<< .mine=======		<docitem>
 			<path>src\org\cart\igd\discreet\ObjectBlock.java</path>
 			<source>true</source>
 			<index>3</index>
@@ -105,7 +101,7 @@
 			<index>5</index>
 			<active>false</active>
 		</docitem>
-		<docitem>
+>>>>>>> .r468		<docitem>
 			<path>src\org\cart\igd\gui\InGameGUI.java</path>
 			<source>true</source>
 			<index>6</index>
@@ -172,12 +168,4 @@
 			<active>true</active>
 		</docitem>
 	</open_files>
-	<build_files>
-		<builditem>
-			<path>build.xml</path>
-			<hidden>false</hidden>
-			<showtargets>true</showtargets>
-			<hidden_targets/>
-		</builditem>
-	</build_files>
 </workspace_user>
