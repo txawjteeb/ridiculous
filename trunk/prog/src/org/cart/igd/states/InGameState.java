@@ -216,6 +216,7 @@ public class InGameState extends GameState
 					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
 			glg.glgEnd();
 		}
+		
 	}
 	
 	public void init(GL gl, GLU glu)

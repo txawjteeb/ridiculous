@@ -366,7 +366,7 @@ public class GLGraphics
 	
 	public int drawBitmapString(String text, int x, int y, float[] rgb)
 	{
-		return drawBitmapString(text, x, y, 12, rgb, new float[] {1f,1f}, false);
+		return drawBitmapString(text, x, y, 14, rgb, new float[] {1f,1f}, false);
 	}
 	
 	public int drawBitmapString(String text, int x, int y, float[] rgb, float[] size)
@@ -432,11 +432,11 @@ public class GLGraphics
 				//all capital letters
 				//if(c>=97&&c<=122) c-=32;
 				
-				if(i>0)
-				{
-					if(isCompressed(text.charAt(i-1))) x-=3;
-					if(isCompressed(c)) x-=3;
-				}
+				//if(i>0)
+				//{
+				//	if(isCompressed(text.charAt(i-1))) x-=3;
+				//	if(isCompressed(c)) x-=3;
+				//}
 				c-=33;
 
 	 
@@ -537,6 +537,8 @@ public class GLGraphics
 		gl.glDisable( GL.GL_TEXTURE_2D );
 		gl.glDisable( GL.GL_BLEND );
 	}
+
+
 
 	public void drawImageRotate(Texture text, float x, float y, int degree)
 	{
@@ -643,6 +645,11 @@ public class GLGraphics
 	public void drawImageRotateHuefZ(Texture text, float x, float y,float z, float degree, float[] rgba)
 	{
 		drawImageRotatefZ(text,x,y,z,degree,rgba,1f,0);
+	}
+	
+	public void drawImageRotateFloat(Texture text, float x, float y,float degree)
+	{
+		drawImageRotatefZ(text,x,y,1f,degree,new float[]{1f,1f,1f,1f},1f,0);
 	}
 
 	public void drawImageRotatef(Texture text, float x, float y, float degree, float[] rgba,float alpha, int blend)
