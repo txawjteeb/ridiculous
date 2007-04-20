@@ -11,9 +11,7 @@
 		<ant_ref/>
 	</settings>
 	<ant_events/>
-	<run_items>
-		<item run="org.cart.igd.core.Kernel"/>
-	</run_items>
+	<run_items/>
 	<runtimes>
 		<runtime>
 			<label>&lt;Default&gt;</label>

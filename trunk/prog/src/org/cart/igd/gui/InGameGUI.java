@@ -101,16 +101,11 @@ public class InGameGUI extends GUI
 			((InGameState)gameState).changeGuiState(2);
 		}
 		
-		
-		boolean animalPickedUp = false;
-		
-		if(testChangeGui.isActive()){
+		if(input.isSquareButtonPressed(btBush)){
 			((InGameState)gameState).changeGuiState(1);
 		}
 		
-		if (pressQuestLog.isActive()) {
-			textList.addText(pressQuestLog.getInfo());
-		}
+		boolean animalPickedUp = false;
 
 		/* check for click on the gui elements once */
 		if (mouseSelect.isActive()) {
@@ -121,9 +116,9 @@ public class InGameGUI extends GUI
 					hudBottom.components.get(i).activate();// triger GameAction										// with the button
 				}
 			}
-			// check for left bud buttons
-			for (int i = 0; i < hudLeft.components.size(); i++) {
-				if (Kernel.userInput.isSquareButtonPressed(hudLeft.components.get(i))) 
+			// check for left bud buttons except for bush
+			for (int i = 1; i < hudLeft.components.size(); i++) {
+				if (input.isSquareButtonPressed(hudLeft.components.get(i))) 
 				{
 					animalPickedUp = true;
 					selectedButton = new UIButton(
@@ -155,10 +150,13 @@ public class InGameGUI extends GUI
 					else if (!animalPickedUp) {
 						hudGroup.components.get(iG).activate();
 						//hudGroup.components.get(iG)
-						textList.addText("animal selected");
+						textList.addText(hudGroup.components.get(iG).getAction().getInfo());
 					}
 				}
 			}
+			
+			
+			if(input.isSquareButtonPressed(btQuestLog)) btQuestLog.activate();
 			
 			/**
 			 * make sure the button is not still attached when its not dropped off at
@@ -169,6 +167,11 @@ public class InGameGUI extends GUI
 			}
 		} // end if(mouseSelect.isActive())
 
+		
+		if (pressQuestLog.isActive()) {
+			textList.addText("lk;jdsf");
+		}
+		
 		// move the selected button
 		if (selectedButton != null) {
 			selectedButton.setXY(input.mousePos[0] - 32,
@@ -177,7 +180,7 @@ public class InGameGUI extends GUI
 
 		if (mouseReleased.isActive()) {
 			System.out.println("release");
-		}
+		}	
 	}// end handleInput()
 
 	
@@ -277,11 +280,11 @@ public class InGameGUI extends GUI
 		// add buttons
 		btBush = new UIButton(texBush, pressQuestLog, 0, 0, 128, 128);
 		btQuestLog = new UIButton(texQuestLog, pressQuestLog, 128, 0, 64, 64);
-		btQuestLog.scale = 1.2f;
+		btQuestLog.scale(2f);
 		
 		for (int iItm = 0; iItm < btItems.length; iItm++) {
 			btItems[iItm] = new UIButton(texItemIco[iItm], useItem[iItm],
-					192 + (64 * iItm), 0, 64, 64);
+					256 + (64 * iItm), 0, 64, 64);
 		}
 		
 		/* make animal buttons */
@@ -291,7 +294,7 @@ public class InGameGUI extends GUI
 					selectBushAnimal[iAnm], 64, 128 + (40 * iAnm), 64, 64);
 					
 			btBushAnimals[iAnm+1] = new UIButton(texAnimalIco[iAnm+1],
-					selectBushAnimal[iAnm], 0, 160 + (40 * iAnm), 64, 64);
+					selectBushAnimal[iAnm+1], 0, 160 + (40 * iAnm), 64, 64);
 		}
 
 		btGroupAnimals[0] = new UIButton(texAnimalIco[0], 

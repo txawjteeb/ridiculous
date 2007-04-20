@@ -27,7 +27,7 @@ public class InputHandler extends Thread{
     		long elapsedTime = currentTime - lastTime;
     		
     		/* prevent unnecesary updates*/
-    		if(elapsedTime > 0){
+    		if(elapsedTime > 0 && Kernel.display != null && null != Kernel.display.getRenderer()){
     			try{
     				if(Kernel.display.getRenderer().getStateManager().
    		 					getCurrentState()!= null)

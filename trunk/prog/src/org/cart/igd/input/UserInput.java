@@ -70,6 +70,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		if( c.getX()<mousePress[0] && (c.getX()+c.getWidth())>mousePress[0] && 
 			c.getY()<mousePress[1] && (c.getY()+c.getHeight())>mousePress[1] )
 		{
+			c.activate();
 			return true;
 		}
 		return false;
