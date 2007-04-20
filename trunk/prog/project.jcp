@@ -367,6 +367,10 @@
 				<folder>src\org\cart\igd\gui</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\gui\PauseMenu.java</path>
+				<folder>src\org\cart\igd\gui</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\input\GameAction.java</path>
 				<folder>src\org\cart\igd\input</folder>
 			</fileitem>
