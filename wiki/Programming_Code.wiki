@@ -1,8 +1,23 @@
-This page will cover a short back ground about the programming that went into the game
+  
+Click [http://ridiculous.googlecode.com/svn/trunk/prog/src/org/cart/igd/ here] to view the source code for *Zoo Escape*
 
-A short paragraph or two about what was used to program the game etc...
+These are all the programs used to program *Zoo Escape*. Click on a link to go to that programs webpage if you are interested.
 
-Also, a few screenshots of our code (Maybe a link to view the source code etc...)
+  * [http://www.sgi.com/products/software/opengl/ OpenGL 2.0] - Created by SGI
+  * [http://www.sun.com/ GlueGen 1.0] - Created by Sun Microsystems
+  * [http://www.sun.com/ OpenGL Java Bindings 1.1.0 RC4] - Created by Sun Microsystems
+  * [http://www.jcreator.net/download.htm JCreator LE 3.00.092] - Created by Xinox Software
+
+
+
+
+
+
+
+
+
+
+
 
 
 
