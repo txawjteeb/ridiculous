@@ -9,4 +9,8 @@ public class Guard extends Entity {
 		super(pos,fD,bsr,model);
 	}
 	
+	public void update(long elapsedTime){
+		walkForward(elapsedTime);
+	}
+	
 }

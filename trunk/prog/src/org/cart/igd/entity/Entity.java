@@ -18,13 +18,14 @@ public class Entity
 {
 	public Vector3f position;
 	public Vector3f lastPosition;
+	public Vector3f scale = new Vector3f(.2f,.2f,.2f);
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
-	public float speed = 0.05f;
+	public float speed = 0.01f;
 	public float turnSpeed = 0.1f;
 	
-	public OBJModel model;
+	public OBJModel modelObj;
 	public Model model3ds;
 	/*protected Model model;
 	protected float deltaTime;
@@ -70,7 +71,7 @@ public class Entity
 	public Entity(Vector3f pos, float fD, float bsr, OBJModel model)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
 		this(pos,fD,bsr);
-		this.model = model;
+		this.modelObj = model;
 	}
 	
 	public Entity(Vector3f pos, float fD, float bsr, Model model)//, int id, File meshFile, File skinFile)// throws EntityException
@@ -155,6 +156,18 @@ public class Entity
 		position.z -= ( ((float)elapsedTime * speed) * (float)Math.sin(facingDirection * 0.0174f) );
 	}
 	
+	public final void strafeLeft(long elapsedTime)
+	{
+		position.x += ( ((float)elapsedTime * speed) * (float)Math.cos((facingDirection-90) * 0.0174f) );
+		position.z += ( ((float)elapsedTime * speed) * (float)Math.sin((facingDirection-90) * 0.0174f) );
+	}
+	
+	public final void strafeRight(long elapsedTime)
+	{
+		position.x += ( ((float)elapsedTime * speed) * (float)Math.cos((facingDirection+90) * 0.0174f) );
+		position.z += ( ((float)elapsedTime * speed) * (float)Math.sin((facingDirection+90) * 0.0174f) );
+	}
+	
 	public final void turnRight(long elapsedTime)
 	{
 		facingDirection += ((float)elapsedTime * turnSpeed);
@@ -168,23 +181,19 @@ public class Entity
 	public void render(GL gl){
 		if(model3ds!= null){
 			gl.glPushMatrix();
-			gl.glScalef(0.025f, 0.025f, 0.025f);
-			gl.glRotatef(facingDirection+180f, 0f, -1f, 0f);
+			gl.glScalef(scale.x,scale.y,scale.z);
 			gl.glTranslatef(position.x, position.y, position.z);
+			gl.glRotatef(facingDirection+180, 0f, -1f, 0f);
 			model3ds.render(gl);
 			gl.glPopMatrix();
 		}
-	}
-	
-	public void draw(GL gl){
-		if(model!= null){
+		if(modelObj!= null){
 			gl.glPushMatrix();
+			//gl.glScalef(scale.x,scale.y,scale.z);
 			gl.glTranslatef(position.x, position.y, position.z);
-			model.draw(gl);
+			gl.glRotatef(facingDirection+180, 0f, -1f, 0f);
+			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
-	}
-	
-	
-	
+	}	
 }
