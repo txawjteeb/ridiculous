@@ -30,7 +30,7 @@ public class Camera
 	{
 		this.player = player;
 		cameraPos = new Vector3f();
-		cameraUp = new Vector3f(0f, 1f, 0f);
+		cameraUp = new Vector3f(0f, 2f, 0f);
 		this.verticalAngle = degCameraAngle*.0174532925f;
 		this.distance = distance;
 	}
@@ -116,9 +116,9 @@ public class Camera
 		posHeight = (float)Math.sin(verticalAngle)*distance;
 		posDistance = (float)Math.cos(verticalAngle)*distance;
 		
-		cameraPos.x = player.position.x + ( posDistance * (float)Math.cos((player.facingDirection+facingOffset-180f) * 0.0174f) );
+		cameraPos.x = player.position.x + ( posDistance * (float)Math.cos((player.facingDirection+facingOffset+180f) * 0.0174f) );
 		cameraPos.y = posHeight + player.position.y;
-		cameraPos.z = player.position.z + ( posDistance * (float)Math.sin((player.facingDirection+facingOffset-180f) * 0.0174f) );
+		cameraPos.z = player.position.z + ( posDistance * (float)Math.sin((player.facingDirection+facingOffset+180f) * 0.0174f) );
 		
 		try
 		{

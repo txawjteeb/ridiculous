@@ -1,6 +1,7 @@
 package org.cart.igd.entity;
 
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.models.obj.OBJModel;
 
 public class Animal extends Entity
 {
@@ -9,7 +10,7 @@ public class Animal extends Entity
 	float viewDistance;
 	float hearDistance;//show pings of movement on "radar"
 	
-	public Animal(Vector3f pos, float fD, float bsr){
-		super(pos,fD,bsr);
+	public Animal(Vector3f pos, float fD, float bsr,OBJModel model){
+		super(pos,fD,bsr,model);
 	}
 }

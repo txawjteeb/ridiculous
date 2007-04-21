@@ -24,7 +24,7 @@ public class PartySnapper extends Entity{
 			gl.glPushMatrix();
 				gl.glTranslatef(position.x, position.y, position.z);
 				gl.glRotatef(facingDirection, 0f, -1f, 0f);
-				model.draw(gl);
+				modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
 		

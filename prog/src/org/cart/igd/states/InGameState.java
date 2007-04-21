@@ -30,15 +30,15 @@ import org.cart.igd.entity.*;
 
 public class InGameState extends GameState
 {
-	ArrayList<Entity> entities = new ArrayList<Entity>();
+	private OBJModel worldMap;
+	private SkyDome skyDome;
 	
-	private OBJModel partySnapper;
+	ArrayList<Entity> entities = new ArrayList<Entity>();
 	
 	private Camera camera;
 	private Entity player;
 	private OBJModel playerSprite;
-	private OBJModel worldMap;
-	private SkyDome skyDome;
+	private OBJModel partySnapper;
 	
 	private MaxParser maxParser;
 	private Model test3ds;
@@ -47,8 +47,6 @@ public class InGameState extends GameState
 	private final float GRAVITY = 0.025f;
 	
 	private int playerState = 0;
-	
-	
 	
 	public static final int GUI_GAME = 1;
 	public static final int GUI_DIALOGUE = 0;
@@ -84,7 +82,7 @@ public class InGameState extends GameState
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
-		player			= new Entity(new Vector3f(), 0f, 10f, test3ds);
+		player			= new Entity(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		
@@ -98,12 +96,12 @@ public class InGameState extends GameState
 		 **/
 		gui.add(new InGameGUI(this));
 		gui.add(new Dialogue(this));
-	/* add new in game pause menu*/
 		gui.add(new PauseMenu(this));
 		//ex: gui.add(new DialogueGUI());				
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode",true);
 		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON2 );
+		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );
 		
 		//one press actions continuous = false;
 		incCameraH = new GameAction("camera h++", false);
@@ -132,8 +130,6 @@ public class InGameState extends GameState
 			Entity entity = entities.get(i);
 			entity.update(elapsedTime);
 		}
-		
-		entities.get(0).position.z++;
 		
 		handleInput(elapsedTime);
 		player.lastPosition.x = player.position.x;
@@ -176,6 +172,7 @@ public class InGameState extends GameState
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
 		
+		
 		/* Setup Camera */
 		camera.lookAt(glu, player);
 		
@@ -186,19 +183,12 @@ public class InGameState extends GameState
 		player.render(gl);
 
 		Iterator itr = entities.iterator();
-		/* draw the guards*/
-		while(itr.hasNext()){
+		/* render all entities */
+		while(itr.hasNext())
+		{
 			Entity e = (Entity)itr.next();
-			if(e instanceof Guard){
-				if(e.model3ds!=null){
-					e.render(gl);
-				}
-				else{
-					System.out.println("guard 3ds model is null");
-				}
-			}
-		}
-		
+			e.render(gl);
+		}		
 		
 		/* Render SkyDome */
 		gl.glPushMatrix();
@@ -218,13 +208,6 @@ public class InGameState extends GameState
 			gl.glScalef(500f, 500f, 500f);
 			worldMap.draw(gl);
 		gl.glPopMatrix();
-		
-		/* render all entities */
-
-		for(int i = 0; i<entities.size(); i++){
-			Entity entity = entities.get(i);
-			entity.draw(gl);
-		}
 		
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
@@ -280,6 +263,11 @@ public class InGameState extends GameState
 			player.turnRight(elapsedTime);
 		else if(Kernel.userInput.keys[KeyEvent.VK_A])
 			player.turnLeft(elapsedTime);
+		
+		if(Kernel.userInput.keys[KeyEvent.VK_Q])
+			player.strafeLeft(elapsedTime);
+		else if(Kernel.userInput.keys[KeyEvent.VK_E])
+			player.strafeRight(elapsedTime);
 		
 		/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
 		if(Kernel.userInput.keys[KeyEvent.VK_PAGE_UP])
