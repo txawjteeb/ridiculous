@@ -82,7 +82,7 @@ public class InGameState extends GameState
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
-		player			= new Entity(new Vector3f(), 0f, 10f, playerSprite);
+		player			= new Animal(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		
@@ -195,7 +195,8 @@ public class InGameState extends GameState
 			gl.glDisable(GL.GL_LIGHTING);
 			gl.glDisable(GL.GL_LIGHT0);
 			gl.glDisable(GL.GL_CULL_FACE);
-			gl.glTranslatef(player.position.x, player.position.y-30f, player.position.z);
+			gl.glTranslatef(player.position.x, player.position.y-30f, 
+					player.position.z);
 			skyDome.render(gl);
 			gl.glEnable(GL.GL_CULL_FACE);
 			gl.glEnable(GL.GL_LIGHTING);
@@ -304,7 +305,8 @@ public class InGameState extends GameState
 		} //camera snap back action
 		else if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
 		{
-			if(player.position.x==player.lastPosition.x && player.position.z==player.lastPosition.z)
+			if(player.position.x==player.lastPosition.x && 
+				player.position.z==player.lastPosition.z)
 			{
 				camera.moveToBackView(8f);
 			}

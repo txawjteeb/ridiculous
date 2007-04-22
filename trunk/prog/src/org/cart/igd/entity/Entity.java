@@ -14,7 +14,7 @@ import org.cart.igd.discreet.Model;
 //import org.cart.igd.bsp.BSPObject;
 import org.cart.igd.models.obj.OBJModel;
 
-public class Entity
+public abstract class Entity
 {
 	public Vector3f position;
 	public Vector3f lastPosition;
@@ -183,7 +183,7 @@ public class Entity
 			gl.glPushMatrix();
 			gl.glScalef(scale.x,scale.y,scale.z);
 			gl.glTranslatef(position.x, position.y, position.z);
-			gl.glRotatef(facingDirection+180, 0f, -1f, 0f);
+			gl.glRotatef(facingDirection, 0f, -1f, 0f);
 			model3ds.render(gl);
 			gl.glPopMatrix();
 		}
