@@ -285,11 +285,19 @@
 				<folder>src\org\cart\igd\discreet</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\Animal.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\entity\Entity.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\EntityInterface.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\entity\Guard.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
 			<fileitem>
@@ -301,11 +309,23 @@
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\Noise.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\entity\PartySnapper.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\PseudoEntity.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\game\GameObjective.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\Item.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>

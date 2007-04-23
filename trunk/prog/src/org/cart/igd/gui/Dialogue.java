@@ -12,13 +12,13 @@ public class Dialogue extends GUI {
 	
 	static ArrayList <DialogueInfo> renderDialogue = new ArrayList <DialogueInfo>();
 	static ArrayList <Leaf> renderLeaves = new ArrayList <Leaf>();
-//	private UserInput input;s
 	private UserInput input;
 	private Texture[] animalIcons = new Texture[10];
 	private Texture dialogueBackground;
 	private Texture border;
-	private Texture leaf;
+	private Texture leaf,fog;
 	private Texture leaves1024,background1024;
+	private float fogdegree  = 0f;
 	/**
 	 * param1 informative string
 	 * param2 continuous action
@@ -52,6 +52,7 @@ public class Dialogue extends GUI {
 		leaves1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaves1024_cw.png");
 		background1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/dialogue_background1024_cw.png");
 		leaf = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaf.png");
+		fog = Kernel.display.getRenderer().loadImage("data/images/dialogue/fog.png");
 		
 	}
 	
@@ -78,11 +79,16 @@ public class Dialogue extends GUI {
 				di.update();
 				di.draw(g);
 			}
-			for(int i = 0;i<renderLeaves.size();i++){
-				Leaf leaf = renderLeaves.get(i);
-				leaf.update();
-				leaf.draw(g);
-			}
+		//	for(int i = 0;i<renderLeaves.size();i++){
+		//		Leaf leaf = renderLeaves.get(i);
+		//		leaf.update();
+		//		leaf.draw(g);
+		//	}
+		//	g.drawImageRotate(fog,-300,0,(int)fogdegree);
+		//	g.drawImageRotate(fog,0,0,(int)fogdegree);
+		//	g.drawImageRotate(fog,300,300,(int)fogdegree);
+		//	g.drawImageRotate(fog,-300,-300,(int)fogdegree);
+		//	fogdegree+=.2f;
 		g.glgEnd();
 	}
 	
@@ -363,10 +369,10 @@ public class Dialogue extends GUI {
 		int lastMousePress[] = new int[]{0,0};
 
 		public void run(){
-					Dialogue.renderLeaves.add(new Leaf(-20,500));
-					Dialogue.renderLeaves.add(new Leaf(-20,200));
-					Dialogue.renderLeaves.add(new Leaf(-20,800));
-					Dialogue.renderLeaves.add(new Leaf(-20,100));
+				//	Dialogue.renderLeaves.add(new Leaf(-20,500));
+				//	Dialogue.renderLeaves.add(new Leaf(-20,200));
+				//	Dialogue.renderLeaves.add(new Leaf(-20,800));
+				//	Dialogue.renderLeaves.add(new Leaf(-20,100));
 					Dialogue.renderDialogue.add(new DialogueInfo(0,1,0,"Oh hey flamingo... uhgg hello go sublime sublime hello go go go sublime",0));
 					Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I escaped, and you need to too",1));
 					Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Hey Giraffe, ill be right back",2));

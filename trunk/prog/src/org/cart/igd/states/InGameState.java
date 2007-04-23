@@ -27,6 +27,7 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.util.*;
 import org.cart.igd.math.*;
 import org.cart.igd.entity.*;
+import org.cart.igd.game.*;
 
 public class InGameState extends GameState
 {
@@ -34,11 +35,14 @@ public class InGameState extends GameState
 	private SkyDome skyDome;
 	
 	ArrayList<Entity> entities = new ArrayList<Entity>();
+	ArrayList<Item> items = new ArrayList<Item>();
+	
 	
 	private Camera camera;
 	private Entity player;
 	private OBJModel playerSprite;
 	private OBJModel partySnapper;
+	private OBJModel zoopaste;
 	
 	private MaxParser maxParser;
 	private Model test3ds;
@@ -62,7 +66,7 @@ public class InGameState extends GameState
 	
 	private GameAction mouseWheelUp;
 	private GameAction mouseWheelDown;
-
+	
 	
 	public InGameState(GL gl)
 	{
@@ -77,19 +81,25 @@ public class InGameState extends GameState
 		{
 			e.printStackTrace();
 		}
-		
-		
+
+		items.add(new Item("Zoo Paste",0,1,0f,1f,
+							new OBJModel(gl,"data/models/TreeTest"),
+							Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
+							new Vector3f(15f,0f,15f)));
+							
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		player			= new Animal(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
+	
 		
 		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard));
 		entities.add(new Guard(new Vector3f(30f,0f,0f),0f,20f,guard));
 		entities.add(new Guard(new Vector3f(0f,40f,0f),0f,20f,guard));
 		entities.add(new Guard(new Vector3f(0f,40f,-20f),0f,20f,guard));
+
 		
 		/** 
 		 * add new gui subsets here 
@@ -128,8 +138,18 @@ public class InGameState extends GameState
 	 * moved some of the character movement input due to a faster update 
 	 * which made character jitter forward when walking 
 	 **/
+	 
+	public void updateItems(){
+		for(int i = 0;i<items.size();i++){
+			Item item = items.get(i);
+			item.update(player.position);
+		}
+	}
+	 
 	public void update(long elapsedTime)
 	{
+		updateItems();
+
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
 		{
@@ -221,7 +241,14 @@ public class InGameState extends GameState
 		{
 			Entity e = (Entity)itr.next();
 			e.render(gl);
-		}		
+		}	
+			
+		for(int i = 0;i<items.size();i++){
+			Item item = items.get(i);
+			if(item.state == 0){
+				item.render(gl);
+			}
+		}	
 		
 		/* Render SkyDome */
 		gl.glPushMatrix();
