@@ -1,4 +1,4 @@
-====Welcome to the main Wiki page dedicated solely to CART’s Interactive Game Design lab newest project entitled Zoo Escape!!====
+
 == Purpose ==
  This Wiki was created to aid in notifying the public about the Center for Advanced Reasearch and Technology's Interactive Game Design lab's newest project entitled *"Zoo Escape"*
 
@@ -21,6 +21,7 @@ http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/fin
 
 
 [http://cart.org/ http://i169.photobucket.com/albums/u209/M1sfire/cart_logo_resize_da.png][http://igd.cart.org/ http://i169.photobucket.com/albums/u209/M1sfire/bluestar_logo_resize_da.png]
+
 
 
 
