@@ -124,14 +124,47 @@ public class InGameState extends GameState
 		camera.facingOffset += amt;
 	}
 	
+	/** 
+	 * moved some of the character movement input due to a faster update 
+	 * which made character jitter forward when walking 
+	 **/
 	public void update(long elapsedTime)
 	{
+		/* W/S - Move player forward/back. Resets camera offset to back view*/
+		if(Kernel.userInput.keys[KeyEvent.VK_W])
+		{
+			player.walkForward(elapsedTime);
+			
+			if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
+			{
+				if(player.position.x==player.lastPosition.x && 
+						player.position.z==player.lastPosition.z)
+					{
+						camera.moveToBackView(8f);
+					}
+			}
+		}
+			
+		else if(Kernel.userInput.keys[KeyEvent.VK_S])
+			player.walkBackward(elapsedTime);
+		
+		/* D/A - Rotate the player on y axis */
+		if(Kernel.userInput.keys[KeyEvent.VK_D])
+			player.turnRight(elapsedTime);
+		else if(Kernel.userInput.keys[KeyEvent.VK_A])
+			player.turnLeft(elapsedTime);
+		
+		/* Q/E Strafe left and right */
+		if(Kernel.userInput.keys[KeyEvent.VK_Q])
+			player.strafeLeft(elapsedTime);
+		else if(Kernel.userInput.keys[KeyEvent.VK_E])
+			player.strafeRight(elapsedTime);
+		
 		for(int i = 0; i<entities.size(); i++){
 			Entity entity = entities.get(i);
 			entity.update(elapsedTime);
 		}
 		
-		handleInput(elapsedTime);
 		player.lastPosition.x = player.position.x;
 		player.lastPosition.y = player.position.y;
 		player.lastPosition.z = player.position.z;
@@ -253,23 +286,6 @@ public class InGameState extends GameState
 		/* Check for Escape key to end program */
 		if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
 		
-		/* W/S - Move player forward/back. */
-		if(Kernel.userInput.keys[KeyEvent.VK_W])
-			player.walkForward(elapsedTime);
-		else if(Kernel.userInput.keys[KeyEvent.VK_S])
-			player.walkBackward(elapsedTime);
-		
-		/* D/A - Rotate the player on y axis */
-		if(Kernel.userInput.keys[KeyEvent.VK_D])
-			player.turnRight(elapsedTime);
-		else if(Kernel.userInput.keys[KeyEvent.VK_A])
-			player.turnLeft(elapsedTime);
-		
-		if(Kernel.userInput.keys[KeyEvent.VK_Q])
-			player.strafeLeft(elapsedTime);
-		else if(Kernel.userInput.keys[KeyEvent.VK_E])
-			player.strafeRight(elapsedTime);
-		
 		/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
 		if(Kernel.userInput.keys[KeyEvent.VK_PAGE_UP])
 			camera.changeVerticalAngleDeg( 1);
@@ -295,7 +311,6 @@ public class InGameState extends GameState
 
 		}
 		
-		
 		/** camera mouse rotation */
 		if(mouseCameraRotate.isActive())
 		{
@@ -303,13 +318,5 @@ public class InGameState extends GameState
 			/** camera angle change */
 			camera.changeVerticalAngleDeg( Kernel.userInput.getYDif()*0.5f );
 		} //camera snap back action
-		else if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
-		{
-			if(player.position.x==player.lastPosition.x && 
-				player.position.z==player.lastPosition.z)
-			{
-				camera.moveToBackView(8f);
-			}
-		}
 	}
 }
