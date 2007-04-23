@@ -21,6 +21,10 @@ public class Item extends Entity {
 	public int state = 0;
 	public int amount;
 	
+	boolean up = true;
+	float difference;
+	
+	
 	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Texture texture, Vector3f location){
 		super(location,fd,bsr, model);
 		this.name = name;
@@ -35,7 +39,23 @@ public class Item extends Entity {
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius) state = 1;
 		}
-		
+		if(id==8){
+				difference+=.1f;
+			if(up){
+				position.y+=.1f;
+				if(difference>1f){
+					difference = 0f;
+					up = false;
+				}
+			} else{
+				position.y-=.1f;
+				if(difference>1f){
+					difference = 0f;
+					up = true;
+				}
+			}
+			facingDirection+=4f;
+		}
 	}
 }
 
