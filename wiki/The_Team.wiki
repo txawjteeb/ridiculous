@@ -1,14 +1,35 @@
 *Meet the Team behind Zoo Escape*
 
+[Art]
+  * Crystal Williams
+  * Justin Her
+  * Shaylee Pizana
+[Book]
+  * Shannon Gleghorn
+  * Sabrina Romero
 [Core]
   * Ian Kinsey
   * Jesse Martinez
   * William Harshbarger
   * James Williams
+[Cutscenes]
+  * Christopher Flynn
+  * Juan Lopez 
+  * Ker Thao
+[Documentation]
+  * Jeff Clark
+  * Tim Potesan
+  * Sean Coffman
+  * Sarah Otto
 [Programming]
   * Spencer Allen
   * Cameron Catterfeld
   * Vitaly Maximov
+[Psychology]
+  * Robert Criswell
+  * David Armi
+  * Matt Pettersen
+  * Liz Anderson 
 [Utilities]
   * Ryan Williams
   * Jacob Placensia
@@ -20,24 +41,3 @@
   * Alex Whitbey
   * Kim Mann
   * Kyle Corcoran
-[Documentation]
-  * Jeff Clark
-  * Tim Potesan
-  * Sean Coffman
-  * Sarah Otto
-[Psychology]
-  * Robert Criswell
-  * David Armi
-  * Matt Pettersen
-  * Liz Anderson 
-[Book]
-  * Shannon Gleghorn
-  * Sabrina Romero
-[Art]
-  * Crystal Williams
-  * Justin Her
-  * Shaylee Pizana
-[Cutscenes]
-  * Christopher Flynn
-  * Juan Lopez 
-  * Ker Thao
