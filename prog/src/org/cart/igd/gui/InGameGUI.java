@@ -85,6 +85,15 @@ public class InGameGUI extends GUI
 
 		hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
 		hudGroup.updateAndDraw(g);
+		
+		/* draw Items that are picked up */
+		int incr = 256;
+		for(int i = 0; i<((InGameState)gameState).items.size();i++){
+			if(((InGameState)gameState).items.get(i).state == 1){
+				btItems[((InGameState)gameState).items.get(i).id].draw(g, incr, 0);
+				incr+= 64;
+			}
+		}
 
 		textList.draw(g);
 		g.glgEnd();
@@ -242,7 +251,7 @@ public class InGameGUI extends GUI
 		texItemIco[6] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/paddleball_sp.png");
 		texItemIco[7] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/paddleball_sp.png");
+				"data/images/gui/toothpaste_sp.png");
 		
 		
 
@@ -312,8 +321,8 @@ public class InGameGUI extends GUI
 
 
 		//addd some test items
-		hudBottom.add(btItems[0]);
-		hudBottom.add(btItems[1]);
+		//hudBottom.add(btItems[0]);
+		//hudBottom.add(btItems[1]);
 
 		hudLeft.add(btBush);
 
