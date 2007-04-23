@@ -684,7 +684,7 @@
 			<path>src\org\cart\igd\states\InGameState.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\gui\Dialogue.java</path>
@@ -714,7 +714,7 @@
 			<path>src\org\cart\igd\game\Item.java</path>
 			<source>true</source>
 			<index>5</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\entity\PartySnapper.java</path>

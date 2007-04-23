@@ -22,7 +22,7 @@ public class InGameGUI extends GUI
 	private Texture texBush;
 	private Texture texQuestLog;
 	private Texture texEmptySlot;
-	private Texture texItemIco[] = new Texture[8];
+	private Texture texItemIco[] = new Texture[9];
 	private Texture texAnimalIco[] = new Texture[10];
 
 	/* button containers */
@@ -34,11 +34,11 @@ public class InGameGUI extends GUI
 	private UIButton btBush;
 	private UIButton btQuestLog;
 	private UIButton btBushAnimals[] = new UIButton[10];
-	private UIButton btItems[] = new UIButton[8];
+	private UIButton btItems[] = new UIButton[9];
 	private UIButton btGroupAnimals[] = new UIButton[4];
 
 	/* game actions */
-	private GameAction useItem[] = new GameAction[8];
+	private GameAction useItem[] = new GameAction[9];
 	private GameAction selectBushAnimal[] = new GameAction[10];
 
 	// other game actions
@@ -251,6 +251,8 @@ public class InGameGUI extends GUI
 		texItemIco[6] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/paddleball_sp.png");
 		texItemIco[7] = Kernel.display.getRenderer().loadImage(
+				"data/images/gui/toothpaste_sp.png");
+		texItemIco[8] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/toothpaste_sp.png");
 		
 		

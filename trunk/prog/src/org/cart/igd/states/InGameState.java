@@ -90,6 +90,11 @@ public class InGameState extends GameState
 				new OBJModel(gl,"data/models/TreeTest"),
 				Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
 				new Vector3f(-15f,0f,15f)));
+				
+		items.add(new Item("PartySnapper",8,1,0f,1f,
+				new OBJModel(gl,"data/models/party_snapper"),
+				Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
+				new Vector3f(-15f,0f,-15f)));
 		
 							
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
