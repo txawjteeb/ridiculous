@@ -34,8 +34,8 @@ public class InGameState extends GameState
 	private OBJModel worldMap;
 	private SkyDome skyDome;
 	
-	ArrayList<Entity> entities = new ArrayList<Entity>();
-	ArrayList<Item> items = new ArrayList<Item>();
+	public ArrayList<Entity> entities = new ArrayList<Entity>();
+	public ArrayList<Item> items = new ArrayList<Item>();
 	
 	
 	private Camera camera;
@@ -82,10 +82,15 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 
-		items.add(new Item("Zoo Paste",0,1,0f,1f,
+		items.add(new Item("Zoo Paste",7,1,0f,1f,
 							new OBJModel(gl,"data/models/TreeTest"),
 							Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
 							new Vector3f(15f,0f,15f)));
+		items.add(new Item("paddle ball",6,1,0f,1f,
+				new OBJModel(gl,"data/models/TreeTest"),
+				Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
+				new Vector3f(-15f,0f,15f)));
+		
 							
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");

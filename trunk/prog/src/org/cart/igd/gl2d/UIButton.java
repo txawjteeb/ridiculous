@@ -28,6 +28,11 @@ public class UIButton extends UIComponent
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
+	public void draw(GLGraphics g, int x, int y)
+	{
+		g.drawImage(getTexture(),x,y,scale,scale);
+	}
+	
 	public void draw(GLGraphics g, int x, int y, float alpha)
 	{
 		g.drawImage(getTexture(),getX(),getY(),scale,scale);
