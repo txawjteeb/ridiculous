@@ -1,4 +1,4 @@
-Click on a Link to go to that characters page containing a pic of the character along with a back ground story.
+Click on a link to go to that character's page containing a picture of the character along with his/her background story.
 
   * [http://code.google.com/p/ridiculous/wiki/Flamingo Poncho the Flamingo]
   * [http://code.google.com/p/ridiculous/wiki/Turtles The Turtles (Jorge, Miercoles, Santiago)]
