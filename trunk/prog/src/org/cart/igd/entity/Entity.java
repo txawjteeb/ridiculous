@@ -8,11 +8,10 @@ import javax.media.opengl.glu.GLU;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
+import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.discreet.Model;
-//import org.cart.igd.model.Model;
 //import org.cart.igd.model.ModelManager;
 //import org.cart.igd.bsp.BSPObject;
-import org.cart.igd.models.obj.OBJModel;
 
 public abstract class Entity
 {
@@ -27,12 +26,9 @@ public abstract class Entity
 	
 	public OBJModel modelObj;
 	public Model model3ds;
-	/*protected Model model;
+
 	protected float deltaTime;
 	protected float animationSpeed = 7.0f;
-	*/
-	
-	private boolean isDead;
 	
 	protected GL gl;
 	protected GLU glu;
