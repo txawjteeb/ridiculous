@@ -58,7 +58,7 @@ public class Dialogue extends GUI {
 	
 	boolean t = true;
 	public void update(long elapsedTime){
-		if(t)new ActiveDialogue().start();
+		if(t)new ActiveDialogue(4).start();
 		t = false;
 	}
 	
@@ -367,12 +367,62 @@ public class Dialogue extends GUI {
 
 	private class ActiveDialogue extends Thread{
 		int lastMousePress[] = new int[]{0,0};
+		int id;
 
+		public ActiveDialogue(int id){
+			this.id = id;
+		}
+		
 		public void run(){
-				//	Dialogue.renderLeaves.add(new Leaf(-20,500));
-				//	Dialogue.renderLeaves.add(new Leaf(-20,200));
-				//	Dialogue.renderLeaves.add(new Leaf(-20,800));
-				//	Dialogue.renderLeaves.add(new Leaf(-20,100));
+			
+					Dialogue.renderDialogue.add(new DialogueInfo(0,id,0,"Why are you bothering an old man?",0));
+					Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"Sorry, wrong cage.",1));
+					Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo issold!",2));
+					switch(getSelection()){
+						case 1:
+							pause(2000);
+							Dialogue.clearDialogue();
+							break;
+						case 2:
+							pause(2000);
+							Dialogue.clearDialogue();
+							Dialogue.renderDialogue.add(new DialogueInfo(3,id,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(4,0,1,"We've all been sold and I need your help to get everyone out ofhere!",1));
+							Dialogue.renderDialogue.add(new DialogueInfo(5,0,1,"They're selling us too!  We're going to be made into food!",2));
+							switch(getSelection()){
+								case 4:
+									pause(2000);
+									Dialogue.clearDialogue();
+									Dialogue.renderDialogue.add(new DialogueInfo(6,id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
+							
+									break;
+								
+								case 5:
+									pause(2000);
+									Dialogue.clearDialogue();
+									break;
+							}
+							
+					}
+			/*
+			 Why are you bothering an old man?
+	A. Sorry, wrong cage. (Dialogue ends)
+	B. Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is
+	   sold!
+		Giraffe: Well why should I go?  I'm just gonna let 'em move me to a new zoo.
+			A. We've all been sold and I need your help to get everyone out of
+			   here!
+				Giraffe: I'll do my best, youngin, but I don't know how much
+					 my back can take.  If you could find me something
+					 to fix my back, I could help you!
+					A. I'm a little busy. (Dialogue ends)
+					B. Alright, I'll be back as soon as I can get it.
+					   (Job)
+			B. They're selling us too!  We're going to be made into food!
+				Giraffe: Well...in that case, I guess I can make these tired
+					 old legs work for just a little bit longer. (Done)
+			 
+			 */
 					Dialogue.renderDialogue.add(new DialogueInfo(0,1,0,"Oh hey flamingo... uhgg hello go sublime sublime hello go go go sublime",0));
 					Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I escaped, and you need to too",1));
 					Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Hey Giraffe, ill be right back",2));

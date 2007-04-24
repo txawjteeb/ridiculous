@@ -36,6 +36,8 @@ public class InGameState extends GameState
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
+	public ArrayList<Animal> animals = new ArrayList<Animal>();
+		
 	public Entity player;
 	
 	
@@ -88,7 +90,7 @@ public class InGameState extends GameState
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs");
 		worldMap		= new OBJModel(gl, "data/models/zoo_map_io");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
-		player			= new Animal(new Vector3f(), 0f, 10f, playerSprite);
+		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 	
@@ -119,15 +121,17 @@ public class InGameState extends GameState
 		/* add collectable object to the map */
 		items.add(new Item("Zoo Paste",7,1,0f,1f,
 				new OBJModel(gl,"data/models/TreeTest"),
-				new Vector3f(15f,0f,15f)));
+				new Vector3f(15f,0f,15f),false,false));
 		
 		items.add(new Item("Paddle Ball",6,1,0f,1f,
 				new OBJModel(gl,"data/models/TreeTest"),
-				new Vector3f(-15f,0f,15f)));
+				new Vector3f(-15f,0f,15f),false,false));
 				
 		items.add(new Item("Party Snapper",8,1,0f,1f,
 				new OBJModel(gl,"data/models/party_snapper"),
-				new Vector3f(-15f,0f,-15f)));
+				new Vector3f(-15f,0f,-15f),true,true));
+				
+		animals.add(new Animal("Giraffe",4,0f,5f,new OBJModel(gl,"data/models/giraffe_scaled_2_km"), new Vector3f(-30f,0f,-30f)));
 		
 		
 		/* add different gui segments */
@@ -171,10 +175,18 @@ public class InGameState extends GameState
 			item.update(player.position);
 		}
 	}
+	
+	public void updateAnimals(){
+		for(int i = 0;i<animals.size();i++){
+			Animal animal = animals.get(i);
+			animal.update(player.position);
+		}
+	}
 	 
 	public void update(long elapsedTime)
 	{
 		updateItems();
+		updateAnimals();
 
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
@@ -274,7 +286,14 @@ public class InGameState extends GameState
 			if(item.state == 0){
 				item.render(gl);
 			}
-		}	
+		}
+		
+		for(int i = 0;i<animals.size();i++){
+			Animal animal = animals.get(i);
+			if(animal.state == 0){
+				animal.render(gl);
+			}
+		}
 		
 		/* Render SkyDome */
 		gl.glPushMatrix();

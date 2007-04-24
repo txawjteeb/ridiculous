@@ -20,16 +20,29 @@ public class Item extends Entity {
 	public int id;
 	public int state = 0;
 	public int amount;
+	public boolean turn;
+	public boolean bounce;
 	
 	boolean up = true;
 	float difference;
 	
+	
+	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Vector3f location, boolean turn, boolean bounce){
+		super(location,fd,bsr, model);
+		this.name = name;
+		this.id = id;
+		this.amount = amount;
+		this.turn = turn;
+		this.bounce = bounce;
+	}
 	
 	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Vector3f location){
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.id = id;
 		this.amount = amount;
+		this.turn = false;
+		this.bounce = false;
 	}
 	
 	public void update(Vector3f playerPosition){
@@ -38,7 +51,7 @@ public class Item extends Entity {
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius) state = 1;
 		}
-		if(id==8){
+		if(bounce){
 				difference+=.1f;
 			if(up){
 				position.y+=.1f;
@@ -53,8 +66,8 @@ public class Item extends Entity {
 					up = true;
 				}
 			}
-			facingDirection+=4f;
 		}
+		if(turn)facingDirection+=4f;
 	}
 }
 
