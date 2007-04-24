@@ -82,42 +82,58 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 
-		items.add(new Item("Zoo Paste",7,1,0f,1f,
-							new OBJModel(gl,"data/models/TreeTest"),
-							Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
-							new Vector3f(15f,0f,15f)));
-		items.add(new Item("paddle ball",6,1,0f,1f,
-				new OBJModel(gl,"data/models/TreeTest"),
-				Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
-				new Vector3f(-15f,0f,15f)));
-				
-		items.add(new Item("PartySnapper",8,1,0f,1f,
-				new OBJModel(gl,"data/models/party_snapper"),
-				Kernel.display.getRenderer().loadImage("data/images/toothpaste_sp.png"),
-				new Vector3f(-15f,0f,-15f)));
+		
 		
 							
-		playerSprite	= new OBJModel(gl, "data/models/flamingo_sa");
-		worldMap		= new OBJModel(gl, "data/models/zoo_map_export_km");
+		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs");
+		worldMap		= new OBJModel(gl, "data/models/zoo_map_io");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		player			= new Animal(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 	
+		/*
+		Model guardo = null;
+		try{
+			guardo = new Model(maxParser.getObjectMesh("data/models/guard_km.3DS"));
+		}catch(Exception e){}
+		*/
+		OBJModel guardo = new OBJModel(gl, "data/models/guard_vm");
 		
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard));
-		entities.add(new Guard(new Vector3f(30f,0f,0f),0f,20f,guard));
-		entities.add(new Guard(new Vector3f(0f,40f,0f),0f,20f,guard));
-		entities.add(new Guard(new Vector3f(0f,40f,-20f),0f,20f,guard));
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guardo));
+		entities.add(new Guard(new Vector3f(30f,0f,-20f),0f,20f,guard));//3ds guard
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guardo));
+		entities.add(new Guard(new Vector3f(-30f,0f,-20f),0f,20f,guardo));
+		
+		/* test walking guard*/
+		((Guard)entities.get(0)).path.add(new Vector3f(50,0,30));
+		((Guard)entities.get(0)).path.add(new Vector3f(-50,0,20));
+		((Guard)entities.get(0)).path.add(new Vector3f(-100,0,100));
+		((Guard)entities.get(0)).path.add(new Vector3f(100,0,-20));
 
+		/* test walking guard */
+		((Guard)entities.get(1)).path.add(new Vector3f(-30,0,30));
+		((Guard)entities.get(1)).path.add(new Vector3f( 30,0, 30));
 		
-		/** 
-		 * add new gui subsets here 
-		 **/
+		
+		/* add collectable object to the map */
+		items.add(new Item("Zoo Paste",7,1,0f,1f,
+				new OBJModel(gl,"data/models/TreeTest"),
+				new Vector3f(15f,0f,15f)));
+		
+		items.add(new Item("Paddle Ball",6,1,0f,1f,
+				new OBJModel(gl,"data/models/TreeTest"),
+				new Vector3f(-15f,0f,15f)));
+				
+		items.add(new Item("Party Snapper",8,1,0f,1f,
+				new OBJModel(gl,"data/models/party_snapper"),
+				new Vector3f(-15f,0f,-15f)));
+		
+		
+		/* add different gui segments */
 		gui.add(new InGameGUI(this));
 		gui.add(new Dialogue(this));
-		gui.add(new PauseMenu(this));
-		//ex: gui.add(new DialogueGUI());				
+		gui.add(new PauseMenu(this));			
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode",true);
 		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON2 );
