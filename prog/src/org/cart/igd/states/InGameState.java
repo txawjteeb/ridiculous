@@ -58,8 +58,8 @@ public class InGameState extends GameState
 	public static final int GUI_DIALOGUE = 0;
 	
 	/** Contain different gui states */
-	private ArrayList<GUI> gui = new ArrayList<GUI>();
-	int currentGuiState = GUI_GAME;
+	public ArrayList<GUI> gui = new ArrayList<GUI>();
+	public int currentGuiState = 0;
 	
 	private GameAction mouseCameraRotate;
 	
@@ -137,13 +137,13 @@ public class InGameState extends GameState
 				treeModel,
 				new Vector3f(-15f,0f,-15f),true,true));
 				
-		animals.add(new Animal("Giraffe",4,0f,5f,new OBJModel(gl,"data/models/giraffe_scaled_2_km"), new Vector3f(-30f,0f,-30f)));
+		animals.add(new Animal("Giraffe",4,0f,5f,new OBJModel(gl,"data/models/giraffe_scaled_2_km"), new Vector3f(10f,0f,0f),this));
 		
 		
 		/* add different gui segments */
 		gui.add(new InGameGUI(this));
 		gui.add(new Dialogue(this));
-		gui.add(new PauseMenu(this));			
+		gui.add(new PauseMenu(this));
 		
 		mouseCameraRotate = new GameAction("mouse rotation mode",true);
 		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON2 );
@@ -253,6 +253,8 @@ public class InGameState extends GameState
 				playerState = 0;
 		}
 		
+		
+		
 		gui.get(currentGuiState).update(elapsedTime);
 	}
 	
@@ -305,9 +307,7 @@ public class InGameState extends GameState
 		
 		for(int i = 0;i<animals.size();i++){
 			Animal animal = animals.get(i);
-			if(animal.state == 0){
-				animal.render(gl);
-			}
+				animal.display(gl);
 		}
 		
 		/* Render SkyDome */
@@ -397,6 +397,7 @@ public class InGameState extends GameState
 			throwPartyPopper();
 
 		}
+
 		
 		/** camera mouse rotation */
 		if(mouseCameraRotate.isActive())

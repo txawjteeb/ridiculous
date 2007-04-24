@@ -7,6 +7,7 @@ import org.cart.igd.util.*;
 import org.cart.igd.core.*;
 import org.cart.igd.input.*;
 import org.cart.igd.states.*;
+import org.cart.igd.game.*;
 
 public class Dialogue extends GUI {
 	
@@ -37,10 +38,16 @@ public class Dialogue extends GUI {
 		initInput();
 		loadImages();
 	}
-	public void initInput()
-	{
+	public void initInput()	{
 		input.bindToKey(testChangeGui, KeyEvent.VK_T);
 	}
+	
+	public void createDialogue(Animal animal){
+		
+		new ActiveDialogue(animal).start();
+	}
+	
+	
 	
 	public void loadImages(){		
 		for(int i = 0;i<animalIcons.length;i++){
@@ -58,8 +65,8 @@ public class Dialogue extends GUI {
 	
 	boolean t = true;
 	public void update(long elapsedTime){
-		if(t)new ActiveDialogue(4).start();
-		t = false;
+	//	if(t)new ActiveDialogue(4).start();
+	//	t = false;
 	}
 	
 	public void handleInput(long elapsedTime){
@@ -365,108 +372,87 @@ public class Dialogue extends GUI {
 		}
 	}
 
-	private class ActiveDialogue extends Thread{
-		int lastMousePress[] = new int[]{0,0};
-		int id;
+	class ActiveDialogue extends Thread{
+		int lastMousePress[] = new int[]{-110,-110};
+		Animal animal;
 
-		public ActiveDialogue(int id){
-			this.id = id;
+		public ActiveDialogue(Animal animal){
+			this.animal = animal;
 		}
 		
 		public void run(){
-			
-					Dialogue.renderDialogue.add(new DialogueInfo(0,id,0,"Why are you bothering an old man?",0));
-					Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"Sorry, wrong cage.",1));
-					Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo issold!",2));
-					switch(getSelection()){
+	//			 states
+	 //0 = incage not talked to
+	 //1 = incage waiting for item
+	 //2 = incage ready to be saved
+	 //3 = incage ready to be saved after item given
+	 //4 = saved by bush
+	 //5 = saved in party
+			switch(animal.id){
+				case 4:
+					switch(animal.state){
+						case 0:
+							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Why are you bothering an old man?",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"Sorry, wrong cage.",1));
+							Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!",2));
+							switch(getSelection()){
+								case 1:
+									pause(1000);
+									Dialogue.clearDialogue();
+									break;
+								case 2:
+									pause(1000);
+									Dialogue.clearDialogue();
+									Dialogue.renderDialogue.add(new DialogueInfo(3,animal.id,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
+									Dialogue.renderDialogue.add(new DialogueInfo(4,0,1,"We've all been sold and I need your help to get everyone out of here!",1));
+									Dialogue.renderDialogue.add(new DialogueInfo(5,0,1,"They're selling us too!  We're going to be made into food!",2));
+									switch(getSelection()){
+										case 4:
+											pause(1000);
+											Dialogue.clearDialogue();
+											Dialogue.renderDialogue.add(new DialogueInfo(6,animal.id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
+											Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"Alright, I'll be back as soon as I can get it.",1));
+											animal.state = 1;
+											break;
+										
+										case 5:
+											pause(1000);
+											Dialogue.clearDialogue();
+											Dialogue.renderDialogue.add(new DialogueInfo(8,animal.id,0,"Well...in that case, I guess I can make these tired old legs work for just a little bit longer.",0));
+											animal.state = 2;
+											break;
+									}
+									break;
+									
+							}
+							break;
 						case 1:
-							pause(2000);
-							Dialogue.clearDialogue();
+							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"What's takin' ya so long, sonny?  My back's still hurtin'!",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
+							switch(getSelection()){
+									case 1:
+											pause(1000);
+											Dialogue.clearDialogue();
+											break;	
+							}
 							break;
 						case 2:
-							pause(2000);
-							Dialogue.clearDialogue();
-							Dialogue.renderDialogue.add(new DialogueInfo(3,id,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
-							Dialogue.renderDialogue.add(new DialogueInfo(4,0,1,"We've all been sold and I need your help to get everyone out ofhere!",1));
-							Dialogue.renderDialogue.add(new DialogueInfo(5,0,1,"They're selling us too!  We're going to be made into food!",2));
+							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Yer' slower than I am laddie, hurry up and get me out of here.",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
 							switch(getSelection()){
-								case 4:
-									pause(2000);
-									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(6,id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
-							
-									break;
-								
-								case 5:
-									pause(2000);
-									Dialogue.clearDialogue();
-									break;
+									case 1:
+											pause(1000);
+											Dialogue.clearDialogue();
+											break;	
 							}
-							
+							break;
 					}
-			/*
-			 Why are you bothering an old man?
-	A. Sorry, wrong cage. (Dialogue ends)
-	B. Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is
-	   sold!
-		Giraffe: Well why should I go?  I'm just gonna let 'em move me to a new zoo.
-			A. We've all been sold and I need your help to get everyone out of
-			   here!
-				Giraffe: I'll do my best, youngin, but I don't know how much
-					 my back can take.  If you could find me something
-					 to fix my back, I could help you!
-					A. I'm a little busy. (Dialogue ends)
-					B. Alright, I'll be back as soon as I can get it.
-					   (Job)
-			B. They're selling us too!  We're going to be made into food!
-				Giraffe: Well...in that case, I guess I can make these tired
-					 old legs work for just a little bit longer. (Done)
-			 
-			 */
-					Dialogue.renderDialogue.add(new DialogueInfo(0,1,0,"Oh hey flamingo... uhgg hello go sublime sublime hello go go go sublime",0));
-					Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I escaped, and you need to too",1));
-					Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Hey Giraffe, ill be right back",2));
-					Dialogue.renderDialogue.add(new DialogueInfo(3,0,1,"Is something wrong?",3));
-					switch(getSelection()){
-						case 1:
-							pause(2000);
-							Dialogue.clearDialogue();
-							Dialogue.renderDialogue.add(new DialogueInfo(4,1,0,"Alright, these trees are to low for me to eat off of. It makes my neck hurt, I could use a vacation.",0));
-							
-							break;
-						case 2:
-							//JUST THERE FOR SHOW
-							pause(500);
-							Dialogue.clearDialogue();
-							Dialogue.renderDialogue.add(new DialogueInfo(5,1,0,"Its just my neck. What are you doing out of your cage?",0));
-							Dialogue.renderDialogue.add(new DialogueInfo(6,0,1,"Oh yea, it doesn't look so good. You need to get yourself out of this cage",1));
-							Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"I can tell you are in pain, but no time for that, you have to escape and save your life",2));
-							Dialogue.clearDialogue();
-							break;
-						case 3:
-							pause(500);
-							Dialogue.clearDialogue();
-							Dialogue.renderDialogue.add(new DialogueInfo(5,1,0,"Its just my neck. What are you doing out of your cage?",0));
-							Dialogue.renderDialogue.add(new DialogueInfo(6,0,1,"Oh yea, it doesn't look so good. You need to get yourself out of this cage",1));
-							Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"I can tell you are in pain, but no time for that, you have to escape and save your life",2));
-							switch(getSelection()){
-								case 6:
-									pause(300);
-									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(8,1,0,"You don't look so good yourself. Well until my neck feels better, I'm not leaving.",0));
-									
-								break;
-								case 7:
-									pause(300);
-									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(9,1,0,"Yea, of course there is no time for my pain. You are just like the zookeepers.",0));
-									
-								break;
-							}
-							break;
-					}			
+				break;
 			}
-
+			Dialogue.clearDialogue();
+			((InGameState)gameState).changeGuiState(0);
+		}
+		
 		public void pause(int miliseconds){
 			try{
 				this.sleep(miliseconds);			
