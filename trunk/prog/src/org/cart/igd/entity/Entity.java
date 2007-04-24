@@ -18,7 +18,7 @@ public abstract class Entity
 {
 	public Vector3f position;
 	public Vector3f lastPosition;
-	public Vector3f scale = new Vector3f(.2f,.2f,.2f);
+	public Vector3f scale = new Vector3f(.1f,.1f,.1f);
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
@@ -181,17 +181,17 @@ public abstract class Entity
 	public void render(GL gl){
 		if(model3ds!= null){
 			gl.glPushMatrix();
-			gl.glScalef(scale.x,scale.y,scale.z);
 			gl.glTranslatef(position.x, position.y, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
+			gl.glScalef(scale.x,scale.y,scale.z);
 			model3ds.render(gl);
 			gl.glPopMatrix();
 		}
 		if(modelObj!= null){
 			gl.glPushMatrix();
-			//gl.glScalef(scale.x,scale.y,scale.z);
 			gl.glTranslatef(position.x, position.y, position.z);
-			gl.glRotatef(facingDirection+180, 0f, -1f, 0f);
+			gl.glRotatef(facingDirection, 0f, -1f, 0f);
+			//gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}

@@ -25,12 +25,11 @@ public class Item extends Entity {
 	float difference;
 	
 	
-	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Texture texture, Vector3f location){
+	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Vector3f location){
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.id = id;
 		this.amount = amount;
-		this.texture = texture;
 	}
 	
 	public void update(Vector3f playerPosition){
