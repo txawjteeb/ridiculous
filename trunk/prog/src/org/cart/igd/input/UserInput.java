@@ -24,6 +24,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public int[] mouseRelease = new int[] { 0, 0 };
 	public int[] mouseDragged = new int[] { 0, 0 };
 	
+	
 	public GameAction keyActions[] = new GameAction[512];
 	public GameAction mouseActions[] = new GameAction[20];
 	public GameAction buttonActions[] = new GameAction[50];

@@ -7,17 +7,20 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.entity.*;
 import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
+import org.cart.igd.gui.*;
+import org.cart.igd.states.*;
 
 
 
 public class Animal extends Entity{
 	/*
-	 states
-	 0 = incage not talked to
-	 1 = incage waiting for item
-	 2 = incage ready to be saved
-	 3 = saved by bush
-	 4 = saved in party
+	//			 states
+	 //0 = incage not talked to
+	 //1 = incage waiting for item
+	 //2 = incage ready to be saved
+	 //3 = incage ready to be saved after item given
+	 //4 = saved by bush
+	 //5 = saved in party
 	 
 	 
 	 ids
@@ -35,23 +38,37 @@ public class Animal extends Entity{
 	public String name;
 	public int id;
 	public int state = 0;
+	private boolean Collide = false;
+	private InGameState igs;
 	
-	
-	public Animal(String name,int id,float fd, float bsr, OBJModel model, Vector3f location){
+	public Animal(String name,int id,float fd, float bsr, OBJModel model, Vector3f location,InGameState igs){
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.id = id;
+		this.igs = igs;
 	}	
 		
 	public void update(Vector3f playerPosition){
-		if(state < 3){
+		System.out.println("state = " + state);
+		if(state < 4){
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
-			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius) state = 1;
+			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius){
+				if(!Collide&&igs.currentGuiState!=1){
+					//if(igs.engageTalk){
+						((Dialogue)igs.gui.get(1)).createDialogue(this);
+						igs.changeGuiState(1);
+					//}
+				}
+				Collide = true;
+			} else{
+				Collide = false;
+			}
 		}
 	}
 	
 	public void display(GL gl){
-		if(state<4)render(gl);
+		System.out.println("state HERE " + state);
+		if(state<5)render(gl);
 	}
 }
