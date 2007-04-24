@@ -285,10 +285,6 @@
 				<folder>src\org\cart\igd\discreet</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\org\cart\igd\entity\Animal.java</path>
-				<folder>src\org\cart\igd\entity</folder>
-			</fileitem>
-			<fileitem>
 				<path>src\org\cart\igd\entity\Entity.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
@@ -317,8 +313,16 @@
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\Player.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\entity\PseudoEntity.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\Animal.java</path>
+				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\GameObjective.java</path>
