@@ -36,10 +36,10 @@ public class InGameState extends GameState
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
+	public Entity player;
 	
 	
 	private Camera camera;
-	private Entity player;
 	private OBJModel playerSprite;
 	private OBJModel partySnapper;
 	private OBJModel zoopaste;
@@ -100,10 +100,10 @@ public class InGameState extends GameState
 		*/
 		OBJModel guardo = new OBJModel(gl, "data/models/guard_vm");
 		
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guardo));
-		entities.add(new Guard(new Vector3f(30f,0f,-20f),0f,20f,guard));//3ds guard
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guardo));
-		entities.add(new Guard(new Vector3f(-30f,0f,-20f),0f,20f,guardo));
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guardo,player));
+		entities.add(new Guard(new Vector3f(30f,0f,-20f),0f,20f,guard,player));//3ds guard
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guardo,player));
+		entities.add(new Guard(new Vector3f(-30f,0f,-20f),0f,20f,guardo,player));
 		
 		/* test walking guard*/
 		((Guard)entities.get(0)).path.add(new Vector3f(50,0,30));
