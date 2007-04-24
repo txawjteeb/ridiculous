@@ -26,7 +26,7 @@ public class Guard extends Entity
 	}
 	
 	/**
-	 * Test whether the player's animal is withing range 
+	 * Test whether the player's animal is within range 
 	 **/
 	public void lookForTarget(){
 		
@@ -46,36 +46,34 @@ public class Guard extends Entity
 			float xDiff = Math.abs(position.x - target.x);
 			float zDiff = Math.abs(position.z - target.z);
 			
-			double refAngleRad = Math.atan(zDiff/xDiff);
-			
-			System.out.println(""+currentTarget);
+			float refAngleRad = (float)Math.atan(zDiff/xDiff);
 			
 			/* quadrant 1*/
 			if( position.x < target.x && 
 				position.z < target.z )
 			{
-				facingDirection = (float)Math.toDegrees(refAngleRad);
+				facingDirection = refAngleRad * 0.0174f;
 			}
 			
 			/* quadrant 2*/
 			if( position.x > target.x && 
 				position.z < target.z )
 			{
-				facingDirection = 90f+(float)Math.toDegrees(refAngleRad);
+				facingDirection = 90f + (refAngleRad * 0.0174f);
 			}
 			
 			/* quadrant 3*/
 			if( position.x > target.x && 
 				position.z > target.z )
 			{
-				facingDirection = 180f+(float)Math.toDegrees(refAngleRad);
+				facingDirection = 180f + (refAngleRad * 0.0174f);
 			}
 			
 			/* quadrant 4*/
 			if( position.x < target.x && 
 				position.z > target.z )
 			{
-				facingDirection = 270f+(float)Math.toDegrees(refAngleRad);
+				facingDirection = 270f + (refAngleRad * 0.0174f);
 			}
 			
 			/* change course when target reached*/
@@ -85,21 +83,18 @@ public class Guard extends Entity
 			}
 			
 			walkForward(elapsedTime);
-			
-			
 		}
-		
 	}
 	
-	private void getNextTarget(){
-		if(currentTarget < path.size()-1){
+	private void getNextTarget()
+	{
+		if(currentTarget < path.size()-1)
+		{
 			currentTarget++;
 			target = path.get(currentTarget);
-			
 		}else{
 			currentTarget=0;
 			target = path.get(currentTarget);
 		}
 	}
-	
 }
