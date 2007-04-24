@@ -80,7 +80,12 @@ public class InGameGUI extends GUI
 		// g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
 		// g.drawBitmapString("Button", 3, 3);
 		// g.drawImage(texAnimalButton, 200,200);
-		hudLeft.updateAndDraw(g);
+		
+		if(((InGameState)gameState).nearBush){
+			hudLeft.updateAndDraw(g);
+		}
+		
+		
 		hudBottom.updateAndDraw(g);
 
 		hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );

@@ -64,6 +64,12 @@ public abstract class Entity
 		*/
 	}
 	
+	/**
+	 * @param Vector3f pos: location of the entity 
+	 * @param float fD: direction entity is facing ( y rotation )
+	 * @param float bsr: bounding sphere radius used for collision detection
+	 * @param Model model: .obj format file data
+	 **/
 	public Entity(Vector3f pos, float fD, float bsr, OBJModel model)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
 		this(pos,fD,bsr);

@@ -69,6 +69,9 @@ public class InGameState extends GameState
 	private GameAction mouseWheelUp;
 	private GameAction mouseWheelDown;
 	
+	public Entity bush;
+	public boolean nearBush = false;
+	
 	
 	public InGameState(GL gl)
 	{
@@ -93,6 +96,9 @@ public class InGameState extends GameState
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
+		OBJModel treeModel = new OBJModel(gl,"data/models/party_snapper");
+		
+		bush = new Bush( new Vector3f(0,0,0), 20f, playerSprite,this);
 	
 		/*
 		Model guardo = null;
@@ -120,15 +126,15 @@ public class InGameState extends GameState
 		
 		/* add collectable object to the map */
 		items.add(new Item("Zoo Paste",7,1,0f,1f,
-				new OBJModel(gl,"data/models/TreeTest"),
+				treeModel,
 				new Vector3f(15f,0f,15f),false,false));
 		
 		items.add(new Item("Paddle Ball",6,1,0f,1f,
-				new OBJModel(gl,"data/models/TreeTest"),
+				treeModel,
 				new Vector3f(-15f,0f,15f),false,false));
 				
 		items.add(new Item("Party Snapper",8,1,0f,1f,
-				new OBJModel(gl,"data/models/party_snapper"),
+				treeModel,
 				new Vector3f(-15f,0f,-15f),true,true));
 				
 		animals.add(new Animal("Giraffe",4,0f,5f,new OBJModel(gl,"data/models/giraffe_scaled_2_km"), new Vector3f(-30f,0f,-30f)));
@@ -187,6 +193,10 @@ public class InGameState extends GameState
 	{
 		updateItems();
 		updateAnimals();
+		
+		((Bush)bush).update(elapsedTime);
+
+		
 
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
@@ -262,15 +272,20 @@ public class InGameState extends GameState
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
-		
-		
 		/* Setup Camera */
 		camera.lookAt(glu, player);
 		
+		
+		
+		
+		/* render the bush */
+		bush.render(gl);
+		
 		/* Render Player Model */
 		
-		test3ds.render(gl);
-			//playerSprite.draw(gl);
+		//test3ds.render(gl);
+		//playerSprite.draw(gl);
+		
 		player.render(gl);
 
 		Iterator itr = entities.iterator();
