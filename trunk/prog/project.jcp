@@ -285,6 +285,10 @@
 				<folder>src\org\cart\igd\discreet</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\Bush.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\entity\Entity.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 			</fileitem>

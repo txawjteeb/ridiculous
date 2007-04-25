@@ -60,7 +60,7 @@ public class Animal extends Entity{
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius){
 				if(!Collide&&igs.currentGuiState!=1){
 					//if(igs.engageTalk){
-						((Dialogue)igs.gui.get(1)).createDialogue(this);
+						((Dialogue)igs.gui.get(1)).createDialogue(this,igs);
 						igs.changeGuiState(1);
 					//}
 				}

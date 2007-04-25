@@ -15,11 +15,13 @@ public class Dialogue extends GUI {
 	static ArrayList <Leaf> renderLeaves = new ArrayList <Leaf>();
 	private UserInput input;
 	private Texture[] animalIcons = new Texture[10];
-	private Texture dialogueBackground;
+//	private Texture background;
 	private Texture border;
 	private Texture leaf,fog;
-	private Texture leaves1024,background1024;
+	private Texture leaves1024,background;
 	private float fogdegree  = 0f;
+	public float alphaBackground = 0f;
+	public boolean down = false;
 	/**
 	 * param1 informative string
 	 * param2 continuous action
@@ -42,9 +44,10 @@ public class Dialogue extends GUI {
 		input.bindToKey(testChangeGui, KeyEvent.VK_T);
 	}
 	
-	public void createDialogue(Animal animal){
-		
-		new ActiveDialogue(animal).start();
+	public void createDialogue(Animal animal,InGameState igs){
+		down = false;
+		alphaBackground = 0f;
+		new ActiveDialogue(animal,igs).start();
 	}
 	
 	
@@ -53,20 +56,18 @@ public class Dialogue extends GUI {
 		for(int i = 0;i<animalIcons.length;i++){
 			animalIcons[i] = Kernel.display.getRenderer().loadImage("data/images/dialogue/" + i + ".png");
 		}
-		dialogueBackground = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
+		//dialogueBackground = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
 		border = Kernel.display.getRenderer().loadImage("data/images/dialogue/border.png");
 		
 		leaves1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaves1024_cw.png");
-		background1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/dialogue_background1024_cw.png");
+		background = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
 		leaf = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaf.png");
 		fog = Kernel.display.getRenderer().loadImage("data/images/dialogue/fog.png");
 		
 	}
 	
-	boolean t = true;
 	public void update(long elapsedTime){
-	//	if(t)new ActiveDialogue(4).start();
-	//	t = false;
+		
 	}
 	
 	public void handleInput(long elapsedTime){
@@ -77,9 +78,15 @@ public class Dialogue extends GUI {
 
 	public void render(GLGraphics g){
 		g.glgBegin();
+			if(down){
+				alphaBackground-=.15f;
+			} else {
+				alphaBackground+=.07f;
+			}
 			
-			g.drawImageAlpha(background1024,0,0,1f);
-			g.drawImageHue(leaves1024,0,0,new float[]{1f,1f,1f,.94f+new Random().nextFloat()/20});
+			g.drawImageAlpha(background,0,0,alphaBackground);
+			
+		//	g.drawImageHue(leaves1024,0,0,new float[]{1f,1f,1f,.94f+new Random().nextFloat()/20});
 
 			for(int i = 0;i<renderDialogue.size();i++){
 				DialogueInfo di = renderDialogue.get(i);
@@ -156,7 +163,7 @@ public class Dialogue extends GUI {
 		boolean rising = true;
 		boolean falling = false;
 		float alpha = 0f;
-	//	int originalx;
+		int originalx;
 		int originaly;
 		
 		int mouseOverTime = 0;
@@ -227,42 +234,91 @@ public class Dialogue extends GUI {
 				break;
 			}
 			
-		//	originalx=x;
+			originalx=x;
 			originaly=y;
 		//	x-=40;
-			y-=80;
+		
+		/*
+			if(type!=0){
+				y-=80;	
+			} else {
+				x -= 80;
+			}
+		*/	
+			
+			if(type!=0){
+				x+=80;	
+			} else {
+				x -= 80;
+			}
 		}
 		
 		public void update(){
-			if(rising){				
-				y+=risespeed;
-				if(risespeed>1)risespeed--;
-				alpha+=.06f;
-				if(y>originaly){;
+			if(rising){	
+				if(type >0){
+					/*
+					y+=risespeed;
+					if(risespeed>1)risespeed--;
+					alpha+=.06f;
+					if(y>originaly){
+						rising = false;
+						alpha = 1f;
+						y = originaly;
+					}
+					*/
+					x-=risespeed;
+					if(risespeed>1)risespeed--;
+					alpha+=.06f;
+					if(x<originalx){
+						rising = false;
+						alpha = 1f;
+						x = originalx;
+					}
+				}else{
+					x+=risespeed;
+					if(risespeed>1)risespeed--;
+					alpha+=.06f;
+					if(x>originalx){
 					rising = false;
 					alpha = 1f;
-					y = originaly;
+					x = originalx;
 				}
-			} else if(falling){
-				y-=risespeed;
-				risespeed++;
-				alpha-=.06f;
-			} else {
+			}			
 				
-				mouseOver = false;
-				if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64){
-					mouseOver = true;
-					mouseOverTime++;
-					if(!swinging){
-						degree = 0;
-						left = true;
-						swinging = true;	
-					} 
-						counter = 0;
-						alphaSwing = .6f;
-				} else{
-					mouseOverTime = 0;
-				}	
+			} else if(falling){
+				if(type ==0){
+					/*
+					x+=risespeed;
+					risespeed++;
+					alpha-=.06f;
+					*/
+					y+=risespeed;
+					risespeed++;
+					alpha-=.06f;
+				} else {
+					y-=risespeed;
+					risespeed++;
+					alpha-=.06f;	
+				}
+				
+			} else {
+				if(type!=0){
+					mouseOver = false;
+					if(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64){
+						mouseOver = true;
+						mouseOverTime++;
+						if(!swinging){
+							degree = 0;
+							left = true;
+							swinging = true;	
+						} 
+							counter = 0;
+							alphaSwing = .6f;
+					} else{
+						mouseOverTime = 0;
+					}
+				}
+					
 			}
 			
 		}
@@ -303,15 +359,15 @@ public class Dialogue extends GUI {
 					} else{
 						alphaSwing +=.05f;
 							
-							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{alphaSwing,1f,alphaSwing,1f});	
+							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{alphaSwing,1f,alphaSwing,alpha});	
 				
 						
-						g.drawImageRotate(border,x,y,degree);
+						g.drawImageRotateHue(border,x,y,degree, new float[]{1f,1f,1f,alpha});
 					}
 					
 			
 					for(int i = 0;i<brokenWords.length;i++){
-						g.drawBitmapStringStroke(brokenWords[i],x+76,y+50-i*20,1,new float[]{.6f,1f,.6f,1f},new float[]{0f,0f,0f,1f});
+						g.drawBitmapStringStroke(brokenWords[i],x+76,y+50-i*20,1,new float[]{.6f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
 					}
 				
 					
@@ -348,7 +404,7 @@ public class Dialogue extends GUI {
 								g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,alpha});
 						}
 						for(int i = 0;i<brokenWords.length;i++){
-							g.drawBitmapStringStroke(brokenWords[i],x+76,y+50-i*20,1,new float[]{1f,1f,1f,1f},new float[]{0f,0f,0f,alpha});
+							g.drawBitmapStringStroke(brokenWords[i],x+76,y+50-i*20,1,new float[]{1f,1f,1f,alpha},new float[]{0f,0f,0f,alpha});
 						}
 					//	g.drawBitmapStringStroke(words,x+76,y+20,1,new float[]{1f,1f,1f,1f},new float[]{0f,0f,0f,1f});
 					} else {
@@ -358,9 +414,9 @@ public class Dialogue extends GUI {
 							g.drawImageRotateHue(animalIcons[animal],x,y,degree,new float[]{1f,alphaSwing,alphaSwing,alpha});
 					
 						
-						g.drawImageRotate(border,x,y,degree);
+						g.drawImageRotateHue(border,x,y,degree, new float[]{1f,1f,1f,alpha});
 						for(int i = 0;i<brokenWords.length;i++){
-							g.drawBitmapStringStroke(brokenWords[i],x+76,y+50-i*20,1,new float[]{1f,.6f,.6f,1f},new float[]{0f,0f,0f,alpha});
+							g.drawBitmapStringStroke(brokenWords[i],x+76,y+50-i*20,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
 						}
 					//	g.drawBitmapStringStroke(words,x+76,y+20,1,new float[]{1f,.6f,.6f,1f},new float[]{0f,0f,0f,1f});
 					}
@@ -373,11 +429,14 @@ public class Dialogue extends GUI {
 	}
 
 	class ActiveDialogue extends Thread{
-		int lastMousePress[] = new int[]{-110,-110};
+		int lastMousePress[] = new int[]{0,0};
 		Animal animal;
-
-		public ActiveDialogue(Animal animal){
+		InGameState igs;
+		public ActiveDialogue(Animal animal, InGameState igs){
 			this.animal = animal;
+			this.igs = igs;
+			lastMousePress[0] = Kernel.userInput.mousePress[0];
+			lastMousePress[1] = Kernel.userInput.mousePress[1];
 		}
 		
 		public void run(){
@@ -397,6 +456,7 @@ public class Dialogue extends GUI {
 							Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!",2));
 							switch(getSelection()){
 								case 1:
+									((Dialogue)igs.gui.get(1)).down = true;
 									pause(1000);
 									Dialogue.clearDialogue();
 									break;
@@ -412,6 +472,13 @@ public class Dialogue extends GUI {
 											Dialogue.clearDialogue();
 											Dialogue.renderDialogue.add(new DialogueInfo(6,animal.id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
 											Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"Alright, I'll be back as soon as I can get it.",1));
+											switch(getSelection()){
+												case 7:
+													break;
+											}
+											
+											((Dialogue)igs.gui.get(1)).down = true;
+											pause(1000);
 											animal.state = 1;
 											break;
 										
@@ -419,6 +486,10 @@ public class Dialogue extends GUI {
 											pause(1000);
 											Dialogue.clearDialogue();
 											Dialogue.renderDialogue.add(new DialogueInfo(8,animal.id,0,"Well...in that case, I guess I can make these tired old legs work for just a little bit longer.",0));
+											pause(3000);
+											setFalling();
+											((Dialogue)igs.gui.get(1)).down = true;
+											pause(1000);
 											animal.state = 2;
 											break;
 									}
@@ -431,6 +502,7 @@ public class Dialogue extends GUI {
 							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
 							switch(getSelection()){
 									case 1:
+											((Dialogue)igs.gui.get(1)).down = true;
 											pause(1000);
 											Dialogue.clearDialogue();
 											break;	
@@ -440,7 +512,9 @@ public class Dialogue extends GUI {
 							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Yer' slower than I am laddie, hurry up and get me out of here.",0));
 							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
 							switch(getSelection()){
+								
 									case 1:
+											((Dialogue)igs.gui.get(1)).down = true;
 											pause(1000);
 											Dialogue.clearDialogue();
 											break;	
@@ -462,6 +536,8 @@ public class Dialogue extends GUI {
 		}
 		
 		public int getSelection(){
+		//	lastMousePress[0] = -100;
+			//lastMousePress[1] = -100;
 			int id = -1;
 			while(true){
 				if(newClick()){
@@ -478,6 +554,13 @@ public class Dialogue extends GUI {
 				di.falling = true;
 			}
 			return id;
+		}
+		
+		public void setFalling(){
+			for(int i = 0;i < Dialogue.renderDialogue.size();i++){
+				DialogueInfo di = Dialogue.renderDialogue.get(i);
+				di.falling = true;
+			}
 		}
 		
 		public boolean newClick(){	
