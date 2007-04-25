@@ -1,18 +1,6 @@
 == Purpose ==
  This Wiki was created to aid in notifying the public about the Center for Advanced Reasearch and Technology's Interactive Game Design lab's newest project entitled *"Zoo Escape".*
 
-<div id="p-search" class="portlet">
-		<h5><label for="searchInput">Search</label></h5>
-		<div id="searchBody" class="pBody">
-			<form action="/wiki/Special:Search" id="searchform"><div>
-				<input id="searchInput" name="search" type="text" title="Search Wikipedia [f]" accesskey="f" value="" />
-				<input type='submit' name="go" class="searchButton" id="searchGoButton"	value="Go" />&nbsp;
-
-				<input type='submit' name="fulltext" class="searchButton" id="mw-searchButton" value="Search" />
-			</div></form>
-		</div>
-	</div>
-
 == Links ==                               
 
   * [http://code.google.com/p/ridiculous/wiki/Concept_Art?updated=Concept_Art&ts=1176843100 Art]
@@ -32,7 +20,6 @@ http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/fin
 
 
 [http://cart.org/ http://i169.photobucket.com/albums/u209/M1sfire/cart_logo_resize_da.png][http://igd.cart.org/ http://i169.photobucket.com/albums/u209/M1sfire/bluestar_logo_resize_da.png]
-
 
 
 
