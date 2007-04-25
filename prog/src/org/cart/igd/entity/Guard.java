@@ -14,6 +14,7 @@ public class Guard extends Entity
 	private Vector3f target = new Vector3f(0,0,0);
 	private boolean moving = true;
 	private float hearingRadius = 5f;
+	private boolean lostTarget = false;
 	
 	private Entity player;
 	
@@ -55,9 +56,11 @@ public class Guard extends Entity
 		
 		if( playerDistance < ( hearingRadius + player.boundingSphereRadius ) )
 		{
+			lostTarget = false;
 			target = player.position;
-		} else {//loose target back to patrol
-			target = path.get(0);
+		} else if(!lostTarget){//loose target back to patrol
+			target = null;
+			lostTarget = true;
 		}
 	}
 	
@@ -69,7 +72,7 @@ public class Guard extends Entity
 			target=path.get(0);
 		}
 		
-		if(moving == true && target != null && path.size()>0)
+		if(moving == true && target != null)
 		{		
 			float xDiff = Math.abs(position.x - target.x);
 			float zDiff = Math.abs(position.z - target.z);

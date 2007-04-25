@@ -80,31 +80,36 @@ public class Renderer implements GLEventListener
 		
 		gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 		
-		/* Enable and setup lighting */
 		initLighting(gl);
 		
 		/* Create the GLGraphics object for rendering 2D GUI. */
-		g = new GLGraphics();
+		g = new GLGraphics(gl,glu,glut);
 		
-		/* Initialize Game States 
-		 * NOTE: should be initialized outside of renderer class and before it 
-		 * or check for completion of game state before attempting to update*/
+		initGameStates(gl);
+
+		/* Set initial time variable for FPS calculations. */
+		lastFPSCheck = System.currentTimeMillis();
+	}
+	
+	/** 
+	 * Initialize Game States 
+	 * check for completion of game state before attempting to update 
+	 **/
+	public void initGameStates(GL gl){
 		stateManager.addGameState(new MenuState(gl),"MenuState");
 		stateManager.addGameState(new InGameState(gl),"InGameState");
 		stateManager.setCurrentState("MenuState");
 		stateManager.initStates(gl, glu);
-		
-		
-		
-		/* Set initial time variable for FPS calculations. 
-		 * NOTE: this should go into profiler class*/
-		lastFPSCheck = System.currentTimeMillis();
 	}
+	
 	
 	public GameStateManager getStateManager(){
 		return stateManager;
 	}
 	
+	/** 
+	 * Enable and setup lighting 
+	 **/
 	private void initLighting(GL gl)
 	{
 		gl.glEnable(GL.GL_LIGHT0);
@@ -161,7 +166,7 @@ public class Renderer implements GLEventListener
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glLoadIdentity();
 		
-		glu.gluPerspective(45f, (float)width/(float)height, 0.1f, 20000f);
+		glu.gluPerspective(45f, (float)width/(float)height, 0.1f, 1000f);
 		
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();

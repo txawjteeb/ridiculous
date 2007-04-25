@@ -23,6 +23,7 @@ public class Animal extends Entity{
 	 //5 = saved in party
 	 
 	 
+	 
 	 ids
 	 0 flamingo
 	 1 turtles
@@ -35,6 +36,9 @@ public class Animal extends Entity{
 	 8 woodpecker 
 	 9 elephant
 	 */
+	public static final int SAVED_BUSH = 4;
+	public static final int SAVED_PARTY = 5;
+	
 	public String name;
 	public int id;
 	public int state = 0;
@@ -65,6 +69,10 @@ public class Animal extends Entity{
 				Collide = false;
 			}
 		}
+	}
+	
+	public int getState(){
+		return state;
 	}
 	
 	public void display(GL gl){

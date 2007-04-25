@@ -17,6 +17,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.sun.opengl.util.FPSAnimator;
+
+import org.cart.igd.core.Kernel;
 import org.cart.igd.input.UserInput;
 
 public class Display implements WindowListener
@@ -75,6 +77,7 @@ public class Display implements WindowListener
 		//make it run at max speed 100fps on pentiums or 64fps on amd64
 		animator = new FPSAnimator( glCanvas, 100 );
 		animator.setRunAsFastAsPossible( true );
+		Kernel.displayRunning = true;
 	}
 	
 	public Renderer getRenderer(){
@@ -135,6 +138,7 @@ public class Display implements WindowListener
 	
 	public void stop()
 	{
+		Kernel.displayRunning = false;
 		try
 		{
 			animator.stop();

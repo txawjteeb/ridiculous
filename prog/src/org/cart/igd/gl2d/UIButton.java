@@ -5,7 +5,7 @@ import org.cart.igd.input.*;
 
 public class UIButton extends UIComponent
 {
-	private boolean pressed = false;
+	public boolean enabled = true;
 	
 	public UIButton(String value, int x, int y)
 	{
@@ -28,9 +28,31 @@ public class UIButton extends UIComponent
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
+	
+	/**
+	 * Draw the buttons at forced location regardless of location.
+	 * Will prevent from using press detection methods correctly.
+	 **/
 	public void draw(GLGraphics g, int x, int y)
 	{
-		g.drawImage(getTexture(),x,y,scale,scale);
+		if(enabled == false){
+			g.drawImageHue(getTexture(),x,y,new float[]{.5f,.5f,.5f,.5f} );
+		} else {
+			g.drawImage(getTexture(),x,y,scale,scale);
+		}
+	}
+	
+	
+	/**
+	 * Draw the button at predefined location defined during creation
+	 * */
+	public void draw(GLGraphics g)
+	{
+		if(enabled == false){
+			g.drawImageHue(getTexture(),getX(),getY(),new float[]{.5f,.5f,.5f,.5f} );
+		} else {
+			g.drawImage(getTexture(),getX(),getY(),scale,scale);
+		}
 	}
 	
 	public void draw(GLGraphics g, int x, int y, float alpha)
@@ -51,13 +73,16 @@ public class UIButton extends UIComponent
 		if(getAction() == null){
 			System.out.println("UIButton: GameAction action is null");
 		}
-		
+	}
+	
+	public void moveTo(int x, int y){
+		this.setXY(x,y);
 	}
 	
 	public void getFocus()
 	{
 		rgb = new float[] { (102f/255f), (153f/255f), (204f/255f) };
-		pressed = true;
+		enabled = true;
 	}
 	
 	public void dropFocus()
