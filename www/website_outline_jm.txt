@@ -1,0 +1,25 @@
+Home
+ - Updates/News
+
+Gameplay 
+ - Overview 
+ - Features
+ - Characters
+ - Pyschology
+
+Media
+ - Video
+ - Concept Art
+ - Screenshots
+ - World Map
+
+Support
+ - About Zoo Escape 
+ - System Requirements
+ - Contact Us
+ - Frequently Asked Questions
+ - Legal Information
+
+Downloads
+ - Download the game
+   // include instructions on how to operate it, i.e. lan server. 
