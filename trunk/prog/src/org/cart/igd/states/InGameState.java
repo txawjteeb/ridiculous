@@ -123,6 +123,14 @@ public class InGameState extends GameState
 		((Guard)entities.get(1)).path.add(new Vector3f(-30,0,30));
 		((Guard)entities.get(1)).path.add(new Vector3f( 30,0, 30));
 		
+		/* test walking guard */
+		((Guard)entities.get(2)).path.add(new Vector3f(30,0,-30));
+		((Guard)entities.get(2)).path.add(new Vector3f( 20,0, 30));
+		
+		/* test walking guard */
+		((Guard)entities.get(3)).path.add(new Vector3f(-30,0,39));
+		((Guard)entities.get(3)).path.add(new Vector3f( 35,0, 35));
+		
 		
 		/* add collectable object to the map */
 		items.add(new Item("Zoo Paste",7,1,0f,1f,
@@ -164,6 +172,11 @@ public class InGameState extends GameState
 		
 		/* Test 3ds Data */
 		test3ds.printData();
+	}
+	
+	public void init(GL gl, GLU glu)
+	{
+		
 	}
 	
 	public void rotateCamera(float amt){
@@ -278,8 +291,6 @@ public class InGameState extends GameState
 		camera.lookAt(glu, player);
 		
 		
-		
-		
 		/* render the bush */
 		bush.render(gl);
 		
@@ -342,11 +353,6 @@ public class InGameState extends GameState
 					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
 			glg.glgEnd();
 		}
-		
-	}
-	
-	public void init(GL gl, GLU glu)
-	{
 		
 	}
 	

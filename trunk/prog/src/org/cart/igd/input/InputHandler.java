@@ -21,13 +21,13 @@ public class InputHandler extends Thread{
 	}
 	
 	public void run(){
-		while(running)
+		while(Kernel.displayRunning)
     	{
     		currentTime = profiler.currentTime;
     		long elapsedTime = currentTime - lastTime;
     		
     		/* prevent unnecesary updates*/
-    		if(elapsedTime > 0 && Kernel.display != null && null != Kernel.display.getRenderer()){
+    		if(elapsedTime > 0){
     			try{
     				if(Kernel.display.getRenderer().getStateManager().
    		 					getCurrentState()!= null)

@@ -3,6 +3,7 @@ package org.cart.igd.gui;
 
 import org.cart.igd.core.Kernel;
 import org.cart.igd.util.Texture;
+import org.cart.igd.game.Animal;
 import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.gl2d.GUITextList;
 import org.cart.igd.gl2d.UIButton;
@@ -81,8 +82,23 @@ public class InGameGUI extends GUI
 		// g.drawBitmapString("Button", 3, 3);
 		// g.drawImage(texAnimalButton, 200,200);
 		
-		if(((InGameState)gameState).nearBush){
-			hudLeft.updateAndDraw(g);
+		/* draw the animal selection, faded buttons for unavailable animals */
+		if(((InGameState)gameState).nearBush)
+		{
+			btBush.draw(g);
+			for(int i = 0;i<((InGameState)gameState).animals.size();i++)
+			{
+				Animal a = ((InGameState)gameState).animals.get(i);
+				
+				if( a.getState() == Animal.SAVED_BUSH )
+				{
+					btBushAnimals[a.id].enabled = true;
+					btBushAnimals[a.id].draw(g);
+				} else {
+					btBushAnimals[a.id].enabled = false;
+					btBushAnimals[a.id].draw(g);
+				}
+			}
 		}
 		
 		
@@ -95,7 +111,7 @@ public class InGameGUI extends GUI
 		int incr = 256;
 		for(int i = 0; i<((InGameState)gameState).items.size();i++){
 			if(((InGameState)gameState).items.get(i).state == 1){
-				btItems[((InGameState)gameState).items.get(i).id].draw(g, incr, 0);
+				btItems[((InGameState)gameState).items.get(i).id].draw(g,incr,0);
 				incr+= 64;
 			}
 		}
@@ -154,7 +170,8 @@ public class InGameGUI extends GUI
 				if (input.isSquareButtonPressed(hudGroup.components.get(iG)))
 				{
 					if (selectedButton != null) {
-						(hudGroup.components.get(iG)).setTexture( selectedButton.getTexture());
+						(hudGroup.components.get(iG)).
+								setTexture( selectedButton.getTexture());
 						(hudGroup.components.get(iG))
 								.setAction(( selectedButton).getAction());
 
@@ -164,7 +181,8 @@ public class InGameGUI extends GUI
 					else if (!animalPickedUp) {
 						hudGroup.components.get(iG).activate();
 						//hudGroup.components.get(iG)
-						textList.addText(hudGroup.components.get(iG).getAction().getInfo());
+						textList.addText(hudGroup.components.get(iG).
+								getAction().getInfo());
 					}
 				}
 			}
@@ -173,8 +191,8 @@ public class InGameGUI extends GUI
 			if(input.isSquareButtonPressed(btQuestLog)) btQuestLog.activate();
 			
 			/**
-			 * make sure the button is not still attached when its not dropped off at
-			 * a proper location in the paw button 
+			 * make sure the button is not still attached when its not dropped 
+			 * off at a proper location in the paw button 
 			 **/
 			if (!animalPickedUp) {
 				selectedButton = null;

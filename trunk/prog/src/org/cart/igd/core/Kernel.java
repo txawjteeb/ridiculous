@@ -15,6 +15,8 @@ public class Kernel
 	 **/
 	public static Profiler profiler;
 	
+	public static volatile boolean displayRunning = false;
+	
 	/** 
 	 * collection of all the game event 
 	 * note: refer to this for game logic 
