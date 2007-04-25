@@ -115,6 +115,7 @@ public class InGameGUI extends GUI
 				incr+= 64;
 			}
 		}
+		
 
 		textList.draw(g);
 		g.glgEnd();
@@ -262,22 +263,22 @@ public class InGameGUI extends GUI
 		texItemIco[0] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/paddleball_sp.png");
 		texItemIco[1] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/toothpaste_sp.png");
+				"data/images/gui/fish_sp.png");
 		texItemIco[2] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/paddleball_sp.png");
+				"data/images/gui/hotdog_jh64.png");
 		texItemIco[3] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/paddleball_sp.png");
+				"data/images/gui/disguise_glasses64_jh.png");
 		texItemIco[4] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/paddleball_sp.png");
+				"data/images/gui/disguise_glasses64_jh.png");
 		texItemIco[5] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/paddleball_sp.png");
+				"data/images/gui/medicine_bottle_cw.png");
 		texItemIco[6] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/paddleball_sp.png");
 		texItemIco[7] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/toothpaste_sp.png");
 		texItemIco[8] = Kernel.display.getRenderer().loadImage(
-				"data/images/gui/toothpaste_sp.png");
-		
+				"data/images/gui/party_snappers64_cw.png");
+
 		
 
 		texAnimalIco[0] = Kernel.display.getRenderer().loadImage(

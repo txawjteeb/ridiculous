@@ -7,6 +7,7 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.entity.*;
 import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
+import org.cart.igd.input.*;
 
 public class Item extends Entity {
 	/*
@@ -50,24 +51,38 @@ public class Item extends Entity {
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius) state = 1;
-		}
-		if(bounce){
-				difference+=.1f;
-			if(up){
-				position.y+=.1f;
-				if(difference>1f){
-					difference = 0f;
-					up = false;
-				}
-			} else{
-				position.y-=.1f;
-				if(difference>1f){
-					difference = 0f;
-					up = true;
+			if(bounce){
+					difference+=.1f;
+				if(up){
+					position.y+=.1f;
+					if(difference>1f){
+						difference = 0f;
+						up = false;
+					}
+				} else{
+					position.y-=.1f;
+					if(difference>1f){
+						difference = 0f;
+						up = true;
+					}
 				}
 			}
+			if(turn)facingDirection+=4f;
+		} else if(state == 1){
+			
+		}	
+	}
+	
+	public void display2d(GL gl){
+		if(state == 1){
+			
 		}
-		if(turn)facingDirection+=4f;
+	}
+	
+	public void display3d(GL gl){
+		if(state == 0){
+			render(gl);
+		}
 	}
 }
 

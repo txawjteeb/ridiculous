@@ -91,7 +91,7 @@ public class InGameState extends GameState
 		
 							
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs");
-		worldMap		= new OBJModel(gl, "data/models/zoo_map_io");
+		worldMap		= new OBJModel(gl, "data/models/zoo_map_km");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
@@ -133,18 +133,32 @@ public class InGameState extends GameState
 		
 		
 		/* add collectable object to the map */
-		items.add(new Item("Zoo Paste",7,1,0f,1f,
+				//0 reserverd
+		items.add(new Item("Fish",1,1,0f,1f,
 				treeModel,
-				new Vector3f(15f,0f,15f),false,false));
-		
+				new Vector3f(-15f,0f,-15f),true,true));
+		items.add(new Item("Hotdog",2,1,0f,1f,
+				treeModel,
+				new Vector3f(-15f,0f,-15f),true,true));
+				//3 reserved
+		items.add(new Item("Disguise Glasses",4,1,0f,1f,
+				treeModel,
+				new Vector3f(-15f,0f,-15f),true,true));
+		items.add(new Item("Medication",5,1,0f,1f,
+				treeModel,
+				new Vector3f(-15f,0f,-15f),true,true));
 		items.add(new Item("Paddle Ball",6,1,0f,1f,
 				treeModel,
 				new Vector3f(-15f,0f,15f),false,false));
-				
+		items.add(new Item("Zoo Paste",7,1,0f,1f,
+				treeModel,
+				new Vector3f(15f,0f,15f),false,false));
 		items.add(new Item("Party Snapper",8,1,0f,1f,
 				treeModel,
 				new Vector3f(-15f,0f,-15f),true,true));
-				
+	
+		
+					
 		animals.add(new Animal("Giraffe",4,0f,5f,new OBJModel(gl,"data/models/giraffe_scaled_2_km"), new Vector3f(10f,0f,0f),this));
 		
 		
@@ -311,9 +325,7 @@ public class InGameState extends GameState
 			
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
-			if(item.state == 0){
-				item.render(gl);
-			}
+			item.display3d(gl);
 		}
 		
 		for(int i = 0;i<animals.size();i++){
