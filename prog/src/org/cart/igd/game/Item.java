@@ -47,7 +47,7 @@ public class Item extends Entity {
 	}
 	
 	public void update(Vector3f playerPosition){
-		if(state == 0){
+		if(state == 0){ // in 3d world
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius) state = 1;
@@ -68,14 +68,13 @@ public class Item extends Entity {
 				}
 			}
 			if(turn)facingDirection+=4f;
-		} else if(state == 1){
+		} else if(state == 1){ // in inventory
 			
 		}	
 	}
 	
 	public void display2d(GL gl){
 		if(state == 1){
-			
 		}
 	}
 	
@@ -85,4 +84,3 @@ public class Item extends Entity {
 		}
 	}
 }
-

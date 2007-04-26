@@ -351,9 +351,9 @@ public class Dialogue extends GUI {
 							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{alphaSwing,1f,alphaSwing,1f});	
 
 						if(mouseOverTime > 5){
-								g.drawImageRotateHue(border,x,y,degree,new float[]{.2f,.2f,1f,1f});
+								g.drawImageRotateHue(border,x,y,degree,new float[]{.2f,.2f,1f,alpha});
 						} else {
-								g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,1f});
+								g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,alpha});
 						}
 					
 					} else{
@@ -399,7 +399,7 @@ public class Dialogue extends GUI {
 							g.drawImageRotateHue(animalIcons[animal],x,y,degree, new float[]{1f,alphaSwing,alphaSwing,alpha});
 
 						if(mouseOverTime > 5){
-								g.drawImageRotateHue(border,x,y,degree,new float[]{.2f,.2f,1f,1f});
+								g.drawImageRotateHue(border,x,y,degree,new float[]{.2f,.2f,1f,alpha});
 						} else {
 								g.drawImageRotateHue(border,x,y,degree+new Random().nextInt(30)-15,new float[]{.2f,.2f,1f,alpha});
 						}
