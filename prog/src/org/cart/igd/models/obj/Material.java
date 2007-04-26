@@ -98,7 +98,7 @@ public class Material
 	{
 		try
 		{
-			texture = Kernel.display.getRenderer().loadImage("data/images/"+fnm);
+			texture = Kernel.display.getRenderer().loadImage("data/textures/"+fnm);
 		}
 		catch(Exception e)
 		{
