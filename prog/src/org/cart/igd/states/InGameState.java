@@ -86,32 +86,36 @@ public class InGameState extends GameState
 		}
 
 			
-			
+		OBJModel tree0,tree1,tree2,tree3;
+		tree0 = new OBJModel(gl, "data/models/tree0");
+		tree1 = new OBJModel(gl, "data/models/tree1");
+		tree2 = new OBJModel(gl, "data/models/tree2");
+		tree3 = new OBJModel(gl, "data/models/tree3");				
 
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(0f,0f,20f)));		
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(1f,0f,-35f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(4f,0f,0f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(6f,0f,10f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(16f,0f,20f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(20f,0f,-20f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(12f,0f,22f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(25f,0f,0f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(40f,0f,10f)));		
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(30f,0f,20f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(35f,0f,45f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(42f,0f,-35f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(63f,0f,0f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-10f,0f,20f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-51f,0f,10f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(-15f,0f,7f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(-120f,0f,-41f)));		
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(-680f,0f,20f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-390f,0f,10f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(-6f,0f,32f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(-13f,0f,-6f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-190f,0f,20f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-25f,0f,-25f)));
-		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(-50f,0f,10f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(0f,0f,20f)));		
+		trees.add( new Tree(0f,3f,tree2, new Vector3f(1f,0f,-35f)));
+		trees.add( new Tree(0f,3f,tree3, new Vector3f(4f,0f,0f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(6f,0f,10f)));
+		trees.add( new Tree(0f,3f,tree1, new Vector3f(16f,0f,20f)));
+		trees.add( new Tree(0f,3f,tree2, new Vector3f(20f,0f,-20f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(12f,0f,22f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(25f,0f,0f)));
+		trees.add( new Tree(0f,3f,tree1, new Vector3f(40f,0f,10f)));		
+		trees.add( new Tree(0f,3f,tree3, new Vector3f(30f,0f,20f)));
+		trees.add( new Tree(0f,3f,tree2, new Vector3f(35f,0f,45f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(42f,0f,-35f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(63f,0f,0f)));
+		trees.add( new Tree(0f,3f,tree2, new Vector3f(-10f,0f,20f)));
+		trees.add( new Tree(0f,3f,tree3, new Vector3f(-51f,0f,10f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(-15f,0f,7f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(-120f,0f,-41f)));		
+		trees.add( new Tree(0f,3f,tree2, new Vector3f(-680f,0f,20f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(-390f,0f,10f)));
+		trees.add( new Tree(0f,3f,tree3, new Vector3f(-6f,0f,32f)));
+		trees.add( new Tree(0f,3f,tree0, new Vector3f(-13f,0f,-6f)));
+		trees.add( new Tree(0f,3f,tree1, new Vector3f(-190f,0f,20f)));
+		trees.add( new Tree(0f,3f,tree2, new Vector3f(-25f,0f,-25f)));
+		trees.add( new Tree(0f,3f,tree3, new Vector3f(-50f,0f,10f)));
 		
 			
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs");
@@ -373,6 +377,7 @@ public class InGameState extends GameState
 			tree.modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
+
 		
 		
 		/* Render GUI */
