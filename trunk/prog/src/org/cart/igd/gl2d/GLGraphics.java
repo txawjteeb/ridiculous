@@ -27,9 +27,9 @@ public class GLGraphics
 		this.glut = glut;
 		for(int i=0; i<94; i++)
 		{
-			Font[i] = Kernel.display.getRenderer().loadImage("data/images/new font/"+(i+2)+".png");
+			Font[i] = Kernel.display.getRenderer().loadImage("data/images/fonts/new font/"+(i+2)+".png");
 		}
-		GLGraphics.Cursor = Kernel.display.getRenderer().loadImage("data/images/cursor.png");
+		GLGraphics.Cursor = Kernel.display.getRenderer().loadImage("data/images/gui/cursors/cursor.png");
 	}
 	
 	public void glgBegin()
