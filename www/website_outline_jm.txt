@@ -2,24 +2,53 @@ Home
  - Updates/News
 
 Gameplay 
- - Overview 
+ - Overview
+	An overview will depict the game overall, what can be done in it,
+	just what it does for the player, and how it plays out.   
  - Features
+	Within this page will be a general overview of the important features
+	that make the game unique and enjoyable to the public. 
  - Characters
+	Listings of the important characters will be placed here along with
+	descriptions of each one. 
  - Pyschology
+	Here is where the psychological part of the game will be discussed
+	and explained. 
 
 Media
  - Video
+	The video being done by the Book team will be posted here along with 		any trailers we make. 
  - Concept Art
+	Most of the concept we've worked on will be scanned and input here so 
+	viewers can see the process we went through to make the game. 
  - Screenshots
+	In game photos will be displayed here for visitors to view. 
  - World Map
+	A top view of the whole game will be available for people to look at 		here.
 
 Support
- - About Zoo Escape 
  - System Requirements
+	Basic requirements and recommended requirements to be able to play our
+        game will be listed here. 
  - Contact Us
+	The page will contain important names, emails, and locations on how
+	and where to reach us.
  - Frequently Asked Questions
+	This section will contain questions which are commonly asked by 		visitors and customers interested in our services. 
  - Legal Information
+   //EULA
+	Disclaimers and important legal notices to protect us will be 	displayed in this page. 
 
 Downloads
  - Download the game
-   // include instructions on how to operate it, i.e. lan server. 
+   	This page is where players may download it-if we choose to distribute
+	it this way-and learn how to operate it.  
+
+About
+ - Zoo Escape 
+   	A reiteration of the EULA will be placed here along with a small
+	sentence or two about the game to describe it. 
+ - The Team 
+	Basically, this is the credits portion of the document where our team
+	may put a picture of themselves if they like along with their name. 
+
