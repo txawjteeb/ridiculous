@@ -67,6 +67,9 @@ public class InGameState extends GameState
 	public Entity bush;
 	public boolean nearBush = false;
 	
+	////////////////////////////
+	ArrayList <Tree> trees = new ArrayList<Tree>();
+	
 	
 	public InGameState(GL gl)
 	{
@@ -82,11 +85,37 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 
+			
+			
+
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(0f,0f,20f)));		
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(1f,0f,-35f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(4f,0f,0f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(6f,0f,10f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(16f,0f,20f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(20f,0f,-20f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(12f,0f,22f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(25f,0f,0f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(40f,0f,10f)));		
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(30f,0f,20f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(35f,0f,45f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(42f,0f,-35f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(63f,0f,0f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-10f,0f,20f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-51f,0f,10f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(-15f,0f,7f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree3"), new Vector3f(-120f,0f,-41f)));		
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(-680f,0f,20f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-390f,0f,10f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(-6f,0f,32f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree0"), new Vector3f(-13f,0f,-6f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-190f,0f,20f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree2"), new Vector3f(-25f,0f,-25f)));
+		trees.add( new Tree(0f,3f,new OBJModel(gl, "data/models/tree1"), new Vector3f(-50f,0f,10f)));
 		
-		
-							
+			
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs");
-		worldMap		= new OBJModel(gl, "data/models/zoo_map_vm");
+		worldMap		= new OBJModel(gl, "data/models/ground_cc");
 		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
@@ -331,10 +360,20 @@ public class InGameState extends GameState
 
 		/* Render Land Map */
 		gl.glPushMatrix();
-			gl.glTranslatef(0f, 0f, 0f);
+			gl.glTranslatef(0f, -2f, 0f);
 			gl.glScalef(500f, 500f, 500f);
 			worldMap.draw(gl);
 		gl.glPopMatrix();
+		
+		for(int i = 0;i<trees.size();i++){
+			Tree tree = trees.get(i);
+			gl.glPushMatrix();
+			gl.glTranslatef(tree.position.x,tree.position.y+5f,tree.position.z);
+			gl.glScalef(12f,12f, 12f);
+			tree.modelObj.draw(gl);
+			gl.glPopMatrix();
+		}
+		
 		
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );

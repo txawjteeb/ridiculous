@@ -345,6 +345,10 @@
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\game\Tree.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\gl2d\ButtonSlot.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
 			</fileitem>
