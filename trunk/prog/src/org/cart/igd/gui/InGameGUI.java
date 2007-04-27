@@ -21,6 +21,7 @@ public class InGameGUI extends GUI
 	private UserInput input;
 	
 	/* textures */
+	private Texture texQuestLogIco;
 	private Texture texBush;
 	private Texture texQuestLog;
 	private Texture texEmptySlot;
@@ -34,7 +35,7 @@ public class InGameGUI extends GUI
 	
 	/* buttons */
 	private UIButton btBush;
-	private UIButton btQuestLog;
+
 	private UIButton btBushAnimals[] = new UIButton[10];
 	private UIButton btItems[] = new UIButton[9];
 	private UIButton btGroupAnimals[] = new UIButton[4];
@@ -86,7 +87,7 @@ public class InGameGUI extends GUI
 		/* draw the animal selection, faded buttons for unavailable animals */
 		if(((InGameState)gameState).nearBush)
 		{
-			btBush.draw(g);
+			//btBush.draw(g);
 			for(int i = 0;i<((InGameState)gameState).animals.size();i++)
 			{
 				Animal a = ((InGameState)gameState).animals.get(i);
@@ -122,6 +123,7 @@ public class InGameGUI extends GUI
 			Item item = ((InGameState)gameState).inventory.items.get(i);
 			item.display2d(g,texItemIco[item.id]);
 		}
+		((InGameState)gameState).questlog.display(g,texQuestLogIco,texQuestLog);
 		
 		
 		//System.out.println(((InGameState)gameState).nearBush);
@@ -142,9 +144,9 @@ public class InGameGUI extends GUI
 			((InGameState)gameState).changeGuiState(2);
 		}
 		
-		if(input.isSquareButtonPressed(btBush)){
-			((InGameState)gameState).changeGuiState(1);
-		}
+	//	if(input.isSquareButtonPressed(btBush)){
+	//		((InGameState)gameState).changeGuiState(1);
+	//	}
 		
 		boolean animalPickedUp = false;
 
@@ -198,8 +200,7 @@ public class InGameGUI extends GUI
 				}
 			}
 			
-			
-			if(input.isSquareButtonPressed(btQuestLog)) btQuestLog.activate();
+		
 			
 			/**
 			 * make sure the button is not still attached when its not dropped 
@@ -260,10 +261,12 @@ public class InGameGUI extends GUI
 	/** load texture for the gui components */
 	public void loadImages()
 	{
+		texQuestLog = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/questlog.png");
 		texBush = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/bush_ico_big.png");
 			
-		texQuestLog = Kernel.display.getRenderer().loadImage(
+		texQuestLogIco = Kernel.display.getRenderer().loadImage(
 			"data/images/gui/questlogicon.png");
 		
 		texEmptySlot = Kernel.display.getRenderer().loadImage(
@@ -323,9 +326,8 @@ public class InGameGUI extends GUI
 		hudGroup = new UIWindow("", 0, 0, false);
 
 		// add buttons
-		btBush = new UIButton(texBush, pressQuestLog, 0, 0, 128, 128);
-		btQuestLog = new UIButton(texQuestLog, pressQuestLog, 128, 0, 64, 64);
-		btQuestLog.scale(2f);
+		//btBush = new UIButton(texBush, pressQuestLog, 0, 0, 128, 128);
+
 		
 		for (int iItm = 0; iItm < btItems.length; iItm++) {
 			btItems[iItm] = new UIButton(texItemIco[iItm], useItem[iItm],
@@ -353,14 +355,14 @@ public class InGameGUI extends GUI
 
 		// add gui elements
 
-		hudBottom.add(btQuestLog);
+
 
 
 		//addd some test items
 		//hudBottom.add(btItems[0]);
 		//hudBottom.add(btItems[1]);
 
-		hudLeft.add(btBush);
+		//hudLeft.add(btBush);
 
 		/* add all buttons except the first, which is flamingo */
 		for(int ibt = 1; ibt< btBushAnimals.length;ibt++){

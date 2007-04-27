@@ -349,6 +349,10 @@
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\game\QuestLog.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\game\Tree.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
