@@ -37,7 +37,7 @@ public class GUITextList
     	this.textFadeTime=time;
     }
     
-    public void addText(String txt){
+    public synchronized void addText(String txt){
     	text.addFirst(txt);
     	timeBeforeFade = textFadeTime;
     }
@@ -55,7 +55,7 @@ public class GUITextList
     	
     }
     
-    public void draw(GLGraphics g){
+    public synchronized void draw(GLGraphics g){
     	int iText=0;
     	for(String t: text){
     		g.drawBitmapString(t,x,y+(iText*hSpace));
@@ -64,7 +64,7 @@ public class GUITextList
     	cleanUp();	
     }
     
-    public void update(long elapsedTime){
+    public synchronized void update(long elapsedTime){
     	timeBeforeFade = timeBeforeFade - elapsedTime;
     	if(timeBeforeFade <= 0){
     		addText("");//add blank

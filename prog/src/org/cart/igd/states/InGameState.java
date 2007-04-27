@@ -34,6 +34,14 @@ public class InGameState extends GameState
 	private OBJModel worldMap;
 	private SkyDome skyDome;
 	
+	public String[] infoText = {
+		"sdf",
+		"dd",
+		"dsf",
+		"fd",
+		"sd",
+	};
+	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
 	public ArrayList<Animal> animals = new ArrayList<Animal>();
@@ -132,25 +140,25 @@ public class InGameState extends GameState
 		bush = new Bush( new Vector3f(0,0,0), 20f, guard3ds,this);	
 		
 		/* create and add test guards */
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player));
-		entities.add(new Guard(new Vector3f(30f,0f,-20f),0f,20f,guard,player));//3ds guard
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player));
-		entities.add(new Guard(new Vector3f(-30f,0f,-20f),0f,20f,guard,player));
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player,2f));
+		//entities.add(new Guard(new Vector3f(30f,0f,-20f),0f,20f,guard,player));//3ds guard
+		//entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player));
+		//entities.add(new Guard(new Vector3f(-30f,0f,-20f),0f,20f,guard,player));
 		
 		/* create paths for the guards to follow*/
-		((Guard)entities.get(0)).path.add(new Vector3f(50,0,30));
-		((Guard)entities.get(0)).path.add(new Vector3f(-50,0,20));
-		((Guard)entities.get(0)).path.add(new Vector3f(-100,0,100));
-		((Guard)entities.get(0)).path.add(new Vector3f(100,0,-20));
+		((Guard)entities.get(0)).path.add(new Vector3f(30,0,30));
+		((Guard)entities.get(0)).path.add(new Vector3f(-30,0,30));
+		((Guard)entities.get(0)).path.add(new Vector3f(-30,0,-30));
+		((Guard)entities.get(0)).path.add(new Vector3f(40,0,-40));
 
-		((Guard)entities.get(1)).path.add(new Vector3f(-30,0,30));
-		((Guard)entities.get(1)).path.add(new Vector3f( 30,0, 30));
+		//((Guard)entities.get(1)).path.add(new Vector3f(-30,0,30));
+		//((Guard)entities.get(1)).path.add(new Vector3f( 30,0, 30));
 		
-		((Guard)entities.get(2)).path.add(new Vector3f(30,0,-30));
-		((Guard)entities.get(2)).path.add(new Vector3f( 20,0, 30));
+		//((Guard)entities.get(2)).path.add(new Vector3f(30,0,-30));
+		//((Guard)entities.get(2)).path.add(new Vector3f( 20,0, 30));
 		
-		((Guard)entities.get(3)).path.add(new Vector3f(-30,0,39));
-		((Guard)entities.get(3)).path.add(new Vector3f( 35,0, 35));
+		//((Guard)entities.get(3)).path.add(new Vector3f(-30,0,39));
+		//((Guard)entities.get(3)).path.add(new Vector3f( 35,0, 35));
 		
 		
 		/* add collectable object to the map */
@@ -207,6 +215,12 @@ public class InGameState extends GameState
 	public void init(GL gl, GLU glu)
 	{
 		
+	}
+	
+	public void addInfoText(int index, String txt){
+		if(index<infoText.length){
+			infoText[index] = txt;
+		} 
 	}
 	
 	public void rotateCamera(float amt){
@@ -321,6 +335,7 @@ public class InGameState extends GameState
 		camera.lookAt(glu, player);
 		
 		
+		
 		/* render the bush */
 		bush.render(gl);
 		
@@ -339,6 +354,10 @@ public class InGameState extends GameState
 			e.render(gl);
 		}	
 			
+		/* guard debug text*/
+		addInfoText(0,"guard 1  ref angle: "+((Guard)entities.get(0)).refAngleRad);
+		addInfoText(1,"player yrot: "+ player.getFacingDirection());
+		addInfoText(2,"guard1 yrot: "+entities.get(0).facingDirection);
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
 			item.display3d(gl);
@@ -383,15 +402,22 @@ public class InGameState extends GameState
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		
+		/* draw cursor and info text */
+		GLGraphics glg = Kernel.display.getRenderer().getGLG();
+		glg.glgBegin();
 		if(!mouseCameraRotate.isActive())
 		{
-			GLGraphics glg = Kernel.display.getRenderer().getGLG();
-			glg.glgBegin();
 			glg.drawImage(
 					GLGraphics.Cursor, Kernel.userInput.mousePos[0], 
 					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
-			glg.glgEnd();
 		}
+		
+		int i = 0;
+		for(String s: infoText){
+			i++;
+			glg.drawBitmapString(s, 600 , 600 - (i*16));
+		}
+		glg.glgEnd();
 		
 	}
 	
