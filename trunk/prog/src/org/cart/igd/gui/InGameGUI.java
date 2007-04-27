@@ -12,6 +12,7 @@ import org.cart.igd.gl2d.UIWindow;
 import org.cart.igd.input.*;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.states.GameState;
+import org.cart.igd.game.*;
 
 import java.awt.event.*;
 
@@ -108,13 +109,22 @@ public class InGameGUI extends GUI
 		hudGroup.updateAndDraw(g);
 		
 		/* draw Items that are picked up */
-		int incr = 256;
-		for(int i = 0; i<((InGameState)gameState).items.size();i++){
-			if(((InGameState)gameState).items.get(i).state == 1){
-				btItems[((InGameState)gameState).items.get(i).id].draw(g,incr,0);
-				incr+= 64;
-			}
+	//	int incr = 256;
+	//	for(int i = 0; i<((InGameState)gameState).items.size();i++){
+	///		if(((InGameState)gameState).items.get(i).state == 1){
+		//		btItems[((InGameState)gameState).items.get(i).id].draw(g,incr,0);
+		//		incr+= 64;
+	//		}
+	//	}
+	
+		/* draw Items that are picked up from the Items arraylist in IGS */
+		for(int i = 0;i<((InGameState)gameState).inventory.items.size();i++){
+			Item item = ((InGameState)gameState).inventory.items.get(i);
+			item.display2d(g,texItemIco[item.id]);
 		}
+		
+		
+		//System.out.println(((InGameState)gameState).nearBush);
 		
 
 		textList.draw(g);
@@ -254,7 +264,7 @@ public class InGameGUI extends GUI
 			"data/images/buttons/bush_ico_big.png");
 			
 		texQuestLog = Kernel.display.getRenderer().loadImage(
-			"data/images/buttons/questlog_ico.png");
+			"data/images/gui/questlogicon.png");
 		
 		texEmptySlot = Kernel.display.getRenderer().loadImage(
 			"data/images/buttons/button_slot_empty.png");

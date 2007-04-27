@@ -77,7 +77,7 @@ public class InGameState extends GameState
 	
 	////////////////////////////
 	ArrayList <Tree> trees = new ArrayList<Tree>();
-	
+	public Inventory inventory;
 	
 	public InGameState(GL gl)
 	{
@@ -94,6 +94,7 @@ public class InGameState extends GameState
 		}
 
 			
+		inventory = new Inventory();
 		OBJModel tree0,tree1,tree2,tree3;
 		tree0 = new OBJModel(gl, "data/models/tree0");
 		tree1 = new OBJModel(gl, "data/models/tree1");
@@ -182,9 +183,13 @@ public class InGameState extends GameState
 		items.add(new Item("Zoo Paste",7,1,0f,1f,
 				treeModel,
 				new Vector3f(15f,0f,15f),false,false));
-		items.add(new Item("Party Snapper",8,1,0f,1f,
+		items.add(new Item("Party Snapper",8,50,0f,1f,
 				treeModel,
 				new Vector3f(-15f,0f,-15f),true,true));
+				
+		items.add(new Item("Party Snapper",8,50,0f,1f,
+				treeModel,
+				new Vector3f(-15f,0f,-35f),true,true));
 	
 		/* add animals to the map */
 		animals.add(new Animal("Giraffe",4,0f,5f,
@@ -232,10 +237,10 @@ public class InGameState extends GameState
 	 * which made character jitter forward when walking 
 	 **/
 	 
-	public void updateItems(){
+	public void updateItems(long elapsedTime){
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
-			item.update(player.position);
+			item.update(player.position,this, elapsedTime);
 		}
 	}
 	
@@ -248,7 +253,7 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
-		updateItems();
+		updateItems(elapsedTime);
 		updateAnimals();
 		
 		((Bush)bush).update(elapsedTime);
@@ -385,18 +390,18 @@ public class InGameState extends GameState
 		gl.glPushMatrix();
 			gl.glTranslatef(0f, -2f, 0f);
 			gl.glScalef(500f, 500f, 500f);
-			worldMap.draw(gl);
+		//	worldMap.draw(gl);
 		gl.glPopMatrix();
 		
-		for(int i = 0;i<trees.size();i++){
+	/*	for(int i = 0;i<trees.size();i++){
 			Tree tree = trees.get(i);
 			gl.glPushMatrix();
-			gl.glTranslatef(tree.position.x,tree.position.y+5f,tree.position.z);
-			gl.glScalef(12f,12f, 12f);
+			gl.glTranslatef(tree.position.x,tree.position.y,tree.position.z);
+			gl.glScalef(100f,100f, 100f);
 			tree.modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
-
+*/
 		
 		
 		/* Render GUI */
@@ -421,14 +426,20 @@ public class InGameState extends GameState
 		
 	}
 	
-	public synchronized void throwPartyPopper()
-	{
-		entities.add(new PartySnapper(
-				new Vector3f(player.position.x, player.position.y, player.position.z),
-				player.facingDirection, 
-				0f,
-				partySnapper)
-		);
+	public synchronized void throwPartyPopper(){
+		for(int i = 0;i<inventory.items.size();i++){
+			Item item = inventory.items.get(i);
+			if(item.id ==8 && item.amount>0){
+				entities.add(new PartySnapper(
+					new Vector3f(player.position.x, player.position.y, player.position.z),
+					player.facingDirection, 
+					0f,
+					partySnapper)
+				);
+				item.amount--;
+			}
+		}
+		
 	}
 	
 	public void handleInput(long elapsedTime)
@@ -462,11 +473,8 @@ public class InGameState extends GameState
 				playerState=1;
 		}
 		
-		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL])
-		{
-		
+		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 			throwPartyPopper();
-
 		}
 
 		

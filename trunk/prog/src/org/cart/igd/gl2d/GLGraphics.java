@@ -145,6 +145,11 @@ public class GLGraphics
 		drawImage( tex, new float[] {x,y,TEX_Z}, DEFAULT, rgba, GL.GL_MODULATE );
 	}
 	
+	public void drawImageHueSize(Texture tex, float x, float y, float[] rgba, float[] size)
+	{
+		drawImage( tex, new float[] {x,y,TEX_Z}, size, rgba, GL.GL_MODULATE );
+	}
+	
 	public void drawImageAlpha(Texture tex, int x, int y, float alpha)
 	{
 		drawImageAlpha(tex,(float)x,(float)y,alpha);
@@ -572,8 +577,9 @@ public class GLGraphics
 	
 	public void drawImageRotateHueRandomAlpha(Texture text, int x, int y, int degree, float[] rgba){drawImageRotate(text,x,y,degree,rgba,1f,0,4);}
 	
-	public void drawImageRotateHue(Texture text, int x, int y, int degree, float[] rgba){drawImageRotate(text,x,y,degree,rgba,1f,0,2);}	
 	
+	
+
 	public void drawImageRotateHue(Texture text, int x, int y, int degree, float[] rgba, int blend){drawImageRotate(text,x,y,degree,rgba,1f,blend,5);}
 	
 	public void drawImageRotateHue(Texture text, float x, float y, int degree, float[] rgba, int blend){drawImageRotate(text,x,y,degree,rgba,1f,blend,5);}
@@ -592,6 +598,11 @@ public class GLGraphics
 		gl.glRotatef(-degree,0,0,1);
 		gl.glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
 	}
+
+	public void drawImageRotateHue(Texture text, int x, int y, int degree, float[] rgba){drawImageRotate(text,x,y,degree,rgba,1f,0,2);}	
+	
+	
+	
 
 	public void drawImageRotateZ(Texture text, float x, float y, float z, float degree, float[] rgba)
 	{
@@ -619,6 +630,39 @@ public class GLGraphics
 			break;
 		case 2:
 			drawImageHue(text,-text.imageHeight/2,-text.imageWidth/2,rgba);
+			break;
+		case 3:
+			drawImageRandomAlpha(text,-text.imageHeight/2,-text.imageWidth/2);
+			break;
+		case 4:
+			drawImageHueRandomAlpha(text,-text.imageHeight/2,-text.imageWidth/2,rgba);
+			break;
+		case 5:
+			drawImage( text, new float[] {-text.imageHeight/2,-text.imageWidth/2,TEX_Z}, DEFAULT, rgba, new int[] {GL.GL_MODULATE,blend} );
+			break;
+		}
+
+		gl.glRotatef(-degree,0,0,1);
+		gl.glTranslatef(-(x + text.imageHeight/2), -(y + text.imageHeight/2), 0);
+	}
+	
+	
+	public void drawImageRotateHueSize(Texture text, int x, int y, int degree, float[] rgba, float[] size){drawImageRotateSize(text,(float)x,(float)y,degree,rgba,1f,0,2,size);}	
+	public void drawImageRotateSize(Texture text, float x, float y, int degree, float[] rgba,float alpha, int blend, int type,float[] size)
+	{
+		gl.glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);
+		gl.glRotatef(degree,0,0,1);
+
+		switch(type)
+		{
+		case 0:
+			drawImage(text,-text.imageHeight/2,-text.imageWidth/2);
+			break;
+		case 1:
+			drawImageAlpha(text,-text.imageHeight/2,-text.imageWidth/2,alpha);
+			break;
+		case 2:
+			drawImageHueSize(text,-text.imageHeight/2,-text.imageWidth/2,rgba,size);
 			break;
 		case 3:
 			drawImageRandomAlpha(text,-text.imageHeight/2,-text.imageWidth/2);
