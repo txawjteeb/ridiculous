@@ -78,6 +78,7 @@ public class InGameState extends GameState
 	////////////////////////////
 	ArrayList <Tree> trees = new ArrayList<Tree>();
 	public Inventory inventory;
+	public QuestLog questlog;
 	
 	public InGameState(GL gl)
 	{
@@ -93,7 +94,7 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 
-			
+		questlog = new QuestLog("Quest Log",20,10);	
 		inventory = new Inventory();
 		OBJModel tree0,tree1,tree2,tree3;
 		tree0 = new OBJModel(gl, "data/models/tree0");
@@ -194,7 +195,7 @@ public class InGameState extends GameState
 		/* add animals to the map */
 		animals.add(new Animal("Giraffe",4,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km"), 
-				new Vector3f(10f,0f,0f),this));
+				new Vector3f(10f,0f,10f),this));
 		
 		
 		/* add different gui segments */
@@ -250,11 +251,16 @@ public class InGameState extends GameState
 			animal.update(player.position);
 		}
 	}
+	
+	public void updateQuestLog(long elapsedTime){
+		questlog.update(this,elapsedTime);
+	}
 	 
 	public void update(long elapsedTime)
 	{
 		updateItems(elapsedTime);
 		updateAnimals();
+		updateQuestLog(elapsedTime);
 		
 		((Bush)bush).update(elapsedTime);
 

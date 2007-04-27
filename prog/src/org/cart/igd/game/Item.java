@@ -33,6 +33,7 @@ public class Item extends Entity {
 		boolean left = false;
 		boolean swinging;
 		float alpha = 1f;
+		float alphaText = 0f;
 		
 	/*
 	 taken from dialogue
@@ -142,6 +143,7 @@ public class Item extends Entity {
 					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){
 						mouseOver = true;
 						mouseOverTime++;
+						if(alphaText<1f)alphaText+=0.1f;
 						if(!swinging){
 							degree = 0;
 							left = true;
@@ -150,6 +152,7 @@ public class Item extends Entity {
 							counter = 0;
 							alphaSwing = .6f;
 					} else{
+						if(alphaText>0f)alphaText-=0.1f;
 						mouseOverTime = 0;
 					}
 					
@@ -189,6 +192,7 @@ public class Item extends Entity {
 						g.drawImageRotateHue(texture,x,y,degree,new float[]{1f,alphaSwing,alphaSwing,alpha});
 			}
 			g.drawBitmapStringStroke(""+amount,x,y,1,new float[]{.6f,1f,.6f,1f},new float[]{0f,0f,0f,1f});
+			g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
 			/*
 			if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){
 				g.drawImageHue(texture,x,y,new float[]{1f,.4f,.4f,1f});
