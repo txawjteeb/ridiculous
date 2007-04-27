@@ -333,6 +333,10 @@
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\game\Inventory.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\game\Item.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
