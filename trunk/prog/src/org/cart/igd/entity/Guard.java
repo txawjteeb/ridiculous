@@ -15,6 +15,9 @@ public class Guard extends Entity
 	private boolean moving = true;
 	private float hearingRadius = 5f;
 	private boolean lostTarget = false;
+	public float refAngleRad = 0f;
+	final float toDeg = 57.2957f;
+	final float toRad = 0.0174f;
 	
 	private Entity player;
 	
@@ -25,11 +28,12 @@ public class Guard extends Entity
 	 * @param OBJModel model: .obj format file data
 	 * @param Entity refference to player for detection
 	 **/
-	public Guard(Vector3f pos, float fD, float bsr, OBJModel model, Entity pl)
+	public Guard(Vector3f pos, float fD, float bsr, OBJModel model, Entity pl,float scale)
 	{
-		super(pos,fD,bsr,model);
+		super(pos,fD,bsr,model,scale);
 		this.player = pl;
 		path.add(new Vector3f(20,0,20));
+		this.speed = 0.004f;
 	}
 	
 	/**
@@ -49,12 +53,13 @@ public class Guard extends Entity
 	 * @purpose detect whether the player's animal is within a
 	 **/
 	public void lookForTarget(){
-		float xDiff = Math.abs(position.x - player.position.x);
-		float zDiff = Math.abs(position.z - player.position.z);
+		float xDiff = (position.x - player.position.x);
+		float zDiff = (position.z - player.position.z);
 		
 		float playerDistance = (float)Math.sqrt( (xDiff*xDiff)+(zDiff+zDiff) );
 		
-		if( playerDistance < ( hearingRadius + player.boundingSphereRadius ) )
+		if( playerDistance < ( hearingRadius + player.boundingSphereRadius )&&
+			testLines(30f)	)
 		{
 			lostTarget = false;
 			target = player.position;
@@ -62,6 +67,27 @@ public class Guard extends Entity
 			target = null;
 			lostTarget = true;
 		}
+	}
+	public boolean testLines(float view){
+		Vector3f left;
+		Vector3f right;
+		
+		
+		return true;
+	}
+	
+	public Vector3f getNewPointDeg(float deg,float distance){
+		float newPosX = position.x + ( distance*(float)Math.cos(deg * toRad) );
+		float newPosZ = position.z + ( distance*(float)Math.sin(deg * toRad) );
+		
+		return new Vector3f(newPosX,position.y,newPosZ);
+	}
+	
+	public Vector3f getNewPointRad(float rad,float distance){
+		float newPosX = position.x + ( distance * (float)Math.cos(rad) );
+		float newPosZ = position.z + ( distance * (float)Math.sin(rad) );
+		
+		return new Vector3f(newPosX,position.y,newPosZ);
 	}
 	
 	public void update(long elapsedTime){
@@ -74,37 +100,38 @@ public class Guard extends Entity
 		
 		if(moving == true && target != null)
 		{		
-			float xDiff = Math.abs(position.x - target.x);
-			float zDiff = Math.abs(position.z - target.z);
+			float xDiff = (position.x - target.x);
+			float zDiff = (position.z - target.z);
 			
-			float refAngleRad = (float)Math.atan(zDiff/xDiff);
+			refAngleRad = (float)Math.atan(zDiff/xDiff);
+			//refAngleRad = Math.abs(refAngleRad);
 			
 			/* quadrant 1 */
 			if( position.x < target.x && 
 				position.z < target.z )
 			{
-				facingDirection = refAngleRad * 0.0174f;
+				facingDirection = refAngleRad * toDeg;
 			}
 			
 			/* quadrant 2 */
 			if( position.x > target.x && 
 				position.z < target.z )
 			{
-				facingDirection = 90f + (refAngleRad * 0.0174f);
+				facingDirection = 90f + (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 3 */
 			if( position.x > target.x && 
 				position.z > target.z )
 			{
-				facingDirection = 180f + (refAngleRad * 0.0174f);
+				facingDirection = 180f + (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 4 */
 			if( position.x < target.x && 
 				position.z > target.z )
 			{
-				facingDirection = 270f + (refAngleRad * 0.0174f);
+				facingDirection = 270f + (refAngleRad * toDeg);
 			}
 			
 			/* change course when target reached */

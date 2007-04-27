@@ -17,7 +17,7 @@ public abstract class Entity
 {
 	public Vector3f position;
 	public Vector3f lastPosition;
-	public Vector3f scale = new Vector3f(.1f,.1f,.1f);
+	public Vector3f scale = new Vector3f(1f,1f,1f);
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
@@ -37,6 +37,8 @@ public abstract class Entity
 	protected boolean drawBoundingSphere;
 	
 	public float boundingSphereRadius;
+	
+	public float yRotationRad = 0f;
 	
 	public Entity(Vector3f pos, float fD, float bsr)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
@@ -74,6 +76,14 @@ public abstract class Entity
 	{
 		this(pos,fD,bsr);
 		this.modelObj = model;
+	}
+	public Entity(Vector3f pos, float fD, float bsr, OBJModel model,float scale)//, int id, File meshFile, File skinFile)// throws EntityException
+	{
+		this(pos,fD,bsr);
+		this.modelObj = model;
+		this.scale.x = scale;
+		this.scale.y = scale;
+		this.scale.z = scale;
 	}
 	
 	public Entity(Vector3f pos, float fD, float bsr, Model model)//, int id, File meshFile, File skinFile)// throws EntityException
@@ -146,6 +156,23 @@ public abstract class Entity
 		return facingDirection;
 	}
 	
+	
+	public final void setYRotationDeg(float deg){
+		yRotationRad = deg*0.0174532925f;
+	}
+	
+	public final void setYRotationRad(float rad){
+		this.yRotationRad = rad;
+	}
+	
+	public final float getYRotationDeg(){
+		return yRotationRad*57.29577951f;
+	}
+	
+	public final float getYRotationRad(){
+		return yRotationRad;
+	}
+	
 	public final void walkForward(long elapsedTime)
 	{
 		position.x += ( ((float)elapsedTime * speed) * (float)Math.cos(facingDirection * 0.0174f) );
@@ -185,7 +212,7 @@ public abstract class Entity
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			gl.glScalef(scale.x,scale.y,scale.z);
+			gl.glScalef(.1f,.1f,.1f);
 			model3ds.render(gl);
 			gl.glPopMatrix();
 		}
@@ -193,7 +220,7 @@ public abstract class Entity
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			//gl.glScalef(scale.x,scale.y,scale.z);
+			gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
