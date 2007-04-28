@@ -373,30 +373,30 @@ public class GLGraphics
 	{
 		return drawBitmapString(text,x,y,12, 
 				new float[]{1.0f,1.0f,1.0f,1.0f}, 
-				new float[] {1f,1f}, false);
+				new float[] {1f,1f});
 	}
 	
 	public int drawBitmapString(String text, int x, int y, float[] rgb)
 	{
-		return drawBitmapString(text, x, y, 14, rgb, new float[]{1f,1f}, false);
+		return drawBitmapString(text, x, y, 14, rgb, new float[]{1f,1f});
 	}
 	
 	public int drawBitmapString(String text, int x, int y, float[] rgb, float[] size)
 	{
-		return drawBitmapString(text,x,y,(int)(12f*size[0]),rgb,size,false);
+		return drawBitmapString(text,x,y,(int)(12f*size[0]),rgb,size);
 	}
 	
  	public int drawBitmapString(String text, int x, int y, int spacing, 
  			float[] rgba, boolean flash)
  	{
- 		return drawBitmapString(text,x,y,12,rgba,new float[]{1f,1f},flash);
+ 		return drawBitmapString(text,x,y,12,rgba,new float[]{1f,1f});
  	}
  	
 	public int drawBitmapString(String text, float x, float y, int spacing, 
 			float[] rgba, boolean flash)
 	{
 		return drawBitmapString(text,(int)x,(int)y,12,rgba,
-				new float[]{1f,1f},flash);
+				new float[]{1f,1f});
 	}
 	
 	public int drawBitmapStringStroke(String text, int x, int y, int ss, float[] rgba, float[] strokergba)
@@ -432,8 +432,11 @@ public class GLGraphics
 	{
 		return (c=='i'||c=='I'||c=='1'||c=='.'||c==','||c=='|'||c==':'||c==';');
 	}
-	
-	public int drawBitmapString(String text, int x, int y, int spacing, float[] rgba, float[] size, boolean flash)
+	/**
+	 * @return int length of string in pixels
+	 * */
+	public int drawBitmapString(String text, int x, int y, int spacing, 
+			float[] rgba, float[] size)
 	{
 		try
 		{
@@ -453,19 +456,13 @@ public class GLGraphics
 				//	if(isCompressed(c)) x-=3;
 				//}
 				c-=33;
-
-	 
-				if(flash)
-					drawImageHue( GLGraphics.Font[c], x, y, new float[]{rgba[0],rgba[1],rgba[2], 1.0f - ((float)Math.random())/4} , size);
-				else 
-					drawImageHue( GLGraphics.Font[c], x, y, rgba, size ); 
+					
+				drawImageHue( GLGraphics.Font[c], x, y, rgba, size ); 
 				
 				x+=spacing;
 			}
 			return x-iX;
-		}
-		catch(Exception e)
-		{
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		return 0;
@@ -563,7 +560,16 @@ public class GLGraphics
 		drawImageRotate(text,x,y,degree,new float[]{1f,1f,1f,1f},alpha,0,1);
 	}
 	
-	public void drawImageRotateHue(Texture text, float x, float y, int degree, float[] rgba){drawImageRotate(text,x,y,degree,rgba,1f,0,2);}
+	/**
+	 * 
+	 * @param Texture image to be drawn
+	 * @param int x
+	 * @param int y
+	 * @param int degree for the image roate
+	 * */
+	public void drawImageRotateHue(Texture text, float x, float y, int degree, 
+			float[] rgba)
+	{drawImageRotate(text,x,y,degree,rgba,1f,0,2);}
 	
 	public void drawImageRotateRandomAlpha(Texture text, float x, float y, int degree){drawImageRotate(text,x,y,degree, new float[]{1f,1f,1f,1f},1f,0,3);}
 	

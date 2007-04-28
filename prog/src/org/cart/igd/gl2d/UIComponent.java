@@ -4,15 +4,16 @@ import org.cart.igd.util.*;
 
 public abstract class UIComponent
 {
-	public String value;
+	public String title = "";
 	private int x, y;
 	private int width, height;
 	public float[] rgb;
 	public boolean focused;
 	
 	public float scale = 1f;
+	public float alpha = 1f;
 	
-	public abstract void draw(GLGraphics g,int x, int y, float alpha);
+	public abstract void draw(GLGraphics g);
 	public abstract void getFocus();
 	public abstract void dropFocus();
 	

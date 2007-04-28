@@ -10,17 +10,18 @@ public class UITextField extends UIComponent
 	private float[] fontColor = new float[] {0f,0f,0f};
 	private boolean password = false;
 	private GL gl;
+	private String text="";
 	
 	public UITextField(GL gl, String value, int x, int y, int width, int height, boolean password)
 	{
 		super(x,y,width,height);
 		this.gl = gl;
-		this.value = value;
+		this.text = value;
 		this.rgb = new float[] { 0f,0f,0f };
 		this.password = password;
 	}
 	
-	public void draw(GLGraphics g,int x, int y, float alpha)
+	public void draw(GLGraphics g)
 	{
 		//GLEngine.g.drawImageHue( Images.UITextField, x+rel_x, y+rel_y, new float[]{rgb[0],rgb[1],rgb[2],alpha}, new float[] { ((float)width)/128f, ((float)height)/16f } );
 		int bx = getX();
@@ -40,16 +41,16 @@ public class UITextField extends UIComponent
 		
 		String newVal = "";
 		if(password)
-			for(int i=0; i<value.length(); i++) newVal += "*";
+			for(int i=0; i<text.length(); i++) newVal += "*";
 		else
-			newVal = value;
+			newVal = text;
 		
 		if(!focused)
-			g.drawBitmapString( value, bx, by, new float[] {fontColor[0],fontColor[1],fontColor[2],1f} );
+			g.drawBitmapString( text, bx, by, new float[] {fontColor[0],fontColor[1],fontColor[2],1f} );
 		else
 		{
 			int length = g.drawBitmapStringStroke( 
-					value, 
+					text, 
 					bx, 
 					by, 
 					1, 
