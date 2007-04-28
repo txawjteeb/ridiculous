@@ -24,9 +24,9 @@ public class PauseMenu extends GUI{
 	
 	public void render(GLGraphics g){
 		g.glgBegin();
-		menuSelection[0].draw(g,0,0,1f);
-		menuSelection[1].draw(g,0,0,.5f);
-		menuSelection[2].draw(g,0,0,.5f);
+		menuSelection[0].draw(g);
+		menuSelection[1].draw(g);
+		menuSelection[2].draw(g);
 		g.glgEnd();
 		
 	}

@@ -76,6 +76,16 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		}
 		return false;
 	}
+	
+	public boolean isMouseOver(UIComponent c)
+	{
+		if( c.getX()<mousePos[0] && (c.getX()+c.getWidth())>mousePos[0] && 
+			c.getY()<mousePos[1] && (c.getY()+c.getHeight())>mousePos[1] )
+		{
+			return true;
+		}
+		return false;
+	}
 
 	public boolean isSquareButtonPressed(int bx, int by,int bw, int bh,int mx, int my)
 	{

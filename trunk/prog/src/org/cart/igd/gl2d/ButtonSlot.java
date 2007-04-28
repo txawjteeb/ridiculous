@@ -12,11 +12,10 @@ public class ButtonSlot extends UIComponent
 		super(x,y,width,height);
 		setTexture(tex);
 		setAction(new GameAction("no button selected",false));
-		this.value = "";
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
-	public void draw(GLGraphics g, int x, int y,float alpha){
+	public void draw(GLGraphics g){
 		
 	}
 	

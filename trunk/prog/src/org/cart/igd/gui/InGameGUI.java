@@ -56,10 +56,6 @@ public class InGameGUI extends GUI
 	
 	
 	private GameAction testChangeGui = new GameAction("test swap",false);
-	
-	public String renderTime="";
-	public String updateTime="";
-	public String inputTime="";
 
 	public InGameGUI(GameState igs) {
 		super(igs);
@@ -68,6 +64,35 @@ public class InGameGUI extends GUI
 		loadImages();
 		loadGUI();
 	}
+	
+	/** load game actions before adding them to UIButtons */
+	public void loadGameActions() {
+		// GameAction( String details, boolean continuous )
+		pressQuestLog = new GameAction("open the quest log", false);
+		mouseSelect = new GameAction("mouse press", false);
+		mouseReleased = new GameAction("mouse release", false );
+				
+		input.bindToKey(testChangeGui, KeyEvent.VK_G);
+		
+
+		for (int iEvt = 0; iEvt < useItem.length; iEvt++) {
+			useItem[iEvt] = new GameAction("use item: " + (iEvt + 1), false);
+			input.bindToButton(useItem[iEvt], 31 + iEvt);
+		}
+
+		// select animal on press
+		for (int iEvt = 0; iEvt < selectBushAnimal.length; iEvt++) {
+			selectBushAnimal[iEvt] = new GameAction("select animal: "
+					+ (iEvt + 1), false, GameAction.ON_PRESS_ONLY);
+			input.bindToButton(selectBushAnimal[iEvt], 11 + iEvt);
+		}
+
+		input.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
+		input.bindToKey(pressQuestLog, KeyEvent.VK_L);
+		input.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
+		input.bindToMouse(mouseSelect, MouseEvent.BUTTON1);
+		// Kernel.userInput.bindToMouse(mouseReleased, MouseEvent.BUTTON1 );
+	}// end loadGameActions()
 
 	/** renders gui, called by Renderer thread*/
 	public void render(GLGraphics g) {
@@ -78,7 +103,7 @@ public class InGameGUI extends GUI
 		g.glgBegin();
 
 		if (selectedButton != null) {
-			selectedButton.draw(g,300, 300, 1f);
+			selectedButton.draw(g);
 		}
 		// g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
 		// g.drawBitmapString("Button", 3, 3);
@@ -103,6 +128,7 @@ public class InGameGUI extends GUI
 			}
 		}
 		
+		hudLeft.draw(g);
 		
 		hudBottom.updateAndDraw(g);
 
@@ -212,6 +238,12 @@ public class InGameGUI extends GUI
 		} // end if(mouseSelect.isActive())
 
 		
+		
+		/* update the hud buttons so they rotate */
+		for (int i = 0; i < hudLeft.components.size(); i++) {
+			((UIButton)hudLeft.components.get(i)).update(input, elapsedTime);
+		}
+		
 		if (pressQuestLog.isActive()) {
 			textList.addText("lk;jdsf");
 		}
@@ -226,37 +258,6 @@ public class InGameGUI extends GUI
 			System.out.println("release");
 		}	
 	}// end handleInput()
-
-	
-	/** load game actions before adding them to UIButtons */
-	public void loadGameActions() {
-		// GameAction( String details, boolean continuous )
-		pressQuestLog = new GameAction("open the quest log", false);
-		mouseSelect = new GameAction("mouse press", false);
-		mouseReleased = new GameAction("mouse release", false,
-				GameAction.ON_RELEASE_ONLY);
-				
-		input.bindToKey(testChangeGui, KeyEvent.VK_G);
-		
-
-		for (int iEvt = 0; iEvt < useItem.length; iEvt++) {
-			useItem[iEvt] = new GameAction("use item: " + (iEvt + 1), false);
-			input.bindToButton(useItem[iEvt], 31 + iEvt);
-		}
-
-		// select animal on press
-		for (int iEvt = 0; iEvt < selectBushAnimal.length; iEvt++) {
-			selectBushAnimal[iEvt] = new GameAction("select animal: "
-					+ (iEvt + 1), false, GameAction.ON_PRESS_ONLY);
-			input.bindToButton(selectBushAnimal[iEvt], 11 + iEvt);
-		}
-
-		input.bindToButton(pressQuestLog, GUIEvent.BT_QUEST_LOG);
-		input.bindToKey(pressQuestLog, KeyEvent.VK_L);
-		input.bindToKey(pressQuestLog, KeyEvent.VK_TAB);
-		input.bindToMouse(mouseSelect, MouseEvent.BUTTON1);
-		// Kernel.userInput.bindToMouse(mouseReleased, MouseEvent.BUTTON1 );
-	}// end loadGameActions()
 
 	/** load texture for the gui components */
 	public void loadImages()

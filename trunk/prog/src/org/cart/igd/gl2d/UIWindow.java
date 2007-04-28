@@ -92,7 +92,12 @@ public class UIWindow extends UIComponent
 	
 	public void draw(GLGraphics g){
 		for(UIComponent c: components){
-			c.draw(g, c.getX(), c.getY(), alpha);
+			if(c instanceof UIButton){
+				((UIButton)c).draw(g);
+			} else{
+				c.draw(g);
+			}
+			
 		}
 	}
 	
