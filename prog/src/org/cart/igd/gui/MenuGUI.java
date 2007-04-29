@@ -24,11 +24,14 @@ public class MenuGUI extends GUI
 	public void loadImages()
 	{
 		menuSelection[0] = new UILabel("Start Game", 200, 400, 200, 16);
-		menuSelection[0].scale(4);
+		menuSelection[0].size[0]=4;
+		menuSelection[0].size[1]=4;
 		menuSelection[1] = new UILabel("Options", 200, 300, 200, 16);
-		menuSelection[1].scale(4);
+		menuSelection[1].size[0]=4;
+		menuSelection[1].size[1]=4;
 		menuSelection[2] = new UILabel("Quit", 200, 200, 200, 16);
-		menuSelection[2].scale(4);
+		menuSelection[2].size[0]=4;
+		menuSelection[2].size[1]=4;
 	}
 	
 	public void update(long elapsedTime)
