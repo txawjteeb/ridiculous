@@ -20,13 +20,13 @@ public class UILabel extends UIComponent
 	
 	public void draw(GLGraphics g)
 	{
-		if(scale == 1f){
+		if(size[0] == 1f){
 			g.drawBitmapStringStroke( text, getX(), getY(), 1, 
 					new float[] {rgb[0],rgb[1],rgb[2],alpha}, 
 					ColorRGBA.White.getRGBA() );
 		} else {
 			g.drawBitmapString( text, getX(), getY(), new float[]{1,1,1,}, 
-					new float[]{scale,scale} );
+					size );
 			
 		}
 		

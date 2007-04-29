@@ -654,6 +654,19 @@ public class GLGraphics
 	
 	
 	public void drawImageRotateHueSize(Texture text, int x, int y, int degree, float[] rgba, float[] size){drawImageRotateSize(text,(float)x,(float)y,degree,rgba,1f,0,2,size);}	
+	
+	/** made by vitaly specifically for gui buttons */
+	public void drawImage(Texture tex, float x, float y, float w, float h, int degree, float[] rgba,float[] size)
+	{
+		gl.glTranslatef(x + w/2, y + h/2, 0);
+		gl.glRotatef(degree,0,0,1);
+
+		drawImageHueSize(tex,-h/2,-w/2,rgba,size);
+	
+		gl.glRotatef(-degree,0,0,1);
+		gl.glTranslatef(-(x + h/2), -(y + w/2), 0);
+	}
+	
 	public void drawImageRotateSize(Texture text, float x, float y, int degree, float[] rgba,float alpha, int blend, int type,float[] size)
 	{
 		gl.glTranslatef(x + text.imageHeight/2, y + text.imageHeight/2, 0);

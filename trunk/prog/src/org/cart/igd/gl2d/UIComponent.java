@@ -10,8 +10,9 @@ public abstract class UIComponent
 	public float[] rgb;
 	public boolean focused;
 	
-	public float scale = 1f;
 	public float alpha = 1f;
+	
+	public  float size[]={1f,1f};
 	
 	public abstract void draw(GLGraphics g);
 	public abstract void getFocus();
@@ -52,12 +53,6 @@ public abstract class UIComponent
 		}
 	}
 	
-	public void scale(float scale){
-		this.scale = scale;
-		width = width*((int)scale);
-		height = height*((int)scale);
-	}
-	
 	/** returns x location relative to the canvas takes 
 	 * the location of the parent(container) into account*/
 	public int getX(){
@@ -90,10 +85,10 @@ public abstract class UIComponent
 	}
 	
 	public int getWidth(){
-		return width;
+		return (int)((float)width*size[0]);
 	}
 	public int getHeight(){
-		return height;
+		return (int)((float)height*size[1]);
 	}
 	
 	public void setParent(UIComponent parent){

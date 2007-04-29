@@ -1,27 +1,33 @@
 package org.cart.igd.gl2d;
 
 import org.cart.igd.util.Texture;
-import org.cart.igd.core.Kernel;
 import org.cart.igd.input.*;
 
 public class UIButton extends UIComponent
 {
+	/* button special effect options*/
+	public static final int BUTTON_NORMAL = 1;
+	public static final int BUTTON_ROCK = 2;
+	public static final int BUTTON_SCALE = 3;
+	public static final int BUTTON_ROCK_SCALE = 4;
+	
 	/* general */
-	public boolean selectable = true;
+	public int mouseOverEffect = BUTTON_ROCK_SCALE;
 	public boolean enabled = true;
-	public boolean reactOnMouseOver = true;
+	public boolean selectable = true;
+	public boolean mouseOver = false;
 	
 	/* special effect related*/
 	private long timeToUpdate = 0;
 	private long updateTime = 30;
 	
-	private String toolTip = "";
-	private float toolTipAlpha = 1f;
-	private boolean back = false;
+	private String toolTip = "button";
+	private float toolTipRgba[] ={1f,1f,0.6f,0f} ;
+	private float toolTipStroke[] = {0f,0f,0f,0f};
+	private int delay = 0;
 	private int rockIndex = 0;
 	
 	private float rgba[] = { 1f,1f,1f,1f };
-	private float size[] = { 1f,1f };
 	
 	/** rotation cycles when button is rocking back and forth */
 	private int rockDegreeCycle[] =
@@ -41,7 +47,8 @@ public class UIButton extends UIComponent
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
-	public UIButton(Texture tex, GameAction action, int x, int y, int width, int height)
+	public UIButton(Texture tex, GameAction action, int x, int y, 
+			int width, int height)
 	{
 		super(x,y,width,height);
 		setTexture( tex );
@@ -49,43 +56,134 @@ public class UIButton extends UIComponent
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
-	public void update(UserInput input,long elapsedTime){
-		if(input.isMouseOver(this))
-		{
-			if(reactOnMouseOver)
-			{
+	public void update(UserInput input,long elapsedTime)
+	{
+		if(input.isMouseOver(this)){
+			mouseOver = true;
+		} else {
+			mouseOver = false;
+		}
+		
+		switch(mouseOverEffect) {
+			case 1:
+				timeToUpdate -= elapsedTime;
+				if(timeToUpdate <= 0)
+				{	
+					if(mouseOver)
+					{
+						toolTipRgba[3] = 1f;
+						toolTipStroke[3] = 1f;
+					} else {
+						toolTipRgba[3] -= .055f;
+						toolTipStroke[3] -=.04f;
+					}
+				} 
+				break;
+			case 2:
 				timeToUpdate -= elapsedTime;
 				if(timeToUpdate <= 0)
 				{
-					toolTipAlpha = 1f;
+					if(mouseOver)
+					{
+						toolTipRgba[3] = 1f;
+						toolTipStroke[3] = 1f;
 					
-					if(rockIndex < rockDegreeCycle.length-1){
-						rockIndex++;
-					} else {
-						rockIndex = 0;
+						if(rockIndex < rockDegreeCycle.length-1){
+							rockIndex++;
+						} else {
+							rockIndex = 0;
+						}
+						timeToUpdate = updateTime;
+						delay = 3;	
+					} else {					
+						toolTipRgba[3] -= .035f;
+						toolTipStroke[3] -=.04f;;
+						if(delay > 0 ){
+							if(rockIndex < rockDegreeCycle.length-1){
+								rockIndex++;
+							} else {
+								rockIndex = 0;
+								delay--;
+							}
+						}
 					}
+				}// end if(timeToUpdate <= 0)
+				break;
+			case 3:
+				timeToUpdate -= elapsedTime;
+				if(timeToUpdate <= 0)
+				{
+					if(mouseOver)
+					{
+						toolTipRgba[3] = 1f;
+						toolTipStroke[3] = 1f;
 					
+						size[0]=1.2f;
+						size[1]=1.2f;
+						delay = 3;	
+					} else {					
+						toolTipRgba[3] -= .035f;
+						toolTipStroke[3] -=.04f;
+						if(delay > 0 ){
+							delay--;
+						}
+						size[0]=1f;
+						size[1]=1f;
+					}
 					timeToUpdate = updateTime;
-				}
-				
-			}
-		} else {
-			toolTipAlpha -= .04f;
-			rockIndex = 0;
-		}
+				}// end if(timeToUpdate <= 0)
+				break;
+			case 4:
+				timeToUpdate -= elapsedTime;
+				if(timeToUpdate <= 0)
+				{
+					if(mouseOver)
+					{
+						toolTipRgba[3] = 1f;
+						toolTipStroke[3] = 1f;
+					
+						if(rockIndex < rockDegreeCycle.length-1){
+							rockIndex++;
+						} else {
+							rockIndex = 0;
+						}
+						size[0]=1.2f;
+						size[1]=1.2f;
+						delay = 3;	
+					} else {					
+						toolTipRgba[3] -= .035f;
+						toolTipStroke[3] -=.04f;
+						if(delay > 0 ){
+							if(rockIndex < rockDegreeCycle.length-1){
+								rockIndex++;
+							} else {
+								rockIndex = 0;
+								delay--;
+							}
+						}
+						size[0]=1f;
+						size[1]=1f;
+					}
+					timeToUpdate = updateTime;
+				}// end if(timeToUpdate <= 0)
+				break;
+			default:
+					System.out.println("Invalid Button Action");
+			break;
+		}// end switch(mouseOverEffect)
 	}
 	/**
 	 * Draw the button at predefined location defined during creation
 	 * */
 	public void draw(GLGraphics g)
 	{
-		g.drawImageRotateHue(getTexture(),getX(),getY(),
-			rockDegreeCycle[rockIndex], rgba );
+		g.drawImage( getTexture(), getX(), getY(), getWidth(), getHeight(),
+				rockDegreeCycle[rockIndex], rgba, size );
 			
-		if( !toolTip.equals("") || toolTipAlpha < 0f )
+		if( !toolTip.equals("") || toolTipRgba[3] < 0f )
 		{
-			g.drawBitmapString(toolTip, getX(), getY()+getHeight(), 
-					16, rgba, size);
+			g.drawBitmapStringStroke( toolTip, getX(), getY()+getHeight(), 1,
+					toolTipRgba, toolTipStroke);
 		}
 	}
 	
