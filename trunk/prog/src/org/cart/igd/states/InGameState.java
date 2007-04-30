@@ -11,7 +11,6 @@ import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
 import org.cart.igd.Camera;
-import org.cart.igd.Display;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.discreet.*;
 import org.cart.igd.entity.Entity;
@@ -24,30 +23,18 @@ import org.cart.igd.input.GameAction;
 import org.cart.igd.input.UserInput;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
-import org.cart.igd.util.*;
-import org.cart.igd.math.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.game.*;
 
 public class InGameState extends GameState
-{
-	private OBJModel worldMap;
-	private SkyDome skyDome;
-	
-	public String[] infoText = {
-		"sdf",
-		"dd",
-		"dsf",
-		"fd",
-		"sd",
-	};
+{	
+	public String[] infoText = { "", "", "", "", "" };
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
 	public ArrayList<Animal> animals = new ArrayList<Animal>();
 		
 	public Entity player;
-	
 	
 	private Camera camera;
 	private OBJModel playerSprite;
@@ -75,10 +62,10 @@ public class InGameState extends GameState
 	public Entity bush;
 	public boolean nearBush = false;
 	
-	////////////////////////////
-	ArrayList <Tree> trees = new ArrayList<Tree>();
 	public Inventory inventory;
 	public QuestLog questlog;
+	
+	private Terrain terrain;
 	
 	public InGameState(GL gl)
 	{
@@ -93,75 +80,33 @@ public class InGameState extends GameState
 		{
 			e.printStackTrace();
 		}
+		
+		terrain = new Terrain();
+		terrain.load(gl);
 
 		questlog = new QuestLog("Quest Log",20,10);	
 		inventory = new Inventory();
-		OBJModel tree0,tree1,tree2,tree3;
-		tree0 = new OBJModel(gl, "data/models/tree0");
-		tree1 = new OBJModel(gl, "data/models/tree1");
-		tree2 = new OBJModel(gl, "data/models/tree2");
-		tree3 = new OBJModel(gl, "data/models/tree3");				
-
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(0f,0f,20f)));		
-		trees.add( new Tree(0f,3f,tree2, new Vector3f(1f,0f,-35f)));
-		trees.add( new Tree(0f,3f,tree3, new Vector3f(4f,0f,0f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(6f,0f,10f)));
-		trees.add( new Tree(0f,3f,tree1, new Vector3f(16f,0f,20f)));
-		trees.add( new Tree(0f,3f,tree2, new Vector3f(20f,0f,-20f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(12f,0f,22f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(25f,0f,0f)));
-		trees.add( new Tree(0f,3f,tree1, new Vector3f(40f,0f,10f)));		
-		trees.add( new Tree(0f,3f,tree3, new Vector3f(30f,0f,20f)));
-		trees.add( new Tree(0f,3f,tree2, new Vector3f(35f,0f,45f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(42f,0f,-35f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(63f,0f,0f)));
-		trees.add( new Tree(0f,3f,tree2, new Vector3f(-10f,0f,20f)));
-		trees.add( new Tree(0f,3f,tree3, new Vector3f(-51f,0f,10f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(-15f,0f,7f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(-120f,0f,-41f)));		
-		trees.add( new Tree(0f,3f,tree2, new Vector3f(-680f,0f,20f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(-390f,0f,10f)));
-		trees.add( new Tree(0f,3f,tree3, new Vector3f(-6f,0f,32f)));
-		trees.add( new Tree(0f,3f,tree0, new Vector3f(-13f,0f,-6f)));
-		trees.add( new Tree(0f,3f,tree1, new Vector3f(-190f,0f,20f)));
-		trees.add( new Tree(0f,3f,tree2, new Vector3f(-25f,0f,-25f)));
-		trees.add( new Tree(0f,3f,tree3, new Vector3f(-50f,0f,10f)));
 		
-			
-		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs");
-		worldMap		= new OBJModel(gl, "data/models/ground_cc");
-		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
+		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
+		partySnapper = new OBJModel(gl,"data/models/party_snapper");
+		OBJModel treeModel = new OBJModel(gl,"data/models/party_snapper");
+		OBJModel guard = new OBJModel(gl, "data/models/guard_vm",1.5f,false);
+		
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
-		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		
-		OBJModel treeModel = new OBJModel(gl,"data/models/party_snapper");
-		OBJModel guard = new OBJModel(gl, "data/models/guard_vm");
-		
-		/* special entity where animals are hidden after rescue */
+		/* special entity where animals are hidden after rescue place rescued 
+		 * animals in a position relative to this */
 		bush = new Bush( new Vector3f(0,0,0), 20f, guard3ds,this);	
 		
-		/* create and add test guards */
+		/* create and add test guard */
 		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player,2f));
-		//entities.add(new Guard(new Vector3f(30f,0f,-20f),0f,20f,guard,player));//3ds guard
-		//entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player));
-		//entities.add(new Guard(new Vector3f(-30f,0f,-20f),0f,20f,guard,player));
 		
-		/* create paths for the guards to follow*/
+		/* create paths for the guard to follow*/
 		((Guard)entities.get(0)).path.add(new Vector3f(30,0,30));
 		((Guard)entities.get(0)).path.add(new Vector3f(-30,0,30));
 		((Guard)entities.get(0)).path.add(new Vector3f(-30,0,-30));
 		((Guard)entities.get(0)).path.add(new Vector3f(40,0,-40));
-
-		//((Guard)entities.get(1)).path.add(new Vector3f(-30,0,30));
-		//((Guard)entities.get(1)).path.add(new Vector3f( 30,0, 30));
-		
-		//((Guard)entities.get(2)).path.add(new Vector3f(30,0,-30));
-		//((Guard)entities.get(2)).path.add(new Vector3f( 20,0, 30));
-		
-		//((Guard)entities.get(3)).path.add(new Vector3f(-30,0,39));
-		//((Guard)entities.get(3)).path.add(new Vector3f( 35,0, 35));
-		
 		
 		/* add collectable object to the map */
 				//0 reserverd
@@ -194,7 +139,7 @@ public class InGameState extends GameState
 	
 		/* add animals to the map */
 		animals.add(new Animal("Giraffe",4,0f,5f,
-				new OBJModel(gl,"data/models/giraffe_scaled_2_km"), 
+				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,10f),this));
 		
 		
@@ -378,37 +323,9 @@ public class InGameState extends GameState
 			Animal animal = animals.get(i);
 				animal.display(gl);
 		}
-		
-		/* Render SkyDome */
-		gl.glPushMatrix();
-			gl.glDisable(GL.GL_LIGHTING);
-			gl.glDisable(GL.GL_LIGHT0);
-			gl.glDisable(GL.GL_CULL_FACE);
-			gl.glTranslatef(player.position.x, player.position.y-30f, 
-					player.position.z);
-			skyDome.render(gl);
-			gl.glEnable(GL.GL_CULL_FACE);
-			gl.glEnable(GL.GL_LIGHTING);
-			gl.glEnable(GL.GL_LIGHT0);
-		gl.glPopMatrix();
 
-		/* Render Land Map */
-		gl.glPushMatrix();
-			gl.glTranslatef(0f, -2f, 0f);
-			gl.glScalef(500f, 500f, 500f);
-		//	worldMap.draw(gl);
-		gl.glPopMatrix();
-		
-	/*	for(int i = 0;i<trees.size();i++){
-			Tree tree = trees.get(i);
-			gl.glPushMatrix();
-			gl.glTranslatef(tree.position.x,tree.position.y,tree.position.z);
-			gl.glScalef(100f,100f, 100f);
-			tree.modelObj.draw(gl);
-			gl.glPopMatrix();
-		}
-*/
-		
+		/* render the world map and sky*/
+		terrain.render( gl, player);
 		
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );

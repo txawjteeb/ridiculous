@@ -22,8 +22,22 @@ public class Tree extends Entity {
 	
 	}
 	
-	public void display(GL gl){
-		render(gl);
+	/** 
+	 * render the trees with back face culling disabled 
+	 * so that both sides of plane canopy is drawn
+	 **/
+	public void render(GL gl){
+		gl.glPushMatrix();
+		gl.glDisable(GL.GL_LIGHTING);
+		gl.glDisable(GL.GL_LIGHT0);
+		gl.glDisable(GL.GL_CULL_FACE);
+		gl.glTranslatef(position.x, position.y, position.z);
+		modelObj.draw(gl);
+		gl.glEnable(GL.GL_CULL_FACE);
+		gl.glEnable(GL.GL_LIGHTING);
+		gl.glEnable(GL.GL_LIGHT0);
+		gl.glPopMatrix();
+
 	}
 
 }
