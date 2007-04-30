@@ -1,0 +1,25 @@
+<html>
+<head>
+  <title>Zoo Escape: Welcome to the official Zoo Escape web-site.</title>
+  <style type="text/css">
+    .topnavmenu {
+      position: absolute;
+      top: 200px;
+      left: 350;
+    } 
+    .background {
+      position: absolute;
+      right: 0;
+    }        
+  </style>
+</head>
+<body> 
+  <div class="topnavmenu">
+   <embed src="zooescape_flashmenu_jm.swf" quality="high" width="560px" height="200px" name="zooescape_flashmenu_jm.swf" />
+  </div>
+  <div class="background">
+    <img src="website_background_jh.jpg" height= 1024px width = 1300px z-index: "-1" />
+  </div>
+</body>
+</html>
+
