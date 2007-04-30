@@ -56,9 +56,11 @@ public class InGameGUI extends GUI
 	
 	
 	private GameAction testChangeGui = new GameAction("test swap",false);
+	private InGameState igs;
 
 	public InGameGUI(GameState igs) {
 		super(igs);
+		igs = (InGameState)igs;
 		input = Kernel.userInput;
 		loadGameActions();
 		loadImages();

@@ -20,6 +20,7 @@ import org.cart.igd.gui.GUI;
 import org.cart.igd.gui.InGameGUI;
 import org.cart.igd.gui.PauseMenu;
 import org.cart.igd.input.GameAction;
+import org.cart.igd.input.PickingHandler;
 import org.cart.igd.input.UserInput;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
@@ -66,6 +67,10 @@ public class InGameState extends GameState
 	public QuestLog questlog;
 	
 	private Terrain terrain;
+	
+	public PickingHandler pickingHandler;
+	
+	private boolean loaded = false;
 	
 	public InGameState(GL gl)
 	{
@@ -159,13 +164,15 @@ public class InGameState extends GameState
 		Kernel.userInput.bindToMouse(mouseWheelScroll,UserInput.MOUSE_WHEEL_DOWN);
 		
 		
+		
 		/* Test 3ds Data */
 		test3ds.printData();
 	}
 	
 	public void init(GL gl, GLU glu)
 	{
-		
+		pickingHandler = new PickingHandler(gl,glu,entities);
+		loaded = true;
 	}
 	
 	public void addInfoText(int index, String txt){
@@ -346,6 +353,10 @@ public class InGameState extends GameState
 			glg.drawBitmapString(s, 600 , 600 - (i*16));
 		}
 		glg.glgEnd();
+		
+		if(loaded == true){
+			//pickingHandler.pickModels();
+		}
 		
 	}
 	

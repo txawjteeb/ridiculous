@@ -224,5 +224,9 @@ public abstract class Entity
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
-	}	
+	}
+	
+	public String getName(){
+		return "obj @ x: "+position.x+" y: "+position.y+" z "+position.z;
+	}
 }
