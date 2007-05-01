@@ -32,9 +32,15 @@ public class PickingHandler {
 		this.pickingBox = new OBJModel(gl,"data/models/picking_box");
 	}
 	
-	public void startPicking(){
+	private void startPicking()
+	{
+		int viewport[] = new int[4];
+		gl.glGetIntegerv(GL.GL_VIEWPORT, viewport, 0);
+		
 		int selectBuf[]= new int[512];
+		
 		selectBuffer = BufferUtil.newIntBuffer(BUFSIZE);
+		
 		gl.glSelectBuffer(BUFSIZE, selectBuffer);
 		
 		gl.glRenderMode(GL.GL_SELECT);
@@ -45,8 +51,7 @@ public class PickingHandler {
 		gl.glPushMatrix();
 		gl.glLoadIdentity();
 		
-		int viewport[] = new int[4];
-		gl.glGetIntegerv(GL.GL_VIEWPORT, viewport, 0);
+		
 		
 		glu.gluPickMatrix((double) xCursor,
 				(double) (viewport[3] - yCursor),
@@ -59,7 +64,7 @@ public class PickingHandler {
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 	}
 	
-	public void endPicking(){
+	private void endPicking(){
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glPopMatrix();
 		gl.glMatrixMode(GL.GL_MODELVIEW);
@@ -67,7 +72,7 @@ public class PickingHandler {
 		inSelectionMode = false;
 	}
 	
-	public void processHits(int nHits){
+	private void processHits(int nHits){
 		if (numHits == 0){
 			return;
 		}
@@ -128,15 +133,17 @@ public class PickingHandler {
 	
 	public void pickModels(){
 		startPicking();
+		gl.glPushName(0);
 		for(Entity e: entities){
-			gl.glPushName(e.id);
+			
+			gl.glLoadName(e.id);
 			drawEntity(e);
 			gl.glPopName();
 		}
 		endPicking();
 	}
 	
-	public void drawEntity(Entity e){
+	private void drawEntity(Entity e){
 		gl.glPushMatrix();
 		gl.glTranslatef( e.position.x, e.position.y, e.position.z );
 		pickingBox.draw(gl);

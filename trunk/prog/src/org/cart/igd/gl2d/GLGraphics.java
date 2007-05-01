@@ -408,6 +408,20 @@ public class GLGraphics
 		return drawBitmapString(text, x, y, rgba);
 	}
 	
+	public int drawBitmapStringStrokeSize(String text, int x, int y, int ss, float[] rgba, float[] strokergba, float[] size, int spacing)
+	{
+		drawBitmapStringSize(text, x+ss, y, strokergba,size,spacing);
+		drawBitmapStringSize(text, x-ss, y, strokergba,size,spacing);
+		drawBitmapStringSize(text, x, y+ss, strokergba,size,spacing);
+		drawBitmapStringSize(text, x, y-ss, strokergba,size,spacing);
+		return drawBitmapStringSize(text, x, y, rgba,size,spacing);
+	}
+	
+	public int drawBitmapStringSize(String text, int x, int y, float[] rgb, float[] size, int spacing)
+	{
+		return drawBitmapString(text, x, y, spacing, rgb, size);// had an extra false
+	}
+	
 	public int drawBitmapStringShadow(String text, int x, int y, int ss, int dir, float[] rgb, float[] shadowrgb)
 	{
 		int nx = 0;

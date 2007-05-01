@@ -24,8 +24,8 @@ import org.cart.igd.input.PickingHandler;
 import org.cart.igd.input.UserInput;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
-import org.cart.igd.entity.*;
 import org.cart.igd.game.*;
+import org.cart.igd.entity.*;
 
 public class InGameState extends GameState
 {	
@@ -88,9 +88,37 @@ public class InGameState extends GameState
 		
 		terrain = new Terrain();
 		terrain.load(gl);
+/*
+ 	public static final int FLAMINGO = 0;
+	public static final int TURTLES = 1; 
+	public static final int PANDA = 2; 
+	public static final int KANGAROO = 3; 
+	public static final int GIRAFFE = 4; 
+	public static final int TIGER = 5; 
+	public static final int PENGUIN = 6; 
+	public static final int MEERKAT = 7; 
+	public static final int WOODPECKER = 8;
+	public static final int ELEPHANT = 9;  
 
-		questlog = new QuestLog("Quest Log",20,10);	
+ */
+		questlog = new QuestLog("Quest Log",20,10);
+		questlog.createQuest(Inventory.FLAMINGO,"Flamingo", "subtit","Go out and save that animal now",false);
+		questlog.createQuest(Inventory.TURTLES,"Turtles", "subtit","Go out and save that animal now",false);
+		questlog.createQuest(Inventory.PANDA,"Panda","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.KANGAROO,"Kangaroo","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.GIRAFFE,"Giraffe","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.TIGER,"Tiger","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.PENGUIN,"Penguin","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.MEERKAT,"Meerkat","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.WOODPECKER,"WoodPecker","subtit", "Go out and save that animal now",false);
+		questlog.createQuest(Inventory.ELEPHANT,"Elephant", "subtit","Go out and save that animal now",false);
+		//questlog.createQuest(0,"Butcher", "I do not want green eggs and ham said the butcher who is fat.",true);
+		//questlog.createQuest(1,"Save Animal", "Go out and save that animal now",false);
+		//questlog.createQuest(2,"Get Medication", "I need to find some medication",true);
+		//questlog.createQuest(3,"Do This", "I sure need to go out and do this",false);
+
 		inventory = new Inventory();
+
 		
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
@@ -317,6 +345,10 @@ public class InGameState extends GameState
 			e.render(gl);
 		}	
 			
+		for(int i = 0;i<animals.size();i++){
+			Animal animal = animals.get(i);
+			animal.display(gl);
+		}
 		/* guard debug text*/
 		addInfoText(0,"guard 1  ref angle: "+((Guard)entities.get(0)).refAngleRad);
 		addInfoText(1,"player yrot: "+ player.getFacingDirection());
@@ -326,10 +358,7 @@ public class InGameState extends GameState
 			item.display3d(gl);
 		}
 		
-		for(int i = 0;i<animals.size();i++){
-			Animal animal = animals.get(i);
-				animal.display(gl);
-		}
+
 
 		/* render the world map and sky*/
 		terrain.render( gl, player);
