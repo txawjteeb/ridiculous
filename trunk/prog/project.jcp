@@ -353,6 +353,10 @@
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\game\Terrain.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\game\Tree.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
@@ -426,6 +430,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\InputHandler.java</path>
+				<folder>src\org\cart\igd\input</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\input\PickingHandler.java</path>
 				<folder>src\org\cart\igd\input</folder>
 			</fileitem>
 			<fileitem>

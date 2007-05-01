@@ -34,7 +34,10 @@ public class PickingHandler {
 	}
 	
 	/* calle every render cycle */
-	public void pickModels(){
+	public void pickModels()
+	{
+		if(!inSelectionMode)
+			return;
 		startPicking();
 		drawEntities();
 		endPicking();
@@ -46,9 +49,7 @@ public class PickingHandler {
 		gl.glGetIntegerv(GL.GL_VIEWPORT, viewport, 0);
 		
 		int selectBuf[]= new int[512];
-		
 		selectBuffer = BufferUtil.newIntBuffer(BUFSIZE);
-		
 		gl.glSelectBuffer(BUFSIZE, selectBuffer);
 		
 		gl.glRenderMode(GL.GL_SELECT);
@@ -59,15 +60,15 @@ public class PickingHandler {
 		gl.glPushMatrix();
 		gl.glLoadIdentity();
 		
-		
 		glu.gluPickMatrix((double) xCursor,
-				(double) (viewport[3] - yCursor),
+				(double) yCursor,
 				5.0,5.0, viewport, 0 );
 				
 		glu.gluPerspective(45f,
 				(float)Kernel.display.getScreenWidth()/
 				(float)Kernel.display.getScreenHeight()
 				, 1, 100);
+				
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 	}
 	
@@ -76,19 +77,21 @@ public class PickingHandler {
 		for(Entity e: entities)
 		{
 			gl.glPushName(e.id);
-				gl.glPushMatrix();
-					gl.glTranslatef( e.position.x, e.position.y, e.position.z );
-					pickingBox.draw(gl);
-				gl.glPopMatrix();
-			gl.glPopName();
+			gl.glPushMatrix();
+			gl.glTranslatef( e.position.x, e.position.y, e.position.z );
+			pickingBox.draw(gl);
+			gl.glPopMatrix();
 		}
 	}
 	
-	private void endPicking(){
+	private void endPicking()
+	{
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glPopMatrix();
+		
 		gl.glMatrixMode(GL.GL_MODELVIEW);
-		processHits(numHits);
+		
+		processHits((numHits = gl.glRenderMode(GL.GL_RENDER)));
 		inSelectionMode = false;
 	}
 	
@@ -102,6 +105,7 @@ public class PickingHandler {
 		int selectedNameId = -1;
 		float smallestZ = -1f;
 		*/
+		if(nHits==0) return;
 		
 		int selectedNameId = 0;
 		float smallestZ = -1f;
@@ -148,7 +152,7 @@ public class PickingHandler {
 			}
 			System.out.println();
 		}
-		System.out.println("Picked the " + idToString(selectedNameId));
+		System.out.println("Picked the " + idToString(selectedNameId) + "\n");
 	}//end process hits
 	
 	private float getDepth(int offset){
