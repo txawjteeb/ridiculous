@@ -29,7 +29,7 @@ import org.cart.igd.entity.*;
 
 public class InGameState extends GameState
 {	
-	public String[] infoText = { "", "", "", "", "" };
+	public String[] infoText = { "", "", "", "", "","","","" };
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
@@ -68,9 +68,12 @@ public class InGameState extends GameState
 	
 	private Terrain terrain;
 	
-	public PickingHandler pickingHandler;
-	
 	private boolean loaded = false;
+	boolean showInfoText = true;
+	
+	GLGraphics glg;
+	PickingHandler ph;
+	
 	
 	public InGameState(GL gl)
 	{
@@ -122,7 +125,8 @@ public class InGameState extends GameState
 		
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
-		OBJModel treeModel = new OBJModel(gl,"data/models/party_snapper");
+		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
+		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
 		OBJModel guard = new OBJModel(gl, "data/models/guard_vm",1.5f,false);
 		
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
@@ -130,7 +134,7 @@ public class InGameState extends GameState
 		
 		/* special entity where animals are hidden after rescue place rescued 
 		 * animals in a position relative to this */
-		bush = new Bush( new Vector3f(0,0,0), 20f, guard3ds,this);	
+		bush = new Bush( new Vector3f(0,0,0), 20f, treeModel,this);	
 		
 		/* create and add test guard */
 		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player,2f));
@@ -144,36 +148,41 @@ public class InGameState extends GameState
 		/* add collectable object to the map */
 				//0 reserverd
 		items.add(new Item("Fish",1,1,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,-15f),true,true));
 		items.add(new Item("Hotdog",2,1,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,-15f),true,true));
 				//3 reserved
 		items.add(new Item("Disguise Glasses",4,1,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,-15f),true,true));
 		items.add(new Item("Medication",5,1,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,-15f),true,true));
 		items.add(new Item("Paddle Ball",6,1,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,15f),false,false));
 		items.add(new Item("Zoo Paste",7,1,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(15f,0f,15f),false,false));
 		items.add(new Item("Party Snapper",8,50,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,-15f),true,true));
 				
 		items.add(new Item("Party Snapper",8,50,0f,1f,
-				treeModel,
+				partySnapper,
 				new Vector3f(-15f,0f,-35f),true,true));
 	
 		/* add animals to the map */
 		animals.add(new Animal("Giraffe",4,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,10f),this));
+		
+		/* add animals to the map */
+		animals.add(new Animal("Meerkat",5,0f,3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new Vector3f(10f,0f,-20f),this));
 		
 		
 		/* add different gui segments */
@@ -191,18 +200,19 @@ public class InGameState extends GameState
 		
 		Kernel.userInput.bindToMouse(mouseWheelScroll,UserInput.MOUSE_WHEEL_DOWN);
 		
-		
-		
 		/* Test 3ds Data */
 		test3ds.printData();
 	}
 	
 	public void init(GL gl, GLU glu)
 	{
-		pickingHandler = new PickingHandler(gl,glu,entities);
+		glg = Kernel.display.getRenderer().getGLG();
+		ph = new PickingHandler(gl,glu,animals);
+		
 		loaded = true;
 	}
 	
+	/* post a string message do be displayed on index line*/
 	public void addInfoText(int index, String txt){
 		if(index<infoText.length){
 			infoText[index] = txt;
@@ -217,7 +227,6 @@ public class InGameState extends GameState
 	 * moved some of the character movement input due to a faster update 
 	 * which made character jitter forward when walking 
 	 **/
-	 
 	public void updateItems(long elapsedTime){
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
@@ -243,9 +252,9 @@ public class InGameState extends GameState
 		updateQuestLog(elapsedTime);
 		
 		((Bush)bush).update(elapsedTime);
-
 		
-
+		ph.mousePress(Kernel.userInput.mousePress[0], Kernel.userInput.mousePress[1]);
+		
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
 		{
@@ -306,7 +315,7 @@ public class InGameState extends GameState
 		gui.get(currentGuiState).update(elapsedTime);
 	}
 	
-	/** safely change gui defaul gui to dialogue gui and viasa versa */
+	/** select differen gui subsets */
 	public void changeGuiState( int guiState){
 		if(gui.size()>= guiState){
 			currentGuiState =guiState;
@@ -318,56 +327,53 @@ public class InGameState extends GameState
 	}
 	
 	public synchronized void display(GL gl, GLU glu)
-	{
+	{	
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
+		
 		/* Setup Camera */
 		camera.lookAt(glu, player);
-		
-		
 		
 		/* render the bush */
 		bush.render(gl);
 		
 		/* Render Player Model */
-		
-		//test3ds.render(gl);
-		//playerSprite.draw(gl);
-		
 		player.render(gl);
-
-		Iterator itr = entities.iterator();
+		
 		/* render all entities */
+		Iterator itr = entities.iterator();
 		while(itr.hasNext())
 		{
 			Entity e = (Entity)itr.next();
 			e.render(gl);
 		}	
-			
+		addInfoText(5,"# entities: "+entities.size());
+		
+		/* render all animals */
 		for(int i = 0;i<animals.size();i++){
 			Animal animal = animals.get(i);
 			animal.display(gl);
 		}
+		addInfoText(3,"# animals: "+animals.size());
+		
 		/* guard debug text*/
 		addInfoText(0,"guard 1  ref angle: "+((Guard)entities.get(0)).refAngleRad);
 		addInfoText(1,"player yrot: "+ player.getFacingDirection());
 		addInfoText(2,"guard1 yrot: "+entities.get(0).facingDirection);
+		
+		/* render all items in 3d space */
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
 			item.display3d(gl);
 		}
+		addInfoText(4,"# items: "+items.size());
 		
-
-
 		/* render the world map and sky*/
 		terrain.render( gl, player);
 		
-		/* Render GUI */
-		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		
-		/* draw cursor and info text */
-		GLGraphics glg = Kernel.display.getRenderer().getGLG();
+		/* DRAW ALL 2D draw cursor and info text */
 		glg.glgBegin();
 		if(!mouseCameraRotate.isActive())
 		{
@@ -376,17 +382,20 @@ public class InGameState extends GameState
 					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
 		}
 		
-		int i = 0;
-		for(String s: infoText){
-			i++;
-			glg.drawBitmapString(s, 600 , 600 - (i*16));
+		if(showInfoText){
+			int i = 0;
+			for(String s: infoText){
+				i++;
+				glg.drawBitmapString(s, 600 , 600 - (i*16));
+			}
 		}
 		glg.glgEnd();
 		
-		if(loaded == true){
-			//pickingHandler.pickModels();
-		}
+		/* Render GUI */
+		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		
+		/* PICK MODELS*/
+		//ph.pickModels();
 	}
 	
 	public synchronized void throwPartyPopper(){

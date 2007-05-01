@@ -207,7 +207,7 @@ public class Item extends Entity {
 	
 	public void display3d(GL gl){
 		if(state == 0){
-			render(gl);
+			super.render(gl);
 		}
 	}
 

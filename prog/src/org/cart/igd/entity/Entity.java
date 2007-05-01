@@ -218,7 +218,7 @@ public abstract class Entity
 		}
 		if(modelObj!= null){
 			gl.glPushMatrix();
-			gl.glTranslatef(position.x, position.y, position.z);
+			gl.glTranslatef(position.x, position.y -2f, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
 			gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);

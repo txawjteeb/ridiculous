@@ -21,13 +21,13 @@ public class Terrain
 	
 	
 	public void load(GL gl){
-		skyDome			= new SkyDome(0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
-		worldMap		= new OBJModel(gl, "data/models/ground_cc",500,false);	
+		skyDome	 = new SkyDome( 0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
+		worldMap = new OBJModel( gl, "data/models/zoo_map_vm", 500, false);	
 		
-		OBJModel tree0 = new OBJModel(gl, "data/models/tree0",2.5f,false);
-		OBJModel tree1 = new OBJModel(gl, "data/models/tree1",3f,false);
-		OBJModel tree2 = new OBJModel(gl, "data/models/tree2",1.3f, false);
-		OBJModel tree3 = new OBJModel(gl, "data/models/tree3",4.5f,false);	
+		OBJModel tree0 = new OBJModel(gl, "data/models/tree0",4f,false);
+		OBJModel tree1 = new OBJModel(gl, "data/models/tree1",4f,false);
+		OBJModel tree2 = new OBJModel(gl, "data/models/tree2",4f, false);
+		OBJModel tree3 = new OBJModel(gl, "data/models/tree3",4f,false);	
 		
 		trees.add( new Tree(0f,3f,tree0, new Vector3f(0f,0f,20f)));		
 		trees.add( new Tree(0f,3f,tree2, new Vector3f(1f,0f,-35f)));
@@ -61,11 +61,10 @@ public class Terrain
 	public void render(GL gl, Entity player){
 		/* Render Land Map */
 		gl.glPushMatrix();
-		gl.glEnable(GL.GL_LIGHT0);
-			
-			gl.glTranslatef(0f, -7f, 0f);
+			//gl.glEnable(GL.GL_LIGHT0);
+			gl.glTranslatef(0f, 6f, 0f);
 			worldMap.draw(gl);
-			gl.glDisable(GL.GL_LIGHT0);
+			//gl.glDisable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
 		
 		/* Render trees */
@@ -76,15 +75,15 @@ public class Terrain
 		
 		/* Render SkyDome */
 		gl.glPushMatrix();
-			gl.glDisable(GL.GL_LIGHTING);
-			gl.glDisable(GL.GL_LIGHT0);
+			//gl.glDisable(GL.GL_LIGHTING);
+			//gl.glDisable(GL.GL_LIGHT0);
 			gl.glDisable(GL.GL_CULL_FACE);
 			gl.glTranslatef(player.position.x, player.position.y-30f, 
 					player.position.z);
 			skyDome.render(gl);
 			gl.glEnable(GL.GL_CULL_FACE);
-			gl.glEnable(GL.GL_LIGHTING);
-			gl.glEnable(GL.GL_LIGHT0);
+			//gl.glEnable(GL.GL_LIGHTING);
+			//gl.glEnable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
 	}
 }
