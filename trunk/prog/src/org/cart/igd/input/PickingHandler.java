@@ -8,6 +8,7 @@ import javax.media.opengl.glu.GLU;
 
 import org.cart.igd.core.Kernel;
 import org.cart.igd.entity.Entity;
+import org.cart.igd.game.Animal;
 import org.cart.igd.models.obj.OBJModel;
 
 import com.sun.opengl.util.BufferUtil;
@@ -23,13 +24,20 @@ public class PickingHandler {
 	boolean inSelectionMode;
 	
 	int yCursor, xCursor;
-	ArrayList<Entity> entities;
+	ArrayList<Animal> entities;
 	
-	public PickingHandler(GL gl,GLU glu,ArrayList<Entity> entities){
+	public PickingHandler(GL gl,GLU glu,ArrayList<Animal> entities){
 		this.gl=gl;
 		this.glu = glu;
 		this.entities = entities;
 		this.pickingBox = new OBJModel(gl,"data/models/picking_box");
+	}
+	
+	/* calle every render cycle */
+	public void pickModels(){
+		startPicking();
+		drawEntities();
+		endPicking();
 	}
 	
 	private void startPicking()
@@ -52,7 +60,6 @@ public class PickingHandler {
 		gl.glLoadIdentity();
 		
 		
-		
 		glu.gluPickMatrix((double) xCursor,
 				(double) (viewport[3] - yCursor),
 				5.0,5.0, viewport, 0 );
@@ -64,6 +71,19 @@ public class PickingHandler {
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 	}
 	
+	private void drawEntities()
+	{
+		for(Entity e: entities)
+		{
+			gl.glPushName(e.id);
+				gl.glPushMatrix();
+					gl.glTranslatef( e.position.x, e.position.y, e.position.z );
+					pickingBox.draw(gl);
+				gl.glPopMatrix();
+			gl.glPopName();
+		}
+	}
+	
 	private void endPicking(){
 		gl.glMatrixMode(GL.GL_PROJECTION);
 		gl.glPopMatrix();
@@ -73,12 +93,17 @@ public class PickingHandler {
 	}
 	
 	private void processHits(int nHits){
+		/*
 		if (numHits == 0){
 			return;
 		}
 		System.out.println("# hits: " + numHits);
 		
 		int selectedNameId = -1;
+		float smallestZ = -1f;
+		*/
+		
+		int selectedNameId = 0;
 		float smallestZ = -1f;
 		
 		boolean isFirstLoop = true;
@@ -129,26 +154,6 @@ public class PickingHandler {
 	private float getDepth(int offset){
 		long depth = (long) selectBuffer.get(offset);
 		return (1f+((float)depth/ 0x7fffffff));
-	}
-	
-	public void pickModels(){
-		startPicking();
-		gl.glPushName(0);
-		for(Entity e: entities){
-			
-			gl.glLoadName(e.id);
-			drawEntity(e);
-			gl.glPopName();
-		}
-		endPicking();
-	}
-	
-	private void drawEntity(Entity e){
-		gl.glPushMatrix();
-		gl.glTranslatef( e.position.x, e.position.y, e.position.z );
-		pickingBox.draw(gl);
-		gl.glPopMatrix();
-		
 	}
 	
 	/** 

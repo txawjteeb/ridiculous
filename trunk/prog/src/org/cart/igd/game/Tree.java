@@ -9,14 +9,12 @@ import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
 import org.cart.igd.input.*;
 
-public class Tree extends Entity {
+public class Tree extends Entity
+{
 
-	
 	public Tree(float fd, float bsr, OBJModel model, Vector3f location){
 		super(location,fd,bsr, model);
 	}
-	
-
 	
 	public void update(Vector3f playerPosition){
 	
@@ -28,16 +26,11 @@ public class Tree extends Entity {
 	 **/
 	public void render(GL gl){
 		gl.glPushMatrix();
-		gl.glDisable(GL.GL_LIGHTING);
-		gl.glDisable(GL.GL_LIGHT0);
-		gl.glDisable(GL.GL_CULL_FACE);
-		gl.glTranslatef(position.x, position.y, position.z);
-		modelObj.draw(gl);
-		gl.glEnable(GL.GL_CULL_FACE);
-		gl.glEnable(GL.GL_LIGHTING);
-		gl.glEnable(GL.GL_LIGHT0);
+			gl.glDisable(GL.GL_CULL_FACE);
+			gl.glTranslatef(position.x, -1f, position.z);
+			modelObj.draw(gl);
+			gl.glEnable(GL.GL_CULL_FACE);
+
 		gl.glPopMatrix();
-
 	}
-
 }

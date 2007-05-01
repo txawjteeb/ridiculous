@@ -99,11 +99,8 @@ public class InGameGUI extends GUI
 	}// end loadGameActions()
 
 	/** renders gui, called by Renderer thread*/
-	public void render(GLGraphics g) {
-		// move this outside to game state input check and render separate
-		// process
-		//handleInput();
-
+	public void render(GLGraphics g)
+	{
 		g.glgBegin();
 
 		if (selectedButton != null) {
@@ -248,18 +245,10 @@ public class InGameGUI extends GUI
 			((UIButton)hudLeft.components.get(i)).update(input, elapsedTime);
 		}
 		
-		if (pressQuestLog.isActive()) {
-			textList.addText("lk;jdsf");
-		}
-		
 		// move the selected button
 		if (selectedButton != null) {
 			selectedButton.setXY(input.mousePos[0] - 32,
 				input.mousePos[1] - 32);
-		}
-
-		if (mouseReleased.isActive()) {
-			System.out.println("release");
 		}	
 	}// end handleInput()
 
