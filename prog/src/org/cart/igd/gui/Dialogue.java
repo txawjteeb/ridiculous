@@ -448,7 +448,12 @@ public class Dialogue extends GUI {
 	 //4 = saved by bush
 	 //5 = saved in party
 			switch(animal.id){
-				case 4:
+				
+				///
+				///// GIRAFFE NOT DONE
+				///
+				///
+				case 4: 
 					switch(animal.state){
 						case 0:
 							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Why are you bothering an old man?",0));
@@ -491,6 +496,7 @@ public class Dialogue extends GUI {
 											((Dialogue)igs.gui.get(1)).down = true;
 											pause(1000);
 											animal.state = 2;
+											igs.questlog.createQuest(Inventory.GIRAFFE,"Giraffe", "Ready to leave","The Giraffe wants to leave the zoo.",false);
 											break;
 									}
 									break;
@@ -517,11 +523,23 @@ public class Dialogue extends GUI {
 											((Dialogue)igs.gui.get(1)).down = true;
 											pause(1000);
 											Dialogue.clearDialogue();
+											if(igs.inventory.hasItem(Inventory.MEDICATION)){
+												animal.state =5;
+												igs.inventory.useItem(Inventory.MEDICATION);
+												igs.questlog.createQuest(Inventory.GIRAFFE,"Giraffe", "Saved","You have successfully saved the giraffe.",true);
+											} else {
+												igs.questlog.createQuest(Inventory.GIRAFFE,"Giraffe", "Ready to leave2","The Giraffe wants to leave the zoo2.",false);
+											}
+											
 											break;	
 							}
 							break;
 					}
 				break;
+				///
+				///// GIRAFFE NOT DONE
+				///
+				///
 			}
 			Dialogue.clearDialogue();
 			((InGameState)gameState).changeGuiState(0);

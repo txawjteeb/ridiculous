@@ -21,12 +21,14 @@ public class InGameGUI extends GUI
 	private UserInput input;
 	
 	/* textures */
+	private Texture texQuestDone,texQuestNotDone;
 	private Texture texQuestLogIco;
 	private Texture texBush;
 	private Texture texQuestLog;
 	private Texture texEmptySlot;
 	private Texture texItemIco[] = new Texture[9];
 	private Texture texAnimalIco[] = new Texture[10];
+	private Texture texAnimalIcoQuestLog[] = new Texture[11];
 
 	/* button containers */
 	private UIWindow hudBottom;// quest log and item buttons
@@ -151,7 +153,7 @@ public class InGameGUI extends GUI
 			Item item = ((InGameState)gameState).inventory.items.get(i);
 			item.display2d(g,texItemIco[item.id]);
 		}
-		((InGameState)gameState).questlog.display(g,texQuestLogIco,texQuestLog);
+		((InGameState)gameState).questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog);
 		
 		
 		//System.out.println(((InGameState)gameState).nearBush);
@@ -264,6 +266,18 @@ public class InGameGUI extends GUI
 	/** load texture for the gui components */
 	public void loadImages()
 	{
+		for(int i = 0;i<texAnimalIcoQuestLog.length;i++){
+			texAnimalIcoQuestLog[i] = Kernel.display.getRenderer().loadImage(
+			"data/images/dialogue/old/" + i + ".png");
+		}
+		
+
+		
+		texQuestDone = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/quest_done.png");
+		texQuestNotDone = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/quest_notdone.png");
+			
 		texQuestLog = Kernel.display.getRenderer().loadImage(
 			"data/images/gui/questlog.png");
 		texBush = Kernel.display.getRenderer().loadImage(

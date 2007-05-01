@@ -39,6 +39,13 @@ public class QuestLog{
 
 	ArrayList <Quest> quests = new ArrayList<Quest>();
 	public boolean open = false;
+	public boolean swingingBook = false;
+		int degreeBook = 0;
+		int mathDegreesBook[] = new int[]{10,8,6,4,2,1};
+		int velDegreesBook[] = new int[]{6,5,4,3,2,1};
+		int counterBook = 0;
+		boolean leftBook = true;
+		float swingBookAlpha = 0f;
 
 
 
@@ -50,9 +57,8 @@ public class QuestLog{
 
 	public void update(InGameState igs, long elapsedTime){
 			timeToUpdate -= elapsedTime;
-			if(timeToUpdate <= 0)
-			{
-				if(!open){
+			if(timeToUpdate <= 0){
+				//if(!open){
 					mouseOver = false;
 					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+128&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+128){
 							
@@ -94,20 +100,63 @@ public class QuestLog{
 					if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+128&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+128){
 						Kernel.userInput.mousePress[0] = -100;
 						Kernel.userInput.mousePress[1] = -100;
-						open = true;
+						if(open){
+							open=false;
+							swingingBook = true;
+							degreeBook = 0;
+							counterBook=0;
+							leftBook=true;
+							swingBookAlpha=1f;
+						}
+						else {
+							swingBookAlpha = 0f;
+							leftBook=true;
+							degreeBook = 0;
+							counterBook=0;
+							swingingBook = true;
+							open = true;
+						}
 					} 
-				} else{
+			//	} else{
 					
-				}
+			//	}
 					
 				
 			timeToUpdate = updateTime;
+			for(int i = 0;i<quests.size();i++){
+					quests.get(i).update(270,570-i*30);
+			}
 		}
-
+		
+		if(swingingBook){
+			if(leftBook){
+					degreeBook+=velDegreesBook[counterBook];
+							if(degreeBook>mathDegreesBook[counterBook]){
+								counterBook++;
+								leftBook = false;
+							}
+						}else{
+							degreeBook-=velDegreesBook[counterBook];
+							if(degreeBook<-mathDegreesBook[counterBook]){
+								counterBook++;
+								leftBook = true;
+							}
+						}
+						if(counterBook>mathDegrees.length-1){
+							swingingBook = false;
+							degreeBook = 0;
+							counterBook=0;
+			}
+			if(!open){
+				swingBookAlpha-=.05f;
+			} else{
+				swingBookAlpha+=.05f;
+			}
+		}
 			
 	}
 
-	public void display(GLGraphics g, Texture texture1, Texture texture2){
+	public void display(GLGraphics g, Texture texture1, Texture texture2,Texture texture3, Texture texture4, Texture[] texture5){
 		if(!open){
 				if(mouseOver){
 						g.drawImageRotateHueSize(texture1,x-13,y-13,degree, new float[]{1f,1f,alphaSwing,alpha}, new float[]{1.2f,1.2f});
@@ -116,31 +165,91 @@ public class QuestLog{
 						g.drawImageRotateHue(texture1,x,y,degree,new float[]{1f,1f,alphaSwing,alpha});
 				}
 				g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
+			if(swingingBook){
+				g.drawImageRotateHue(texture2,0,0,degreeBook,new float[]{1f,1f,1f,swingBookAlpha});
+			}
 		} else{
+			g.drawImageRotateHue(texture2,0,0,degreeBook,new float[]{1f,1f,1f,swingBookAlpha});
 				for(int i = 0;i<quests.size();i++){
-					Quest quest = quests.get(i);
-				//	g.drawBitmapStringStroke(quest.title,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
-				//	for(int j = 0;j<quest.brokenInformation.length;j++){
-				//			g.drawBitmapStringStroke(quest.brokenInformation[j],x+76,y+50-i*20,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-					//	}
+					quests.get(i).draw(g,270,570-i*40,texture3,texture4,texture5,swingBookAlpha);
 				}
-				g.drawImageRotateHue(texture2,0,0,0,new float[]{1f,1f,1f,1f});
+			if(mouseOver){
+						g.drawImageRotateHueSize(texture1,x-13,y-13,degree, new float[]{1f,1f,alphaSwing,alpha}, new float[]{1.2f,1.2f});
+				} else {	
+						alphaSwing +=.05f;
+						g.drawImageRotateHue(texture1,x,y,degree,new float[]{1f,1f,alphaSwing,alpha});
+				}
+				g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
+				
 		}
 		
 	
 	}
 	
+	
+	public void createQuest(int id,String title, String subtitle, String information, boolean done){
+		
+		//huge problem here, it works, but never understood the problem
+		boolean duplicate = false;
+		int i = 0;
+		for(;i<quests.size();i++){
+			if(quests.get(i).id==id){
+				duplicate = true;
+				break;
+			}
+		}
+		
+		if(duplicate){
+			Quest quest = quests.get(i);
+			quest.title = title;
+			quest.subtitle = subtitle;
+			quest.information = information;
+			quest.done = done;
+			quest.breakUpInformation();
+		} else {
+			quests.add(new Quest(id,title, subtitle,information,done));
+		}
+
+/*
+		for(int i = 0;i<quests.size();i++){
+			if(quests.get(i).id==id){
+				quests.remove(quests.get(i));
+				break;
+			}
+		}
+			quests.add(new Quest(id,title, subtitle,information,done));
+*/		
+	}
+	
+	public void questCompleted(int id){
+		for(int i = 0;i<quests.size();i++){
+			if(quests.get(i).id==id){
+				quests.get(i).done = true;
+				break;
+			}
+		}
+	}
+	
 	class Quest{
-		boolean done;
+		int id;
+		boolean selected = false;
+		boolean done = false;
 		String title;
+		String subtitle;
 		String information;
 		String brokenInformation[];
+		boolean mouseOverTitle = false;
 		
-		public Quest(String title, String information, boolean done){
+		public Quest(int id, String title, String subtitle, String information, boolean done){
+			this.id = id;
 			this.done = done;
 			this.title = title;
+			this.subtitle = subtitle;
 			this.information = information;
-			
+			breakUpInformation();
+		}
+		
+		public void breakUpInformation(){
 			if(information.length()<40){
 				brokenInformation = new String[] {information};
 			} else {
@@ -169,7 +278,74 @@ public class QuestLog{
 					brokenInformation[i] = wordsArray[i];
 				}
 			}
-			
+		}
+		/*
+		 HAve the Title move right, and left with algs
+		 wiggle book
+		 alpha text when switch
+		 wiggle book on swithc
+		 */
+		public void draw(GLGraphics g, int x, int y,Texture texture3, Texture texture4,Texture[] texture5,float swingBookAlpha){
+			g.drawImageHue(texture5[id],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});
+			g.drawImageHue(texture5[10],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});
+			if(mouseOverTitle){
+					g.drawBitmapStringStrokeSize(title,x,y+3,1,new float[]{1f,.5f,.5f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.2f,1.2f},14);
+				} else {
+					g.drawBitmapStringStroke(title,x,y+3,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
+				}
+				
+				if(selected){
+					g.drawBitmapStringStrokeSize(subtitle,x+400,700,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
+					for(int j = 0;j<brokenInformation.length;j++){
+						int adder = 0;
+						if(j==0)adder = 30;
+							g.drawBitmapStringStroke(brokenInformation[j],x+200+adder,650-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
+					}
+					if(done){
+						g.drawBitmapStringStrokeSize("Finished",x+400,100,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+					} else {
+						g.drawBitmapStringStrokeSize("Unfinished",x+400,100,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+					}
+				}
+				if(done){
+						g.drawImage(texture3,x-40,y-5);
+				} else {
+						g.drawImage(texture4,x-40,y-5);
+			}
+				/*if(mouseOverTitle){
+					g.drawBitmapStringStrokeSize(title,x,y,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.2f,1.2f},14);
+				} else {
+					g.drawBitmapStringStroke(title,x,y,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
+				}
+				
+				if(selected){
+					g.drawBitmapStringStrokeSize(subtitle,x+400,700,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
+					for(int j = 0;j<brokenInformation.length;j++){
+						int adder = 0;
+						if(j==0)adder = 30;
+							g.drawBitmapStringStroke(brokenInformation[j],x+200+adder,650-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
+					}
+					if(done){
+						g.drawBitmapStringStrokeSize("Finished",x+400,100,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+					} else {
+						g.drawBitmapStringStrokeSize("Unfinished",x+400,100,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+					}
+				}
+				if(done){
+						g.drawImage(texture3,x-40,y-5);
+				} else {
+						g.drawImage(texture4,x-40,y-5);
+				}
+				*/
+		}
+		
+		public void update(int x, int y){
+			if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+16*title.length()&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+16){
+				mouseOverTitle = true;
+			} else mouseOverTitle = false;
+			if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+16*title.length()&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+16){
+				selected = true;
+			} else selected = false;
 		}
 	}
 }
