@@ -74,7 +74,6 @@ public class InGameState extends GameState
 	GLGraphics glg;
 	PickingHandler ph;
 	
-	
 	public InGameState(GL gl)
 	{
 		super(gl);
@@ -177,7 +176,7 @@ public class InGameState extends GameState
 		/* add animals to the map */
 		animals.add(new Animal("Giraffe",4,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,10f),this));
+				new Vector3f(10f,30f,10f),this));
 		
 		/* add animals to the map */
 		animals.add(new Animal("Meerkat",5,0f,3f,
@@ -395,7 +394,7 @@ public class InGameState extends GameState
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		
 		/* PICK MODELS*/
-		//ph.pickModels();
+		ph.pickModels();
 	}
 	
 	public synchronized void throwPartyPopper(){
