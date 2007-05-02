@@ -253,7 +253,7 @@ public class InGameGUI extends GUI
 		}
 		if(gameState.picked){
 			gameState.picked = false;
-			System.out.println(" InGameGUI.handleInput()"+gameState.pickedId);
+			//System.out.println(" InGameGUI.handleInput()"+gameState.pickedId);
 		}
 	}// end handleInput()
 

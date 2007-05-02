@@ -90,34 +90,19 @@ public class InGameState extends GameState
 		
 		terrain = new Terrain();
 		terrain.load(gl);
-/*
- 	public static final int FLAMINGO = 0;
-	public static final int TURTLES = 1; 
-	public static final int PANDA = 2; 
-	public static final int KANGAROO = 3; 
-	public static final int GIRAFFE = 4; 
-	public static final int TIGER = 5; 
-	public static final int PENGUIN = 6; 
-	public static final int MEERKAT = 7; 
-	public static final int WOODPECKER = 8;
-	public static final int ELEPHANT = 9;  
 
- */
 		questlog = new QuestLog("Quest Log",20,10);
-		questlog.createQuest(Inventory.FLAMINGO,"Flamingo", "subtit","Go out and save that animal now",false);
-		questlog.createQuest(Inventory.TURTLES,"Turtles", "subtit","Go out and save that animal now",false);
-		questlog.createQuest(Inventory.PANDA,"Panda","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.KANGAROO,"Kangaroo","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.GIRAFFE,"Giraffe","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.TIGER,"Tiger","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.PENGUIN,"Penguin","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.MEERKAT,"Meerkat","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.WOODPECKER,"WoodPecker","subtit", "Go out and save that animal now",false);
-		questlog.createQuest(Inventory.ELEPHANT,"Elephant", "subtit","Go out and save that animal now",false);
-		//questlog.createQuest(0,"Butcher", "I do not want green eggs and ham said the butcher who is fat.",true);
-		//questlog.createQuest(1,"Save Animal", "Go out and save that animal now",false);
-		//questlog.createQuest(2,"Get Medication", "I need to find some medication",true);
-		//questlog.createQuest(3,"Do This", "I sure need to go out and do this",false);
+		questlog.createQuest(Inventory.FLAMINGO,"Flamingo", "Escaped!","You have escaped the zoo!",true);
+		questlog.createQuest(Inventory.TURTLES,"Turtles", "Find and Talk","I must tell the Turtles about the zoo!",false);
+		questlog.createQuest(Inventory.PANDA,"Panda","Find and Talk", "I must tell the Panda about the zoo!",false);
+		questlog.createQuest(Inventory.KANGAROO,"Kangaroo","Find and Talk", "I must tell the Kangaroo about the zoo!",false);
+		questlog.createQuest(Inventory.GIRAFFE,"Giraffe","Find and Talk", "I must tell the Giraffe about the zoo!",false);
+		questlog.createQuest(Inventory.TIGER,"Tiger","Find and Talk", "I must tell the Tiger about the zoo!",false);
+		questlog.createQuest(Inventory.PENGUIN,"Penguin","Find and Talk", "I must tell the Penguin about the zoo!",false);
+		questlog.createQuest(Inventory.MEERKAT,"Meerkat","Find and Talk", "I must tell the Meerkat about the zoo!",false);
+		questlog.createQuest(Inventory.WOODPECKER,"WoodPecker","Find and Talk", "I must tell the WoodPecker about the zoo!",false);
+		questlog.createQuest(Inventory.ELEPHANT,"Elephant", "Find and Talk","I must tell the Elephant about the zoo!",false);
+
 
 		inventory = new Inventory();
 
@@ -146,42 +131,82 @@ public class InGameState extends GameState
 		
 		/* add collectable object to the map */
 				//0 reserverd
-		items.add(new Item("Fish",1,1,0f,1f,
+		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
 				partySnapper,
-				new Vector3f(-15f,0f,-15f),true,true));
-		items.add(new Item("Hotdog",2,1,0f,1f,
-				partySnapper,
-				new Vector3f(-15f,0f,-15f),true,true));
-				//3 reserved
-		items.add(new Item("Disguise Glasses",4,1,0f,1f,
-				partySnapper,
-				new Vector3f(-15f,0f,-15f),true,true));
-		items.add(new Item("Medication",5,1,0f,1f,
-				partySnapper,
-				new Vector3f(-15f,0f,-15f),true,true));
-		items.add(new Item("Paddle Ball",6,1,0f,1f,
-				partySnapper,
-				new Vector3f(-15f,0f,15f),false,false));
-		items.add(new Item("Zoo Paste",7,1,0f,1f,
-				partySnapper,
-				new Vector3f(15f,0f,15f),false,false));
-		items.add(new Item("Party Snapper",8,50,0f,1f,
-				partySnapper,
-				new Vector3f(-15f,0f,-15f),true,true));
+				new Vector3f(-15f,0f,0f),true,true));
 				
-		items.add(new Item("Party Snapper",8,50,0f,1f,
+		items.add(new Item("Hotdog",Inventory.HOTDOG,1,0f,1f,
 				partySnapper,
-				new Vector3f(-15f,0f,-35f),true,true));
-	
+				new Vector3f(-15f,0f,10f),true,true));
+				//3 reserved
+				
+		items.add(new Item("Disguise Glasses",Inventory.DISGUISEGLASSES,1,0f,1f,
+				partySnapper,
+				new Vector3f(-15f,0f,20f),true,true));
+				
+		items.add(new Item("Medication",Inventory.MEDICATION,1,0f,1f,
+				partySnapper,
+				new Vector3f(-15f,0f,30f),true,true));
+				
+		items.add(new Item("Paddle Ball",Inventory.PADDLEBALL,1,0f,1f,
+				partySnapper,
+				new Vector3f(-15f,0f,40f),false,false));
+				
+		items.add(new Item("Zoo Paste",Inventory.ZOOPASTE,1,0f,1f,
+				partySnapper,
+				new Vector3f(-15f,0f,50f),false,false));
+				
+		items.add(new Item("Party Snapper",Inventory.POPPERS,50,0f,1f,
+				partySnapper,
+				new Vector3f(-15f,0f,60f),true,true));
+/*
+ 	public static final int FLAMINGO = 0;
+	public static final int TURTLES = 1; 
+	public static final int PANDA = 2; 
+	public static final int KANGAROO = 3; 
+	public static final int GIRAFFE = 4; 
+	public static final int TIGER = 5; 
+	public static final int PENGUIN = 6; 
+	public static final int MEERKAT = 7; 
+	public static final int WOODPECKER = 8;
+	public static final int ELEPHANT = 9;  
+*/
 		/* add animals to the map */
-		animals.add(new Animal("Giraffe",4,0f,5f,
-				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,30f,10f),this));
-		
-		/* add animals to the map */
-		animals.add(new Animal("Meerkat",5,0f,3f,
+		animals.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-20f),this));
+				
+		animals.add(new Animal("Panda",Inventory.PANDA,0f,3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new Vector3f(10f,0f,-30f),this));
+				
+		animals.add(new Animal("Panda",Inventory.KANGAROO,0f,3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new Vector3f(10f,0f,-40f),this));
+		
+		animals.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
+				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
+				new Vector3f(10f,0f,-50f),this));
+		
+		animals.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
+				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
+				new Vector3f(10f,0f,-60f),this));
+		
+		animals.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
+				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
+				new Vector3f(10f,0f,-70f),this));
+				
+		animals.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new Vector3f(10f,0f,-80f),this));
+				
+		animals.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new Vector3f(10f,0f,-90f),this));
+				
+		animals.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new Vector3f(10f,0f,-100f),this));
 		
 		
 		/* add different gui segments */
