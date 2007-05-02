@@ -75,6 +75,19 @@ public class Item extends Entity {
 	}
 	
 	public void update(Vector3f playerPosition,InGameState igs,long elapsedTime){
+		if(amount<1){
+			boolean found = false;
+			for(int i = 0;i<igs.inventory.items.size();i++){
+						Item item = igs.inventory.items.get(i);
+						if(found){
+							item.x-=70;
+						} else if(item.equals(this)){
+							found = true;
+						}
+			}
+			igs.items.remove(this);
+			igs.inventory.items.remove(this);
+		}
 		if(state == 0){ // in 3d world
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
@@ -131,7 +144,6 @@ public class Item extends Entity {
 				}
 				igs.inventory.items.remove(this);
 				igs.items.remove(this);
-				
 			}
 			
 			
@@ -178,8 +190,6 @@ public class Item extends Entity {
 				
 				timeToUpdate = updateTime;
 				}
-			//f(input.mousePos[0]>x &&input.mousePos[0]<x+64&&input.mousePos[1]>y&&input.mousePos[1]<y+64){
-			//Kernel.userInput.mousePress[0]!=lastMousePress[0]||Kernel.userInput.mo
 		}	
 	}
 
@@ -187,20 +197,13 @@ public class Item extends Entity {
 		if(state == 1){
 			if(mouseOver){
 						g.drawImageRotateHueSize(texture,x,y,degree, new float[]{1f,alphaSwing,alphaSwing,alpha}, new float[]{1.3f,1.3f});
+						g.drawBitmapStringStroke(name,x,y+73,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
 					} else {	
 						alphaSwing +=.05f;
 						g.drawImageRotateHue(texture,x,y,degree,new float[]{1f,alphaSwing,alphaSwing,alpha});
+						g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
 			}
 			g.drawBitmapStringStroke(""+amount,x,y,1,new float[]{.6f,1f,.6f,1f},new float[]{0f,0f,0f,1f});
-			g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
-			/*
-			if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){
-				g.drawImageHue(texture,x,y,new float[]{1f,.4f,.4f,1f});
-			} else{
-				g.drawImage(texture,x,y);
-			}
-			
-				*/
 				
 		}
 	}

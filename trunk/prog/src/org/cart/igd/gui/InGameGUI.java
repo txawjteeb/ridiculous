@@ -29,6 +29,8 @@ public class InGameGUI extends GUI
 	private Texture texItemIco[] = new Texture[9];
 	private Texture texAnimalIco[] = new Texture[10];
 	private Texture texAnimalIcoQuestLog[] = new Texture[11];
+	private Texture texAnimalQuestLogFree[] = new Texture[10];
+	private Texture texQuestLogCage;
 
 	/* button containers */
 	private UIWindow hudBottom;// quest log and item buttons
@@ -150,7 +152,7 @@ public class InGameGUI extends GUI
 			Item item = ((InGameState)gameState).inventory.items.get(i);
 			item.display2d(g,texItemIco[item.id]);
 		}
-		((InGameState)gameState).questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog);
+		((InGameState)gameState).questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog,texAnimalQuestLogFree,texQuestLogCage);
 		
 		
 		//System.out.println(((InGameState)gameState).nearBush);
@@ -255,6 +257,17 @@ public class InGameGUI extends GUI
 	/** load texture for the gui components */
 	public void loadImages()
 	{
+		
+		texQuestLogCage = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/cage.png");
+			
+		for(int i = 0;i<texAnimalQuestLogFree.length;i++){
+			texAnimalQuestLogFree[i] = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/quest_animal4.png");
+		}
+		
+		
+		
 		for(int i = 0;i<texAnimalIcoQuestLog.length;i++){
 			texAnimalIcoQuestLog[i] = Kernel.display.getRenderer().loadImage(
 			"data/images/dialogue/old/" + i + ".png");
