@@ -21,6 +21,7 @@ public class Dialogue extends GUI {
 	private float fogdegree  = 0f;
 	public float alphaBackground = 0f;
 	public boolean down = false;
+	public InGameState igs = null;
 	/**
 	 * param1 informative string
 	 * param2 continuous action
@@ -45,8 +46,11 @@ public class Dialogue extends GUI {
 	
 	public void createDialogue(Animal animal,InGameState igs){
 		down = false;
+		this.igs = igs;
 		alphaBackground = 0f;
 		new ActiveDialogue(animal,igs).start();
+		igs.camera.distance = 2;
+		
 	}
 	
 	
@@ -541,7 +545,10 @@ public class Dialogue extends GUI {
 				///
 			}
 			Dialogue.clearDialogue();
+			igs.camera.distance = 10;
+			igs.gui.get(InGameState.GUI_GAME).picked = false;
 			((InGameState)gameState).changeGuiState(0);
+			
 		}
 		
 		public void pause(int miliseconds){

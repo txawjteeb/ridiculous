@@ -9,6 +9,7 @@ import javax.media.opengl.glu.GLU;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.game.Animal;
+import org.cart.igd.gui.GUI;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.GameState;
 
@@ -19,7 +20,7 @@ public class PickingHandler {
 	private GL gl;
 	private GLU glu;
 	private OBJModel pickingBox;
-	private GameState gs;
+	private GUI gs;
 	static final int BUFSIZE = 512;
 	IntBuffer selectBuffer;
 	int numHits;
@@ -28,7 +29,7 @@ public class PickingHandler {
 	int yCursor, xCursor;
 	ArrayList<Animal> entities;
 	
-	public PickingHandler(GL gl,GLU glu,ArrayList<Animal> entities,GameState gs){
+	public PickingHandler(GL gl,GLU glu,ArrayList<Animal> entities,GUI gs){
 		this.gs = gs;
 		this.gl=gl;
 		this.glu = glu;
