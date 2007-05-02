@@ -10,6 +10,7 @@ import org.cart.igd.core.Kernel;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.game.Animal;
 import org.cart.igd.models.obj.OBJModel;
+import org.cart.igd.states.GameState;
 
 import com.sun.opengl.util.BufferUtil;
 
@@ -18,6 +19,7 @@ public class PickingHandler {
 	private GL gl;
 	private GLU glu;
 	private OBJModel pickingBox;
+	private GameState gs;
 	static final int BUFSIZE = 512;
 	IntBuffer selectBuffer;
 	int numHits;
@@ -26,14 +28,15 @@ public class PickingHandler {
 	int yCursor, xCursor;
 	ArrayList<Animal> entities;
 	
-	public PickingHandler(GL gl,GLU glu,ArrayList<Animal> entities){
+	public PickingHandler(GL gl,GLU glu,ArrayList<Animal> entities,GameState gs){
+		this.gs = gs;
 		this.gl=gl;
 		this.glu = glu;
 		this.entities = entities;
-		this.pickingBox = new OBJModel(gl,"data/models/picking_box");
+		this.pickingBox = new OBJModel(gl,"data/models/picking_box", 5f,false);
 	}
 	
-	/* calle every render cycle */
+	/* call every render cycle */
 	public void pickModels()
 	{
 		if(!inSelectionMode)
@@ -74,9 +77,10 @@ public class PickingHandler {
 	
 	private void drawEntities()
 	{
-		for(Entity e: entities)
+		for(Animal e: entities)
 		{
 			gl.glPushName(e.id);
+			System.out.println("animal id: "+e.id);
 			gl.glPushMatrix();
 			gl.glTranslatef( e.position.x, e.position.y, e.position.z );
 			pickingBox.draw(gl);
@@ -107,7 +111,7 @@ public class PickingHandler {
 		*/
 		if(nHits==0) return;
 		
-		int selectedNameId = 0;
+		int selectedNameId = -1;
 		float smallestZ = -1f;
 		
 		boolean isFirstLoop = true;
@@ -136,7 +140,7 @@ public class PickingHandler {
 			offset++;
 			
 			System.out.println(" minZ: " + minZ+ 
-					"; masZ: " + maxZ);
+					"; maxZ: " + maxZ);
 			
 			int nameId;
 			for( int j = 0; j < numNames; j++){
@@ -145,12 +149,15 @@ public class PickingHandler {
 				if(j == (numNames-1)){
 					if(smallestZ == minZ){
 						selectedNameId = nameId;
+						gs.picked = true;
+						gs.pickedId = selectedNameId;
+						System.out.println("selected");
 					}
 				}
 				System.out.print(" ");
 				offset++;
 			}
-			System.out.println();
+			System.out.println("selectedID"+selectedNameId);
 		}
 		System.out.println("Picked the " + idToString(selectedNameId) + "\n");
 	}//end process hits
@@ -170,6 +177,11 @@ public class PickingHandler {
 	}
 	
 	public String idToString(int nameID){
-		return " "+entities.get(nameID).getName();
+		String retVal="";
+		for (Animal a: entities){
+			if(a.id == nameID);
+				retVal = ""+a.getName();
+		}
+		return retVal ="";
 	}
 }

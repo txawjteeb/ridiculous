@@ -40,7 +40,6 @@ public class Animal extends Entity{
 	public static final int SAVED_PARTY = 5;
 	
 	public String name;
-	public int id;
 	public int state = 0;
 	private boolean Collide = false;
 	private InGameState igs;

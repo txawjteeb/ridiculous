@@ -115,7 +115,6 @@ public class InGameGUI extends GUI
 		/* draw the animal selection, faded buttons for unavailable animals */
 		if(((InGameState)gameState).nearBush)
 		{
-			//btBush.draw(g);
 			for(int i = 0;i<((InGameState)gameState).animals.size();i++)
 			{
 				Animal a = ((InGameState)gameState).animals.get(i);
@@ -229,7 +228,7 @@ public class InGameGUI extends GUI
 				}
 			}
 			
-		
+			((InGameState)gameState).pick();
 			
 			/**
 			 * make sure the button is not still attached when its not dropped 
@@ -251,7 +250,11 @@ public class InGameGUI extends GUI
 		if (selectedButton != null) {
 			selectedButton.setXY(input.mousePos[0] - 32,
 				input.mousePos[1] - 32);
-		}	
+		}
+		if(gameState.picked){
+			gameState.picked = false;
+			System.out.println(" InGameGUI.handleInput()"+gameState.pickedId);
+		}
 	}// end handleInput()
 
 	/** load texture for the gui components */

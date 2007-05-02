@@ -9,6 +9,9 @@ public abstract class GameState
 	public boolean changeState = false; 
 	public boolean waitToInit = false;
 	public boolean initialized = false;
+	
+	public boolean picked = false;
+	public int pickedId = 0;
 
 	public GameState()
 	{
