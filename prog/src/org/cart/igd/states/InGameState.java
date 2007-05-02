@@ -206,7 +206,7 @@ public class InGameState extends GameState
 	public void init(GL gl, GLU glu)
 	{
 		glg = Kernel.display.getRenderer().getGLG();
-		ph = new PickingHandler(gl,glu,animals);
+		ph = new PickingHandler(gl,glu,animals,this);
 		
 		loaded = true;
 	}
@@ -251,8 +251,6 @@ public class InGameState extends GameState
 		updateQuestLog(elapsedTime);
 		
 		((Bush)bush).update(elapsedTime);
-		
-		ph.mousePress(Kernel.userInput.mousePress[0], Kernel.userInput.mousePress[1]);
 		
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
@@ -400,6 +398,11 @@ public class InGameState extends GameState
 		
 		/* PICK MODELS*/
 		ph.pickModels();
+	}
+	
+	/** called from in game gui mousePressed block */
+	public void pick(){
+		ph.mousePress(Kernel.userInput.mousePress[0], Kernel.userInput.mousePress[1]);
 	}
 	
 	public synchronized void throwPartyPopper(){
