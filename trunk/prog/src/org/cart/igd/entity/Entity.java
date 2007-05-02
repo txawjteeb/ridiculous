@@ -216,6 +216,9 @@ public abstract class Entity
 		facingDirection -= ((float)elapsedTime * turnSpeed);
 	}
 	
+	/**
+	 * render the model depending on which type was asigned
+	 * */
 	public void render(GL gl){
 		if(model3ds!= null){
 			gl.glPushMatrix();

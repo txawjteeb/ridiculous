@@ -103,7 +103,7 @@ public class Guard extends Entity
 			float xDiff = (position.x - target.x);
 			float zDiff = (position.z - target.z);
 			
-			refAngleRad = (float)Math.atan(zDiff/xDiff);
+			refAngleRad = Math.abs((float)Math.atan(zDiff/xDiff));
 			//refAngleRad = Math.abs(refAngleRad);
 			
 			/* quadrant 1 */
@@ -117,7 +117,7 @@ public class Guard extends Entity
 			if( position.x > target.x && 
 				position.z < target.z )
 			{
-				facingDirection = 90f + (refAngleRad * toDeg);
+				facingDirection = 180f - (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 3 */
@@ -131,13 +131,13 @@ public class Guard extends Entity
 			if( position.x < target.x && 
 				position.z > target.z )
 			{
-				facingDirection = 270f + (refAngleRad * toDeg);
+				facingDirection = 360f - (refAngleRad * toDeg);
 			}
 			
 			/* change course when target reached */
 			if( xDiff < posRange && zDiff < posRange)
-			{
-				getNextTarget();
+			{		
+				
 			}
 			
 			walkForward(elapsedTime);

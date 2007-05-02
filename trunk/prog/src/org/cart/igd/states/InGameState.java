@@ -37,7 +37,8 @@ public class InGameState extends GameState
 		
 	public Entity player;
 	
-	private Camera camera;
+	public  Camera camera;
+	public int previousCameraZoom;
 	private OBJModel playerSprite;
 	private OBJModel partySnapper;
 	private OBJModel zoopaste;
@@ -72,7 +73,7 @@ public class InGameState extends GameState
 	boolean showInfoText = true;
 	
 	GLGraphics glg;
-	PickingHandler ph;
+
 	
 	public InGameState(GL gl)
 	{
@@ -186,8 +187,7 @@ public class InGameState extends GameState
 		
 		animals.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-50f),this));
-		
+
 		animals.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,-60f),this));
@@ -207,12 +207,10 @@ public class InGameState extends GameState
 		animals.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-100f),this));
+
 		
 		
-		/* add different gui segments */
-		gui.add(new InGameGUI(this));
-		gui.add(new Dialogue(this));
-		gui.add(new PauseMenu(this));
+		
 		
 		
 		/* setup input */
@@ -230,8 +228,14 @@ public class InGameState extends GameState
 	
 	public void init(GL gl, GLU glu)
 	{
+		
+		
 		glg = Kernel.display.getRenderer().getGLG();
-		ph = new PickingHandler(gl,glu,animals,this);
+		
+		/* add different gui segments */
+		gui.add(new InGameGUI(this,gl,glu));
+		gui.add(new Dialogue(this));
+		gui.add(new PauseMenu(this));
 		
 		loaded = true;
 	}
@@ -417,17 +421,6 @@ public class InGameState extends GameState
 				glg.glgEnd();
 			}
 		}
-		
-		
-
-		
-		/* PICK MODELS*/
-		ph.pickModels();
-	}
-	
-	/** called from in game gui mousePressed block */
-	public void pick(){
-		ph.mousePress(Kernel.userInput.mousePress[0], Kernel.userInput.mousePress[1]);
 	}
 	
 	public synchronized void throwPartyPopper(){
@@ -449,6 +442,7 @@ public class InGameState extends GameState
 	public void handleInput(long elapsedTime)
 	{
 		gui.get(currentGuiState).handleInput(elapsedTime);
+		previousCameraZoom = (int)camera.distance;
 		camera.zoom((float)Kernel.userInput.getMouseWheelMovement()*2f);
 		
 		if(mouseWheelScroll.isActive())

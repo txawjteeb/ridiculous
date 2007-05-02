@@ -16,6 +16,9 @@ import org.cart.igd.game.*;
 
 import java.awt.event.*;
 
+import javax.media.opengl.GL;
+import javax.media.opengl.glu.GLU;
+
 public class InGameGUI extends GUI
 {
 	private UserInput input;
@@ -50,7 +53,6 @@ public class InGameGUI extends GUI
 
 	// other game actions
 	private GameAction mouseSelect;
-	private GameAction mouseReleased;
 	private GameAction pressQuestLog;
 
 	/* other gui components */
@@ -58,14 +60,20 @@ public class InGameGUI extends GUI
 
 	private GUITextList textList = new GUITextList(100, 600, 16, 20);
 	
-	
-	private GameAction testChangeGui = new GameAction("test swap",false);
 	private InGameState igs;
+	
+	PickingHandler ph;
 
-	public InGameGUI(GameState igs) {
+	
+	
+	
+	public InGameGUI(GameState igs,GL gl,GLU glu){
 		super(igs);
-		igs = (InGameState)igs;
+		this.igs = ((InGameState)igs);
 		input = Kernel.userInput;
+		
+		ph = new PickingHandler(gl, glu, this.igs.animals, this);
+		
 		loadGameActions();
 		loadImages();
 		loadGUI();
@@ -75,11 +83,7 @@ public class InGameGUI extends GUI
 	public void loadGameActions() {
 		// GameAction( String details, boolean continuous )
 		pressQuestLog = new GameAction("open the quest log", false);
-		mouseSelect = new GameAction("mouse press", false);
-		mouseReleased = new GameAction("mouse release", false );
-				
-		input.bindToKey(testChangeGui, KeyEvent.VK_G);
-		
+		mouseSelect = new GameAction("mouse press", false);	
 
 		for (int iEvt = 0; iEvt < useItem.length; iEvt++) {
 			useItem[iEvt] = new GameAction("use item: " + (iEvt + 1), false);
@@ -100,9 +104,17 @@ public class InGameGUI extends GUI
 		// Kernel.userInput.bindToMouse(mouseReleased, MouseEvent.BUTTON1 );
 	}// end loadGameActions()
 
+	/** called from in game gui mousePressed block */
+	public void pick(){
+		ph.mousePress(input.mousePress[0], input.mousePress[1]);
+	}
+	
 	/** renders gui, called by Renderer thread*/
 	public void render(GLGraphics g)
 	{
+		/* PICK MODELS*/
+		ph.pickModels();
+		
 		g.glgBegin();
 
 		if (selectedButton != null) {
@@ -136,27 +148,16 @@ public class InGameGUI extends GUI
 
 		hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
 		hudGroup.updateAndDraw(g);
-		
-		/* draw Items that are picked up */
-	//	int incr = 256;
-	//	for(int i = 0; i<((InGameState)gameState).items.size();i++){
-	///		if(((InGameState)gameState).items.get(i).state == 1){
-		//		btItems[((InGameState)gameState).items.get(i).id].draw(g,incr,0);
-		//		incr+= 64;
-	//		}
-	//	}
 	
 		/* draw Items that are picked up from the Items arraylist in IGS */
 		for(int i = 0;i<((InGameState)gameState).inventory.items.size();i++){
 			Item item = ((InGameState)gameState).inventory.items.get(i);
 			item.display2d(g,texItemIco[item.id]);
 		}
+		
+		
 		((InGameState)gameState).questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog,texAnimalQuestLogFree,texQuestLogCage);
 		
-		
-		//System.out.println(((InGameState)gameState).nearBush);
-		
-
 		textList.draw(g);
 		g.glgEnd();
 	}
@@ -164,6 +165,9 @@ public class InGameGUI extends GUI
 	/** updates gui, called by Renderer thread*/
 	public void update(long elapsedTime) {
 		textList.update(elapsedTime);
+		if(igs.currentGuiState != 1){
+			pick();
+		}
 	}
 
 	/** handle input, called by the InputHandler thread*/
@@ -171,10 +175,6 @@ public class InGameGUI extends GUI
 		if(Kernel.userInput.keys[KeyEvent.VK_TAB]){
 			((InGameState)gameState).changeGuiState(2);
 		}
-		
-	//	if(input.isSquareButtonPressed(btBush)){
-	//		((InGameState)gameState).changeGuiState(1);
-	//	}
 		
 		boolean animalPickedUp = false;
 
@@ -228,15 +228,32 @@ public class InGameGUI extends GUI
 				}
 			}
 			
-			((InGameState)gameState).pick();
-			
-			/**
-			 * make sure the button is not still attached when its not dropped 
-			 * off at a proper location in the paw button 
-			 **/
+			/* make sure the button is not still attached when its not dropped 
+			 * off at a proper location in the paw button */
 			if (!animalPickedUp) {
 				selectedButton = null;
 			}
+			
+			
+			/* pick animal */
+			if(picked && igs.currentGuiState!=1 ){
+				picked = false;
+				Animal animal = null;
+				boolean match = false;
+				for(Animal a: ((InGameState)gameState).animals){
+					if(a.id == pickedId)
+						animal = a;
+					match = true;
+					
+					System.out.println(" InGameGUI.handleInput()"+pickedId);
+					break;
+				}
+				if(match){
+					((Dialogue)((InGameState)gameState).gui.get(1)).createDialogue(animal,(InGameState)gameState);
+					((InGameState)gameState).changeGuiState(1);
+				}
+			}
+			
 		} // end if(mouseSelect.isActive())
 
 		
@@ -250,10 +267,6 @@ public class InGameGUI extends GUI
 		if (selectedButton != null) {
 			selectedButton.setXY(input.mousePos[0] - 32,
 				input.mousePos[1] - 32);
-		}
-		if(gameState.picked){
-			gameState.picked = false;
-			//System.out.println(" InGameGUI.handleInput()"+gameState.pickedId);
 		}
 	}// end handleInput()
 

@@ -53,7 +53,7 @@ public class Animal extends Entity{
 		
 	public void update(Vector3f playerPosition){
 		igs.addInfoText(3,"state = " + state);
-		if(state < 4){
+		/*if(state < 4){
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius){
@@ -67,7 +67,7 @@ public class Animal extends Entity{
 			} else{
 				Collide = false;
 			}
-		}
+		}*/
 	}
 	
 	public int getState(){

@@ -61,10 +61,8 @@ public class Terrain
 	public void render(GL gl, Entity player){
 		/* Render Land Map */
 		gl.glPushMatrix();
-			//gl.glEnable(GL.GL_LIGHT0);
 			gl.glTranslatef(0f, 6f, 0f);
 			worldMap.draw(gl);
-			//gl.glDisable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
 		
 		/* Render trees */
@@ -75,15 +73,15 @@ public class Terrain
 		
 		/* Render SkyDome */
 		gl.glPushMatrix();
-			//gl.glDisable(GL.GL_LIGHTING);
-			//gl.glDisable(GL.GL_LIGHT0);
+			gl.glDisable(GL.GL_LIGHTING);
+			gl.glDisable(GL.GL_LIGHT0);
 			gl.glDisable(GL.GL_CULL_FACE);
 			gl.glTranslatef(player.position.x, player.position.y-30f, 
 					player.position.z);
 			skyDome.render(gl);
 			gl.glEnable(GL.GL_CULL_FACE);
-			//gl.glEnable(GL.GL_LIGHTING);
-			//gl.glEnable(GL.GL_LIGHT0);
+			gl.glEnable(GL.GL_LIGHTING);
+			gl.glEnable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
 	}
 }
