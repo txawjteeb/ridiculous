@@ -77,6 +77,6 @@ public class Animal extends Entity{
 	
 	public void display(GL gl){
 		igs.addInfoText(4,"state HERE " + state);
-		if(state<5)render(gl);
+		if(state<5)super.render(gl);
 	}
 }

@@ -367,31 +367,36 @@ public class InGameState extends GameState
 			item.display3d(gl);
 		}
 		addInfoText(4,"# items: "+items.size());
-		
+
 		/* render the world map and sky*/
 		terrain.render( gl, player);
-		
+		/* Render GUI */
+		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );		
 		
 		/* DRAW ALL 2D draw cursor and info text */
-		glg.glgBegin();
+
 		if(!mouseCameraRotate.isActive())
 		{
+			glg.glgBegin();
 			glg.drawImage(
 					GLGraphics.Cursor, Kernel.userInput.mousePos[0], 
 					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
+					glg.glgEnd();
 		}
+
 		
 		if(showInfoText){
 			int i = 0;
 			for(String s: infoText){
 				i++;
+				glg.glgBegin();
 				glg.drawBitmapString(s, 600 , 600 - (i*16));
+				glg.glgEnd();
 			}
 		}
-		glg.glgEnd();
 		
-		/* Render GUI */
-		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
+		
+
 		
 		/* PICK MODELS*/
 		ph.pickModels();

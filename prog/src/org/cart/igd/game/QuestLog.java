@@ -14,7 +14,6 @@ import java.util.*;
 
 public class QuestLog{
 	
-	
 	 	int mouseOverTime = 0;
 		boolean mouseOver = false;
 		int degree = 0;
@@ -156,7 +155,7 @@ public class QuestLog{
 			
 	}
 
-	public void display(GLGraphics g, Texture texture1, Texture texture2,Texture texture3, Texture texture4, Texture[] texture5){
+	public void display(GLGraphics g, Texture texture1, Texture texture2,Texture texture3, Texture texture4, Texture[] texture5, Texture[] texture6, Texture texture7){
 		if(!open){
 				if(mouseOver){
 						g.drawImageRotateHueSize(texture1,x-13,y-13,degree, new float[]{1f,1f,alphaSwing,alpha}, new float[]{1.2f,1.2f});
@@ -171,7 +170,7 @@ public class QuestLog{
 		} else{
 			g.drawImageRotateHue(texture2,0,0,degreeBook,new float[]{1f,1f,1f,swingBookAlpha});
 				for(int i = 0;i<quests.size();i++){
-					quests.get(i).draw(g,270,570-i*40,texture3,texture4,texture5,swingBookAlpha);
+					quests.get(i).draw(g,270,570-i*40,texture3,texture4,texture5,swingBookAlpha,texture6,texture7);
 				}
 			if(mouseOver){
 						g.drawImageRotateHueSize(texture1,x-13,y-13,degree, new float[]{1f,1f,alphaSwing,alpha}, new float[]{1.2f,1.2f});
@@ -250,7 +249,7 @@ public class QuestLog{
 		}
 		
 		public void breakUpInformation(){
-			if(information.length()<40){
+			if(information.length()<25){
 				brokenInformation = new String[] {information};
 			} else {
 				String wordsArray[] = new String[10];
@@ -261,7 +260,7 @@ public class QuestLog{
 				for(int i = 0;i<information.length();i++){
 					c = information.charAt(i);
 					if(c ==' ')lastSpace = i;
-					if(i<amountOfLines*40){
+					if(i<amountOfLines*25){
 						
 					}  else {
 						wordsArray[amountOfLines-1] = information.substring(lastAmountCopied, lastSpace);
@@ -280,14 +279,14 @@ public class QuestLog{
 			}
 		}
 		/*
-		 HAve the Title move right, and left with algs
+		 Have the Title move right, and left with algs
 		 wiggle book
 		 alpha text when switch
 		 wiggle book on swithc
 		 */
-		public void draw(GLGraphics g, int x, int y,Texture texture3, Texture texture4,Texture[] texture5,float swingBookAlpha){
-			g.drawImageHue(texture5[id],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});
-			g.drawImageHue(texture5[10],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});
+		public void draw(GLGraphics g, int x, int y,Texture texture3, Texture texture4,Texture[] texture5,float swingBookAlpha,Texture[] texture6, Texture texture7){
+			g.drawImageHue(texture5[id],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});//little anial icon
+			g.drawImageHue(texture5[10],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});//littl border
 			if(mouseOverTitle){
 					g.drawBitmapStringStrokeSize(title,x,y+3,1,new float[]{1f,.5f,.5f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.2f,1.2f},14);
 				} else {
@@ -295,16 +294,23 @@ public class QuestLog{
 				}
 				
 				if(selected){
-					g.drawBitmapStringStrokeSize(subtitle,x+400,700,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
+					g.drawBitmapStringStrokeSize(subtitle,x+400,600,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
 					for(int j = 0;j<brokenInformation.length;j++){
 						int adder = 0;
 						if(j==0)adder = 30;
-							g.drawBitmapStringStroke(brokenInformation[j],x+200+adder,650-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
+							g.drawBitmapStringStroke(brokenInformation[j],x+250+adder,580-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
 					}
 					if(done){
-						g.drawBitmapStringStrokeSize("Finished",x+400,100,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+						g.drawBitmapStringStrokeSize("Finished",x+350,110,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
 					} else {
-						g.drawBitmapStringStrokeSize("Unfinished",x+400,100,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+						g.drawBitmapStringStrokeSize("Unfinished",x+350,110,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
+					}
+					
+					if(!done){
+						g.drawImageRotate(texture6[id],x+300,y-180,3);
+						g.drawImageRotate(texture7,x+300,y-180,3);
+					} else {
+						g.drawImageRotate(texture6[id],x+300,y-180,3);
 					}
 				}
 				if(done){
@@ -312,31 +318,6 @@ public class QuestLog{
 				} else {
 						g.drawImage(texture4,x-40,y-5);
 			}
-				/*if(mouseOverTitle){
-					g.drawBitmapStringStrokeSize(title,x,y,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.2f,1.2f},14);
-				} else {
-					g.drawBitmapStringStroke(title,x,y,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-				}
-				
-				if(selected){
-					g.drawBitmapStringStrokeSize(subtitle,x+400,700,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
-					for(int j = 0;j<brokenInformation.length;j++){
-						int adder = 0;
-						if(j==0)adder = 30;
-							g.drawBitmapStringStroke(brokenInformation[j],x+200+adder,650-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-					}
-					if(done){
-						g.drawBitmapStringStrokeSize("Finished",x+400,100,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
-					} else {
-						g.drawBitmapStringStrokeSize("Unfinished",x+400,100,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
-					}
-				}
-				if(done){
-						g.drawImage(texture3,x-40,y-5);
-				} else {
-						g.drawImage(texture4,x-40,y-5);
-				}
-				*/
 		}
 		
 		public void update(int x, int y){
