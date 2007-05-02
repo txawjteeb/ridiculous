@@ -37,6 +37,7 @@ public class QuestLog{
 
 
 	ArrayList <Quest> quests = new ArrayList<Quest>();
+	ArrayList <QuestPopUp> questPopUps = new ArrayList<QuestPopUp>();
 	public boolean open = false;
 	public boolean swingingBook = false;
 		int degreeBook = 0;
@@ -153,6 +154,13 @@ public class QuestLog{
 			}
 		}
 			
+		Iterator i = questPopUps.iterator();
+		while(i.hasNext()){
+			QuestPopUp qpu = (QuestPopUp)i.next();
+			if(qpu.update()){
+				i.remove();
+			}
+		}
 	}
 
 	public void display(GLGraphics g, Texture texture1, Texture texture2,Texture texture3, Texture texture4, Texture[] texture5, Texture[] texture6, Texture texture7){
@@ -180,6 +188,9 @@ public class QuestLog{
 				}
 				g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
 				
+		}
+		for(int i = 0;i<questPopUps.size();i++){
+			questPopUps.get(i).draw(g);
 		}
 		
 	
@@ -209,15 +220,7 @@ public class QuestLog{
 			quests.add(new Quest(id,title, subtitle,information,done));
 		}
 
-/*
-		for(int i = 0;i<quests.size();i++){
-			if(quests.get(i).id==id){
-				quests.remove(quests.get(i));
-				break;
-			}
-		}
-			quests.add(new Quest(id,title, subtitle,information,done));
-*/		
+		questPopUps.add(new QuestPopUp());
 	}
 	
 	public void questCompleted(int id){
@@ -294,7 +297,7 @@ public class QuestLog{
 				}
 				
 				if(selected){
-					g.drawBitmapStringStrokeSize(subtitle,x+400,600,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
+					g.drawBitmapStringStrokeSize(subtitle,x+400,600,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
 					for(int j = 0;j<brokenInformation.length;j++){
 						int adder = 0;
 						if(j==0)adder = 30;
@@ -327,6 +330,40 @@ public class QuestLog{
 			if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+16*title.length()&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+16){
 				selected = true;
 			} else selected = false;
+		}
+	}
+	
+	
+	private class QuestPopUp{
+		int x; int y;
+		boolean up;
+		float alpha;
+		public QuestPopUp(){
+			x = 10;
+			y = 50;
+			up = true;
+			alpha = 0f;
+		}
+		
+		public void draw(GLGraphics g){
+			g.drawBitmapStringStrokeSize("Quest Log Updated",x,y,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.0f,1.0f},20);
+		}
+		
+		public boolean update(){
+			if(up){
+				y++;
+				alpha +=.03f;
+				if(y> 100){
+					up = false;
+				}
+			} else{
+				y--;
+				alpha -=.03f;
+			}
+			if(y<0){
+				return true;
+			}
+			return false;
 		}
 	}
 }

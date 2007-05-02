@@ -10,11 +10,16 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.discreet.Model;
+import java.util.*;
 //import org.cart.igd.model.ModelManager;
 //import org.cart.igd.bsp.BSPObject;
 
 public abstract class Entity
 {
+	public static ArrayList <Entity>allEntities = new ArrayList<Entity>();
+	public static int globalIdCounter=0;
+	public int globalId;
+	
 	public Vector3f position;
 	public Vector3f lastPosition;
 	public Vector3f scale = new Vector3f(1f,1f,1f);
@@ -42,6 +47,7 @@ public abstract class Entity
 	
 	public Entity(Vector3f pos, float fD, float bsr)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
+		globalId = globalIdCounter++;
 		gl = Kernel.display.getRenderer().getGL();
 		/*if(this.gl==null)
 			throw new EntityException("**** No drawable.gl given ****");
@@ -76,6 +82,7 @@ public abstract class Entity
 	{
 		this(pos,fD,bsr);
 		this.modelObj = model;
+		globalId = globalIdCounter++;
 	}
 	public Entity(Vector3f pos, float fD, float bsr, OBJModel model,float scale)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
@@ -84,12 +91,14 @@ public abstract class Entity
 		this.scale.x = scale;
 		this.scale.y = scale;
 		this.scale.z = scale;
+		globalId = globalIdCounter++;
 	}
 	
 	public Entity(Vector3f pos, float fD, float bsr, Model model)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
 		this(pos,fD,bsr);
 		this.model3ds = model;
+		globalId = globalIdCounter++;
 	}
 	
 	public void update(long elapseTime){

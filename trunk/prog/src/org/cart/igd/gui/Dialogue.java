@@ -15,7 +15,6 @@ public class Dialogue extends GUI {
 	static ArrayList <Leaf> renderLeaves = new ArrayList <Leaf>();
 	private UserInput input;
 	private Texture[] animalIcons = new Texture[10];
-//	private Texture background;
 	private Texture border;
 	private Texture leaf,fog;
 	private Texture leaves1024,background;
