@@ -2,6 +2,7 @@ package org.cart.igd.gui;
 
 import java.util.*;
 import java.awt.event.*;
+
 import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
 import org.cart.igd.core.*;
@@ -9,65 +10,78 @@ import org.cart.igd.input.*;
 import org.cart.igd.states.*;
 import org.cart.igd.game.*;
 
-public class Dialogue extends GUI {
+public class DialogueGUI extends GUI {
 	
-	static ArrayList <DialogueInfo> renderDialogue = new ArrayList <DialogueInfo>();
-	static ArrayList <Leaf> renderLeaves = new ArrayList <Leaf>();
+	public ArrayList <DialogueInfo> renderDialogue = new ArrayList <DialogueInfo>();
+	public ArrayList <ActiveDialogue> dialogue = new ArrayList<ActiveDialogue>();
 	private UserInput input;
 	private Texture[] animalIcons = new Texture[10];
 	private Texture border;
-	private Texture leaf,fog;
-	private Texture leaves1024,background;
-	private float fogdegree  = 0f;
+	private Texture leaf;
+	private Texture background;
 	public float alphaBackground = 0f;
 	public boolean down = false;
 	public InGameState igs = null;
-	/**
-	 * param1 informative string
-	 * param2 continuous action
-	 **/
-	private GameAction testChangeGui = new GameAction("test swap",false);
+	
+	public UIButton[] btConversationOptions = new UIButton[3];
+	
+	public GameAction mousePressed = new GameAction("mouse pressed",false);
+	
+	public GameAction gaReplySelection[] = {
+			new GameAction("selected",false,0),
+			new GameAction("selected",false,1),
+			new GameAction("selected",false,2),
+			new GameAction("selected",false,3),
+	};
+	
+	public int numberOfChoices = 1;
 	
 	/** 
 	 * pass in a refference from game state that contains this gui class 
 	 * to allow for game state change and gui state change
 	 * @param GameState refference to container
 	 **/
-	 
-	public Dialogue(GameState gameState){
+	public DialogueGUI(GameState gameState){
 		super(gameState);//superclass GUI contain ref to GameState
 		input = Kernel.userInput;
 		initInput();
 		loadImages();
 	}
 	public void initInput()	{
-		input.bindToKey(testChangeGui, KeyEvent.VK_T);
+		
+		input.bindToMouse( mousePressed, MouseEvent.BUTTON1 );
+		
+		
 	}
 	
-	public void createDialogue(Animal animal,InGameState igs){
+	public void createDialogue(ArrayList<Animal> animals,InGameState igs){
 		down = false;
 		this.igs = igs;
 		alphaBackground = 0f;
-		System.out.println("FASDFUSDIF");
-		new ActiveDialogue(animal,igs).start();
-		igs.camera.distance = 2;
 		
+		for(Animal a : animals)
+		{
+			ActiveDialogue ad = new ActiveDialogue(a,igs);
+			dialogue.add(ad);
+		}
+
+		igs.camera.distance = 2;
 	}
 	
 	
 	
 	public void loadImages(){		
 		for(int i = 0;i<animalIcons.length;i++){
-			animalIcons[i] = Kernel.display.getRenderer().loadImage("data/images/dialogue/" + i + ".png");
+			animalIcons[i] = Kernel.display.getRenderer().loadImage(
+					"data/images/dialogue/" + i + ".png");
 		}
-		//dialogueBackground = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
-		border = Kernel.display.getRenderer().loadImage("data/images/dialogue/border.png");
 		
-		leaves1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaves1024_cw.png");
-		background = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
-		leaf = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaf.png");
-		fog = Kernel.display.getRenderer().loadImage("data/images/dialogue/fog.png");
-		
+		border = Kernel.display.getRenderer().loadImage(
+				"data/images/dialogue/border.png");
+		background = Kernel.display.getRenderer().loadImage(
+				"data/images/dialogue/background.png");
+		leaf = Kernel.display.getRenderer().loadImage(
+				"data/images/dialogue/leaf.png");
 	}
 	
 	public void update(long elapsedTime){
@@ -75,13 +89,25 @@ public class Dialogue extends GUI {
 	}
 	
 	public void handleInput(long elapsedTime){
-		if(testChangeGui.isActive()){
-			((InGameState)gameState).changeGuiState(0);
+		if(mousePressed.isActive()){
+			for(int i = 0; i<numberOfChoices;i++){
+				input.isSquareButtonPressed(btConversationOptions[i]);
+				selectDialogue(btConversationOptions[i].getAction().getId());
+			}
 		}
+	}
+	
+	public void selectDialogue(int action){
+		
 	}
 
 	public void render(GLGraphics g){
 		g.glgBegin();
+		
+			for(int i = 0 ; i<numberOfChoices;i++){
+				btConversationOptions[i].draw(g);
+			}
+			
 			if(down){
 				alphaBackground-=.15f;
 			} else {
@@ -90,27 +116,15 @@ public class Dialogue extends GUI {
 			
 			g.drawImageAlpha(background,0,0,alphaBackground);
 			
-		//	g.drawImageHue(leaves1024,0,0,new float[]{1f,1f,1f,.94f+new Random().nextFloat()/20});
-
 			for(int i = 0;i<renderDialogue.size();i++){
 				DialogueInfo di = renderDialogue.get(i);
 				di.update();
 				di.draw(g);
 			}
-		//	for(int i = 0;i<renderLeaves.size();i++){
-		//		Leaf leaf = renderLeaves.get(i);
-		//		leaf.update();
-		//		leaf.draw(g);
-		//	}
-		//	g.drawImageRotate(fog,-300,0,(int)fogdegree);
-		//	g.drawImageRotate(fog,0,0,(int)fogdegree);
-		//	g.drawImageRotate(fog,300,300,(int)fogdegree);
-		//	g.drawImageRotate(fog,-300,-300,(int)fogdegree);
-		//	fogdegree+=.2f;
 		g.glgEnd();
 	}
 	
-	public static void clearDialogue(){
+	public void clearDialogue(){
 		renderDialogue.clear();
 	}
 	/*
@@ -432,7 +446,7 @@ public class Dialogue extends GUI {
 		}
 	}
 
-	class ActiveDialogue extends Thread{
+	private class ActiveDialogue{
 		int lastMousePress[] = new int[]{0,0};
 		Animal animal;
 		InGameState igs;
@@ -443,7 +457,7 @@ public class Dialogue extends GUI {
 			lastMousePress[1] = Kernel.userInput.mousePress[1];
 		}
 		
-		public void run(){
+		public void selected(int selection){
 	//			 states
 	 //0 = incage not talked to
 	 //1 = incage waiting for item
@@ -460,45 +474,38 @@ public class Dialogue extends GUI {
 				case 4: 
 					switch(animal.state){
 						case 0:
-							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Why are you bothering an old man?",0));
-							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"Sorry, wrong cage.",1));
-							Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!",2));
-							switch(getSelection()){
+							renderDialogue.add(new DialogueInfo(0,animal.id,0,"Why are you bothering an old man?",0));
+							renderDialogue.add(new DialogueInfo(1,0,1,"Sorry, wrong cage.",1));
+							renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!",2));
+							switch(selection){
 								case 1:
-									((Dialogue)igs.gui.get(1)).down = true;
-									pause(1000);
-									Dialogue.clearDialogue();
+									((DialogueGUI)igs.gui.get(1)).down = true;
+									clearDialogue();
 									break;
 								case 2:
-									pause(1000);
-									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(3,animal.id,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
-									Dialogue.renderDialogue.add(new DialogueInfo(4,0,1,"We've all been sold and I need your help to get everyone out of here!",1));
-									Dialogue.renderDialogue.add(new DialogueInfo(5,0,1,"They're selling us too!  We're going to be made into food!",2));
-									switch(getSelection()){
+									clearDialogue();
+									renderDialogue.add(new DialogueInfo(3,animal.id,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
+									renderDialogue.add(new DialogueInfo(4,0,1,"We've all been sold and I need your help to get everyone out of here!",1));
+									renderDialogue.add(new DialogueInfo(5,0,1,"They're selling us too!  We're going to be made into food!",2));
+									switch(selection){
 										case 4:
-											pause(1000);
-											Dialogue.clearDialogue();
-											Dialogue.renderDialogue.add(new DialogueInfo(6,animal.id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
-											Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"Alright, I'll be back as soon as I can get it.",1));
-											switch(getSelection()){
+											clearDialogue();
+											renderDialogue.add(new DialogueInfo(6,animal.id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
+											renderDialogue.add(new DialogueInfo(7,0,1,"Alright, I'll be back as soon as I can get it.",1));
+											switch(selection){
 												case 7:
 													break;
 											}
 											
-											((Dialogue)igs.gui.get(1)).down = true;
-											pause(1000);
+											((DialogueGUI)igs.gui.get(1)).down = true;
 											animal.state = 1;
 											break;
 										
 										case 5:
-											pause(1000);
-											Dialogue.clearDialogue();
-											Dialogue.renderDialogue.add(new DialogueInfo(8,animal.id,0,"Well...in that case, I guess I can make these tired old legs work for just a little bit longer.",0));
-											pause(3000);
+											clearDialogue();
+											renderDialogue.add(new DialogueInfo(8,animal.id,0,"Well...in that case, I guess I can make these tired old legs work for just a little bit longer.",0));
 											setFalling();
-											((Dialogue)igs.gui.get(1)).down = true;
-											pause(1000);
+											((DialogueGUI)igs.gui.get(1)).down = true;
 											animal.state = 2;
 											igs.questlog.createQuest(Inventory.GIRAFFE,"Giraffe", "Ready to leave","The Giraffe wants to leave the zoo.",false);
 											break;
@@ -508,24 +515,23 @@ public class Dialogue extends GUI {
 							}
 							break;
 						case 1:
-							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"What's takin' ya so long, sonny?  My back's still hurtin'!",0));
-							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
-							switch(getSelection()){
+							renderDialogue.add(new DialogueInfo(0,animal.id,0,"What's takin' ya so long, sonny?  My back's still hurtin'!",0));
+							renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
+							switch(selection){
 									case 1:
 											((Dialogue)igs.gui.get(1)).down = true;
-											pause(1000);
 											Dialogue.clearDialogue();
 											break;	
 							}
 							break;
 						case 2:
-							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Yer' slower than I am laddie, hurry up and get me out of here.",0));
-							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
-							switch(getSelection()){
+							renderDialogue.add(new DialogueInfo(0,animal.id,0,"Yer' slower than I am laddie, hurry up and get me out of here.",0));
+							renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
+							switch(selection){
 								
 									case 1:
 											((Dialogue)igs.gui.get(1)).down = true;
-											pause(1000);
+
 											Dialogue.clearDialogue();
 											if(igs.inventory.hasItem(Inventory.MEDICATION)){
 												animal.state =5;
@@ -552,14 +558,6 @@ public class Dialogue extends GUI {
 			
 		}
 		
-		public void pause(int miliseconds){
-			try{
-				this.sleep(miliseconds);			
-			} catch(Exception e){
-				
-			}
-		}
-		
 		public int getSelection(){
 		//	lastMousePress[0] = -100;
 			//lastMousePress[1] = -100;
@@ -569,21 +567,14 @@ public class Dialogue extends GUI {
 					id = checkCollision();
 				}
 				if(id!=-1) break;
-				try{
-					this.sleep(5);
-				} catch(Exception e){
-				}
 			}
-			for(int i = 0;i < Dialogue.renderDialogue.size();i++){
-				DialogueInfo di = Dialogue.renderDialogue.get(i);
-				di.falling = true;
-			}
+			
 			return id;
 		}
 		
 		public void setFalling(){
 			for(int i = 0;i < Dialogue.renderDialogue.size();i++){
-				DialogueInfo di = Dialogue.renderDialogue.get(i);
+				DialogueInfo di = renderDialogue.get(i);
 				di.falling = true;
 			}
 		}
@@ -599,7 +590,7 @@ public class Dialogue extends GUI {
 			
 		public int checkCollision(){	
 			for(int i = 0;i < Dialogue.renderDialogue.size();i++){
-				DialogueInfo di = Dialogue.renderDialogue.get(i);
+				DialogueInfo di = renderDialogue.get(i);
 				if(di.type==0) continue; // supposed to be not npc
 				if(lastMousePress[0]>di.x&&
 					lastMousePress[0]<di.x+64&&
@@ -610,6 +601,5 @@ public class Dialogue extends GUI {
 			}
 			return -1;
 		}
-	
 	}	
 }

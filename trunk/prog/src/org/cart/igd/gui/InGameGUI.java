@@ -308,7 +308,7 @@ public class InGameGUI extends GUI
 					System.out.println(" InGameGUI.handleInput()"+pickedId);
 					break;
 				}
-				if(match){
+				if(match&& igs.currentGuiState!=1){
 					((Dialogue)((InGameState)gameState).gui.get(1)).createDialogue(animal,(InGameState)gameState);
 					((InGameState)gameState).changeGuiState(1);
 				}
