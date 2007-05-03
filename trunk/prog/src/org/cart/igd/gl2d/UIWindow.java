@@ -158,8 +158,6 @@ public class UIWindow extends UIComponent
 					my<super.getY()+paddingBottom+c.getY()+c.getHeight())
 				{
 					focused_component = i;
-					c.getFocus();
-					if(tmp!=-1&&tmp!=i) components.get(tmp).dropFocus();
 					earlyExit = true;
 				}
 			}
@@ -168,7 +166,7 @@ public class UIWindow extends UIComponent
 			{
 				for(int i=0; i<components.size(); i++)
 				{
-					components.get(i).dropFocus();
+					
 				}
 			}
 		}
@@ -181,18 +179,6 @@ public class UIWindow extends UIComponent
 
 	@Override
 	public void activate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void dropFocus() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getFocus() {
 		// TODO Auto-generated method stub
 		
 	}

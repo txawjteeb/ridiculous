@@ -8,16 +8,26 @@ import org.cart.igd.models.obj.OBJModel;
 
 public class Guard extends Entity
 {
+	public static final int PATROLING  = 0;
+	public static final int STATIONARY = 1;
+	
+	public int type = 1;
+	
 	public ArrayList<Vector3f> path = new ArrayList<Vector3f>();
 	private int currentTarget = 0;
-	private int posRange = 3;//margin of error
+	private float posRange = .4f;//margin of error
 	private Vector3f target = new Vector3f(0,0,0);
 	private boolean moving = true;
 	private float hearingRadius = 5f;
 	private boolean lostTarget = false;
 	public float refAngleRad = 0f;
-	final float toDeg = 57.2957f;
-	final float toRad = 0.0174f;
+	public float visionDistance = 7f;
+	
+	final float toDeg =57.29578f;
+	final float toRad = 0.01745f;
+	final float    pi = 3.14159f;
+	
+	
 	
 	private Entity player;
 	
@@ -32,7 +42,6 @@ public class Guard extends Entity
 	{
 		super(pos,fD,bsr,model,scale);
 		this.player = pl;
-		path.add(new Vector3f(20,0,20));
 		this.speed = 0.004f;
 	}
 	
@@ -46,7 +55,7 @@ public class Guard extends Entity
 	{
 		super(pos,fD,bsr,model);
 		this.player = pl;
-		path.add(new Vector3f(20,0,20));
+		this.speed = 0.004f;
 	}
 	
 	/**
@@ -68,10 +77,15 @@ public class Guard extends Entity
 			lostTarget = true;
 		}
 	}
+	
 	public boolean testLines(float view){
 		Vector3f left;
 		Vector3f right;
 		
+		//float y =( (position.z-target.z)/
+		//		(position.x -target.x) ) *(position.x);
+		
+		//if(position.z - target.z > 5 && )
 		
 		return true;
 	}
@@ -107,29 +121,25 @@ public class Guard extends Entity
 			//refAngleRad = Math.abs(refAngleRad);
 			
 			/* quadrant 1 */
-			if( position.x < target.x && 
-				position.z < target.z )
+			if( position.x < target.x && position.z < target.z )
 			{
 				facingDirection = refAngleRad * toDeg;
 			}
 			
 			/* quadrant 2 */
-			if( position.x > target.x && 
-				position.z < target.z )
+			if( position.x > target.x && position.z < target.z )
 			{
 				facingDirection = 180f - (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 3 */
-			if( position.x > target.x && 
-				position.z > target.z )
+			if( position.x > target.x && position.z > target.z )
 			{
 				facingDirection = 180f + (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 4 */
-			if( position.x < target.x && 
-				position.z > target.z )
+			if( position.x < target.x && position.z > target.z )
 			{
 				facingDirection = 360f - (refAngleRad * toDeg);
 			}
@@ -137,7 +147,7 @@ public class Guard extends Entity
 			/* change course when target reached */
 			if( xDiff < posRange && zDiff < posRange)
 			{		
-				
+				getNextTarget();
 			}
 			
 			walkForward(elapsedTime);
@@ -146,13 +156,20 @@ public class Guard extends Entity
 	
 	private void getNextTarget()
 	{
-		if(currentTarget < path.size()-1)
-		{
-			currentTarget++;
-			target = path.get(currentTarget);
-		}else{
-			currentTarget=0;
-			target = path.get(currentTarget);
+		if(type == PATROLING){
+			if(currentTarget < path.size()-1)
+			{
+				currentTarget++;
+				target = path.get(currentTarget);
+			}else{
+				currentTarget=0;
+				target = path.get(currentTarget);
+			}
 		}
+		
+		if(type == STATIONARY){
+			
+		}
+		
 	}
 }

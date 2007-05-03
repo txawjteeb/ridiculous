@@ -64,6 +64,7 @@ public class UIButton extends UIComponent
 			mouseOver = false;
 		}
 		
+		if(enabled){
 		switch(mouseOverEffect) {
 			case 1:
 				timeToUpdate -= elapsedTime;
@@ -171,6 +172,7 @@ public class UIButton extends UIComponent
 					System.out.println("Invalid Button Action");
 			break;
 		}// end switch(mouseOverEffect)
+		}// end if(enabled);
 	}
 	/**
 	 * Draw the button at predefined location defined during creation
@@ -206,14 +208,17 @@ public class UIButton extends UIComponent
 		this.setXY(x,y);
 	}
 	
-	public void getFocus()
-	{
-		rgb = new float[] { (102f/255f), (153f/255f), (204f/255f) };
-		enabled = true;
-	}
-	
-	public void dropFocus()
-	{
-		rgb = new float[] {1f,1f,1f};
+	public void setAvailable(boolean aval){
+		if(aval){
+			enabled = true;
+			rgba[0]=1f;
+			rgba[1]=1f;
+			rgba[2]=1f;   
+		} else {
+			enabled = false;
+			rgba[0]=.2f;
+			rgba[1]=.2f;
+			rgba[2]=.2f;   
+		}
 	}
 }

@@ -28,7 +28,7 @@ public class GameAction
 	
 	private boolean continuous = false;
 
-	private int type = 0;
+	private int id = 0;
 	
     public GameAction(String info) {
     	this.info = info;
@@ -40,11 +40,11 @@ public class GameAction
     	active = false;
     	continuous = cont;
     }
-    public GameAction(String info,boolean cont,int type) {
+    public GameAction(String info,boolean cont,int id) {
     	this.info = info;
     	active = false;
     	continuous = cont;
-    	this.type = type;
+    	this.id = id;
     }
     
     /** 
@@ -75,6 +75,10 @@ public class GameAction
     	ammount = amt;
     }
     
+    public int getAmount(){
+    	return ammount;
+    }
+    
     /** 
      * Caled by UserInput when mouse or key is released
      **/
@@ -93,13 +97,12 @@ public class GameAction
     public boolean isPressed(){
     	return pressed;
     }
-    public int getAmount(){
-    	int retVal = ammount;
-    	int ammount = 0;
-    	return retVal;
-    }
     
     public String getInfo(){
     	return info;
+    }
+    
+    public int getId(){
+    	return id;
     }
 }
