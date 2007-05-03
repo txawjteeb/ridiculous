@@ -224,7 +224,7 @@ public abstract class Entity
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			gl.glScalef(.1f,.1f,.1f);
+			//gl.glScalef(.1f,.1f,.1f);
 			model3ds.render(gl);
 			gl.glPopMatrix();
 		}
@@ -232,7 +232,7 @@ public abstract class Entity
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y -2f, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			gl.glScalef(scale.x,scale.y,scale.z);
+			//gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}

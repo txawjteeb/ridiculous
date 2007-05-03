@@ -54,6 +54,19 @@ public class QuestLog{
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void load(){
+		createQuest(Inventory.FLAMINGO,"Flamingo", "Escaped!","You have escaped the zoo!",true);
+		createQuest(Inventory.TURTLES,"Turtles", "Find and Talk","I must tell the Turtles about the zoo!",false);
+		createQuest(Inventory.PANDA,"Panda","Find and Talk", "I must tell the Panda about the zoo!",false);
+		createQuest(Inventory.KANGAROO,"Kangaroo","Find and Talk", "I must tell the Kangaroo about the zoo!",false);
+		createQuest(Inventory.GIRAFFE,"Giraffe","Find and Talk", "I must tell the Giraffe about the zoo!",false);
+		createQuest(Inventory.TIGER,"Tiger","Find and Talk", "I must tell the Tiger about the zoo!",false);
+		createQuest(Inventory.PENGUIN,"Penguin","Find and Talk", "I must tell the Penguin about the zoo!",false);
+		createQuest(Inventory.MEERKAT,"Meerkat","Find and Talk", "I must tell the Meerkat about the zoo!",false);
+		createQuest(Inventory.WOODPECKER,"WoodPecker","Find and Talk", "I must tell the WoodPecker about the zoo!",false);
+		createQuest(Inventory.ELEPHANT,"Elephant", "Find and Talk","I must tell the Elephant about the zoo!",false);
+	}
 
 	public void update(InGameState igs, long elapsedTime){
 			timeToUpdate -= elapsedTime;

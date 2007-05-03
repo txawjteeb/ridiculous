@@ -52,7 +52,6 @@ public class Animal extends Entity{
 	}	
 		
 	public void update(Vector3f playerPosition){
-		igs.addInfoText(3,"state = " + state);
 		/*if(state < 4){
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
@@ -75,7 +74,6 @@ public class Animal extends Entity{
 	}
 	
 	public void display(GL gl){
-		igs.addInfoText(4,"state HERE " + state);
 		if(state<5)super.render(gl);
 	}
 }

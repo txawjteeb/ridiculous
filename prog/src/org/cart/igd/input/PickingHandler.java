@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
+import org.cart.igd.Renderer;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.game.Animal;
@@ -81,7 +82,6 @@ public class PickingHandler {
 		for(Animal e: entities)
 		{
 			gl.glPushName(e.id);
-			System.out.println("animal id: "+e.id);
 			gl.glPushMatrix();
 			gl.glTranslatef( e.position.x, e.position.y, e.position.z );
 			pickingBox.draw(gl);
@@ -152,6 +152,7 @@ public class PickingHandler {
 						selectedNameId = nameId;
 						gs.picked = true;
 						gs.pickedId = selectedNameId;
+						Renderer.info[0]=("picked: "+selectedNameId);
 						System.out.println("selected");
 					}
 				}

@@ -29,17 +29,10 @@ public class UILabel extends UIComponent
 					size );
 			
 		}
-		
-		
-		
-		
 	}
 	
 	public void activate(){
 		
 	}
-	
-	public void getFocus() {  }
-	
-	public void dropFocus() {  }
+
 }

@@ -11,6 +11,7 @@ import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
 import org.cart.igd.Camera;
+import org.cart.igd.Renderer;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.discreet.*;
 import org.cart.igd.entity.Entity;
@@ -58,7 +59,7 @@ public class InGameState extends GameState
 	public ArrayList<GUI> gui = new ArrayList<GUI>();
 	public int currentGuiState = 0;
 	
-	private GameAction mouseCameraRotate;
+	
 	private GameAction mouseWheelScroll;
 	
 	public Entity bush;
@@ -83,36 +84,24 @@ public class InGameState extends GameState
 			maxParser = new MaxParser();
 			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
 			guard3ds = new Model(maxParser.getObjectMesh("data/models/guard_aw.3DS"));
-		}
-		catch(IOException e)
-		{
+		} catch(IOException e) {
 			e.printStackTrace();
 		}
-		
-		terrain = new Terrain();
-		terrain.load(gl);
-
-		questlog = new QuestLog("Quest Log",20,10);
-		questlog.createQuest(Inventory.FLAMINGO,"Flamingo", "Escaped!","You have escaped the zoo!",true);
-		questlog.createQuest(Inventory.TURTLES,"Turtles", "Find and Talk","I must tell the Turtles about the zoo!",false);
-		questlog.createQuest(Inventory.PANDA,"Panda","Find and Talk", "I must tell the Panda about the zoo!",false);
-		questlog.createQuest(Inventory.KANGAROO,"Kangaroo","Find and Talk", "I must tell the Kangaroo about the zoo!",false);
-		questlog.createQuest(Inventory.GIRAFFE,"Giraffe","Find and Talk", "I must tell the Giraffe about the zoo!",false);
-		questlog.createQuest(Inventory.TIGER,"Tiger","Find and Talk", "I must tell the Tiger about the zoo!",false);
-		questlog.createQuest(Inventory.PENGUIN,"Penguin","Find and Talk", "I must tell the Penguin about the zoo!",false);
-		questlog.createQuest(Inventory.MEERKAT,"Meerkat","Find and Talk", "I must tell the Meerkat about the zoo!",false);
-		questlog.createQuest(Inventory.WOODPECKER,"WoodPecker","Find and Talk", "I must tell the WoodPecker about the zoo!",false);
-		questlog.createQuest(Inventory.ELEPHANT,"Elephant", "Find and Talk","I must tell the Elephant about the zoo!",false);
-
-
-		inventory = new Inventory();
-
 		
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
 		OBJModel guard = new OBJModel(gl, "data/models/guard_vm",1.5f,false);
+		
+		/* init container/gamelocic classes*/
+		terrain = new Terrain();
+		terrain.load(gl);
+
+		questlog = new QuestLog("Quest Log",20,10);
+		questlog.load();
+
+		inventory = new Inventory();
 		
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
@@ -125,13 +114,12 @@ public class InGameState extends GameState
 		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player,2f));
 		
 		/* create paths for the guard to follow*/
-		((Guard)entities.get(0)).path.add(new Vector3f(30,0,30));
-		((Guard)entities.get(0)).path.add(new Vector3f(-30,0,30));
-		((Guard)entities.get(0)).path.add(new Vector3f(-30,0,-30));
-		((Guard)entities.get(0)).path.add(new Vector3f(40,0,-40));
+		((Guard)entities.get(0)).path.add(new Vector3f(5,0,5));
+		((Guard)entities.get(0)).path.add(new Vector3f(-5,0,-5));
+		((Guard)entities.get(0)).path.add(new Vector3f(-5,0,5));
+		((Guard)entities.get(0)).path.add(new Vector3f(5,0,-5));
 		
 		/* add collectable object to the map */
-				//0 reserverd
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,0f),true,true));
@@ -139,7 +127,6 @@ public class InGameState extends GameState
 		items.add(new Item("Hotdog",Inventory.HOTDOG,1,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,10f),true,true));
-				//3 reserved
 				
 		items.add(new Item("Disguise Glasses",Inventory.DISGUISEGLASSES,1,0f,1f,
 				partySnapper,
@@ -187,7 +174,9 @@ public class InGameState extends GameState
 		
 		animals.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-
+				new Vector3f(10f,0f,-50f),this));
+				animals.get(3).state = Animal.SAVED_BUSH;
+				
 		animals.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,-60f),this));
@@ -210,14 +199,6 @@ public class InGameState extends GameState
 
 		
 		
-		
-		
-		
-		/* setup input */
-		mouseCameraRotate = new GameAction("mouse rotation mode",true);
-		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON2 );
-		Kernel.userInput.bindToMouse(mouseCameraRotate,MouseEvent.BUTTON3 );	
-		
 		mouseWheelScroll = new GameAction("zoom out", false);
 		
 		Kernel.userInput.bindToMouse(mouseWheelScroll,UserInput.MOUSE_WHEEL_DOWN);
@@ -228,8 +209,6 @@ public class InGameState extends GameState
 	
 	public void init(GL gl, GLU glu)
 	{
-		
-		
 		glg = Kernel.display.getRenderer().getGLG();
 		
 		/* add different gui segments */
@@ -240,14 +219,8 @@ public class InGameState extends GameState
 		loaded = true;
 	}
 	
-	/* post a string message do be displayed on index line*/
-	public void addInfoText(int index, String txt){
-		if(index<infoText.length){
-			infoText[index] = txt;
-		} 
-	}
-	
-	public void rotateCamera(float amt){
+	public void rotateCamera(float amt)
+	{
 		camera.facingOffset += amt;
 	}
 	
@@ -281,41 +254,6 @@ public class InGameState extends GameState
 		
 		((Bush)bush).update(elapsedTime);
 		
-		/* W/S - Move player forward/back. Resets camera offset to back view*/
-		if(Kernel.userInput.keys[KeyEvent.VK_W])
-		{
-			player.walkForward(elapsedTime);
-			
-			if(!mouseCameraRotate.isActive() && camera.facingOffset!=0f)
-			{
-				if(player.position.x==player.lastPosition.x && 
-						player.position.z==player.lastPosition.z)
-					{
-						camera.moveToBackView(8f);
-					}
-			}
-		}
-			
-		else if(Kernel.userInput.keys[KeyEvent.VK_S])
-			player.walkBackward(elapsedTime);
-		
-		/* D/A - Rotate the player on y axis */
-		if(Kernel.userInput.keys[KeyEvent.VK_D])
-			player.turnRight(elapsedTime);
-		else if(Kernel.userInput.keys[KeyEvent.VK_A])
-			player.turnLeft(elapsedTime);
-		
-		/* Q/E Strafe left and right */
-		if(Kernel.userInput.keys[KeyEvent.VK_Q])
-			player.strafeLeft(elapsedTime);
-		else if(Kernel.userInput.keys[KeyEvent.VK_E])
-			player.strafeRight(elapsedTime);
-		
-		for(int i = 0; i<entities.size(); i++){
-			Entity entity = entities.get(i);
-			entity.update(elapsedTime);
-		}
-		
 		player.lastPosition.x = player.position.x;
 		player.lastPosition.y = player.position.y;
 		player.lastPosition.z = player.position.z;
@@ -335,8 +273,6 @@ public class InGameState extends GameState
 			if(player.position.y==0f)
 				playerState = 0;
 		}
-		
-		
 		
 		gui.get(currentGuiState).update(elapsedTime);
 	}
@@ -374,53 +310,27 @@ public class InGameState extends GameState
 			Entity e = (Entity)itr.next();
 			e.render(gl);
 		}	
-		addInfoText(5,"# entities: "+entities.size());
+		Renderer.info[1]="# entities: "+entities.size();
 		
 		/* render all animals */
 		for(int i = 0;i<animals.size();i++){
 			Animal animal = animals.get(i);
 			animal.display(gl);
 		}
-		addInfoText(3,"# animals: "+animals.size());
-		
-		/* guard debug text*/
-		addInfoText(0,"guard 1  ref angle: "+((Guard)entities.get(0)).refAngleRad);
-		addInfoText(1,"player yrot: "+ player.getFacingDirection());
-		addInfoText(2,"guard1 yrot: "+entities.get(0).facingDirection);
+		Renderer.info[2]="# animals: "+animals.size();
 		
 		/* render all items in 3d space */
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
 			item.display3d(gl);
 		}
-		addInfoText(4,"# items: "+items.size());
-
+		Renderer.info[3]="# items: "+items.size();
+		
 		/* render the world map and sky*/
 		terrain.render( gl, player);
+		
 		/* Render GUI */
-		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );		
-		
-		/* DRAW ALL 2D draw cursor and info text */
-
-		if(!mouseCameraRotate.isActive())
-		{
-			glg.glgBegin();
-			glg.drawImage(
-					GLGraphics.Cursor, Kernel.userInput.mousePos[0], 
-					Kernel.userInput.mousePos[1]-(GLGraphics.Cursor.imageHeight));
-					glg.glgEnd();
-		}
-
-		
-		if(showInfoText){
-			int i = 0;
-			for(String s: infoText){
-				i++;
-				glg.glgBegin();
-				glg.drawBitmapString(s, 600 , 600 - (i*16));
-				glg.glgEnd();
-			}
-		}
+		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );	
 	}
 	
 	public synchronized void throwPartyPopper(){
@@ -436,7 +346,6 @@ public class InGameState extends GameState
 				item.amount--;
 			}
 		}
-		
 	}
 	
 	public void handleInput(long elapsedTime)
@@ -474,14 +383,5 @@ public class InGameState extends GameState
 		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 			throwPartyPopper();
 		}
-
-		
-		/** camera mouse rotation */
-		if(mouseCameraRotate.isActive())
-		{
-			camera.arcRotateY( - Kernel.userInput.getXDif()*0.5f );
-			/** camera angle change */
-			camera.changeVerticalAngleDeg( Kernel.userInput.getYDif()*0.5f );
-		} //camera snap back action
 	}
 }

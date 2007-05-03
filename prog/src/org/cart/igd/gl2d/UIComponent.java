@@ -15,9 +15,6 @@ public abstract class UIComponent
 	public  float size[]={1f,1f};
 	
 	public abstract void draw(GLGraphics g);
-	public abstract void getFocus();
-	public abstract void dropFocus();
-	
 	
 	private UIComponent parent;
 	

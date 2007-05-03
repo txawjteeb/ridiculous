@@ -39,6 +39,10 @@ public class Renderer implements GLEventListener
 	public int polyCount = 0;
 	public long lastTime;
 	
+	public static String info[]= {
+		"","","","","",
+	};
+	
 	
 	/*
 	 * Constructor
@@ -258,21 +262,20 @@ public class Renderer implements GLEventListener
 		
 		gl.glColor3f(1f, 0f, 0f);
 		
-		gl.glRasterPos2f(15, 18);
+		gl.glRasterPos2f(15, 16);
 		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "FPS: " + fps);
 		
-		gl.glRasterPos2f(15, 36);
+		gl.glRasterPos2f(15, 32);
 		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "Polygon(s): " + polyCount);
 		
-		gl.glRasterPos2f(15, 54);
-		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "ENTER: start game");
-		
-		gl.glRasterPos2f(15, 72);
-		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "T: open GameGui");
-		
-		gl.glRasterPos2f(15, 90);
-		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "G: open Dialogue");
-		
+		int inc = 0;
+		for(String s: info){
+			inc ++;
+			if( !s.equals("") && s != null){
+				gl.glRasterPos2f(15, 36+(inc*16));
+				glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, s);
+			}
+		}
 		
 		
 		gl.glEnable(GL.GL_TEXTURE_2D);
