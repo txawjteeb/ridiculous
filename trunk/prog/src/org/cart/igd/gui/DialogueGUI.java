@@ -465,7 +465,7 @@ public class DialogueGUI extends GUI {
 	 //3 = incage ready to be saved after item given
 	 //4 = saved by bush
 	 //5 = saved in party
-			switch(animal.id){
+		/*	switch(animal.id){
 				
 				///
 				///// GIRAFFE NOT DONE
@@ -555,7 +555,7 @@ public class DialogueGUI extends GUI {
 			igs.camera.distance = 10;
 			igs.gui.get(InGameState.GUI_GAME).picked = false;
 			((InGameState)gameState).changeGuiState(0);
-			
+		*/	
 		}
 		
 		public int getSelection(){

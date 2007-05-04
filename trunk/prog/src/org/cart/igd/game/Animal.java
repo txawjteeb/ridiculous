@@ -50,10 +50,12 @@ public class Animal extends Entity{
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.animalId = animalId;
-		this.igs = igs;
+		this.igs = igs;	
 	}	
 		
 	public void update(Vector3f playerPosition){
+
+		//System.out.println("Im " + animalId + "  My State is " + state);
 		/*if(state < 4){
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
