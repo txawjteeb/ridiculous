@@ -12,16 +12,7 @@ import org.cart.igd.states.*;
 import org.cart.igd.core.*;
 
 public class Item extends Entity {
-	/*
-	 states 
-	 0 in map
-	 1 in inventory
-	 2 used
-	 */
-	 
-	 /*
-	 taken from dialogue
-	 */
+
 	 
 	 int mouseOverTime = 0;
 		boolean mouseOver = false;
@@ -34,11 +25,9 @@ public class Item extends Entity {
 		boolean swinging;
 		float alpha = 1f;
 		float alphaText = 0f;
+		boolean selected = false;
 		
-	/*
-	 taken from dialogue
-	 */
-	 
+
 	public static final int MAX_POPPERS = 50;
 	public Texture texture;
 	public String name;
@@ -150,7 +139,10 @@ public class Item extends Entity {
 			timeToUpdate -= elapsedTime;
 			if(timeToUpdate <= 0)
 			{
-			
+					if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+64&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+64){
+						igs.inventory.setCurrentItem(id);
+						selected = true;
+					}
 					mouseOver = false;
 					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){
 						mouseOver = true;
@@ -194,17 +186,22 @@ public class Item extends Entity {
 	}
 
 	public void display2d(GLGraphics g, Texture texture){
+	
 		if(state == 1){
-			if(mouseOver){
-						g.drawImageRotateHueSize(texture,x,y,degree, new float[]{1f,alphaSwing,alphaSwing,alpha}, new float[]{1.3f,1.3f});
-						g.drawBitmapStringStroke(name,x,y+73,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
-					} else {	
-						alphaSwing +=.05f;
-						g.drawImageRotateHue(texture,x,y,degree,new float[]{1f,alphaSwing,alphaSwing,alpha});
-						g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
+			if(!selected){
+				if(mouseOver){
+							g.drawImageRotateHueSize(texture,x,y,degree, new float[]{1f,alphaSwing,alphaSwing,alpha}, new float[]{1.3f,1.3f});
+							g.drawBitmapStringStroke(name,x,y+73,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
+						} else {	
+							alphaSwing +=.05f;
+							g.drawImageRotateHue(texture,x,y,degree,new float[]{1f,alphaSwing,alphaSwing,alpha});
+							g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
+				}
+				g.drawBitmapStringStroke(""+amount,x,y,1,new float[]{.6f,1f,.6f,1f},new float[]{0f,0f,0f,1f});				
+			} else{
+				g.drawImageRotateHueSize(texture,x,y,degree, new float[]{.2f,.2f,.2f,.8f}, new float[]{1.0f,1.0aaaaaaaaaaaaaf});
 			}
-			g.drawBitmapStringStroke(""+amount,x,y,1,new float[]{.6f,1f,.6f,1f},new float[]{0f,0f,0f,1f});
-				
+
 		}
 	}
 	

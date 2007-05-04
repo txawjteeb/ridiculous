@@ -115,14 +115,10 @@ public class InGameState extends GameState
 		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player,2f));
 		
 		/* create paths for the guard to follow*/
-		((Guard)entities.get(0)).path.add(
-				new GuardFlag( new Vector3f(5,0,5), 1, 1 ) );
-		((Guard)entities.get(0)).path.add(
-				new GuardFlag( new Vector3f(-5,0,-5), 1, 1 ) );
-		((Guard)entities.get(0)).path.add(
-				new GuardFlag( new Vector3f(-5,0,5), 1, 1 ) );
-		((Guard)entities.get(0)).path.add(
-				new GuardFlag( new Vector3f(5,0,-5), 1, 1 ) );
+		//((Guard)entities.get(0)).path.add(new GuardFlag(5,0,5));
+		//((Guard)entities.get(0)).path.add(new GuardFlag(-5,0,-5));
+		//((Guard)entities.get(0)).path.add(new GuardFlag(-5,0,5));
+		//((Guard)entities.get(0)).path.add(new GuardFlag(5,0,-5));
 		
 		/* add collectable object to the map */
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
@@ -166,7 +162,7 @@ public class InGameState extends GameState
 */
 		/* add animals to the map */
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new OBJModel(gl,"data/models/turtle", 4f,false), 
 				new Vector3f(10f,0f,-20f),this));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
@@ -180,7 +176,6 @@ public class InGameState extends GameState
 		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,-50f),this));
-			//((Animal)interactiveEntities.get(3)).state = Animal.SAVED_BUSH;//test gui buttons
 				
 		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
@@ -191,7 +186,7 @@ public class InGameState extends GameState
 				new Vector3f(10f,0f,-70f),this));
 				
 		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				new OBJModel(gl,"data/models/meerkat", 4f,false), 
 				new Vector3f(10f,0f,-80f),this));
 				
 		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
@@ -261,6 +256,8 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
+		
+
 		updateItems(elapsedTime);
 		updateInteractiveEntities(elapsedTime);
 		updateQuestLog(elapsedTime);

@@ -34,6 +34,7 @@ public class InGameGUI extends GUI
 	private Texture texAnimalIcoQuestLog[] = new Texture[11];
 	private Texture texAnimalQuestLogFree[] = new Texture[10];
 	private Texture texQuestLogCage;
+	private Texture texQuestLogAnimalImages[] = new Texture[12];
 
 	/* button containers */
 	private UIWindow hudBottom;// quest log and item buttons
@@ -156,8 +157,9 @@ public class InGameGUI extends GUI
 		}
 		
 		
-		igs.questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog,texAnimalQuestLogFree,texQuestLogCage);
-		
+		//igs.questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog,texAnimalQuestLogFree,texQuestLogCage);
+		igs.questlog.display(g,texQuestLogIco,texQuestLog,texQuestLogAnimalImages);
+	
 		textList.draw(g);
 		
 		/* drawCursor */
@@ -305,12 +307,17 @@ public class InGameGUI extends GUI
 			if(picked){
 				e = igs.interactiveEntities.get(pickedId);
 			}
-				
 			if(picked && e instanceof Animal){
 				Animal a = ((Animal)e);
 				System.out.println("animal entity: " + a.animalId);
-				((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
-				igs.changeGuiState(1);
+				
+				float xDiff = Math.abs(igs.player.position.x - a.position.x);
+				float zDiff = Math.abs(igs.player.position.z - a.position.z);
+				if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
+					((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
+					igs.changeGuiState(1);
+				}
+				
 				picked = false;
 			}
 			if(picked && e instanceof TerrainEntity){
@@ -350,6 +357,12 @@ public class InGameGUI extends GUI
 	/** load texture for the gui components */
 	public void loadImages()
 	{
+		
+
+		for(int i = 0;i<texQuestLogAnimalImages.length;i++){
+			texQuestLogAnimalImages[i] = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/questlog/" + i + ".png");
+		}
 		
 		texQuestLogCage = Kernel.display.getRenderer().loadImage(
 			"data/images/gui/cage.png");

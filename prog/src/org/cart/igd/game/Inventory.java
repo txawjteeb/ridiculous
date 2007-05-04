@@ -37,6 +37,8 @@ public class Inventory{
 	public static final int ZOOPASTE = 7; 
 	public static final int POPPERS = 8;
 	
+	public int currentItem = -1;
+	
 	public ArrayList<Item> items = new ArrayList<Item>();
 	public ArrayList<Animal> animals = new ArrayList<Animal>();
 	
@@ -49,6 +51,15 @@ public class Inventory{
 		}
 		return false;
 	}
+	
+	public void setCurrentItem(int currentItem){
+		this.currentItem = currentItem;
+	}
+	
+	public void resetCurrentItem(){
+		this.currentItem = -1;
+	}
+	
 	// wont work for poppers
 	public void useItem(int id){ 
 		for(int i = 0;i<items.size();i++){

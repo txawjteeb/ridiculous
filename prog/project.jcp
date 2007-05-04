@@ -79,14 +79,47 @@
 			<folderitem>
 				<path>src\org\cart\igd\util</path>
 			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\sound</path>
+			</folderitem>
 			<fileitem>
 				<path>build.xml</path>
+			</fileitem>
+			<fileitem>
+				<path>commons-logging-api.jar</path>
 			</fileitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
 			</fileitem>
 			<fileitem>
+				<path>jl1.0.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>joal.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>jogg-0.0.7.jar</path>
+			</fileitem>
+			<fileitem>
 				<path>jogl.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>jorbis-0.0.15.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>jspeex0.9.7.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>lwjgl.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>mp3spi1.9.4.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>tritonus_share.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>vorbisspi1.0.2.jar</path>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\Camera.java</path>
@@ -111,6 +144,10 @@
 			<fileitem>
 				<path>src\org\cart\igd\collision\Collision.java</path>
 				<folder>src\org\cart\igd\collision</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\core\GameLauncher.java</path>
+				<folder>src\org\cart\igd\core</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\core\Kernel.java</path>
@@ -357,6 +394,10 @@
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\game\TerrainEntity.java</path>
+				<folder>src\org\cart\igd\game</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\game\Tree.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
@@ -394,6 +435,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\Dialogue.java</path>
+				<folder>src\org\cart\igd\gui</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\gui\DialogueGUI.java</path>
 				<folder>src\org\cart\igd\gui</folder>
 			</fileitem>
 			<fileitem>
@@ -563,6 +608,50 @@
 			<fileitem>
 				<path>src\org\cart\igd\util\WinDataInputStream.java</path>
 				<folder>src\org\cart\igd\util</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\DeferredSound.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\InternalSound.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\Log.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\Music.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\OggData.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\OggDecoder.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\ResourceLoader.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\Sound.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\SoundStore.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\SoundTesting.java</path>
+				<folder>src\org\cart\igd\sound</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\sound\WaveData.java</path>
+				<folder>src\org\cart\igd\sound</folder>
 			</fileitem>
 		</include>
 	</files>
