@@ -42,7 +42,7 @@ public class Item extends Entity {
 	public static final int MAX_POPPERS = 50;
 	public Texture texture;
 	public String name;
-	public int id;
+	public int itemId;
 	public int state = 0;
 	public int amount;
 	public boolean turn;
@@ -56,19 +56,19 @@ public class Item extends Entity {
 	long timeToUpdate = 0;
 	long updateTime = 30;
 	
-	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Vector3f location, boolean turn, boolean bounce){
+	public Item(String name,int itemId, int amount,float fd, float bsr, OBJModel model, Vector3f location, boolean turn, boolean bounce){
 		super(location,fd,bsr, model);
 		this.name = name;
-		this.id = id;
+		this.itemId = itemId;
 		this.amount = amount;
 		this.turn = turn;
 		this.bounce = bounce;
 	}
 	
-	public Item(String name,int id, int amount,float fd, float bsr, OBJModel model, Vector3f location){
+	public Item(String name,int itemId, int amount,float fd, float bsr, OBJModel model, Vector3f location){
 		super(location,fd,bsr, model);
 		this.name = name;
-		this.id = id;
+		this.itemId = itemId;
 		this.amount = amount;
 		this.turn = false;
 		this.bounce = false;
@@ -93,10 +93,10 @@ public class Item extends Entity {
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius){
 				boolean alreadyHasPoppers = false;
-				if(id ==8){
+				if(itemId ==8){
 					for(int i = 0;i<igs.inventory.items.size();i++){
 						Item item = igs.inventory.items.get(i);
-						if(item.id==8){
+						if(item.itemId==8){
 							item.amount =MAX_POPPERS;
 							alreadyHasPoppers = true;
 							break;
@@ -133,7 +133,7 @@ public class Item extends Entity {
 			}
 			if(turn)facingDirection+=4f;
 		} else if(state == 1){ // in inventory
-			if(id==8 && amount ==0){
+			if(itemId==8 && amount ==0){
 				boolean found = false;
 				for(int i=0;i<igs.inventory.items.size();i++){
 					Item item = igs.inventory.items.get(i);

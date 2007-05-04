@@ -72,7 +72,7 @@ public class InGameGUI extends GUI
 		this.igs = ((InGameState)igs);
 		input = Kernel.userInput;
 		
-		ph = new PickingHandler(gl, glu, this.igs.animals, this);
+		ph = new PickingHandler(gl, glu, this.igs.interactiveEntities, this);
 		
 		loadGameActions();
 		loadImages();
@@ -130,15 +130,14 @@ public class InGameGUI extends GUI
 		/* draw the animal selection, faded buttons for unavailable animals */
 		if(((InGameState)gameState).nearBush)
 		{
-			for(int i = 0;i<((InGameState)gameState).animals.size();i++)
-			{
-				Animal a = ((InGameState)gameState).animals.get(i);
-				
-				if( a.getState() == Animal.SAVED_BUSH )
-				{
-					btBushAnimals[a.id].draw(g);
-				} else {
-					btBushAnimals[a.id].draw(g);
+			for( Entity e : igs.interactiveEntities )
+			{		
+				if(e instanceof Animal){
+					Animal a = ((Animal)e);
+					if(  a.getState() == Animal.SAVED_BUSH )
+					{
+						btBushAnimals[a.animalId].draw(g);
+					} //TODO make sure fix this
 				}
 			}
 		}
@@ -153,7 +152,7 @@ public class InGameGUI extends GUI
 		/* draw Items that are picked up from the Items arraylist in IGS */
 		for(int i = 0;i<((InGameState)gameState).inventory.items.size();i++){
 			Item item = ((InGameState)gameState).inventory.items.get(i);
-			item.display2d(g,texItemIco[item.id]);
+			item.display2d(g,texItemIco[item.itemId]);
 		}
 		
 		
@@ -211,14 +210,18 @@ public class InGameGUI extends GUI
 		textList.update(elapsedTime);
 		
 		//update button hue
-		for(Animal a:igs.animals){
-			btBushAnimals[a.id].setAvailable(false);
-			if(a.state == Animal.SAVED_BUSH){
-				btBushAnimals[a.id].setAvailable(true);
+		for(Entity e:igs.interactiveEntities){
+			if(e instanceof Animal){
+				Animal a = ((Animal)e);
+				btBushAnimals[a.animalId].setAvailable(false);
+				if(a.state == Animal.SAVED_BUSH){
+					btBushAnimals[a.animalId].setAvailable(true);
+				}
+				if(a.state == Animal.SAVED_PARTY){
+					btBushAnimals[a.animalId].setAvailable(false);//already in group
+				}
 			}
-			if(a.state == Animal.SAVED_PARTY){
-				btBushAnimals[a.id].setAvailable(false);//already in group
-			}
+			
 		}
 		
 		if(igs.currentGuiState != 1){
@@ -295,26 +298,31 @@ public class InGameGUI extends GUI
 			}
 			
 			
-			/* pick animal */
-			if(picked && igs.currentGuiState!=1 ){
-				picked = false;
-				Animal animal = null;
-				boolean match = false;
-				for(Animal a: ((InGameState)gameState).animals){
-					if(a.id == pickedId)
-						animal = a;
-					match = true;
-					
-					System.out.println(" InGameGUI.handleInput()"+pickedId);
-					break;
-				}
-				if(match&& igs.currentGuiState!=1){
-					((Dialogue)((InGameState)gameState).gui.get(1)).createDialogue(animal,(InGameState)gameState);
-					((InGameState)gameState).changeGuiState(1);
-				}
-			}
+			/* ----------- handle picking selection of entities ------------ */
+			//TODO also make items pickable
 			
+			Entity e = null;
+			if(picked){
+				e = igs.interactiveEntities.get(pickedId);
+			}
+				
+			if(picked && e instanceof Animal){
+				Animal a = ((Animal)e);
+				System.out.println("animal entity: " + a.animalId);
+				((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
+				igs.changeGuiState(1);
+				picked = false;
+			}
+			if(picked && e instanceof TerrainEntity){
+				TerrainEntity t = ((TerrainEntity)e);
+				System.out.println("terrain entity: " + t.terrainId);
+				picked = false;
+			}
+				
+				picked = false;
+				pickedId = -1;
 		} // end if(mouseSelect.isActive())	
+		
 		
 		/* update the hud buttons so they rotate */
 		for (int i = 0; i < hudLeft.components.size(); i++) {

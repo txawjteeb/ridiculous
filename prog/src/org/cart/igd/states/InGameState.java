@@ -34,8 +34,9 @@ public class InGameState extends GameState
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
-	public ArrayList<Animal> animals = new ArrayList<Animal>();
-		
+	//public ArrayList<Animal> animals = new ArrayList<Animal>();
+	public ArrayList<Entity> interactiveEntities = new ArrayList<Entity>();	
+	
 	public Entity player;
 	
 	public  Camera camera;
@@ -160,43 +161,48 @@ public class InGameState extends GameState
 	public static final int ELEPHANT = 9;  
 */
 		/* add animals to the map */
-		animals.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
+		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-20f),this));
 				
-		animals.add(new Animal("Panda",Inventory.PANDA,0f,3f,
+		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-30f),this));
 				
-		animals.add(new Animal("Panda",Inventory.KANGAROO,0f,3f,
+		interactiveEntities.add(new Animal("Panda",Inventory.KANGAROO,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-40f),this));
 		
-		animals.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
+		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,-50f),this));
-				animals.get(3).state = Animal.SAVED_BUSH;
+			((Animal)interactiveEntities.get(3)).state = Animal.SAVED_BUSH;//test gui buttons
 				
-		animals.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
+		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,-60f),this));
 		
-		animals.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
+		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
 				new Vector3f(10f,0f,-70f),this));
 				
-		animals.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
+		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-80f),this));
 				
-		animals.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
+		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-90f),this));
 				
-		animals.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
+		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
 				new Vector3f(10f,0f,-100f),this));
 
+		/* add interactive terrain items*/
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(-10f,10f,-10), 0f, 3f,
+				new OBJModel(gl,"data/models/meerkat_low_poly", 10f,false) 
+				,10));
 		
 		
 		mouseWheelScroll = new GameAction("zoom out", false);
@@ -235,10 +241,13 @@ public class InGameState extends GameState
 		}
 	}
 	
-	public void updateAnimals(){
-		for(int i = 0;i<animals.size();i++){
-			Animal animal = animals.get(i);
-			animal.update(player.position);
+	public void updateInteractiveEntities(long elapsedTime){
+		for( Entity e : interactiveEntities ){
+			if(e instanceof Animal){
+				((Animal)e).update(player.position);
+			} else {
+				e.update(elapsedTime);
+			}
 		}
 	}
 	
@@ -249,7 +258,7 @@ public class InGameState extends GameState
 	public void update(long elapsedTime)
 	{
 		updateItems(elapsedTime);
-		updateAnimals();
+		updateInteractiveEntities(elapsedTime);
 		updateQuestLog(elapsedTime);
 		
 		((Bush)bush).update(elapsedTime);
@@ -312,19 +321,31 @@ public class InGameState extends GameState
 		}	
 		Renderer.info[1]="# entities: "+entities.size();
 		
+		
 		/* render all animals */
-		for(int i = 0;i<animals.size();i++){
-			Animal animal = animals.get(i);
-			animal.display(gl);
+		for( Entity e : interactiveEntities ){
+			int animCount = 0;
+			int terrCount = 0;
+			if( e instanceof Animal){
+				animCount ++;
+				((Animal)e).display(gl);
+			}
+			if(e instanceof TerrainEntity){
+				e.render(gl);
+				terrCount++;
+			}
+			
+			Renderer.info[2]="# animals: "+animCount;
+			Renderer.info[3]="# terrObj: "+terrCount;
 		}
-		Renderer.info[2]="# animals: "+animals.size();
+		
 		
 		/* render all items in 3d space */
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
 			item.display3d(gl);
 		}
-		Renderer.info[3]="# items: "+items.size();
+		Renderer.info[4]="# items: "+items.size();
 		
 		/* render the world map and sky*/
 		terrain.render( gl, player);
@@ -336,7 +357,7 @@ public class InGameState extends GameState
 	public synchronized void throwPartyPopper(){
 		for(int i = 0;i<inventory.items.size();i++){
 			Item item = inventory.items.get(i);
-			if(item.id ==8 && item.amount>0){
+			if(item.itemId ==8 && item.amount>0){
 				entities.add(new PartySnapper(
 					new Vector3f(player.position.x, player.position.y, player.position.z),
 					player.facingDirection, 
