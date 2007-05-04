@@ -13,10 +13,13 @@ public class Guard extends Entity
 	
 	public int type = 1;
 	
-	public ArrayList<Vector3f> path = new ArrayList<Vector3f>();
+	public ArrayList<Entity> path = new ArrayList<Entity>();
+	private Entity player;
+	private Entity target;
+	
 	private int currentTarget = 0;
 	private float posRange = .4f;//margin of error
-	private Vector3f target = new Vector3f(0,0,0);
+	
 	private boolean moving = true;
 	private float hearingRadius = 5f;
 	private boolean lostTarget = false;
@@ -27,11 +30,9 @@ public class Guard extends Entity
 	final float toRad = 0.01745f;
 	final float    pi = 3.14159f;
 	
-	
-	
-	private Entity player;
-	
+
 	/**
+	 * Create a guard with OBJModel
 	 * @param Vector3f pos: location of the entity 
 	 * @param float fD: direction entity is facing ( y rotation )
 	 * @param float bsr: bounding sphere radius used for collision detection
@@ -46,6 +47,7 @@ public class Guard extends Entity
 	}
 	
 	/**
+	 * Create a guard with 3DSModel 
 	 * @param Vector3f pos: location of the entity 
 	 * @param float fD: direction entity is facing ( y rotation )
 	 * @param float bsr: bounding sphere radius used for collision detection
@@ -59,7 +61,7 @@ public class Guard extends Entity
 	}
 	
 	/**
-	 * @purpose detect whether the player's animal is within a
+	 * @purpose detect whether the player's animal is within range
 	 **/
 	public void lookForTarget(){
 		float xDiff = (position.x - player.position.x);
@@ -71,7 +73,7 @@ public class Guard extends Entity
 			testLines(30f)	)
 		{
 			lostTarget = false;
-			target = player.position;
+			target = player;
 		} else if(!lostTarget){//loose target back to patrol
 			target = null;
 			lostTarget = true;
@@ -114,32 +116,32 @@ public class Guard extends Entity
 		
 		if(moving == true && target != null)
 		{		
-			float xDiff = (position.x - target.x);
-			float zDiff = (position.z - target.z);
+			float xDiff = (position.x - target.position.x);
+			float zDiff = (position.z - target.position.z);
 			
 			refAngleRad = Math.abs((float)Math.atan(zDiff/xDiff));
 			//refAngleRad = Math.abs(refAngleRad);
 			
 			/* quadrant 1 */
-			if( position.x < target.x && position.z < target.z )
+			if( position.x < target.position.x && position.z < target.position.z )
 			{
 				facingDirection = refAngleRad * toDeg;
 			}
 			
 			/* quadrant 2 */
-			if( position.x > target.x && position.z < target.z )
+			if( position.x > target.position.x && position.z < target.position.z )
 			{
 				facingDirection = 180f - (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 3 */
-			if( position.x > target.x && position.z > target.z )
+			if( position.x > target.position.x && position.z > target.position.z )
 			{
 				facingDirection = 180f + (refAngleRad * toDeg);
 			}
 			
 			/* quadrant 4 */
-			if( position.x < target.x && position.z > target.z )
+			if( position.x < target.position.x && position.z > target.position.z )
 			{
 				facingDirection = 360f - (refAngleRad * toDeg);
 			}

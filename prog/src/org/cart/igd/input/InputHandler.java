@@ -21,38 +21,39 @@ public class InputHandler extends Thread{
 	}
 	
 	public void run(){
-		while(Kernel.displayRunning)
-    	{
-    		currentTime = profiler.currentTime;
-    		long elapsedTime = currentTime - lastTime;
-    		
-    		/* prevent unnecesary updates*/
-    		if(elapsedTime > 0){
-    			try{
-    				if(Kernel.display.getRenderer().getStateManager().
-   		 					getCurrentState()!= null)
-   		 			{
-   		 						
-    					Kernel.display.getRenderer().getStateManager().
-   		 						getCurrentState().handleInput(elapsedTime);
-   		 				
-   		 				profiler.ihTimedHits ++;
-   		 			}
-    			} catch (Exception e){
-    				e.printStackTrace();
-    			}
-    		}
-    		
-    		profiler.ihAllHits++;
-    		
-    		lastTime = profiler.currentTime;
-    		
-    		try {
+		while(running){		
+			if(Kernel.displayRunning)
+	    	{
+	    		currentTime = profiler.currentTime;
+	    		long elapsedTime = currentTime - lastTime;
+	    		
+	    		/* prevent unnecesary updates*/
+	    		if(elapsedTime > 0){
+	    			try{
+	    				if(Kernel.display.getRenderer().getStateManager().
+	   		 					getCurrentState()!= null)
+	   		 			{
+	   		 						
+	    					Kernel.display.getRenderer().getStateManager().
+	   		 						getCurrentState().handleInput(elapsedTime);
+	   		 				
+	   		 				profiler.ihTimedHits ++;
+	   		 			}
+	    			} catch (Exception e){
+	    				e.printStackTrace();
+	    			}
+	    		}
+	    		
+	    		profiler.ihAllHits++;
+	    		
+	    		lastTime = profiler.currentTime;
+	    	}
+			
+			try {
     			Thread.sleep(sleepTime);
     		} catch (Exception e) {
     			e.printStackTrace();
     		}
-    	}
-		
+		}
 	}
 }

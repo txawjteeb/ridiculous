@@ -39,8 +39,6 @@ public class Display implements WindowListener
 		boolean tmpFs = disp.fullscreen;
 		int tmpW = disp.w;
 		int tmpH = disp.h;
-		disp.setVisible(false);//hide the option frame before loading fullscreen
-			
 		createDisplay( disp.title, tmpW,tmpH, tmpFs );
 	}
 	
