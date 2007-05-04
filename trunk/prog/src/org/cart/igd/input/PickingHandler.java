@@ -28,9 +28,9 @@ public class PickingHandler {
 	boolean inSelectionMode;
 	
 	int yCursor, xCursor;
-	ArrayList<Animal> entities;
+	ArrayList<Entity> entities;
 	
-	public PickingHandler(GL gl,GLU glu,ArrayList<Animal> entities,GUI gs){
+	public PickingHandler(GL gl,GLU glu,ArrayList<Entity> entities,GUI gs){
 		this.gs = gs;
 		this.gl=gl;
 		this.glu = glu;
@@ -79,13 +79,16 @@ public class PickingHandler {
 	
 	private void drawEntities()
 	{
-		for(Animal e: entities)
+		int eid = 0;
+		for(Entity e: entities)
 		{
+			e.id = eid;
 			gl.glPushName(e.id);
 			gl.glPushMatrix();
 			gl.glTranslatef( e.position.x, e.position.y, e.position.z );
 			pickingBox.draw(gl);
 			gl.glPopMatrix();
+			eid++;
 		}
 	}
 	
@@ -119,7 +122,7 @@ public class PickingHandler {
 		int offset = 0;
 		
 		for(int i = 0; i < numHits; i++){
-			System.out.println("hit"+ (i+1));
+			//System.out.println("hit"+ (i+1));
 			
 			int numNames = selectBuffer.get(offset);
 			offset++;
@@ -140,28 +143,25 @@ public class PickingHandler {
 			float maxZ = getDepth(offset);
 			offset++;
 			
-			System.out.println(" minZ: " + minZ+ 
-					"; maxZ: " + maxZ);
+			//System.out.println(" minZ: " + minZ+ "; maxZ: " + maxZ);
 			
 			int nameId;
 			for( int j = 0; j < numNames; j++){
 				nameId = selectBuffer.get(offset);
-				System.out.println( idToString(nameId));
+				//System.out.println( idToString(nameId));
 				if(j == (numNames-1)){
 					if(smallestZ == minZ){
 						selectedNameId = nameId;
 						gs.picked = true;
 						gs.pickedId = selectedNameId;
 						Renderer.info[0]=("picked: "+selectedNameId);
-						System.out.println("selected");
 					}
 				}
-				System.out.print(" ");
 				offset++;
 			}
-			System.out.println("selectedID"+selectedNameId);
+			Renderer.info[5]="selectedID: " + selectedNameId;
 		}
-		System.out.println("Picked the " + idToString(selectedNameId) + "\n");
+		Renderer.info[6] = "picked obj loc: " + idToString( selectedNameId );
 	}//end process hits
 	
 	private float getDepth(int offset){
@@ -180,10 +180,10 @@ public class PickingHandler {
 	
 	public String idToString(int nameID){
 		String retVal="";
-		for (Animal a: entities){
-			if(a.id == nameID);
-				retVal = ""+a.getName();
+		for (Entity e: entities){
+			if(e.id == nameID);
+				retVal = ""+e.getName();
 		}
-		return retVal ="";
+		return retVal;
 	}
 }

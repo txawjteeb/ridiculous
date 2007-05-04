@@ -43,7 +43,7 @@ public class Inventory{
 	public boolean hasItem(int id){
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
-			if(item.id==id){
+			if(item.itemId==id){
 				return true;
 			}
 		}
@@ -53,7 +53,7 @@ public class Inventory{
 	public void useItem(int id){ 
 		for(int i = 0;i<items.size();i++){
 			Item item = items.get(i);
-			if(item.id==id){
+			if(item.itemId==id){
 				item.amount--;
 				return;
 			}

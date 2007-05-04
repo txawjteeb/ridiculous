@@ -451,7 +451,7 @@ public class Dialogue extends GUI {
 	 //3 = incage ready to be saved after item given
 	 //4 = saved by bush
 	 //5 = saved in party
-			switch(animal.id){
+			switch(animal.animalId){
 				
 				///
 				///// GIRAFFE NOT DONE
@@ -460,7 +460,7 @@ public class Dialogue extends GUI {
 				case 4: 
 					switch(animal.state){
 						case 0:
-							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Why are you bothering an old man?",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.animalId,0,"Why are you bothering an old man?",0));
 							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"Sorry, wrong cage.",1));
 							Dialogue.renderDialogue.add(new DialogueInfo(2,0,1,"Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!",2));
 							switch(getSelection()){
@@ -472,14 +472,14 @@ public class Dialogue extends GUI {
 								case 2:
 									pause(1000);
 									Dialogue.clearDialogue();
-									Dialogue.renderDialogue.add(new DialogueInfo(3,animal.id,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
+									Dialogue.renderDialogue.add(new DialogueInfo(3,animal.animalId,0,"Well why should I go?  I'm just gonna let 'em move me to a new zoo.",0));
 									Dialogue.renderDialogue.add(new DialogueInfo(4,0,1,"We've all been sold and I need your help to get everyone out of here!",1));
 									Dialogue.renderDialogue.add(new DialogueInfo(5,0,1,"They're selling us too!  We're going to be made into food!",2));
 									switch(getSelection()){
 										case 4:
 											pause(1000);
 											Dialogue.clearDialogue();
-											Dialogue.renderDialogue.add(new DialogueInfo(6,animal.id,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
+											Dialogue.renderDialogue.add(new DialogueInfo(6,animal.animalId,0,"I'll do my best, youngin, but I don't know how muchmy back can take.  If you could find me something to fix my back, I could help you!",0));
 											Dialogue.renderDialogue.add(new DialogueInfo(7,0,1,"Alright, I'll be back as soon as I can get it.",1));
 											switch(getSelection()){
 												case 7:
@@ -494,7 +494,7 @@ public class Dialogue extends GUI {
 										case 5:
 											pause(1000);
 											Dialogue.clearDialogue();
-											Dialogue.renderDialogue.add(new DialogueInfo(8,animal.id,0,"Well...in that case, I guess I can make these tired old legs work for just a little bit longer.",0));
+											Dialogue.renderDialogue.add(new DialogueInfo(8,animal.animalId,0,"Well...in that case, I guess I can make these tired old legs work for just a little bit longer.",0));
 											pause(3000);
 											setFalling();
 											((Dialogue)igs.gui.get(1)).down = true;
@@ -508,7 +508,7 @@ public class Dialogue extends GUI {
 							}
 							break;
 						case 1:
-							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"What's takin' ya so long, sonny?  My back's still hurtin'!",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.animalId,0,"What's takin' ya so long, sonny?  My back's still hurtin'!",0));
 							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
 							switch(getSelection()){
 									case 1:
@@ -519,7 +519,7 @@ public class Dialogue extends GUI {
 							}
 							break;
 						case 2:
-							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.id,0,"Yer' slower than I am laddie, hurry up and get me out of here.",0));
+							Dialogue.renderDialogue.add(new DialogueInfo(0,animal.animalId,0,"Yer' slower than I am laddie, hurry up and get me out of here.",0));
 							Dialogue.renderDialogue.add(new DialogueInfo(1,0,1,"I'll be right back",1));
 							switch(getSelection()){
 								
