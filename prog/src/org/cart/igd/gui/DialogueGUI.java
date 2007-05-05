@@ -573,7 +573,7 @@ public class DialogueGUI extends GUI {
 		}
 		
 		public void setFalling(){
-			for(int i = 0;i < Dialogue.renderDialogue.size();i++){
+			for(int i = 0;i < ((Dialogue)igs.gui.get(1)).renderDialogue.size();i++){
 				DialogueInfo di = renderDialogue.get(i);
 				di.falling = true;
 			}
@@ -589,7 +589,7 @@ public class DialogueGUI extends GUI {
 		}
 			
 		public int checkCollision(){	
-			for(int i = 0;i < Dialogue.renderDialogue.size();i++){
+			for(int i = 0;i < ((Dialogue)igs.gui.get(1)).renderDialogue.size();i++){
 				DialogueInfo di = renderDialogue.get(i);
 				if(di.type==0) continue; // supposed to be not npc
 				if(lastMousePress[0]>di.x&&

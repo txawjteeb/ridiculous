@@ -78,7 +78,7 @@
 			<path>src\org\cart\igd\gui\Dialogue.java</path>
 			<source>true</source>
 			<index>1</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\game\GameObjective.java</path>
@@ -96,7 +96,7 @@
 			<path>src\org\cart\igd\game\Item.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\game\PlayerStateManager.java</path>
@@ -180,6 +180,18 @@
 			<path>src\org\cart\igd\input\PickingHandler.java</path>
 			<source>true</source>
 			<index>18</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
+			<source>true</source>
+			<index>19</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\DialogueGUI.java</path>
+			<source>true</source>
+			<index>20</index>
 			<active>false</active>
 		</docitem>
 	</open_files>
