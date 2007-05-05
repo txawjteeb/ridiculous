@@ -163,11 +163,13 @@ public class InGameGUI extends GUI
 		textList.draw(g);
 		
 		/* drawCursor */
-		g.drawImage( GLGraphics.Cursor, 
-				input.mousePos[0],input.mousePos[1],
-				GLGraphics.Cursor.imageWidth, GLGraphics.Cursor.imageHeight,
-				0, rgbaCursor, new float[] {1f,1f} );
-
+		if(igs.inventory.currentItem==-1){
+			g.drawImage(GLGraphics.Cursor, 
+					input.mousePos[0],input.mousePos[1],
+					GLGraphics.Cursor.imageWidth, GLGraphics.Cursor.imageHeight,
+					0, rgbaCursor, new float[] {1f,1f} );
+		}
+		
 		g.glgEnd();
 	}
 
@@ -310,12 +312,40 @@ public class InGameGUI extends GUI
 			if(picked && e instanceof Animal){
 				Animal a = ((Animal)e);
 				System.out.println("animal entity: " + a.animalId);
-				
-				float xDiff = Math.abs(igs.player.position.x - a.position.x);
-				float zDiff = Math.abs(igs.player.position.z - a.position.z);
-				if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
-					((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
-					igs.changeGuiState(1);
+				if(igs.inventory.currentItem==-1){
+					float xDiff = Math.abs(igs.player.position.x - a.position.x);
+					float zDiff = Math.abs(igs.player.position.z - a.position.z);
+					if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
+						((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
+						igs.changeGuiState(1);
+					}	
+				} else {
+					float xDiff = Math.abs(igs.player.position.x - a.position.x);
+					float zDiff = Math.abs(igs.player.position.z - a.position.z);
+					if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
+						if(a.state == Inventory.WAITING_FOR_ITEM&&a.itemWanted == igs.inventory.currentItem){
+							a.state = Inventory.JUST_GAVE_ITEM;
+							((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
+							igs.changeGuiState(1);
+							boolean found = false;
+							Item removeItem = igs.items.get(0);
+							for(int i=0;i<igs.inventory.items.size();i++){
+								Item item = igs.inventory.items.get(i);
+								if(found)item.x-=70;
+								else if(item.itemId==a.itemWanted){
+									found = true;
+									removeItem = igs.inventory.items.get(i);
+							}
+						}
+						if(found&&removeItem!=null){
+							igs.inventory.items.remove(removeItem);
+							igs.items.remove(removeItem);	
+							igs.inventory.setCurrentItem(-1);
+						}
+						
+						}
+					}
+					
 				}
 				
 				picked = false;
@@ -343,15 +373,19 @@ public class InGameGUI extends GUI
 		}
 		
 		/** camera mouse rotation */
-		if(mouseCameraRotate.isActive())
-		{
-			igs.camera.arcRotateY( - Kernel.userInput.getXDif()*0.5f );
-			/** camera angle change */
-			igs.camera.changeVerticalAngleDeg( Kernel.userInput.getYDif()*0.5f );
-			rgbaCursor[3]=0f;
-		} else {
-			rgbaCursor[3]=1f;
-		}
+
+		
+			if(mouseCameraRotate.isActive())
+			{
+				igs.camera.arcRotateY( - Kernel.userInput.getXDif()*0.5f );
+				/** camera angle change */
+				igs.camera.changeVerticalAngleDeg( Kernel.userInput.getYDif()*0.5f );
+				rgbaCursor[3]=0f;
+			} else {
+				rgbaCursor[3]=1f;
+			}
+		
+		
 	}// end handleInput()
 
 	/** load texture for the gui components */

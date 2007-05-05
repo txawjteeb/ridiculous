@@ -41,16 +41,19 @@ public class Animal extends Entity{
 	
 	public int animalId;
 
+	public int itemWanted;
+	
 	public String name;
 	public int state = 0;
 	private boolean Collide = false;
 	private InGameState igs;
 	
-	public Animal(String name,int animalId,float fd, float bsr, OBJModel model, Vector3f location,InGameState igs){
+	public Animal(String name,int animalId,float fd, float bsr, OBJModel model, Vector3f location,InGameState igs, int itemWanted){
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.animalId = animalId;
 		this.igs = igs;	
+		this.itemWanted = itemWanted;
 	}	
 		
 	public void update(Vector3f playerPosition){

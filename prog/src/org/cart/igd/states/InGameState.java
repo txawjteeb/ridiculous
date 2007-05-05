@@ -163,39 +163,39 @@ public class InGameState extends GameState
 		/* add animals to the map */
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
 				new OBJModel(gl,"data/models/turtle", 4f,false), 
-				new Vector3f(10f,0f,-20f),this));
+				new Vector3f(10f,0f,-20f),this,0));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-30f),this));
+				new Vector3f(10f,0f,-30f),this,0));
 				
-		interactiveEntities.add(new Animal("Panda",Inventory.KANGAROO,0f,3f,
+		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-40f),this));
+				new Vector3f(10f,0f,-40f),this,Inventory.DISGUISEGLASSES));
 		
 		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-50f),this));
+				new Vector3f(10f,0f,-50f),this,Inventory.MEDICATION));
 				
 		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-60f),this));
+				new Vector3f(10f,0f,-60f),this,Inventory.ZOOPASTE));
 		
 		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-70f),this));
+				new Vector3f(10f,0f,-70f),this,Inventory.FISH));
 				
 		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat", 4f,false), 
-				new Vector3f(10f,0f,-80f),this));
+				new Vector3f(10f,0f,-80f),this,Inventory.HOTDOG));
 				
 		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-90f),this));
+				new Vector3f(10f,0f,-90f),this,Inventory.PADDLEBALL));
 				
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-100f),this));
+				new Vector3f(10f,0f,-100f),this,0));
 
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(

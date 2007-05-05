@@ -17,6 +17,13 @@ public class Inventory{
 	 8 woodpecker 
 	 9 elephant
 	 */
+	public static final int NOT_TALKED_TO = 0;
+	public static final int WAITING_FOR_ITEM = 1;
+	public static final int READY_TO_SAVE = 2;
+	public static final int JUST_GAVE_ITEM = 3;
+	public static final int SAVED_IN_BUSH = 4;
+	public static final int SAVED_IN_PARTY = 5;
+	public static final int JUST_SAVED = 6;
 	 
 	public static final int FLAMINGO = 0;
 	public static final int TURTLES = 1; 
