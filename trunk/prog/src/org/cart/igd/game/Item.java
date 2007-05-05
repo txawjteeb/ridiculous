@@ -26,6 +26,7 @@ public class Item extends Entity {
 		float alpha = 1f;
 		float alphaText = 0f;
 		boolean selected = false;
+		int degreeSet = 0;
 		
 
 	public static final int MAX_POPPERS = 50;
@@ -40,7 +41,7 @@ public class Item extends Entity {
 	boolean up = true;
 	float difference;
 	
-	int x, y;
+	public int x, y;
 	
 	long timeToUpdate = 0;
 	long updateTime = 30;
@@ -139,46 +140,86 @@ public class Item extends Entity {
 			timeToUpdate -= elapsedTime;
 			if(timeToUpdate <= 0)
 			{
-					if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+64&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+64){
-						igs.inventory.setCurrentItem(id);
+					if(itemId != 8&&!igs.questlog.open && Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+64&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+64&& !selected){
+						if(igs.inventory.currentItem!=-1){
+							for(int i = 0;i<igs.inventory.items.size();i++){
+								Item item = igs.inventory.items.get(i);
+								item.selected = false;
+							}
+						}
+						igs.inventory.setCurrentItem(itemId);
 						selected = true;
+						degreeSet = degree;
 					}
 					mouseOver = false;
-					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){
+					if(!selected){
+						if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){
+							mouseOver = true;
+							mouseOverTime++;
+							if(alphaText<1f)alphaText+=0.1f;
+							if(!swinging){
+								degree = 0;
+								left = true;
+								swinging = true;	
+							} 
+								counter = 0;
+								alphaSwing = .6f;
+						} else{
+							if(alphaText>0f)alphaText-=0.1f;
+							mouseOverTime = 0;
+						}
+						
+						if(swinging){
+							if(left){
+								degree+=velDegrees[counter];
+								if(degree>mathDegrees[counter]){
+									counter++;
+									left = false;
+								}
+							}else{
+								degree-=velDegrees[counter];
+								if(degree<-mathDegrees[counter]){
+									counter++;
+									left = true;
+								}
+							}
+							if(counter>mathDegrees.length-1){
+								swinging = false;
+								degree = 0;
+							}
+						}	
+					} else {
 						mouseOver = true;
-						mouseOverTime++;
-						if(alphaText<1f)alphaText+=0.1f;
-						if(!swinging){
-							degree = 0;
-							left = true;
-							swinging = true;	
-						} 
+							mouseOverTime++;
+							if(alphaText<1f)alphaText+=0.1f;
+							if(!swinging){
+								degree = 0;
+								left = true;
+								swinging = true;	
+							} 
 							counter = 0;
 							alphaSwing = .6f;
-					} else{
-						if(alphaText>0f)alphaText-=0.1f;
-						mouseOverTime = 0;
+							if(swinging){
+							if(left){
+								degree+=velDegrees[counter];
+								if(degree>mathDegrees[counter]){
+									counter++;
+									left = false;
+								}
+							}else{
+								degree-=velDegrees[counter];
+								if(degree<-mathDegrees[counter]){
+									counter++;
+									left = true;
+								}
+							}
+							if(counter>mathDegrees.length-1){
+								swinging = false;
+								degree = 0;
+							}
+						}
 					}
 					
-					if(swinging){
-						if(left){
-							degree+=velDegrees[counter];
-							if(degree>mathDegrees[counter]){
-								counter++;
-								left = false;
-							}
-						}else{
-							degree-=velDegrees[counter];
-							if(degree<-mathDegrees[counter]){
-								counter++;
-								left = true;
-							}
-						}
-						if(counter>mathDegrees.length-1){
-							swinging = false;
-							degree = 0;
-						}
-					}
 				
 				timeToUpdate = updateTime;
 				}
@@ -199,7 +240,8 @@ public class Item extends Entity {
 				}
 				g.drawBitmapStringStroke(""+amount,x,y,1,new float[]{.6f,1f,.6f,1f},new float[]{0f,0f,0f,1f});				
 			} else{
-				g.drawImageRotateHueSize(texture,x,y,degree, new float[]{.2f,.2f,.2f,.8f}, new float[]{1.0f,1.0aaaaaaaaaaaaaf});
+				g.drawImageRotateHueSize(texture,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1],degree, new float[]{1f,alphaSwing,alphaSwing,alpha}, new float[]{1.3f,1.3f});
+				g.drawImageRotateHueSize(texture,x,y,degreeSet, new float[]{.2f,.2f,.2f,.8f}, new float[]{1.0f,1.0f});
 			}
 
 		}

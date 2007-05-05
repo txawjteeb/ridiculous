@@ -122,6 +122,13 @@ public class QuestLog{
 							swingBookAlpha=1f;
 						}
 						else {
+							if(igs.inventory.currentItem!=-1) {
+								for(int i = 0;i<igs.inventory.items.size();i++){
+									Item item = igs.inventory.items.get(i);
+									item.selected = false;
+								}
+								 igs.inventory.currentItem =-1;
+							}
 							swingBookAlpha = 0f;
 							leftBook=true;
 							degreeBook = 0;

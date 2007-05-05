@@ -655,5 +655,18 @@
 			</fileitem>
 		</include>
 	</files>
-	<tasks/>
+	<tasks>
+		<todotaskitem>
+			<description>TODO make sure fix this</description>
+			<filepath>src\org\cart\igd\gui\InGameGUI.java</filepath>
+			<line>143</line>
+			<timestamp>1178313761</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO also make items pickable</description>
+			<filepath>src\org\cart\igd\gui\InGameGUI.java</filepath>
+			<line>308</line>
+			<timestamp>1178313761</timestamp>
+		</todotaskitem>
+	</tasks>
 </project>
