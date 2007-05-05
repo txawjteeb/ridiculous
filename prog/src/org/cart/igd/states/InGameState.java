@@ -112,13 +112,14 @@ public class InGameState extends GameState
 		bush = new Bush( new Vector3f(0,0,0), 20f, treeModel,this);	
 		
 		/* create and add test guard */
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,player,2f));
+		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,this,2f));
 		
 		/* create paths for the guard to follow*/
-		//((Guard)entities.get(0)).path.add(new GuardFlag(5,0,5));
-		//((Guard)entities.get(0)).path.add(new GuardFlag(-5,0,-5));
-		//((Guard)entities.get(0)).path.add(new GuardFlag(-5,0,5));
-		//((Guard)entities.get(0)).path.add(new GuardFlag(5,0,-5));
+		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,10f),1f,1f));
+		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(-10f,0f,10f),1f,1f));
+		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(-10,0f,-10f),1f,1f));
+		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
+		
 		
 		/* add collectable object to the map */
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
