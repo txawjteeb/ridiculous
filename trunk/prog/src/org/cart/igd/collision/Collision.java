@@ -18,4 +18,17 @@ public class Collision
 		
 		return v;
 	}
+	
+	public static boolean stsXZ(Vector3f A, float rA, Vector3f B, float rB)
+	{
+		float xDiff = (A.x - B.x);
+		float zDiff = (A.z - B.z);
+		
+		float dist = (float)Math.sqrt( (xDiff*xDiff)+(zDiff*zDiff) );
+		
+		if(dist > rA+rB){
+			return true;
+		}
+		return false;
+	}
 }
