@@ -14,6 +14,7 @@ import org.cart.igd.input.*;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.states.GameState;
 import org.cart.igd.game.*;
+import java.util.ArrayList;
 
 import java.awt.event.*;
 
@@ -35,6 +36,8 @@ public class InGameGUI extends GUI
 	private Texture texAnimalQuestLogFree[] = new Texture[10];
 	private Texture texQuestLogCage;
 	private Texture texQuestLogAnimalImages[] = new Texture[12];
+	private Texture texAnimalCursors[] = new Texture[10];
+	private Texture texPaw[] = new Texture[10];
 
 	/* button containers */
 	private UIWindow hudBottom;// quest log and item buttons
@@ -117,13 +120,12 @@ public class InGameGUI extends GUI
 	public void render(GLGraphics g)
 	{
 		/* PICK MODELS*/
-		ph.pickModels();
-		
+		if(Inventory.canPick)ph.pickModels();
 		g.glgBegin();
-
-		if (selectedButton != null) {
-			selectedButton.draw(g);
-		}
+		
+	//	if (selectedButton != null) {
+	//		selectedButton.draw(g);
+	//	}
 		// g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
 		// g.drawBitmapString("Button", 3, 3);
 		// g.drawImage(texAnimalButton, 200,200);
@@ -137,18 +139,66 @@ public class InGameGUI extends GUI
 					Animal a = ((Animal)e);
 					if(  a.getState() == Animal.SAVED_BUSH )
 					{
-						btBushAnimals[a.animalId].draw(g);
+					//	btBushAnimals[a.animalId].draw(g);
 					} //TODO make sure fix this
 				}
 			}
 		}
 		
-		hudLeft.draw(g);
+		//if((x,y,45,Kernel.userInput.mousePress[0],Kernel.userInput.mousePress[1]))
+		if((Kernel.userInput.isRoundButtonPressed(900,50,45,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1]))){
+			g.drawImageRotateHueSize(texPaw[0], 850,0,0,new float[]{1f,.4f,.4f,1f},new float[]{1.1f,1.1f});
+		} else{
+			g.drawImage(texPaw[0], 855,5);
+		}
+		if((Kernel.userInput.isRoundButtonPressed(900,50,45,Kernel.userInput.mousePress[0],Kernel.userInput.mousePress[1]))){
+			igs.inventory.setCurrentCursor(Inventory.FLAMINGO);
+			igs.inventory.PSYCH_UNNECESSARY_CLICKS++;
+			Kernel.userInput.mousePress[0] = -100;
+			Kernel.userInput.mousePress[1] = -100;
+		}
 		
-		hudBottom.updateAndDraw(g);
+		for(int i = 0;i<igs.inventory.animals.size();i++){
+			Animal animal = igs.inventory.animals.get(i);
+			if(i == 0){
+				if((Kernel.userInput.isRoundButtonPressed(830,100,32,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1]))){
+				g.drawImageRotateHueSize(texPaw[animal.animalId],793,63,0,new float[]{1f,.4f,.4f,1f},new float[]{1.1f,1.1f});
+				} else{
+					g.drawImage(texPaw[animal.animalId], 798,68);
+				}
+				if((Kernel.userInput.isRoundButtonPressed(830,100,32,Kernel.userInput.mousePress[0],Kernel.userInput.mousePress[1]))){
+					igs.inventory.setCurrentCursor(animal.animalId);
+				}
+			} else if(i==1){
+				if((Kernel.userInput.isRoundButtonPressed(900,140,32,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1]))){
+				g.drawImageRotateHueSize(texPaw[animal.animalId],863,103,0,new float[]{1f,.4f,.4f,1f},new float[]{1.1f,1.1f});
+				} else{
+					g.drawImage(texPaw[animal.animalId], 868,108);
+				}
+				if((Kernel.userInput.isRoundButtonPressed(900,140,32,Kernel.userInput.mousePress[0],Kernel.userInput.mousePress[1]))){
+					igs.inventory.setCurrentCursor(animal.animalId);
+				}
+			} else if(i == 2){
+				if((Kernel.userInput.isRoundButtonPressed(970,100,32,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1]))){
+				g.drawImageRotateHueSize(texPaw[animal.animalId],933,63,0,new float[]{1f,.4f,.4f,1f},new float[]{1.1f,1.1f});
+				} else{
+					g.drawImage(texPaw[animal.animalId], 938,68);
+				}
+				if((Kernel.userInput.isRoundButtonPressed(970,100,32,Kernel.userInput.mousePress[0],Kernel.userInput.mousePress[1]))){
+					igs.inventory.setCurrentCursor(animal.animalId);
+				}
+			}
+			
+		}
+		
+	//	g.drawImageRotateHueSize(questLogAnimals[id],x-20,y-20,degree+degreeBook, new float[]{1f,1f,1f,swingBookAlpha}, new float[]{1.0f,1.0f});
+				
+	//	hudLeft.draw(g);
+		
+		//hudBottom.updateAndDraw(g);
 
-		hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
-		hudGroup.updateAndDraw(g);
+	//	hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
+	//	hudGroup.updateAndDraw(g);
 	
 		/* draw Items that are picked up from the Items arraylist in IGS */
 		for(int i = 0;i<((InGameState)gameState).inventory.items.size();i++){
@@ -164,7 +214,7 @@ public class InGameGUI extends GUI
 		
 		/* drawCursor */
 		if(igs.inventory.currentItem==-1){
-			g.drawImage(GLGraphics.Cursor, 
+			g.drawImage(texAnimalCursors[igs.inventory.currentCursor], 
 					input.mousePos[0],input.mousePos[1],
 					GLGraphics.Cursor.imageWidth, GLGraphics.Cursor.imageHeight,
 					0, rgbaCursor, new float[] {1f,1f} );
@@ -175,7 +225,30 @@ public class InGameGUI extends GUI
 
 	/** updates gui, called by Renderer thread*/
 	public void update(long elapsedTime)
-	{
+	{	  
+		
+	  
+	//	System.out.println("PSYCH_FIRST_ANIMAL_TALKED_TO "+igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO);
+	//	System.out.println("PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER "+igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER);
+	//	System.out.println("PSYCH_FOUND_HIDDEN_POPPERS "+igs.inventory.PSYCH_FOUND_HIDDEN_POPPERS);
+	//	System.out.println("PSYCH_FOUND_FAKE_SOLUTION "+igs.inventory.PSYCH_FOUND_FAKE_SOLUTION);
+	//	System.out.println("PSYCH_UNNECESSARY_CLICKS "+igs.inventory.PSYCH_UNNECESSARY_CLICKS);
+	//	System.out.println("PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP "+igs.inventory.PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP);
+	//	System.out.println("PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP "+igs.inventory.PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP);
+	//	System.out.println("PSYCH_FOOD_WATER_AFFINITY "+igs.inventory.PSYCH_FOOD_WATER_AFFINITY);
+	//	System.out.println("PSYCH_AMOUNT_OF_ITEMS_COLLECTED "+igs.inventory.PSYCH_AMOUNT_OF_ITEMS_COLLECTED);
+	//	System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE);
+	//	System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO);
+		
+		System.out.println("PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN);
+		System.out.println("PSYCH_PREFERABLE_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_PREFERABLE_QUADRANT_OF_SCREEN);
+		System.out.println("PSYCH_TOTAL_CLICKS "+ igs.inventory.PSYCH_TOTAL_CLICKS[0]+ " " + igs.inventory.PSYCH_TOTAL_CLICKS[1] + " " + igs.inventory.PSYCH_TOTAL_CLICKS[2] + " " +igs.inventory.PSYCH_TOTAL_CLICKS[3]);
+		
+		System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
+		System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
+			
+		
+
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
 		{
@@ -222,7 +295,7 @@ public class InGameGUI extends GUI
 					btBushAnimals[a.animalId].setAvailable(true);
 				}
 				if(a.state == Animal.SAVED_PARTY){
-					btBushAnimals[a.animalId].setAvailable(false);//already in group
+					btBushAnimals[a.animalId].setAvailable(true);//already in group
 				}
 			}
 			
@@ -231,27 +304,19 @@ public class InGameGUI extends GUI
 		if(igs.currentGuiState != 1){
 			pick();
 		}
-	}
-
-	/** handle input, called by the InputHandler thread*/
-	public void handleInput(long elapsedTime) {
-		if(Kernel.userInput.keys[KeyEvent.VK_TAB]){
-			((InGameState)gameState).changeGuiState(2);
-		}
 		
 		boolean animalPickedUp = false;
-
-		/* check for click on the gui elements once */
 		if (mouseSelect.isActive()) {
 			// check for bottom hud buttons
-			for (int i = 0; i < hudBottom.components.size(); i++) {
+		/*	for (int i = 0; i < hudBottom.components.size(); i++) {
 				if(input.isSquareButtonPressed(hudBottom.components.get(i)))
 				{
 					hudBottom.components.get(i).activate();// triger GameAction										// with the button
 				}
 			}
+			*/
 			// check for left bud buttons except for bush
-			for (int i = 1; i < hudLeft.components.size(); i++) {
+		/*	for (int i = 1; i < hudLeft.components.size(); i++) {
 				if (input.isSquareButtonPressed(hudLeft.components.get(i))) 
 				{
 					if( ((UIButton)hudLeft.components.get(i)).enabled ){
@@ -266,15 +331,15 @@ public class InGameGUI extends GUI
 						
 				}
 			}
-
+*/
 			/* flamingo select */
-			if (input.isSquareButtonPressed(hudGroup.components.get(0)))
-			{
-				textList.addText("flamingo selected");
-			}
+			//if (input.isSquareButtonPressed(hudGroup.components.get(0)))
+		//	{
+		//		textList.addText("flamingo selected");
+		//	}
 			
 			/* check for selected animal dropoff*/
-			for (int iG = 1; iG < hudGroup.components.size(); iG++) {
+		/*	for (int iG = 1; iG < hudGroup.components.size(); iG++) {
 				if (input.isSquareButtonPressed(hudGroup.components.get(iG)))
 				{
 					if (selectedButton != null) {
@@ -286,14 +351,14 @@ public class InGameGUI extends GUI
 						textList.addText("animal added to group");
 					}
 					/* select group animal */
-					else if (!animalPickedUp) {
-						hudGroup.components.get(iG).activate();
+				//	else if (!animalPickedUp) {
+				//		hudGroup.components.get(iG).activate();
 						//hudGroup.components.get(iG)
-						textList.addText("action id: "+hudGroup.components.get(iG).
-								getAction().getId());
-					}
-				}
-			}
+				//		textList.addText("action id: "+hudGroup.components.get(iG).
+				//				getAction().getId());
+			//		}
+		//		}
+		//	}
 			
 			/* make sure the button is not still attached when its not dropped 
 			 * off at a proper location in the paw button */
@@ -315,9 +380,36 @@ public class InGameGUI extends GUI
 				if(igs.inventory.currentItem==-1){
 					float xDiff = Math.abs(igs.player.position.x - a.position.x);
 					float zDiff = Math.abs(igs.player.position.z - a.position.z);
-					if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
-						((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
-						igs.changeGuiState(1);
+					if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius ){
+						
+						//if(a.talkable()&&igs.inventory.currentCursor==Inventory.FLAMINGO){
+						if(a.talkable()){
+							if(igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO==0){
+								igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO=a.animalId;
+								igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER=(a.name.substring(0,1));
+							}
+							((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
+							igs.changeGuiState(1);
+						} else {
+							if(a.state == Inventory.SAVED_IN_BUSH&&igs.inventory.currentCursor!=0){
+								ArrayList<Animal> tempAnimals = new ArrayList<Animal>();
+								tempAnimals.add(igs.inventory.animals.get(0));
+								tempAnimals.add(igs.inventory.animals.get(1));
+								tempAnimals.add(igs.inventory.animals.get(2));
+								igs.inventory.animals.clear();
+								for(int i = 0;i<tempAnimals.size();i++){
+									Animal b = tempAnimals.get(i);
+									if(b.animalId==igs.inventory.currentCursor){
+										b.state = Inventory.SAVED_IN_BUSH;
+										igs.inventory.animals.add(a);
+										a.state = Inventory.SAVED_IN_PARTY;
+										igs.inventory.currentCursor = a.animalId;
+									} else{
+										igs.inventory.animals.add(b);
+									}
+								}
+							}
+						}
 					}	
 				} else {
 					float xDiff = Math.abs(igs.player.position.x - a.position.x);
@@ -325,6 +417,7 @@ public class InGameGUI extends GUI
 					if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
 						if(a.state == Inventory.WAITING_FOR_ITEM&&a.itemWanted == igs.inventory.currentItem){
 							a.state = Inventory.JUST_GAVE_ITEM;
+							igs.giveItem.play();
 							((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
 							igs.changeGuiState(1);
 							boolean found = false;
@@ -352,6 +445,7 @@ public class InGameGUI extends GUI
 			}
 			if(picked && e instanceof TerrainEntity){
 				TerrainEntity t = ((TerrainEntity)e);
+				if(igs.inventory.currentItem==-1)t.save();
 				System.out.println("terrain entity: " + t.terrainId);
 				picked = false;
 			}
@@ -360,17 +454,30 @@ public class InGameGUI extends GUI
 				pickedId = -1;
 		} // end if(mouseSelect.isActive())	
 		
+	}
+
+	/** handle input, called by the InputHandler thread*/
+	public void handleInput(long elapsedTime) {
+		if(Kernel.userInput.keys[KeyEvent.VK_TAB]){
+			((InGameState)gameState).changeGuiState(2);
+		}
+		
+		boolean animalPickedUp = false;
+
+		/* check for click on the gui elements once */
+		
+		
 		
 		/* update the hud buttons so they rotate */
-		for (int i = 0; i < hudLeft.components.size(); i++) {
-			((UIButton)hudLeft.components.get(i)).update(input, elapsedTime);
-		}
+	//	for (int i = 0; i < hudLeft.components.size(); i++) {
+	//		((UIButton)hudLeft.components.get(i)).update(input, elapsedTime);
+	//	}
 		
 		// move the selected button
-		if (selectedButton != null) {
-			selectedButton.setXY(input.mousePos[0] - 32,
-				input.mousePos[1] - 32);
-		}
+	///	if (selectedButton != null) {
+		///	selectedButton.setXY(input.mousePos[0] - 32,
+			//	input.mousePos[1] - 32);
+	//	}
 		
 		/** camera mouse rotation */
 
@@ -392,6 +499,25 @@ public class InGameGUI extends GUI
 	public void loadImages()
 	{
 		
+		
+		for(int i = 0;i<texPaw.length;i++){
+			texPaw[i] = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/paw" + i + ".png");
+		}
+
+		
+		
+		
+		
+		
+		
+		
+		
+			
+		for(int i = 0;i<texAnimalCursors.length;i++){
+			texAnimalCursors[i] = Kernel.display.getRenderer().loadImage(
+			"data/images/gui/cursors/" + i + ".png");
+		}
 
 		for(int i = 0;i<texQuestLogAnimalImages.length;i++){
 			texQuestLogAnimalImages[i] = Kernel.display.getRenderer().loadImage(

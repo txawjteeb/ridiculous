@@ -13,7 +13,7 @@ import org.cart.igd.game.Animal;
 import org.cart.igd.gui.GUI;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.GameState;
-
+import org.cart.igd.game.Inventory;
 import com.sun.opengl.util.BufferUtil;
 
 
@@ -25,7 +25,7 @@ public class PickingHandler {
 	static final int BUFSIZE = 512;
 	IntBuffer selectBuffer;
 	int numHits;
-	boolean inSelectionMode;
+	public boolean inSelectionMode;
 	
 	int yCursor, xCursor;
 	ArrayList<Entity> entities;
@@ -46,6 +46,7 @@ public class PickingHandler {
 		startPicking();
 		drawEntities();
 		endPicking();
+		Inventory.canPick = false;
 	}
 	
 	private void startPicking()

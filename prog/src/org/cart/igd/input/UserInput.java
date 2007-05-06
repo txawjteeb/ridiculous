@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 import org.cart.igd.Display;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.gl2d.UIComponent;
+import org.cart.igd.game.Inventory;
 
 
 public class UserInput implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener
@@ -54,6 +55,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	/** 
 	 * test whether a circular button is pressed 
 	 **/
+	 
 	public boolean isRoundButtonPressed(int xb, int yb, int br,int xm, int ym)
 	{
 		if( br > Math.sqrt( ((double)((xm-xb)*(xm-xb))+ ((ym-yb)*(ym-yb)))) )
@@ -152,6 +154,8 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	
 	public void mousePressed(MouseEvent e)
 	{
+		
+		Inventory.canPick = true;
 		if(mouseActions[e.getButton()]!= null){
 			mouseActions[e.getButton()].activate();
 		}

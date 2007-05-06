@@ -31,7 +31,7 @@ public class QuestLog{
 	public int x;
 	public int y;
 
-	long timeToUpdate = 0;
+	long timeToUpdate = 20;
 	long updateTime = 0;
 
 
@@ -114,6 +114,9 @@ public class QuestLog{
 						Kernel.userInput.mousePress[0] = -100;
 						Kernel.userInput.mousePress[1] = -100;
 						if(open){
+							//igs.backgroundMusic.loop(1f,.5f);
+							//igs.questLogMusic.stop();
+							igs.closeQuestLog.play();
 							open=false;
 							swingingBook = true;
 							degreeBook = 0;
@@ -129,6 +132,9 @@ public class QuestLog{
 								}
 								 igs.inventory.currentItem =-1;
 							}
+							//igs.backgroundMusic.stop();
+							//igs.questLogMusic.loop(1f,.5f);
+							igs.openQuestLog.play();
 							swingBookAlpha = 0f;
 							leftBook=true;
 							degreeBook = 0;
@@ -144,7 +150,7 @@ public class QuestLog{
 				
 			timeToUpdate = updateTime;
 			for(int i = 0;i<quests.size();i++){
-					quests.get(i).update();
+					quests.get(i).update(igs);
 			}
 		}
 		
@@ -184,40 +190,6 @@ public class QuestLog{
 	}
 
 
-/*
-	public void display(GLGraphics g, Texture texture1, Texture texture2,Texture texture3, Texture texture4, Texture[] texture5, Texture[] texture6, Texture texture7){
-		if(!open){
-				if(mouseOver){
-						g.drawImageRotateHueSize(texture1,x-13,y-13,degree, new float[]{1f,1f,alphaSwing,alpha}, new float[]{1.2f,1.2f});
-				} else {	
-						alphaSwing +=.05f;
-						g.drawImageRotateHue(texture1,x,y,degree,new float[]{1f,1f,alphaSwing,alpha});
-				}
-				g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
-			if(swingingBook){
-				g.drawImageRotateHue(texture2,0,0,degreeBook,new float[]{1f,1f,1f,swingBookAlpha});
-			}
-		} else{
-			g.drawImageRotateHue(texture2,0,0,degreeBook,new float[]{1f,1f,1f,swingBookAlpha});
-				for(int i = 0;i<quests.size();i++){
-					quests.get(i).draw(g,270,570-i*40,texture3,texture4,texture5,swingBookAlpha,texture6,texture7);
-				}
-			if(mouseOver){
-						g.drawImageRotateHueSize(texture1,x-13,y-13,degree, new float[]{1f,1f,alphaSwing,alpha}, new float[]{1.2f,1.2f});
-				} else {	
-						alphaSwing +=.05f;
-						g.drawImageRotateHue(texture1,x,y,degree,new float[]{1f,1f,alphaSwing,alpha});
-				}
-				g.drawBitmapStringStroke(name,x,y+64,1,new float[]{1f,1f,.6f,alphaText},new float[]{0f,0f,0f,alphaText});
-				
-		}
-		for(int i = 0;i<questPopUps.size();i++){
-			questPopUps.get(i).draw(g);
-		}
-		
-	
-	}
-	*/
 	
 	public void display(GLGraphics g, Texture questLogIco, Texture questLog,Texture[] questLogAnimals){
 		if(!open){
@@ -363,49 +335,7 @@ public class QuestLog{
 				}
 			}
 		}
-		/*
-		 Have the Title move right, and left with algs
-		 wiggle book
-		 alpha text when switch
-		 wiggle book on swithc
-		 */
-		 /*
-		public void draw(GLGraphics g, int x, int y,Texture texture3, Texture texture4,Texture[] texture5,float swingBookAlpha,Texture[] texture6, Texture texture7){
-			g.drawImageHue(texture5[id],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});//little anial icon
-			g.drawImageHue(texture5[10],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});//littl border
-			if(mouseOverTitle){
-					g.drawBitmapStringStrokeSize(title,x,y+3,1,new float[]{1f,.5f,.5f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.2f,1.2f},14);
-				} else {
-					g.drawBitmapStringStroke(title,x,y+3,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-				}
-				
-				if(selected){
-					g.drawBitmapStringStrokeSize(subtitle,x+400,600,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
-					for(int j = 0;j<brokenInformation.length;j++){
-						int adder = 0;
-						if(j==0)adder = 30;
-							g.drawBitmapStringStroke(brokenInformation[j],x+250+adder,580-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-					}
-					if(done){
-						g.drawBitmapStringStrokeSize("Finished",x+350,110,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
-					} else {
-						g.drawBitmapStringStrokeSize("Unfinished",x+350,110,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
-					}
-					
-					if(!done){
-						g.drawImageRotate(texture6[id],x+300,y-180,3);
-						g.drawImageRotate(texture7,x+300,y-180,3);
-					} else {
-						g.drawImageRotate(texture6[id],x+300,y-180,3);
-					}
-				}
-				if(done){
-						g.drawImage(texture3,x-40,y-5);
-				} else {
-						g.drawImage(texture4,x-40,y-5);
-			}
-		}
-		*/
+
 		
 		public void draw(GLGraphics g, Texture[] questLogAnimals,int degreeBook, float swingBookAlpha){
 			if(mouseOverTitle){
@@ -433,63 +363,36 @@ public class QuestLog{
 					}
 			}
 			
-		
-			
-			
-		/*	g.drawImageHue(texture5[id],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});//little anial icon
-			g.drawImageHue(texture5[10],x-80,y-5,new float[]{1f,1f,1f,swingBookAlpha});//littl border
-			if(mouseOverTitle){
-					g.drawBitmapStringStrokeSize(title,x,y+3,1,new float[]{1f,.5f,.5f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.2f,1.2f},14);
-				} else {
-					g.drawBitmapStringStroke(title,x,y+3,1,new float[]{1f,.6f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-				}
-				
-				if(selected){
-					g.drawBitmapStringStrokeSize(subtitle,x+400,600,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{1.4f,1.4f},14);
-					for(int j = 0;j<brokenInformation.length;j++){
-						int adder = 0;
-						if(j==0)adder = 30;
-							g.drawBitmapStringStroke(brokenInformation[j],x+250+adder,580-j*20,1,new float[]{1f,1f,.6f,alpha},new float[]{0f,0f,0f,alpha});
-					}
-					if(done){
-						g.drawBitmapStringStrokeSize("Finished",x+350,110,1,new float[]{.3f,1f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
-					} else {
-						g.drawBitmapStringStrokeSize("Unfinished",x+350,110,1,new float[]{1f,.3f,.3f,alpha},new float[]{0f,0f,0f,alpha}, new float[]{2.0f,2.0f},20);
-					}
-					
-					if(!done){
-						g.drawImageRotate(texture6[id],x+300,y-180,3);
-						g.drawImageRotate(texture7,x+300,y-180,3);
-					} else {
-						g.drawImageRotate(texture6[id],x+300,y-180,3);
-					}
-				}
-				if(done){
-						g.drawImage(texture3,x-40,y-5);
-				} else {
-						g.drawImage(texture4,x-40,y-5);
-			}
-			*/
+
 		}
 		
 		
 		
-		public void update(){
-			if(mouseOverTitle){
-				if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+128&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+128){
+		public void update(InGameState igs){
+			if(igs.questlog.open){
+				if(mouseOverTitle){
+					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+128&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+128){
+						mouseOverTitle = true;
+					} else mouseOverTitle = false;
+					if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+128&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+128&&!selected){
+						for(int i = 0;i<igs.questlog.quests.size();i++){
+							igs.questlog.quests.get(i).selected = false;
+						}
+						Kernel.userInput.mousePress[0] = -100;
+						Kernel.userInput.mousePress[1] = -100;
+						selected = true;
+						igs.turnPage[(new Random()).nextInt(4)].play();
+					}
+				} else {
+					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+100&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+100){
 					mouseOverTitle = true;
-				} else mouseOverTitle = false;
-				if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+128&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+128){
-					selected = true;
-				} else selected = false;
-			} else {
-				if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+100&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+100){
-				mouseOverTitle = true;
-				} else mouseOverTitle = false;
-				if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+100&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+100){
-					selected = true;
-				} else selected = false;
+					} else mouseOverTitle = false;
+					if(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+100&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+100){
+						selected = true;
+					}
+				}	
 			}
+			
 		}
 	}
 	

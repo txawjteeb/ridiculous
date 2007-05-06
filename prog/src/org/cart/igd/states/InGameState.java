@@ -10,6 +10,8 @@ import java.util.Iterator;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
+import java.util.Random;
+
 import org.cart.igd.Camera;
 import org.cart.igd.Renderer;
 import org.cart.igd.core.Kernel;
@@ -27,6 +29,7 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
+import org.cart.igd.sound.*;
 
 public class InGameState extends GameState
 {	
@@ -34,8 +37,9 @@ public class InGameState extends GameState
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
 	public ArrayList<Item> items = new ArrayList<Item>();
-	//public ArrayList<Animal> animals = new ArrayList<Animal>();
 	public ArrayList<Entity> interactiveEntities = new ArrayList<Entity>();	
+	public ArrayList<UnnecessaryExplore> unnecessaryExplores = new ArrayList<UnnecessaryExplore>();	
+
 	
 	public Entity player;
 	
@@ -43,7 +47,9 @@ public class InGameState extends GameState
 	public int previousCameraZoom;
 	private OBJModel playerSprite;
 	private OBJModel partySnapper;
+	private OBJModel bushModel;
 	private OBJModel zoopaste;
+	private OBJModel explorationBox,waterAffinity,foodAffinity;
 	
 	private MaxParser maxParser;
 	private Model test3ds;
@@ -76,6 +82,8 @@ public class InGameState extends GameState
 	
 	GLGraphics glg;
 
+	public Sound backgroundMusic,throwPopper,popPopper,giveItem,openQuestLog, closeQuestLog,questLogMusic;
+	public Sound turnPage[] = new Sound[4];
 	
 	public InGameState(GL gl)
 	{
@@ -83,17 +91,33 @@ public class InGameState extends GameState
 		try
 		{
 			maxParser = new MaxParser();
+			
 			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
 			guard3ds = new Model(maxParser.getObjectMesh("data/models/guard_aw.3DS"));
-		} catch(IOException e) {
+			backgroundMusic = new Sound("data/sounds/music/zoo_music.ogg");
+			questLogMusic = new Sound("data/sounds/music/questlog_music.ogg");
+			throwPopper = new Sound("data/sounds/effects/throw_popper.ogg");
+			popPopper = new Sound("data/sounds/effects/pop_popper.ogg");
+			giveItem = new Sound("data/sounds/effects/give_item.ogg");
+			openQuestLog = new Sound("data/sounds/effects/open_quest_log.ogg");
+			closeQuestLog = new Sound("data/sounds/effects/close_quest_log.ogg");
+			for(int i = 0;i<turnPage.length;i++){
+				turnPage[i] = new Sound("data/sounds/effects/turn_page-" + i + ".ogg");
+			}
+			
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		bushModel	= new OBJModel(gl,"data/models/bush");
 		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
 		OBJModel guard = new OBJModel(gl, "data/models/guard_vm",1.5f,false);
+		explorationBox = new OBJModel(gl,"data/models/exploration_box",5f,false);
+		waterAffinity = new OBJModel(gl,"data/models/water_affinity",5f,false);
+		foodAffinity = new OBJModel(gl,"data/models/food_Affinity",5f,false);
+		
 		
 		/* init container/gamelocic classes*/
 		terrain = new Terrain();
@@ -102,14 +126,14 @@ public class InGameState extends GameState
 		questlog = new QuestLog("Quest Log",20,10);
 		questlog.load();
 
-		inventory = new Inventory();
+		inventory = new Inventory(this);
 		
 		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		
 		/* special entity where animals are hidden after rescue place rescued 
 		 * animals in a position relative to this */
-		bush = new Bush( new Vector3f(0,0,0), 20f, treeModel,this);	
+		bush = new Bush( new Vector3f(0,0,0), 20f, bushModel,this);	
 		
 		/* create and add test guard */
 		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,this,2f));
@@ -122,6 +146,24 @@ public class InGameState extends GameState
 		
 		
 		/* add collectable object to the map */
+		
+		
+		/*
+		 public UnnecessaryExplore(Vector3f pos, float fD, float bsr, OBJModel model,InGameState igs,boolean display){
+		super(pos, fD, bsr, model);
+		this.display = display;
+	}
+		 */
+		
+		unnecessaryExplores.add(new UnnecessaryExplore("Nothing",new Vector3f(50f,0f,50f),0f,10f,explorationBox,this,true));
+		unnecessaryExplores.add(new UnnecessaryExplore("Water",new Vector3f(-50f,0f,-50f),0f,10f,waterAffinity,this,true));
+		unnecessaryExplores.add(new UnnecessaryExplore("Food",new Vector3f(50f,0f,-50f),0f,10f,foodAffinity,this,true));	
+		unnecessaryExplores.add(new UnnecessaryExplore("Left",new Vector3f(0f,0f,-21f),0f,20f,foodAffinity,this,false));
+		unnecessaryExplores.add(new UnnecessaryExplore("Right",new Vector3f(0f,0f,21f),0f,20f,foodAffinity,this,false));
+		unnecessaryExplores.add(new UnnecessaryExplore("Up",new Vector3f(21f,0f,0f),0f,20f,foodAffinity,this,false));
+		unnecessaryExplores.add(new UnnecessaryExplore("Down",new Vector3f(-21f,0f,0f),0f,20f,foodAffinity,this,false));
+		
+		
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,0f),true,true));
@@ -149,6 +191,12 @@ public class InGameState extends GameState
 		items.add(new Item("Party Snapper",Inventory.POPPERS,50,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,60f),true,true));
+				
+				
+				
+		items.add(new Item("Party Snapper Hidden",Inventory.POPPERS,50,0f,1f,
+				partySnapper,
+				new Vector3f(-15f,0f,80f),true,true));
 /*
  	public static final int FLAMINGO = 0;
 	public static final int TURTLES = 1; 
@@ -164,46 +212,79 @@ public class InGameState extends GameState
 		/* add animals to the map */
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
 				new OBJModel(gl,"data/models/turtle", 4f,false), 
-				new Vector3f(10f,0f,-20f),this,0));
+				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-30f),this,0));
+				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
 				
 		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-40f),this,Inventory.DISGUISEGLASSES));
+				new Vector3f(10f,0f,-40f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
 		
 		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-50f),this,Inventory.MEDICATION));
+				new Vector3f(10f,0f,-50f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-60f),this,Inventory.ZOOPASTE));
+				new Vector3f(10f,0f,-60f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
 		
 		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
 				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
-				new Vector3f(10f,0f,-70f),this,Inventory.FISH));
+				new Vector3f(10f,0f,-70f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat", 4f,false), 
-				new Vector3f(10f,0f,-80f),this,Inventory.HOTDOG));
+				new Vector3f(10f,0f,-80f),this,Inventory.HOTDOG,new Vector3f(0f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-90f),this,Inventory.PADDLEBALL));
+				new Vector3f(10f,0f,-90f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
 				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
-				new Vector3f(10f,0f,-100f),this,0));
+				new Vector3f(10f,0f,-100f),this,0,new Vector3f(-10f,0f,-5f)));
 
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(-10f,10f,-10), 0f, 3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 10f,false) 
-				,10));
-		
+				new Vector3f(20f,0f,-20f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this));
+				
+				
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(30f,0f,-20f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this,true));
+				
+				
+						
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-30f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.PANDA,Inventory.TURTLES,this));
+				
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-40f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.KANGAROO,Inventory.TURTLES,this));
+				
+				
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-50f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.GIRAFFE,Inventory.TURTLES,this));
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-60f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.TIGER,new int[]{Inventory.GIRAFFE,Inventory.PANDA},this));
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-70f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.PENGUIN,Inventory.TIGER,this));
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-80f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.MEERKAT,new int[]{Inventory.GIRAFFE,Inventory.KANGAROO},this));
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-90f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.WOODPECKER,Inventory.MEERKAT,this));
+		interactiveEntities.add(new TerrainEntity(
+				new Vector3f(20f,0f,-100f), 0f, 3f,
+				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.ELEPHANT,new int[]{Inventory.WOODPECKER,Inventory.PENGUIN},this));
 		
 		mouseWheelScroll = new GameAction("zoom out", false);
 		
@@ -221,7 +302,7 @@ public class InGameState extends GameState
 		gui.add(new InGameGUI(this,gl,glu));
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
-		
+		backgroundMusic.loop(1f,.5f);
 		loaded = true;
 	}
 	
@@ -251,17 +332,27 @@ public class InGameState extends GameState
 		}
 	}
 	
+	public void updateUnnecessaryExplores(long elapsedTime){
+		for(int i = 0;i<unnecessaryExplores.size();i++){
+			UnnecessaryExplore unnecessaryExplore = unnecessaryExplores.get(i);
+			unnecessaryExplore.update(player.position,elapsedTime);
+		}
+	}
+	
+	
 	public void updateQuestLog(long elapsedTime){
 		questlog.update(this,elapsedTime);
 	}
 	 
 	public void update(long elapsedTime)
 	{
-		
+		inventory.update();
+		gui.get(currentGuiState).update(elapsedTime);
 
 		updateItems(elapsedTime);
 		updateInteractiveEntities(elapsedTime);
 		updateQuestLog(elapsedTime);
+		updateUnnecessaryExplores(elapsedTime);
 		
 		((Bush)bush).update(elapsedTime);
 		
@@ -285,7 +376,7 @@ public class InGameState extends GameState
 				playerState = 0;
 		}
 		
-		gui.get(currentGuiState).update(elapsedTime);
+		
 	}
 	
 	/** select differen gui subsets */
@@ -347,6 +438,14 @@ public class InGameState extends GameState
 			Item item = items.get(i);
 			item.display3d(gl);
 		}
+		
+		for(int i = 0;i<unnecessaryExplores.size();i++){
+			UnnecessaryExplore unnecessaryExplore = unnecessaryExplores.get(i);
+			unnecessaryExplore.display(gl);
+		}
+		
+		
+		
 		Renderer.info[4]="# items: "+items.size();
 		
 		/* render the world map and sky*/
@@ -360,11 +459,12 @@ public class InGameState extends GameState
 		for(int i = 0;i<inventory.items.size();i++){
 			Item item = inventory.items.get(i);
 			if(item.itemId ==8 && item.amount>0){
+				throwPopper.play((new Random()).nextFloat() + .5f,(new Random()).nextFloat() + .5f);
 				entities.add(new PartySnapper(
 					new Vector3f(player.position.x, player.position.y, player.position.z),
 					player.facingDirection, 
 					0f,
-					partySnapper)
+					partySnapper,this)
 				);
 				item.amount--;
 			}

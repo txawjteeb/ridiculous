@@ -38,6 +38,9 @@ public class Item extends Entity {
 	public boolean turn;
 	public boolean bounce;
 	
+	public boolean deselect = false;
+	public int deselectcounter = 0;
+	
 	boolean up = true;
 	float difference;
 	
@@ -45,6 +48,7 @@ public class Item extends Entity {
 	
 	long timeToUpdate = 0;
 	long updateTime = 30;
+	
 	
 	public Item(String name,int itemId, int amount,float fd, float bsr, OBJModel model, Vector3f location, boolean turn, boolean bounce){
 		super(location,fd,bsr, model);
@@ -82,11 +86,17 @@ public class Item extends Entity {
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
 			float zDiff = Math.abs(playerPosition.z - this.position.z);
 			if(xDiff < boundingSphereRadius && zDiff<boundingSphereRadius){
+				if(!(itemId==8&&igs.inventory.pickedUpPoppers))igs.inventory.PSYCH_AMOUNT_OF_ITEMS_COLLECTED++;
+				if(itemId==8) igs.inventory.pickedUpPoppers = true;
+				if(name.equals("Party Snapper Hidden")){
+					igs.inventory.PSYCH_FOUND_HIDDEN_POPPERS = 1;
+				}
 				boolean alreadyHasPoppers = false;
 				if(itemId ==8){
 					for(int i = 0;i<igs.inventory.items.size();i++){
 						Item item = igs.inventory.items.get(i);
 						if(item.itemId==8){
+							igs.inventory.PSYCH_WASTED_POPPERS+=item.amount;
 							item.amount =MAX_POPPERS;
 							alreadyHasPoppers = true;
 							break;
@@ -140,6 +150,16 @@ public class Item extends Entity {
 			timeToUpdate -= elapsedTime;
 			if(timeToUpdate <= 0)
 			{
+					if(deselect){
+						deselectcounter++;
+						if(deselectcounter>2){
+							deselect = false;
+							selected = false;
+							igs.inventory.setCurrentItem(-1);
+							deselectcounter=0;
+						}
+						
+					}
 					if(itemId != 8&&!igs.questlog.open && Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+64&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+64&& !selected){
 						if(igs.inventory.currentItem!=-1){
 							for(int i = 0;i<igs.inventory.items.size();i++){
@@ -150,7 +170,12 @@ public class Item extends Entity {
 						igs.inventory.setCurrentItem(itemId);
 						selected = true;
 						degreeSet = degree;
+					} else {
+						if(selected&&!(Kernel.userInput.mousePress[0]>x &&Kernel.userInput.mousePress[0]<x+64&&Kernel.userInput.mousePress[1]>y&&Kernel.userInput.mousePress[1]<y+64)){
+							deselect = true;
+						}
 					}
+					
 					mouseOver = false;
 					if(!selected){
 						if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+64&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+64){

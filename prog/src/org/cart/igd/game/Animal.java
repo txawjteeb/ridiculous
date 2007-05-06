@@ -47,17 +47,27 @@ public class Animal extends Entity{
 	public int state = 0;
 	private boolean Collide = false;
 	private InGameState igs;
+	private Vector3f bushLocation;
 	
-	public Animal(String name,int animalId,float fd, float bsr, OBJModel model, Vector3f location,InGameState igs, int itemWanted){
+	public Animal(String name,int animalId,float fd, float bsr, OBJModel model, Vector3f location,InGameState igs, int itemWanted, Vector3f bushLocation){
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.animalId = animalId;
 		this.igs = igs;	
 		this.itemWanted = itemWanted;
+		this.bushLocation = bushLocation;
 	}	
 		
+	public boolean talkable(){
+		if(state==SAVED_BUSH || state == SAVED_PARTY) return false;
+		return true;
+	}
+	
+	public void relocateToBush(){
+		position = bushLocation;
+		super.boundingSphereRadius =30f;
+	}
 	public void update(Vector3f playerPosition){
-
 		//System.out.println("Im " + animalId + "  My State is " + state);
 		/*if(state < 4){
 			float xDiff = Math.abs(playerPosition.x - this.position.x);
@@ -81,6 +91,6 @@ public class Animal extends Entity{
 	}
 	
 	public void display(GL gl){
-		if(state<5)super.render(gl);
+		if(state!=SAVED_PARTY)super.render(gl);
 	}
 }
