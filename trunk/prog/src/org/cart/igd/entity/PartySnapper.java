@@ -11,13 +11,17 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.entity.*;
 import org.cart.igd.models.obj.OBJModel;
+import org.cart.igd.states.*;
 
 public class PartySnapper extends Entity{
 		float gravitypull = -.2f;
+		InGameState igs;
 		
-		public PartySnapper (Vector3f pos, float fD, float bsr, OBJModel model){
+		public PartySnapper (Vector3f pos, float fD, float bsr, OBJModel model, InGameState igs){
+			
 			super(pos,fD,bsr, model);
-			//position.y+= new Random().nextFloat()*20;
+			this.igs = igs;
+
 		}
 	
 		public void draw(GL gl){
@@ -37,6 +41,9 @@ public class PartySnapper extends Entity{
 		
 				//position.x-=;
 				//position.z-=;
+			} else {
+				igs.popPopper.play((new Random()).nextFloat() + 1f,(new Random()).nextFloat() + 1f);
+				igs.entities.remove(this);
 			}
 		}
 		
