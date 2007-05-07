@@ -41,7 +41,7 @@ public class Inventory{
 	  ///
 	  public int PSYCH_FOOD_WATER_AFFINITY = 0; // 1 is food 2 is water
 	  ///
-	  public long PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP = 0;
+	  public int PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP = 0;
 	  public int PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP = 0;
 	  ///
 	  public int PSYCH_UNNECESSARY_CLICKS = 0;

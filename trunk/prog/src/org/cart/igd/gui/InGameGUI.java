@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 package org.cart.igd.gui;
 
 
@@ -119,33 +128,9 @@ public class InGameGUI extends GUI
 	/** renders gui, called by Renderer thread*/
 	public void render(GLGraphics g)
 	{
-		/* PICK MODELS*/
 		if(Inventory.canPick)ph.pickModels();
 		g.glgBegin();
-		
-	//	if (selectedButton != null) {
-	//		selectedButton.draw(g);
-	//	}
-		// g.drawImageHue(texUIButton, 0, 0, new float[] { 1f, 0f, 0f });
-		// g.drawBitmapString("Button", 3, 3);
-		// g.drawImage(texAnimalButton, 200,200);
-		
-		/* draw the animal selection, faded buttons for unavailable animals */
-		if(((InGameState)gameState).nearBush)
-		{
-			for( Entity e : igs.interactiveEntities )
-			{		
-				if(e instanceof Animal){
-					Animal a = ((Animal)e);
-					if(  a.getState() == Animal.SAVED_BUSH )
-					{
-						btBushAnimals[a.animalId].draw(g);
-					} //TODO make sure fix this
-				}
-			}
-		}
-		
-		//if((x,y,45,Kernel.userInput.mousePress[0],Kernel.userInput.mousePress[1]))
+
 		if((Kernel.userInput.isRoundButtonPressed(900,50,45,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1]))){
 			g.drawImageRotateHueSize(texPaw[0], 850,0,0,new float[]{1f,.4f,.4f,1f},new float[]{1.1f,1.1f});
 		} else{
@@ -191,15 +176,7 @@ public class InGameGUI extends GUI
 			
 		}
 		
-	//	g.drawImageRotateHueSize(questLogAnimals[id],x-20,y-20,degree+degreeBook, new float[]{1f,1f,1f,swingBookAlpha}, new float[]{1.0f,1.0f});
-				
-	//	hudLeft.draw(g);
-		
-		//hudBottom.updateAndDraw(g);
 
-	//	hudGroup.setX( (Kernel.display.getScreenWidth() - 200) );
-	//	hudGroup.updateAndDraw(g);
-	
 		/* draw Items that are picked up from the Items arraylist in IGS */
 		for(int i = 0;i<((InGameState)gameState).inventory.items.size();i++){
 			Item item = ((InGameState)gameState).inventory.items.get(i);
@@ -207,7 +184,7 @@ public class InGameGUI extends GUI
 		}
 		
 		
-		//igs.questlog.display(g,texQuestLogIco,texQuestLog, texQuestDone, texQuestNotDone,texAnimalIcoQuestLog,texAnimalQuestLogFree,texQuestLogCage);
+
 		igs.questlog.display(g,texQuestLogIco,texQuestLog,texQuestLogAnimalImages);
 	
 		textList.draw(g);
@@ -240,12 +217,12 @@ public class InGameGUI extends GUI
 	//	System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE);
 	//	System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO);
 		
-		System.out.println("PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN);
-		System.out.println("PSYCH_PREFERABLE_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_PREFERABLE_QUADRANT_OF_SCREEN);
-		System.out.println("PSYCH_TOTAL_CLICKS "+ igs.inventory.PSYCH_TOTAL_CLICKS[0]+ " " + igs.inventory.PSYCH_TOTAL_CLICKS[1] + " " + igs.inventory.PSYCH_TOTAL_CLICKS[2] + " " +igs.inventory.PSYCH_TOTAL_CLICKS[3]);
+		//System.out.println("PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN);
+		//System.out.println("PSYCH_PREFERABLE_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_PREFERABLE_QUADRANT_OF_SCREEN);
+	//	System.out.println("PSYCH_TOTAL_CLICKS "+ igs.inventory.PSYCH_TOTAL_CLICKS[0]+ " " + igs.inventory.PSYCH_TOTAL_CLICKS[1] + " " + igs.inventory.PSYCH_TOTAL_CLICKS[2] + " " +igs.inventory.PSYCH_TOTAL_CLICKS[3]);
 		
-		System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
-		System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
+	//	System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
+	//	System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
 			
 		
 
@@ -307,59 +284,7 @@ public class InGameGUI extends GUI
 		
 		boolean animalPickedUp = false;
 		if (mouseSelect.isActive()) {
-			// check for bottom hud buttons
-		/*	for (int i = 0; i < hudBottom.components.size(); i++) {
-				if(input.isSquareButtonPressed(hudBottom.components.get(i)))
-				{
-					hudBottom.components.get(i).activate();// triger GameAction										// with the button
-				}
-			}
-			*/
-			// check for left bud buttons except for bush
-		/*	for (int i = 1; i < hudLeft.components.size(); i++) {
-				if (input.isSquareButtonPressed(hudLeft.components.get(i))) 
-				{
-					if( ((UIButton)hudLeft.components.get(i)).enabled ){
-						animalPickedUp = true;
-						
-						selectedButton = new UIButton(
-							((UIButton) hudLeft.components.get(i)).getTexture(),
-							((UIButton) hudLeft.components.get(i)).getAction(),
-							Kernel.userInput.mousePos[0] - 32,
-							Kernel.userInput.mousePos[1] - 32, 64, 64);
-					}
-						
-				}
-			}
-*/
-			/* flamingo select */
-			//if (input.isSquareButtonPressed(hudGroup.components.get(0)))
-		//	{
-		//		textList.addText("flamingo selected");
-		//	}
-			
-			/* check for selected animal dropoff*/
-		/*	for (int iG = 1; iG < hudGroup.components.size(); iG++) {
-				if (input.isSquareButtonPressed(hudGroup.components.get(iG)))
-				{
-					if (selectedButton != null) {
-						(hudGroup.components.get(iG)).
-								setTexture( selectedButton.getTexture());
-						(hudGroup.components.get(iG))
-								.setAction(( selectedButton).getAction());
 
-						textList.addText("animal added to group");
-					}
-					/* select group animal */
-				//	else if (!animalPickedUp) {
-				//		hudGroup.components.get(iG).activate();
-						//hudGroup.components.get(iG)
-				//		textList.addText("action id: "+hudGroup.components.get(iG).
-				//				getAction().getId());
-			//		}
-		//		}
-		//	}
-			
 			/* make sure the button is not still attached when its not dropped 
 			 * off at a proper location in the paw button */
 			if (!animalPickedUp) {
@@ -391,22 +316,27 @@ public class InGameGUI extends GUI
 							((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
 							igs.changeGuiState(1);
 						} else {
-							if(a.state == Inventory.SAVED_IN_BUSH&&igs.inventory.currentCursor!=0){
-								ArrayList<Animal> tempAnimals = new ArrayList<Animal>();
-								tempAnimals.add(igs.inventory.animals.get(0));
-								tempAnimals.add(igs.inventory.animals.get(1));
-								tempAnimals.add(igs.inventory.animals.get(2));
-								igs.inventory.animals.clear();
-								for(int i = 0;i<tempAnimals.size();i++){
-									Animal b = tempAnimals.get(i);
-									if(b.animalId==igs.inventory.currentCursor){
-										b.state = Inventory.SAVED_IN_BUSH;
-										igs.inventory.animals.add(a);
-										a.state = Inventory.SAVED_IN_PARTY;
-										igs.inventory.currentCursor = a.animalId;
-									} else{
-										igs.inventory.animals.add(b);
-									}
+							if(a.state == Inventory.SAVED_IN_BUSH){
+								if(igs.inventory.animals.size()<3){
+									a.state = Inventory.SAVED_IN_PARTY;
+									igs.inventory.animals.add(a);
+								}else if(igs.inventory.currentCursor!=0){
+									ArrayList<Animal> tempAnimals = new ArrayList<Animal>();
+									tempAnimals.add(igs.inventory.animals.get(0));
+									tempAnimals.add(igs.inventory.animals.get(1));
+									tempAnimals.add(igs.inventory.animals.get(2));
+									igs.inventory.animals.clear();
+									for(int i = 0;i<tempAnimals.size();i++){
+										Animal b = tempAnimals.get(i);
+										if(b.animalId==igs.inventory.currentCursor){
+											b.state = Inventory.SAVED_IN_BUSH;
+											igs.inventory.animals.add(a);
+											a.state = Inventory.SAVED_IN_PARTY;
+											igs.inventory.currentCursor = a.animalId;
+										} else{
+											igs.inventory.animals.add(b);
+										}
+									}	
 								}
 							}
 						}
@@ -468,16 +398,7 @@ public class InGameGUI extends GUI
 		
 		
 		
-		/* update the hud buttons so they rotate */
-	//	for (int i = 0; i < hudLeft.components.size(); i++) {
-	//		((UIButton)hudLeft.components.get(i)).update(input, elapsedTime);
-	//	}
-		
-		// move the selected button
-	///	if (selectedButton != null) {
-		///	selectedButton.setXY(input.mousePos[0] - 32,
-			//	input.mousePos[1] - 32);
-	//	}
+
 		
 		/** camera mouse rotation */
 
