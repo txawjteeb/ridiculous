@@ -1,11 +1,15 @@
 package org.cart.igd.game;
 
+import java.util.Iterator;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
 import org.cart.igd.entity.Entity;
 import org.cart.igd.entity.Guard;
 import org.cart.igd.entity.GuardFlag;
+import org.cart.igd.entity.Noise;
+import org.cart.igd.entity.PartySnapper;
 import org.cart.igd.entity.StandingGuard;
 import org.cart.igd.entity.WalkingGuard;
 import org.cart.igd.math.Vector3f;
@@ -18,7 +22,7 @@ import org.cart.igd.states.InGameState;
  * sight an animal the whole guard team is alerted
  **/
 public class GuardSquad {
-
+	public boolean reset = false;
 	private InGameState igs;
 	public GuardSquad(InGameState igs){
 		this.igs = igs;
@@ -40,6 +44,24 @@ public class GuardSquad {
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
 		
 		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,guard,igs,.004f,90));
+	}
+	
+	public void reset(){
+		if(reset == true){
+			
+		
+		synchronized(igs.entities){
+			Iterator itr = igs.entities.iterator();
+			while(itr.hasNext()){
+			
+				Entity e = (Entity)itr.next();
+				if( e instanceof Noise || e instanceof PartySnapper){
+					igs.removeList.add(e); 
+				}
+			}
+		}
+		reset = false;
+		}
 	}
 	
 	public void raiseAlarm(){

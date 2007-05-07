@@ -38,7 +38,7 @@ public class Kernel
 	
 	public void init(DisplaySettings ds)
 	{
-		//gameLauncher.setVisible(false);
+		gameLauncher.setVisible(false);
 		displaySettings = ds;
 		display = new Display(ds);
 		display.start();
