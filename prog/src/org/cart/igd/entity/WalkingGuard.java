@@ -43,6 +43,7 @@ public class WalkingGuard extends Guard
 	
 	public void update(long elapsedTime)
 	{
+		lookForPlayer();
 		listenForNoise();
 		
 		
@@ -52,7 +53,14 @@ public class WalkingGuard extends Guard
 			}
 		}
 		
-		lookForPlayer();
+		if( target instanceof Noise ){
+			if( Collision.stsXZ(position,.5f,target.position,.5f) ){
+				changeDirection();
+				walkForward(elapsedTime);
+			}
+		}
+		
+		
 		
 		changeDirection();
 		walkForward(elapsedTime);
