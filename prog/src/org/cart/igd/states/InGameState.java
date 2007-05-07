@@ -28,6 +28,7 @@ import org.cart.igd.input.GameAction;
 import org.cart.igd.input.PickingHandler;
 import org.cart.igd.input.UserInput;
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
@@ -90,6 +91,7 @@ public class InGameState extends GameState
 	public Sound turnPage[] = new Sound[4];
 	
 	public GuardSquad guardSquad;
+	public OBJAnimation objAnimation;
 	
 	public InGameState(GL gl)
 	{
@@ -145,7 +147,7 @@ public class InGameState extends GameState
 		/* guards as a whole unit */
 		guardSquad = new GuardSquad(this);
 		
-		
+		objAnimation = new OBJAnimation(gl);
 		/* add collectable object to the map */
 		
 		
@@ -363,6 +365,8 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
+		objAnimation.update(elapsedTime);
+		
 		/* reset guads be removing Noise entities TODO: make sure to call this once */
 		if(Kernel.userInput.keys[KeyEvent.VK_R]) guardSquad.reset();
 		guardSquad.reset = true;
@@ -424,6 +428,8 @@ public class InGameState extends GameState
 		
 		/* render the bush */
 		bush.render(gl);
+		
+		objAnimation.render(gl);
 		
 		/* Render Player Model */
 		player.render(gl);
