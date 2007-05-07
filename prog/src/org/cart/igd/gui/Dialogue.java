@@ -67,7 +67,13 @@ public class Dialogue extends GUI {
 		animal.facingDirection = igs.player.facingDirection + 180f;
 		new ActiveDialogue(animal,igs).start();
 		igs.backgroundMusic.stop();
-		backgroundMusic[animal.animalId-1].loop(1f,.5f);
+		if(animal.state!=6){
+			backgroundMusic[animal.animalId-1].loop(1f,.5f);
+		} else{
+			igs.freeAnimalTune.play(1.5f,.8f);
+		}
+			
+			
 		igs.camera.distance = 5;
 		
 	
@@ -507,6 +513,7 @@ public class Dialogue extends GUI {
 		}
 		
 		public void run(){
+			
 
 
 			switch(animal.animalId){

@@ -56,7 +56,6 @@ public class TerrainEntity extends Entity{
 				}
 			}
 			if(!match) return;
-			//if(igs.inventory.currentCursor==savior&&!used) {
 				for(int i = 0;i<igs.interactiveEntities.size();i++){
 					Entity e = igs.interactiveEntities.get(i);
 					if(e instanceof Animal){
@@ -70,7 +69,6 @@ public class TerrainEntity extends Entity{
 						}
 					}
 				}
-		//	}
 		}
 
 	}

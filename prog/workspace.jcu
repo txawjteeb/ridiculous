@@ -1,4 +1,5 @@
-<?xml?>
+<?xml version="1.0" encoding="UTF-8"?>
+
 <workspace_user>
 	<active_project>
 		<label>project</label>
@@ -425,6 +426,9 @@
 				<path>src\org\cart\igd\sound\.svn\tmp\text-base</path>
 			</folderitem>
 			<folderitem>
+				<path>src\org\cart\igd\internet</path>
+			</folderitem>
+			<folderitem>
 				<path>src\org\cart\igd\.svn</path>
 			</folderitem>
 			<folderitem>
@@ -698,6 +702,9 @@
 				<path>org\cart\igd\input</path>
 			</folderitem>
 			<folderitem>
+				<path>org\cart\igd\internet</path>
+			</folderitem>
+			<folderitem>
 				<path>org\cart\igd\math</path>
 			</folderitem>
 			<folderitem>
@@ -752,7 +759,85 @@
 			<path>src\org\cart\igd\game\Inventory.java</path>
 			<source>true</source>
 			<index>0</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\entity\GuardFlag.java</path>
+			<source>true</source>
+			<index>1</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\entity\Guard.java</path>
+			<source>true</source>
+			<index>2</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\states\InGameState.java</path>
+			<source>true</source>
+			<index>3</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\entity\PartySnapper.java</path>
+			<source>true</source>
+			<index>4</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\InGameGUI.java</path>
+			<source>true</source>
+			<index>5</index>
 			<active>true</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\game\TerrainEntity.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\Dialogue.java</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\sound\Sound.java</path>
+			<source>true</source>
+			<index>8</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\internet\Connect.java</path>
+			<source>true</source>
+			<index>9</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\game\GuardSquad.java</path>
+			<source>true</source>
+			<index>10</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\game\GameObjective.java</path>
+			<source>true</source>
+			<index>11</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\entity\StandingGuard.java</path>
+			<source>true</source>
+			<index>12</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\entity\WalkingGuard.java</path>
+			<source>true</source>
+			<index>13</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
 </workspace_user>

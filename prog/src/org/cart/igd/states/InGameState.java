@@ -86,7 +86,7 @@ public class InGameState extends GameState
 	
 	GLGraphics glg;
 
-	public Sound backgroundMusic,throwPopper,popPopper,giveItem,openQuestLog, closeQuestLog,questLogMusic;
+	public Sound backgroundMusic,throwPopper,popPopper,giveItem,openQuestLog, closeQuestLog,questLogMusic,freeAnimalTune;
 	public Sound turnPage[] = new Sound[4];
 	
 	public GuardSquad guardSquad;
@@ -107,6 +107,7 @@ public class InGameState extends GameState
 			giveItem = new Sound("data/sounds/effects/give_item.ogg");
 			openQuestLog = new Sound("data/sounds/effects/open_quest_log.ogg");
 			closeQuestLog = new Sound("data/sounds/effects/close_quest_log.ogg");
+			freeAnimalTune = new Sound("data/sounds/music/free_animal_tune.ogg");
 			for(int i = 0;i<turnPage.length;i++){
 				turnPage[i] = new Sound("data/sounds/effects/turn_page-" + i + ".ogg");
 			}
@@ -302,7 +303,7 @@ public class InGameState extends GameState
 		gui.add(new InGameGUI(this,gl,glu));
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
-		//backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
+		backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
 		
 		guardSquad.init( gl, glu );
 		
@@ -345,6 +346,19 @@ public class InGameState extends GameState
 	
 	public void updateQuestLog(long elapsedTime){
 		questlog.update(this,elapsedTime);
+	}
+	 
+	public void removePartyAnimals(){
+		for( Entity e : interactiveEntities ){
+			if(e instanceof Animal){
+				Animal a = (Animal)e;
+				if(a.state==Inventory.SAVED_IN_PARTY){
+					a.state=Inventory.SAVED_IN_BUSH;
+				}
+			}
+		}
+		inventory.animals.clear();
+		inventory.currentCursor=Inventory.FLAMINGO;	
 	}
 	 
 	public void update(long elapsedTime)
@@ -468,7 +482,7 @@ public class InGameState extends GameState
 		for(int i = 0;i<inventory.items.size();i++){
 			Item item = inventory.items.get(i);
 			if(item.itemId ==8 && item.amount>0){
-				//throwPopper.play((new Random()).nextFloat() + .5f,(new Random()).nextFloat() + .5f);//TODO: re-enable when sound is fixed
+				throwPopper.play((new Random()).nextFloat() + .5f,(new Random()).nextFloat() + .5f);//TODO: re-enable when sound is fixed
 				entities.add(new PartySnapper(
 					new Vector3f(player.position.x, player.position.y, player.position.z),
 					player.facingDirection, 
@@ -515,6 +529,10 @@ public class InGameState extends GameState
 		
 		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 			throwPartyPopper();
+		}
+		
+		if(Kernel.userInput.keys[KeyEvent.VK_END]){
+			removePartyAnimals();
 		}
 	}
 }
