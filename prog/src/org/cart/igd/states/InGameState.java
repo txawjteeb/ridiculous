@@ -137,7 +137,7 @@ public class InGameState extends GameState
 
 		inventory = new Inventory(this);
 		
-		player			= new Player(new Vector3f(), 0f, .2f, playerSprite);
+		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		
 		/* special entity where animals are hidden after rescue place rescued 
@@ -350,6 +350,18 @@ public class InGameState extends GameState
 		questlog.update(this,elapsedTime);
 	}
 	 
+	public Animal getAnimal(String name){
+		for( Entity e : interactiveEntities ){
+			if(e instanceof Animal){
+				Animal a = (Animal)e;
+				if(a.name.equals(name)){
+					return a;
+				}
+			}
+		}
+		return null;
+	}
+	
 	public void removePartyAnimals(){
 		for( Entity e : interactiveEntities ){
 			if(e instanceof Animal){

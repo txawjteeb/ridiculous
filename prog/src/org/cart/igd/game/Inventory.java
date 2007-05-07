@@ -24,7 +24,7 @@ public class Inventory{
 	 /*
 	  *Start Psychology Stuff
 	  */
-	  
+	  public int PSYCH_CAUGHT_BEFORE_FREEING_TURTLES = 0;
 	  ///
 	  public int PSYCH_FIRST_DIRECTION = 0; // 1 is right,2 is forward, 3 is left, 4 is backwords
 	  ///

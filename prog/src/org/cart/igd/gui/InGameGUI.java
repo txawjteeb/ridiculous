@@ -223,7 +223,7 @@ public class InGameGUI extends GUI
 		
 	//	System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
 	//	System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
-			
+		System.out.println("PSYCH_CAUGHT_BEFORE_FREEING_TURTLES "+igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES);			
 		
 
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
