@@ -523,35 +523,35 @@ public class Dialogue extends GUI {
 
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						elephantVoiceOvers[0].play();
+						elephantVoiceOvers[0].playLoud();
 						add("What do you vish of me, comrade?");
 						add("We're all getting out of here, Vladikov. We need your help!");
 						switch(selection()){}
-						elephantVoiceOvers[1].play();
+						elephantVoiceOvers[1].playLoud();
 						add("Then get me out of here, little birdie, and I vill CRUSH Vhatever is in the vay.");
 						add("Why haven't you already broken out?");
 						switch(selection()){}
-						elephantVoiceOvers[2].play();
+						elephantVoiceOvers[2].playLoud();
 						add("Fence is electrified, Poncho. I can't touch it with the generator running.");
 						add("I'm on it");
 						switch(selection()){}
 						animal.state = READY_TO_SAVE;
 						updateQuest("Ready","The Elephant is Ready to Escape");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 					break;
 					case READY_TO_SAVE:
-						elephantVoiceOvers[2].play();
+						elephantVoiceOvers[2].playLoud();
 						add("Fence is electrified, Poncho. I can't touch it with the generator running.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_SAVED:
-						elephantVoiceOvers[3].play();
+						elephantVoiceOvers[3].playLoud();
 						add("Now, ve charge gates and sqvish puny little ones!");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved","The Elephant has Escaped");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -571,7 +571,7 @@ public class Dialogue extends GUI {
  		case 8: // woodpecker
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						woodpeckerVoiceOvers[0].play();
+						woodpeckerVoiceOvers[0].playLoud();
 						add("Hey, there!  What's up?  What brings you to our little neck of the woods, Pinky?");
 						add("We need to leave NOW!  Otherwise we're all going to become food!");
 						add("Oh I'm in your neck of the Woods? I better get on out of here then.");
@@ -579,13 +579,13 @@ public class Dialogue extends GUI {
 							case 2:
 							break;
 							case 1:
-								woodpeckerVoiceOvers[1].play();
+								woodpeckerVoiceOvers[1].playLoud();
 								add("Food?  FOOD!  Food is good!  Delicious little grubs!  FOOD! Why, that was a capital idea Pinky. ");
 								add("Um...hey, I know where there are millions of trees chock full of bugs!  Help me out and I'll show you where they are!");
 								add("We have to leave, you guys.  Bad things are about to happen.");
 								switch(selection()){
 									case 1:
-										woodpeckerVoiceOvers[2].play();
+										woodpeckerVoiceOvers[2].playLoud();
 										add("FOOD!  FOOD!  We like food!  We LOVE food! Don't we, guys?");
 										add("Alright... in no time you guys will have all the food you want");
 										switch(selection()){}
@@ -594,11 +594,11 @@ public class Dialogue extends GUI {
 										questLogUpdated.play();
 									break;
 									case 2:
-										woodpeckerVoiceOvers[3].play();
+										woodpeckerVoiceOvers[3].playLoud();
 										add("You're no fun.  You should probably just leave. Besides, even if you're telling the truth, we can just fly away.  Why should we care about what the boring, no-fun Pinky wants?");
 										add("I don't mean to be boring, but we need your help!");
 										switch(selection()){}
-										woodpeckerVoiceOvers[4].play();
+										woodpeckerVoiceOvers[4].playLoud();
 										add("You want us to help you, boring Pinky?  You get us...something that we can play with. ");
 										add("Okay, occupy yourselves for the time being");
 										switch(selection()){}
@@ -612,33 +612,33 @@ public class Dialogue extends GUI {
 						
 					break;
 					case WAITING_FOR_ITEM:
-						woodpeckerVoiceOvers[5].play();
+						woodpeckerVoiceOvers[5].playLoud();
 						add("GAH!  Boring.  That's what you are.  Boring, boring BORING!  Find us fun, or we stay here!");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						woodpeckerVoiceOvers[7].play();
+						woodpeckerVoiceOvers[7].playLoud();
 						add("We're waiting, Pancho.  But we're not gonna keep waiting for long.  Hurry up, or we're going back to chopping down the trees in Sector B.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						woodpeckerVoiceOvers[6].play();
+						woodpeckerVoiceOvers[6].playLoud();
 						add("WHEE!  That's LOT'S of fun.  We can do all sorts of things now.  Alright, let us out.");
 						add("(Done)");
 						switch(selection()){}
 						animal.state = READY_TO_SAVE;
 						updateQuest("Ready","The WoodPecker is Ready to Escape");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 					break;
 					case JUST_SAVED:
-						woodpeckerVoiceOvers[8].play();
+						woodpeckerVoiceOvers[8].playLoud();
 						add("Alright!  It's so big out here!  We can fly, and...fly more!  Alright, let's go Pancho.");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved","The WoodPecker has Escaped");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -657,7 +657,7 @@ public class Dialogue extends GUI {
  		case 7: // meerkat
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						meerkatVoiceOvers[0].play();
+						meerkatVoiceOvers[0].playLoud();
 						add("Um...hi...can I help you?");
 						add("Hello Meerkat, I was just passing through");
 						add("WE NEED TO LEAVE NOW!");
@@ -670,7 +670,7 @@ public class Dialogue extends GUI {
 								add("I didn't mean to frighten you, but we need to leave soon, or we're all going to have a very, very bad day.");
 								switch(selection()){
 									case 1:
-										meerkatVoiceOvers[1].play();
+										meerkatVoiceOvers[1].playLoud();
 										add("I don't know.  Sounds like it might be a long trip. I can't go very long without food.  Find me some and I'll go with you.");
 										add("Okay, I'll look for some food.  Be ready.");
 										switch(selection()){}
@@ -679,13 +679,13 @@ public class Dialogue extends GUI {
 										questLogUpdated.play();
 									break;
 									case 2:
-										meerkatVoiceOvers[2].play();
+										meerkatVoiceOvers[2].playLoud();
 										add("Oh...okay...just don't be so loud next time.  Get us out of here and we'll leave with you.");
 										add("(Done)");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Meerkat is Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 								}
 							break;	
@@ -693,33 +693,33 @@ public class Dialogue extends GUI {
 						
 					break;
 					case WAITING_FOR_ITEM:
-						meerkatVoiceOvers[3].play();
+						meerkatVoiceOvers[3].playLoud();
 						add("No way, Pancho.  We're gonna be stuck with a bunch of big hungry animals, and we won't get any food on the trip.  Get us food now, or we won't go.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						meerkatVoiceOvers[5].play();
+						meerkatVoiceOvers[5].playLoud();
 						add("Hurry up!  You sure are slow for being so big.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						meerkatVoiceOvers[4].play();
+						meerkatVoiceOvers[4].playLoud();
 						add("There we go, now we can have a snack before we leave.  Or just use it to beat off the tiger, tee hee.");
 						add("(Done)");
 						switch(selection()){}
 						animal.state = READY_TO_SAVE;
 						updateQuest("Ready","The Meerkat is Ready to Escape");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 					break;
 					case JUST_SAVED:
-						meerkatVoiceOvers[6].play();
+						meerkatVoiceOvers[6].playLoud();
 						add("AHA!  Now we can get out of here and find more food!  I mean...escape...yeah.");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved","The Meerkat has Escaped");	
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -738,7 +738,7 @@ public class Dialogue extends GUI {
 			case 6: // penguins
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						penguinVoiceOvers[0].play();
+						penguinVoiceOvers[0].playLoud();
 						add("Hey, man.  What's goin' on?  Hey, I heard you let the turtles out.  Is it true they spend a long time staying still?  I could use 'em for target practice.");
 						add("No time for that now!  We need to leave or we'll all be sleeping with the fishes!");
 						add("Yeah I did, I might let you out too, but later.");
@@ -747,13 +747,13 @@ public class Dialogue extends GUI {
 							case 2:
 							break;
 							case 1:
-								penguinVoiceOvers[1].play();
+								penguinVoiceOvers[1].playLoud();
 								add("What are you talking about?  Why am I gonna be sleeping with my food?  Not that I'd mind, I get hungry in the night sometimes.");
 								add("I don't mean it like that.  I mean if we don't break out of here we're going to be turned into food!  We've been sold!");
 								add("We need to leave here by tonight or else none of us are going to eat again.  The only food we need to worry about is the food we get turned into if we don't go now!");
 								switch(selection()){
 									case 1:
-										penguinVoiceOvers[2].play();
+										penguinVoiceOvers[2].playLoud();
 										add("Oh!  Well, in that case, I'd better go wake up the others.");
 										add("(Done)");
 										switch(selection()){}
@@ -762,7 +762,7 @@ public class Dialogue extends GUI {
 										questLogUpdated.play();
 									break;
 									case 2:
-										penguinVoiceOvers[3].play();
+										penguinVoiceOvers[3].playLoud();
 										add("Not talk about food?  Food is everything!  I'm not going anywhere with a food-hating weirdo like you!");
 										add("I'm sorry, I love food.  We really do need to go though, Penguin.");
 										switch(selection()){}
@@ -771,7 +771,7 @@ public class Dialogue extends GUI {
 										switch(selection()){}
 										animal.state = WAITING_FOR_ITEM;
 										updateQuest("Needs Convincing","The Penguins Needs Convincing to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 								}
 							break;	
@@ -779,33 +779,33 @@ public class Dialogue extends GUI {
 						
 					break;
 					case WAITING_FOR_ITEM:
-						penguinVoiceOvers[4].play();
+						penguinVoiceOvers[4].playLoud();
 						add("Where's the food, eh?  Trying to pull a fast one on me, are you?  Leave now, or I will pelt you with snowballs.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						penguinVoiceOvers[6].play();
+						penguinVoiceOvers[6].playLoud();
 						add("I'm waiting, pinky.  Get me out of here, will ya?");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						penguinVoiceOvers[5].play();
+						penguinVoiceOvers[5].playLoud();
 						add("FISH!  I love fish!  GIVE ME THE FISH!  Alright, I'll help you, just get me out of here and give me the fish.");
 						add("(Done)");
 						switch(selection()){}
 						animal.state = READY_TO_SAVE;
 						updateQuest("Ready","The Penguines are Ready to Escape");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 					break;
 					case JUST_SAVED:
-						penguinVoiceOvers[7].play();
+						penguinVoiceOvers[7].playLoud();
 						add("WOO HOO!  Let's roll!  Time to have fun, ya know?");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved","The Penguins have Escaped");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -823,7 +823,7 @@ public class Dialogue extends GUI {
 			case 5: // tiger
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						tigerVoiceOvers[0].play();
+						tigerVoiceOvers[0].playLoud();
 						add("Well...it's been a long time, Flamingo, hasn't it?");
 						add("Hasn't been long enough.");
 						add("gulp... he...hello, Tiger.");
@@ -831,28 +831,28 @@ public class Dialogue extends GUI {
 							case 1:
 							break;
 							case 2:
-								tigerVoiceOvers[1].play();
+								tigerVoiceOvers[1].playLoud();
 								add("What brings you to this part of the zoo?");
 								add("I...gulp...");
 								add("I...thought...you might want to know that the zoo is being sold and we have been too and we're going to be turned into food and I thought you would want us to help you escape and maybe help us back.");
 								switch(selection()){
 									case 1:
-										tigerVoiceOvers[2].play();
+										tigerVoiceOvers[2].playLoud();
 										add("Look, I know about your little plan.  I also know what the zoo owners did.  I'll help you out with the others if you can prove that I won't get bored.  So, amuse me by answering me a riddle.");
 										add("Okay...I'll try.");
 										switch(selection()){}
 										animal.state = WAITING_FOR_ITEM;
 										updateQuest("Needs Convincing","The Tiger Needs Convincing to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 									case 2:
-										tigerVoiceOvers[3].play();
+										tigerVoiceOvers[3].playLoud();
 										add("My, you are an excitable one, aren't you?  Well, I suppose I might be willing to go along with this trip of yours.  After all, at least I'll be amused.");
 										add("(Done)");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Tiger is Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 								}
 							break;	
@@ -860,33 +860,33 @@ public class Dialogue extends GUI {
 						
 					break;
 					case WAITING_FOR_ITEM:
-						tigerVoiceOvers[4].play();
+						tigerVoiceOvers[4].playLoud();
 						add("Not up to the challenge, then?  That's alright, I guess I can't expect much from the commoners.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						tigerVoiceOvers[6].play();
+						tigerVoiceOvers[6].playLoud();
 						add("I'm not used to waiting for those lower on the food chain than myself.  Do try and hurry.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						tigerVoiceOvers[5].play();
+						tigerVoiceOvers[5].playLoud();
 						add("My, I'm impressed.  I thought it would take you much longer.  I guess I can go with you after all.  Now free me, please.");
 						add("(Done)");
 						switch(selection()){}
 						animal.state = READY_TO_SAVE;
 						updateQuest("Ready","The Tiger is Ready to Escape");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 					break;
 					case JUST_SAVED:
-						tigerVoiceOvers[7].play();
+						tigerVoiceOvers[7].playLoud();
 						add("Ah, that's much better.  Now, shall we gather the others and find our way to a land without bars?");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved","The Tiger has Escaped");
-						questLogUpdated.play();	
+						questLogUpdated.playLoud();	
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -904,7 +904,7 @@ public class Dialogue extends GUI {
 	 		case 4: // giraffe
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						giraffeVoiceOvers[0].play();
+						giraffeVoiceOvers[0].playLoud();
 						add("Why are you bothering an old man?");
 						add("Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!");
 						add("I really didn't mean to, in any case, I'll be on my way.");
@@ -913,28 +913,28 @@ public class Dialogue extends GUI {
 							case 2:
 							break;
 							case 1:
-								giraffeVoiceOvers[1].play();
+								giraffeVoiceOvers[1].playLoud();
 								add("Well why should I go?  I'm just gonna let 'em move me to a new zoo.");
 								add("We've all been sold and I need your help to get everyone out of here!");
 								add("They're selling us too!  We're going to be made into food!");
 								switch(selection()){
 									case 1:
-										giraffeVoiceOvers[2].play();
+										giraffeVoiceOvers[2].playLoud();
 										add("I'll do my best, youngin, but I don't know how much my back can take.  If you could find me something to fix my back, I could help you!");
 										add("Alright, I'll be back as soon as I can get something.");
 										switch(selection()){}
 										animal.state = WAITING_FOR_ITEM;
 										updateQuest("Needs Convincing","The Giraffe Needs Convincing to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 									case 2:
-										giraffeVoiceOvers[3].play();
+										giraffeVoiceOvers[3].playLoud();
 										add("Well...in that case, I guess I can make these tired old legs work for just a little bit longer.");
 										add("(Done)");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Giraffe is Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 								}
 							break;	
@@ -942,19 +942,19 @@ public class Dialogue extends GUI {
 						
 					break;
 					case WAITING_FOR_ITEM:
-						giraffeVoiceOvers[4].play();
+						giraffeVoiceOvers[4].playLoud();
 						add("What's takin' ya so long, sonny?  My back's still hurtin'!");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						giraffeVoiceOvers[6].play();
+						giraffeVoiceOvers[6].playLoud();
 						add("Yer' slower than I am laddie, hurry up and get me out of here.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						giraffeVoiceOvers[5].play();
+						giraffeVoiceOvers[5].playLoud();
 						add("Ah, thanks, that's alot better.  Now I feel fit as a fiddle.");
 						add("(Done)");
 						switch(selection()){}
@@ -963,12 +963,12 @@ public class Dialogue extends GUI {
 						questLogUpdated.play();
 					break;
 					case JUST_SAVED:
-						giraffeVoiceOvers[7].play();
+						giraffeVoiceOvers[7].playLoud();
 						add("Thanks, sonny.  I think it's time for us to get on out of here now.");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved","The Giraffe has Escaped");	
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -987,7 +987,7 @@ public class Dialogue extends GUI {
 	 		case 3: // kangaroo
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						kangarooVoiceOvers[0].play();
+						kangarooVoiceOvers[0].playLoud();
 						add("HEY!  Hey Flamingo!  What's up man?  How are you?  What's going on?  Wanna play tag?");
 						add("Oh no, not right now, sorry.");
 						add("Wow...someone had a little too much sugar in their cereal.");
@@ -995,28 +995,28 @@ public class Dialogue extends GUI {
 							case 1:
 							break;
 							case 2:
-								kangarooVoiceOvers[1].play();
+								kangarooVoiceOvers[1].playLoud();
 								add("Sorry, you know me, I'm a little hyper and stuff.  Okay, alot hyper.  Well...alot alot hyper.  Why are you out of your cage?");
 								add("That's okay.  Look, Roger, we need to get out of here.  They're going to sell us all!");
 								add("We're going to be sent away and be turned into food.  You need to go with me now!");
 								switch(selection()){
 									case 1:
-										kangarooVoiceOvers[2].play();
+										kangarooVoiceOvers[2].playLoud();
 										add("Wow!  You mean an adventure?  This'll be great!");
 										add("Done");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Kangaroo is Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 									case 2:
-										kangarooVoiceOvers[3].play();
+										kangarooVoiceOvers[3].playLoud();
 										add("AGH!  That's scary.  I'm not going unless you can disguise me.  Find me a disguise and I'll leave.");
 										add("Okay, I'll find one for you, but then we need to move fast.");
 										switch(selection()){}
 										animal.state = WAITING_FOR_ITEM;
 										updateQuest("Needs Convincing","The Kangaroo Needs Convincing to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 								}
 							break;	
@@ -1024,32 +1024,32 @@ public class Dialogue extends GUI {
 						
 					break;
 					case WAITING_FOR_ITEM:
-						kangarooVoiceOvers[4].play();
+						kangarooVoiceOvers[4].playLoud();
 						add("I don't think so, you didn't get me a disguise yet!  I'm not taking any chances.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						kangarooVoiceOvers[6].play();
+						kangarooVoiceOvers[6].playLoud();
 						add("Um...okay...I'm ready to go now, could you hurry up and do something?  This is getting boring.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						kangarooVoiceOvers[5].play();
+						kangarooVoiceOvers[5].playLoud();
 						add("Ah, that's awesome, now I can get out of here and no one will recognize me.  Okay, find me a way out.");
 						add("(Done)");
 						switch(selection()){}
 						animal.state = READY_TO_SAVE;
 						updateQuest("Ready","The Kangaroo is Ready to Escape");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 					break;
 					case JUST_SAVED:
-						kangarooVoiceOvers[7].play();
+						kangarooVoiceOvers[7].playLoud();
 						add("Thanks! Now we can save everybody else and get the heck out of here.");
 						add("(Done)");
 						finishQuest("Saved","The Kangaroo has Escaped");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						switch(selection()){}
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
@@ -1068,7 +1068,7 @@ public class Dialogue extends GUI {
 			case 2: // panda
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						pandaVoiceOvers[0].play();
+						pandaVoiceOvers[0].playLoud();
 						add("What can I help you with, my fine feathered friend?");
 						add("They're gonna sell us all for food!  We need to run!  Run, I tell you!");
 						add("Oh nothing, I was just passing by.");
@@ -1076,34 +1076,34 @@ public class Dialogue extends GUI {
 							case 2:
 							break;
 							case 1:
-								pandaVoiceOvers[1].play();
+								pandaVoiceOvers[1].playLoud();
 								add("Calm down, young one.  Speak slowly.  What is wrong?");
 								add("I'm sorry.  We need to leave because the zoo has been sold and we are going to be sold as food.");
 								add("There's no time to talk, we need to go now before it's too late!");
 								switch(selection()){
 									case 1:
-										pandaVoiceOvers[2].play();
+										pandaVoiceOvers[2].playLoud();
 										add("Very well then, young one.  Let us make haste.");
 										add("(Done)");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Panda is Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 										
 									break;
 									case 2:
-										pandaVoiceOvers[3].play();
+										pandaVoiceOvers[3].playLoud();
 										add("You speak too swiftly, and your thoughts can not keep up.  Try speaking again when you are clear headed.");
 										add("I apologize.  I meant no offense.  We need to get out of the zoo before we are sold for food.");
 										switch(selection()){
 											case 1:
-												pandaVoiceOvers[4].play();
+												pandaVoiceOvers[4].playLoud();
 												add("Very well then. I shall go with you.");
 												add("(Done)");
 												switch(selection()){}
 												animal.state = READY_TO_SAVE;
 												updateQuest("Ready","The Panda is Ready to Escape");
-												questLogUpdated.play();
+												questLogUpdated.playLoud();
 											break;
 										}
 									break;
@@ -1112,18 +1112,18 @@ public class Dialogue extends GUI {
 						}
 					break;
 					case READY_TO_SAVE:
-						pandaVoiceOvers[5].play();
+						pandaVoiceOvers[5].playLoud();
 						add("Hurry, young one.  Now is not the time to dawdle.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_SAVED:
-						pandaVoiceOvers[6].play();
+						pandaVoiceOvers[6].playLoud();
 						add("Thank you, youngling.  Now we must make haste and get the others.");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved", "The Panda has Escaped");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
@@ -1139,7 +1139,7 @@ public class Dialogue extends GUI {
 			case 1: // turtle
 				switch(animal.state) { // find out what state it is in
 					case NOT_TALKED_TO://not talked to
-						turtleVoiceOvers[0].play();
+						turtleVoiceOvers[0].playLoud();
 						add("What do you want, Flamingo?  We're trying to swim here!");
 						add("Oh sorry, I'll let you guys get back to swimming.");
 						add("We need to get out of here NOW!");
@@ -1148,28 +1148,28 @@ public class Dialogue extends GUI {
 							case 1:
 							break;
 							case 2:
-								turtleVoiceOvers[1].play();
+								turtleVoiceOvers[1].playLoud();
 								add("What are you going on about now, ya durn whimpersnapper?");
 								add("They're going to sell us for food tomorrow!  We're all going to be eaten if we don't leave!");
 								add("Well, I was going to say that we're all going to be sold tomorrow and I'm here to help you escape, but I think I've changed my mind.");
 								switch(selection()){
 									case 1:
-										turtleVoiceOvers[2].play();
+										turtleVoiceOvers[2].playLoud();
 										add("Well why didn't ya say so in the first place! Come on, boys, we gotta get outta here!");
 										add("(Done)");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Turtles are Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 									case 2:
-										turtleVoiceOvers[3].play();
+										turtleVoiceOvers[3].playLoud();
 										add("Now, now, don't be so hasty!  Respect yer elders and get us out of here.");
 										add("(Done)");
 										switch(selection()){}
 										animal.state = READY_TO_SAVE;
 										updateQuest("Ready","The Turtles are Ready to Escape");
-										questLogUpdated.play();
+										questLogUpdated.playLoud();
 									break;
 								}
 							break;
@@ -1178,7 +1178,7 @@ public class Dialogue extends GUI {
 					break;
 					
 					case READY_TO_SAVE://in cage waiting
-						turtleVoiceOvers[4].play();
+						turtleVoiceOvers[4].playLoud();
 						add("What's takin' ya so gol' durn' long!  Hurry up and get us out of here!");
 						add("(Done)");
 						switch(selection()){}
@@ -1186,12 +1186,12 @@ public class Dialogue extends GUI {
 					break;
 					
 					case JUST_SAVED:
-						turtleVoiceOvers[5].play();
+						turtleVoiceOvers[5].playLoud();
 						add("Thanks, nice to see some of you youngin's still have respect fer the old folks.");
 						add("(Done)");
 						switch(selection()){}
 						finishQuest("Saved", "The Turtles have Escaped");
-						questLogUpdated.play();
+						questLogUpdated.playLoud();
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
 							igs.inventory.animals.add(animal);
