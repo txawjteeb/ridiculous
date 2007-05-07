@@ -21,6 +21,10 @@ public class GameLauncher extends JFrame{
 	
 	private Kernel kernel;
 	
+	JComboBox jcbResolution;
+	JCheckBox jcbFullscreen;
+	JButton jbOk;
+	
     public GameLauncher(Kernel sanders) {
     	kernel = sanders;
     	setLayout(new FlowLayout());
@@ -45,7 +49,7 @@ public class GameLauncher extends JFrame{
     	fullscreen = false;
     	
     	
-    	JComboBox jcbResolution = new JComboBox(p);
+    	jcbResolution = new JComboBox(p);
 		jcbResolution.setMaximumRowCount(6);
     	add(jcbResolution);
     	
@@ -53,11 +57,11 @@ public class GameLauncher extends JFrame{
     	jcbResolution.setSelectedIndex(2);//default 1024 by 768
     	
     	//off by default
-    	JCheckBox jcbFullscreen = new JCheckBox("Full Screen Mode",false);
+    	jcbFullscreen = new JCheckBox("Full Screen Mode",false);
     	add(jcbFullscreen);
     		
     		
-    	JButton jbOk = new JButton("Accept");
+    	jbOk = new JButton("Accept");
     	add(jbOk);
     	
     	setVisible(true);
@@ -70,6 +74,7 @@ public class GameLauncher extends JFrame{
     	jbOk.addActionListener(
     		new ActionListener() {
     			public void actionPerformed(ActionEvent e){
+    				updateInfo();
     				kernel.init(new DisplaySettings(w,h,fullscreen));
     			}
     		
@@ -78,15 +83,20 @@ public class GameLauncher extends JFrame{
     	
     	jcbResolution.addKeyListener(
         	new KeyAdapter() {
-        		public void actionPerformed(KeyEvent e){
+        		public void keyPressed(KeyEvent e){
         			if(e.getKeyCode()==KeyEvent.VK_ENTER){
+        				updateInfo();
         				kernel.init(new DisplaySettings(w,h,fullscreen));
         			}
         		}
         	}
         );
     	
-		//String s=jcbResolution.getSelectedItem().toString();
+		
+    }
+    
+    public void updateInfo(){
+    	//String s=jcbResolution.getSelectedItem().toString();
 		
 		//this did not fix the full screen resolution problem	
     	String s=jcbResolution.getItemAt(jcbResolution.getSelectedIndex()).toString();

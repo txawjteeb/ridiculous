@@ -1,8 +1,10 @@
+package org.cart.igd.sound;
 
 
-/*
+
+
 public class SoundTesting { 
-
+	/*
  static Sound sound;
     public static void main(String[] argv) { 
        try { 
@@ -41,5 +43,5 @@ class h extends Thread{
 
 		}
 	}
+	*/
 }
-*/

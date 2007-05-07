@@ -85,6 +85,8 @@ public class InGameState extends GameState
 	public Sound backgroundMusic,throwPopper,popPopper,giveItem,openQuestLog, closeQuestLog,questLogMusic;
 	public Sound turnPage[] = new Sound[4];
 	
+	public GuardSquad guardSquad;
+	
 	public InGameState(GL gl)
 	{
 		super(gl);
@@ -113,7 +115,7 @@ public class InGameState extends GameState
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
-		OBJModel guard = new OBJModel(gl, "data/models/guard_vm",1.5f,false);
+		
 		explorationBox = new OBJModel(gl,"data/models/exploration_box",5f,false);
 		waterAffinity = new OBJModel(gl,"data/models/water_affinity",5f,false);
 		foodAffinity = new OBJModel(gl,"data/models/food_Affinity",5f,false);
@@ -128,21 +130,15 @@ public class InGameState extends GameState
 
 		inventory = new Inventory(this);
 		
-		player			= new Player(new Vector3f(), 0f, 10f, playerSprite);
+		player			= new Player(new Vector3f(), 0f, .2f, playerSprite);
 		camera			= new Camera(player, 10f, 4f);
 		
 		/* special entity where animals are hidden after rescue place rescued 
 		 * animals in a position relative to this */
 		bush = new Bush( new Vector3f(0,0,0), 20f, bushModel,this);	
 		
-		/* create and add test guard */
-		entities.add(new Guard(new Vector3f(0f,0f,0f),0f,20f,guard,this,2f));
-		
-		/* create paths for the guard to follow*/
-		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,10f),1f,1f));
-		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(-10f,0f,10f),1f,1f));
-		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(-10,0f,-10f),1f,1f));
-		((Guard)entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
+		/* guards as a whole unit */
+		guardSquad = new GuardSquad(this);
 		
 		
 		/* add collectable object to the map */
@@ -302,7 +298,10 @@ public class InGameState extends GameState
 		gui.add(new InGameGUI(this,gl,glu));
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
-		backgroundMusic.loop(1f,.5f);
+		//backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
+		
+		guardSquad.init( gl, glu );
+		
 		loaded = true;
 	}
 	
@@ -405,11 +404,9 @@ public class InGameState extends GameState
 		/* Render Player Model */
 		player.render(gl);
 		
-		/* render all entities */
-		Iterator itr = entities.iterator();
-		while(itr.hasNext())
+		/* render all entities: partySnappers, guards*/
+		for( Entity e: entities )
 		{
-			Entity e = (Entity)itr.next();
 			e.render(gl);
 		}	
 		Renderer.info[1]="# entities: "+entities.size();
@@ -459,7 +456,7 @@ public class InGameState extends GameState
 		for(int i = 0;i<inventory.items.size();i++){
 			Item item = inventory.items.get(i);
 			if(item.itemId ==8 && item.amount>0){
-				throwPopper.play((new Random()).nextFloat() + .5f,(new Random()).nextFloat() + .5f);
+				//throwPopper.play((new Random()).nextFloat() + .5f,(new Random()).nextFloat() + .5f);//TODO: re-enable when sound is fixed
 				entities.add(new PartySnapper(
 					new Vector3f(player.position.x, player.position.y, player.position.z),
 					player.facingDirection, 

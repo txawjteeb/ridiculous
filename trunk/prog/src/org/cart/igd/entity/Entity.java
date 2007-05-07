@@ -84,15 +84,6 @@ public abstract class Entity
 		this.modelObj = model;
 		globalId = globalIdCounter++;
 	}
-	public Entity(Vector3f pos, float fD, float bsr, OBJModel model,float scale)//, int id, File meshFile, File skinFile)// throws EntityException
-	{
-		this(pos,fD,bsr);
-		this.modelObj = model;
-		this.scale.x = scale;
-		this.scale.y = scale;
-		this.scale.z = scale;
-		globalId = globalIdCounter++;
-	}
 	
 	public Entity(Vector3f pos, float fD, float bsr, Model model)//, int id, File meshFile, File skinFile)// throws EntityException
 	{

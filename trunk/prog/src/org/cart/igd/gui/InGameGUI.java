@@ -139,7 +139,7 @@ public class InGameGUI extends GUI
 					Animal a = ((Animal)e);
 					if(  a.getState() == Animal.SAVED_BUSH )
 					{
-					//	btBushAnimals[a.animalId].draw(g);
+						btBushAnimals[a.animalId].draw(g);
 					} //TODO make sure fix this
 				}
 			}
