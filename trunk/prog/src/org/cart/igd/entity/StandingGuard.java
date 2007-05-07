@@ -106,7 +106,7 @@ public class StandingGuard extends Guard
 			
 		/* walk until colides with flag */
 		if( target instanceof GuardFlag ){
-			if(Collision.stsXZ(position,boundingSphereRadius,
+			if(Collision.stsXZ(position,.5f,
 					home.position,home.boundingSphereRadius))
 			{
 				target = home;
@@ -120,7 +120,7 @@ public class StandingGuard extends Guard
 		
 		/* walk until colides with flag */
 		if( target instanceof Noise ){
-			if(Collision.stsXZ(position,boundingSphereRadius,
+			if(Collision.stsXZ(position,.5f,
 					target.position,target.boundingSphereRadius))
 			{
 				facingDirection++;

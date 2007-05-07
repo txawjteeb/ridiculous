@@ -28,8 +28,8 @@ public class Guard extends Entity
 	protected int currentTarget = 0;
 	protected float posRange = .4f;//margin of error
 	
-	protected float visionDistance = 4f;
-	protected float hearingDistance = 20f;
+	protected float visionDistance = 7f;
+	protected float hearingDistance = 30f;
 	
 	public float refAngleRad = 0f;
 	

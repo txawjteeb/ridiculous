@@ -31,7 +31,7 @@ public class GuardSquad {
 		
 		
 		/* create and add test guard */
-		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,20f,guard,igs,.004f));
+		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,.5f,guard,igs,.004f));
 		
 		/* create paths for the guard to follow*/
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,10f),1f,1f));
@@ -39,7 +39,7 @@ public class GuardSquad {
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(-10,0f,-10f),1f,1f));
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
 		
-		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,20f,guard,igs,.004f,90));
+		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,guard,igs,.004f,90));
 	}
 	
 	public void raiseAlarm(){
