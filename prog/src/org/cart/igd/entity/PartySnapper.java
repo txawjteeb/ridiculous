@@ -41,9 +41,11 @@ public class PartySnapper extends Entity{
 			//position.z-=;
 		} else {
 			//igs.popPopper.play((new Random()).nextFloat() + 1f,(new Random()).nextFloat() + 1f);//TODO: enable when sound fixed
-			igs.entities.add(new Noise(position,.2f,20000L,igs));//TODO: radius of noise
-			igs.entities.remove(this);
-			
+			synchronized(igs.entities){
+				//TODO: radius of noise
+				igs.entities.add(new Noise(position,.2f,20000L,igs));
+				igs.entities.remove(this);
+			}
 		}
 	}
 }

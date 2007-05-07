@@ -5,7 +5,9 @@ import java.awt.event.MouseEvent;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
@@ -35,11 +37,13 @@ public class InGameState extends GameState
 {	
 	public String[] infoText = { "", "", "", "", "","","","" };
 	
-	public ArrayList<Entity> entities = new ArrayList<Entity>();
+	public List<Entity> entities =
+		Collections.synchronizedList(new ArrayList<Entity>());
 	public ArrayList<Item> items = new ArrayList<Item>();
 	public ArrayList<Entity> interactiveEntities = new ArrayList<Entity>();	
 	public ArrayList<UnnecessaryExplore> unnecessaryExplores = new ArrayList<UnnecessaryExplore>();	
 
+	public ArrayList<Entity> removeList = new ArrayList<Entity>();
 	
 	public Entity player;
 	
@@ -345,6 +349,10 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
+		/* reset guads be removing Noise entities TODO: make sure to call this once */
+		if(Kernel.userInput.keys[KeyEvent.VK_R]) guardSquad.reset();
+		guardSquad.reset = true;
+		
 		inventory.update();
 		gui.get(currentGuiState).update(elapsedTime);
 
@@ -375,6 +383,8 @@ public class InGameState extends GameState
 				playerState = 0;
 		}
 		
+		entities.removeAll(removeList);
+		removeList.clear();
 		
 	}
 	
@@ -405,10 +415,12 @@ public class InGameState extends GameState
 		player.render(gl);
 		
 		/* render all entities: partySnappers, guards*/
-		for( Entity e: entities )
-		{
-			e.render(gl);
-		}	
+		synchronized ( entities ){
+			for( Entity e: entities )
+			{
+				e.render(gl);
+			}	
+		}
 		Renderer.info[1]="# entities: "+entities.size();
 		
 		
@@ -478,6 +490,7 @@ public class InGameState extends GameState
 		{
 			camera.zoom(mouseWheelScroll.getAmount());
 		}
+		
 		
 		/* Check for Escape key to end program */
 		if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
