@@ -858,20 +858,26 @@
 		<todotaskitem>
 			<description>TODO: enable when sound fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>304</line>
-			<timestamp>1178525984</timestamp>
+			<line>308</line>
+			<timestamp>1178576262</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: make sure to call this once */</description>
+			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
+			<line>379</line>
+			<timestamp>1178576262</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: re-enable when sound is fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>475</line>
-			<timestamp>1178525984</timestamp>
+			<line>499</line>
+			<timestamp>1178576262</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO also make items pickable</description>
 			<filepath>src\org\cart\igd\gui\InGameGUI.java</filepath>
-			<line>289</line>
-			<timestamp>1178526434</timestamp>
+			<line>298</line>
+			<timestamp>1178576401</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

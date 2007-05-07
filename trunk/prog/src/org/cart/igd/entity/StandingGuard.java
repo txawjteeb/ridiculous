@@ -8,6 +8,7 @@ import org.cart.igd.discreet.Model;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
+import org.cart.igd.game.*;
 
 public class StandingGuard extends Guard
 {
@@ -131,5 +132,17 @@ public class StandingGuard extends Guard
 		} 
 		
 		Renderer.info[5] = "standing guard: "+position.x+"/"+position.z;
+		
+		if(Collision.stsXZ(position,1f,igs.player.position,igs.player.boundingSphereRadius)){
+			 igs.guardSquad.reset();
+			 igs.player.position = new Vector3f(-20f,0f,-20f);
+			 igs.removePartyAnimals();
+			 Animal a = igs.getAnimal("Turtles");
+			 if(a!=null){
+			 	if(a.state!=Inventory.SAVED_IN_PARTY&&a.state!=Inventory.SAVED_IN_BUSH){
+			 		igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES = 1;
+			 	}
+			 }
+		}
 	}
 }
