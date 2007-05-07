@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="jogl.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="jogl.jar"/>
+	<classpathentry kind="lib" path="gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="lwjgl.jar"/>
+	<classpathentry kind="lib" path="joal.jar"/>
 	<classpathentry kind="lib" path="commons-logging-api.jar"/>
 	<classpathentry kind="lib" path="jl1.0.jar"/>
-	<classpathentry kind="lib" path="joal.jar"/>
 	<classpathentry kind="lib" path="jogg-0.0.7.jar"/>
 	<classpathentry kind="lib" path="jspeex0.9.7.jar"/>
 	<classpathentry kind="lib" path="jorbis-0.0.15.jar"/>
-	<classpathentry kind="lib" path="lwjgl.jar"/>
 	<classpathentry kind="lib" path="mp3spi1.9.4.jar"/>
 	<classpathentry kind="lib" path="tritonus_share.jar"/>
 	<classpathentry kind="lib" path="vorbisspi1.0.2.jar"/>

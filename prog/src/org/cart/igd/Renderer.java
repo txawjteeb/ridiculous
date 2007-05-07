@@ -40,7 +40,7 @@ public class Renderer implements GLEventListener
 	public long lastTime;
 	
 	public static String info[]= {
-		"","","","","","","","","",""
+		"","","","","","","","","","","",""
 	};
 	
 	

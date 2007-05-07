@@ -26,7 +26,7 @@ public class Collision
 		
 		float dist = (float)Math.sqrt( (xDiff*xDiff)+(zDiff*zDiff) );
 		
-		if(dist > rA+rB){
+		if(dist < rA+rB){
 			return true;
 		}
 		return false;
