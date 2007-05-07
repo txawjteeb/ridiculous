@@ -29,7 +29,7 @@ public class Guard extends Entity
 	protected float posRange = .4f;//margin of error
 	
 	protected float visionDistance = 4f;
-	protected float hearingDistance = 12f;
+	protected float hearingDistance = 20f;
 	
 	public float refAngleRad = 0f;
 	
@@ -91,21 +91,6 @@ public class Guard extends Entity
 	
 	public void update(long elapsedTime){
 		System.out.println("must override");
-		
-	}
-	
-	public void lookForPlayer()
-	{
-		Vector3f s = getNewPointDeg(facingDirection, visionDistance);
-		
-		boolean see = Collision.stsXZ(s,visionDistance,
-				igs.player.position,igs.player.boundingSphereRadius);
-		
-		if(see){
-			target = player;
-		} else {
-			target = home;
-		}
 	}
 	
 	/** adjust yrotation to position of the target */

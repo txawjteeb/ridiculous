@@ -70,10 +70,24 @@ public class StandingGuard extends Guard
 		}
 	}
 	
+	public void lookForPlayer()
+	{
+		Vector3f s = getNewPointDeg(facingDirection, visionDistance);
+		
+		boolean see = Collision.stsXZ(s,visionDistance,
+				igs.player.position,igs.player.boundingSphereRadius);
+		
+		if(see){
+			target = player;
+		} else {
+			target = home;
+		}
+	}
+	
 	public void update(long elapsedTime)
 	{
-		listenForNoise();
 		lookForPlayer();
+		listenForNoise();
 		
 		if( target instanceof Player){
 			Vector3f s = getNewPointDeg(facingDirection, visionDistance);
@@ -117,11 +131,5 @@ public class StandingGuard extends Guard
 		} 
 		
 		Renderer.info[5] = "standing guard: "+position.x+"/"+position.z;
-	}
-	
-	private void getNextTarget()
-	{		
-		float xDiff = (position.x - player.position.x);
-		float zDiff = (position.z - player.position.z);
 	}
 }

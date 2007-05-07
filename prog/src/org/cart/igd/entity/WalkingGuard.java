@@ -44,18 +44,34 @@ public class WalkingGuard extends Guard
 	public void update(long elapsedTime)
 	{
 		listenForNoise();
-		lookForPlayer();
+		
 		
 		if( target instanceof GuardFlag ){
 			if( Collision.stsXZ(position,.5f,target.position,.5f) ){
-				getNextTarget();
+				followPath();
 			}
 		}
+		
+		lookForPlayer();
 		
 		changeDirection();
 		walkForward(elapsedTime);
 		
 		Renderer.info[6] = "walking guard: "+position.x+"/"+position.z;
+	}
+	
+	public void lookForPlayer()
+	{
+		Vector3f s = getNewPointDeg(facingDirection, visionDistance);
+		
+		boolean see = Collision.stsXZ(s,visionDistance,
+				igs.player.position,igs.player.boundingSphereRadius);
+		
+		if(see){
+			target = player;
+		} else {
+			target = path.get(currentTarget);
+		}
 	}
 	
 	public void listenForNoise()
@@ -78,7 +94,7 @@ public class WalkingGuard extends Guard
 		}
 	}
 	
-	private void getNextTarget()
+	private void followPath()
 	{
 		if(currentTarget < path.size()-1)
 		{
