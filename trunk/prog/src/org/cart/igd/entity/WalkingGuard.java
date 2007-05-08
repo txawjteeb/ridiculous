@@ -44,6 +44,7 @@ public class WalkingGuard extends Guard
 	
 	public void update(long elapsedTime)
 	{
+		super.update(elapsedTime);
 		lookForPlayer();
 		listenForNoise();
 		

@@ -137,7 +137,10 @@ public class InGameState extends GameState
 
 		inventory = new Inventory(this);
 		
-		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, playerSprite);
+		/* create objAnimation of a flamingo*/
+		objAnimation = new OBJAnimation(gl,10,"data/models/flamingo/flamingo_0",90);
+		
+		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, objAnimation);
 		camera			= new Camera(player, 10f, 4f);
 		
 		/* special entity where animals are hidden after rescue place rescued 
@@ -147,7 +150,9 @@ public class InGameState extends GameState
 		/* guards as a whole unit */
 		guardSquad = new GuardSquad(this);
 		
-		objAnimation = new OBJAnimation(gl);
+		
+		
+		
 		/* add collectable object to the map */
 		
 		
@@ -377,7 +382,7 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
-		objAnimation.update(elapsedTime);
+		player.update(elapsedTime);
 		
 		/* reset guads be removing Noise entities TODO: make sure to call this once */
 		if(Kernel.userInput.keys[KeyEvent.VK_R]) guardSquad.reset();
@@ -440,8 +445,6 @@ public class InGameState extends GameState
 		
 		/* render the bush */
 		bush.render(gl);
-		
-		objAnimation.render(gl);
 		
 		/* Render Player Model */
 		player.render(gl);

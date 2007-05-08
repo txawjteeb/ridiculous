@@ -8,6 +8,7 @@ import javax.media.opengl.glu.GLU;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
+import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.discreet.Model;
 import java.util.*;
@@ -29,6 +30,7 @@ public abstract class Entity
 	public float speed = 0.01f;
 	public float turnSpeed = 0.1f;
 	
+	public OBJAnimation objAnimation;
 	public OBJModel modelObj;
 	public Model model3ds;
 
@@ -92,8 +94,17 @@ public abstract class Entity
 		globalId = globalIdCounter++;
 	}
 	
-	public void update(long elapseTime){
-		
+	public Entity(Vector3f pos, float fD, float bsr, OBJAnimation model)//, int id, File meshFile, File skinFile)// throws EntityException
+	{
+		this(pos,fD,bsr);
+		this.objAnimation = model;
+		globalId = globalIdCounter++;
+	}
+	
+	public void update(long elapsedTime){
+		if(objAnimation != null){
+			objAnimation.update(elapsedTime);
+		}
 	}
 	
 	/*
@@ -226,6 +237,9 @@ public abstract class Entity
 			//gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
+		}
+		if(objAnimation != null){
+			objAnimation.render(gl, position, facingDirection);
 		}
 	}
 	
