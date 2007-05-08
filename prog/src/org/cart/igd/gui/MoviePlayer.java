@@ -115,7 +115,7 @@ public class MoviePlayer extends GUI{
 				paused = false;
 			} else paused = true;
 		}
-		if(fastForwardMovie.isPressed()){ // lol fix this vitaly
+		if(fastForwardMovie.isPressed()){ //TODO: lol fix this vitaly
 			fastForward = true;
 		} else{
 			fastForward = false;

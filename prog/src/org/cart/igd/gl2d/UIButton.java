@@ -3,6 +3,9 @@ package org.cart.igd.gl2d;
 import org.cart.igd.util.Texture;
 import org.cart.igd.input.*;
 
+/**
+ * Render's textures with effects and containg GameAction to trigger when activated. 
+ **/
 public class UIButton extends UIComponent
 {
 	/* button special effect options*/
@@ -56,6 +59,9 @@ public class UIButton extends UIComponent
 		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
+	/**
+	 * called every loop to update button special effects. 
+	 **/
 	public void update(UserInput input,long elapsedTime)
 	{
 		if(input.isMouseOver(this)){
