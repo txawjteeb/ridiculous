@@ -291,10 +291,7 @@ public class InGameGUI extends GUI
 				selectedButton = null;
 			}
 			
-			
 			/* ----------- handle picking selection of entities ------------ */
-			//TODO also make items pickable
-			
 			Entity e = null;
 			if(picked){
 				e = igs.interactiveEntities.get(pickedId);

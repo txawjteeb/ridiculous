@@ -7,6 +7,10 @@
  */
 package org.cart.igd.core;
 
+/**
+ * qwfasdfasdf
+ **/
+
 public class Profiler extends Thread
 {
 	public long currentTime = System.currentTimeMillis();

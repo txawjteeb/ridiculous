@@ -136,7 +136,7 @@ public class InGameState extends GameState
 		inventory = new Inventory(this);
 		
 		/* create objAnimation of a flamingo*/
-		objAnimation = new OBJAnimation(gl,10,"data/models/flamingo/flamingo_0",90);
+		objAnimation = new OBJAnimation(gl,10,"data/models/flamingo/flamingo_0",300);
 		
 		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, objAnimation);
 		camera			= new Camera(player, 10f, 4f);
@@ -147,8 +147,6 @@ public class InGameState extends GameState
 		
 		/* guards as a whole unit */
 		guardSquad = new GuardSquad(this);
-		
-		objAnimation = new OBJAnimation(gl,10,"data/models/flamingo/flamingo_0",90);
 
 		
 		

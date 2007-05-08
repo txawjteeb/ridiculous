@@ -37,7 +37,7 @@ public class OBJAnimation {
 	
 	public void render(GL gl, Vector3f pos, float fd){
 		gl.glPushMatrix();
-		gl.glTranslatef(pos.x, pos.y, pos.z);
+		gl.glTranslatef(pos.x, pos.y -2f, pos.z);
 		gl.glRotatef( fd , 0f, -1f, 0f);
 		//gl.glScalef(scale.x,scale.y,scale.z);
 		model[modelIndex].draw(gl);
