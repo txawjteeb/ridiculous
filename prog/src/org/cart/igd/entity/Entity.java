@@ -243,6 +243,28 @@ public abstract class Entity
 		}
 	}
 	
+	public void renderLocation(GL gl, Vector3f position){
+		if(model3ds!= null){
+			gl.glPushMatrix();
+			gl.glTranslatef(position.x, position.y, position.z);
+			gl.glRotatef(facingDirection, 0f, -1f, 0f);
+			//gl.glScalef(.1f,.1f,.1f);
+			model3ds.render(gl);
+			gl.glPopMatrix();
+		}
+		if(modelObj!= null){
+			gl.glPushMatrix();
+			gl.glTranslatef(position.x, position.y -2f, position.z);
+			gl.glRotatef(facingDirection, 0f, -1f, 0f);
+			//gl.glScalef(scale.x,scale.y,scale.z);
+			modelObj.draw(gl);
+			gl.glPopMatrix();
+		}
+		if(objAnimation != null){
+			objAnimation.render(gl, position, facingDirection);
+		}
+	}
+	
 	public String getName(){
 		return "obj @ x: "+position.x+" y: "+position.y+" z "+position.z;
 	}

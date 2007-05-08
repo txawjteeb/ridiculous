@@ -124,12 +124,14 @@ public class MoviePlayer extends GUI{
 	}
 
 	public void render(GLGraphics g){
-		if(movie!=null){
 			
+		if(movie!=null){
+			g.glgBegin();
 			movie.render(g); // WHY IS IT NOT PRINTING?!?
 			g.drawBitmapString("Space to Pause Movie",300,300);
 			g.drawBitmapString("Enter to Skip Movie",300,200);
 			g.drawBitmapString("Control to FastForward Movie",300,100);
+			g.glgEnd();
 		}
 	}
 	
