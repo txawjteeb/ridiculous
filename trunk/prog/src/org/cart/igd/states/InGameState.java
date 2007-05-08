@@ -21,9 +21,7 @@ import org.cart.igd.discreet.*;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.gui.Dialogue;
-import org.cart.igd.gui.GUI;
-import org.cart.igd.gui.InGameGUI;
-import org.cart.igd.gui.PauseMenu;
+import org.cart.igd.gui.*;
 import org.cart.igd.input.GameAction;
 import org.cart.igd.input.PickingHandler;
 import org.cart.igd.input.UserInput;
@@ -150,9 +148,11 @@ public class InGameState extends GameState
 		/* guards as a whole unit */
 		guardSquad = new GuardSquad(this);
 		
+		objAnimation = new OBJAnimation(gl,10,"data/models/flamingo/flamingo_0",90);
+
 		
 		
-		
+
 		/* add collectable object to the map */
 		
 		
@@ -310,6 +310,7 @@ public class InGameState extends GameState
 		gui.add(new InGameGUI(this,gl,glu));
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
+		gui.add(new MoviePlayer(this));
 		backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
 		
 		guardSquad.init( gl, glu );
@@ -382,7 +383,11 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
+
+		objAnimation.update(elapsedTime);
+
 		player.update(elapsedTime);
+
 		
 		/* reset guads be removing Noise entities TODO: make sure to call this once */
 		if(Kernel.userInput.keys[KeyEvent.VK_R]) guardSquad.reset();
@@ -446,6 +451,10 @@ public class InGameState extends GameState
 		/* render the bush */
 		bush.render(gl);
 		
+
+		//objAnimation.render(gl);
+		
+
 		/* Render Player Model */
 		player.render(gl);
 		
@@ -521,39 +530,43 @@ public class InGameState extends GameState
 		previousCameraZoom = (int)camera.distance;
 		camera.zoom((float)Kernel.userInput.getMouseWheelMovement()*2f);
 		
-		if(mouseWheelScroll.isActive())
-		{
-			camera.zoom(mouseWheelScroll.getAmount());
-		}
-		
-		
-		/* Check for Escape key to end program */
-		if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
-		
-		/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
-		if(Kernel.userInput.keys[KeyEvent.VK_PAGE_UP])
-			camera.changeVerticalAngleDeg( 1);
-		else if(Kernel.userInput.keys[KeyEvent.VK_PAGE_DOWN])
-			camera.changeVerticalAngleDeg(-1);
-		
-		/* HOME/END - Inc./Dec. distance from camera to player. */
-		if(Kernel.userInput.keys[KeyEvent.VK_HOME])
-			camera.zoom(-1);
-		else if(Kernel.userInput.keys[KeyEvent.VK_END])
-			camera.zoom( 1);
+		if(currentGuiState==0){
+			if(mouseWheelScroll.isActive())
+			{
+				camera.zoom(mouseWheelScroll.getAmount());
+			}
 			
-		if(Kernel.userInput.keys[KeyEvent.VK_SPACE])
-		{
-			if(playerState==0)
-				playerState=1;
+		
+			/* Check for Escape key to end program */
+			if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
+			
+			/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
+			if(Kernel.userInput.keys[KeyEvent.VK_PAGE_UP])
+				camera.changeVerticalAngleDeg( 1);
+			else if(Kernel.userInput.keys[KeyEvent.VK_PAGE_DOWN])
+				camera.changeVerticalAngleDeg(-1);
+			
+			/* HOME/END - Inc./Dec. distance from camera to player. */
+			if(Kernel.userInput.keys[KeyEvent.VK_HOME])
+				camera.zoom(-1);
+			else if(Kernel.userInput.keys[KeyEvent.VK_END])
+				camera.zoom( 1);
+				
+			if(Kernel.userInput.keys[KeyEvent.VK_SPACE])
+			{
+				if(playerState==0)
+					playerState=1;
+			}
+			
+			if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
+				throwPartyPopper();
+			}
+			
+			if(Kernel.userInput.keys[KeyEvent.VK_END]){
+				((MoviePlayer)gui.get(3)).playMovie(0);
+			}			
 		}
 		
-		if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
-			throwPartyPopper();
-		}
-		
-		if(Kernel.userInput.keys[KeyEvent.VK_END]){
-			removePartyAnimals();
-		}
+
 	}
 }
