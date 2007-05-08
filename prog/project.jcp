@@ -845,5 +845,24 @@
 			</fileitem>
 		</include>
 	</files>
-	<tasks/>
+	<tasks>
+		<todotaskitem>
+			<description>TODO: enable when sound fixed</description>
+			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
+			<line>317</line>
+			<timestamp>1178661752</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: make sure to call this once */</description>
+			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
+			<line>394</line>
+			<timestamp>1178661752</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: re-enable when sound is fixed</description>
+			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
+			<line>524</line>
+			<timestamp>1178661752</timestamp>
+		</todotaskitem>
+	</tasks>
 </project>

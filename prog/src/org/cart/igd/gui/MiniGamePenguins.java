@@ -12,6 +12,7 @@ import org.cart.igd.game.*;
 import org.cart.igd.sound.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
+import org.cart.igd.math.*;
 
 public class MiniGamePenguins extends GUI{
 	
@@ -19,12 +20,14 @@ public class MiniGamePenguins extends GUI{
 	private UserInput input;
 	private GameAction panLeft = new GameAction("",false);
 	private GameAction panRight = new GameAction("",false);
-	private GameAction throwSnowball = new GameAction("",false);
+	private GameAction throwSlushiball = new GameAction("",false);
 
 	long timeToUpdate = 0;
 	long updateTime = 100;
 	
-	boolean rechargingSnowball = true;
+	long timeToGetSnowball = 2000;
+	long snowballTime= 0;
+	
 	boolean hasSnowball = false;
 			
 	public MiniGamePenguins(GameState gameState){
@@ -38,40 +41,65 @@ public class MiniGamePenguins extends GUI{
 	public void initInput()	{
 		input.bindToKey(panLeft, KeyEvent.VK_LEFT);
 		input.bindToKey(panRight, KeyEvent.VK_RIGHT);
-		input.bindToKey(throwSnowball, KeyEvent.VK_CONTROL);
+		input.bindToKey(throwSlushiball, KeyEvent.VK_CONTROL);
+	}
+	
+	public void startGame(){
+	//	if(igs.getAnimal("Penguin").state !=Inventory.SAVED_IN_PARTY){
+	//		return;
+	//	} 
+		((InGameState)gameState).changeGuiState(4);
+		
+	}
+	
+	public void update(long elapsedTime){
+		if(hasSnowball){
+			snowballTime = 0;
+		} else{
+			snowballTime += elapsedTime;
+			if(snowballTime>timeToGetSnowball){
+				hasSnowball = true;
+			}
+		}
+		timeToUpdate -= elapsedTime;
+
+		if(timeToUpdate<=0){
+			update();
+			timeToUpdate=updateTime;
+		}
 	}
 	
 	public void loadImages(){			
 		
 	}
 	
+	
 	public void loadSounds(){
 		try{
 		} catch(Exception e){	
 		}
 		
-	}
-	
-	public void update(long elapsedTime){
-		timeToUpdate -= elapsedTime;
-
-		if(timeToUpdate<=0){
-
-			timeToUpdate=updateTime;
-		}
-	}
-	
+	}	
 	public void handleInput(long elapsedTime){
 		//if(exitFromMovie.isActive()){
-			
 		//}
 	}
 
-	public void render(GL gl){
-		igs.getAnimal("Penguin").renderLocation(gl,igs.player.position);
+	public void render(GL gl,Animal a){
+		a.renderLocation(gl,((InGameState)igs).player.position);
+	//	Animal a = igs.getAnimal("Penguin");
+	//	if(a!=null){
+	//		System.out.println("fine");
+	//		a.render(gl);
+	//	}
+		
 	}
 	
 	public void render(GLGraphics g){
+		
+	}
+	
+	public void update(){
 		
 	}
 	
