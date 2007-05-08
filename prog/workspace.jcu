@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml?>
 <workspace_user>
 	<active_project>
 		<label>project</label>
@@ -93,13 +92,13 @@
 			<path>src\org\cart\igd\states\InGameState.java</path>
 			<source>true</source>
 			<index>3</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\entity\PartySnapper.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>src\org\cart\igd\gui\InGameGUI.java</path>
@@ -159,6 +158,30 @@
 			<path>..\..\..\..\Program Files\Xinox Software\JCreatorV4\start.zip</path>
 			<source>false</source>
 			<index>14</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\MoviePlayer.java</path>
+			<source>true</source>
+			<index>15</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\game\Item.java</path>
+			<source>true</source>
+			<index>16</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\input\GameAction.java</path>
+			<source>true</source>
+			<index>17</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\models\obj\OBJAnimation.java</path>
+			<source>true</source>
+			<index>18</index>
 			<active>false</active>
 		</docitem>
 	</open_files>
