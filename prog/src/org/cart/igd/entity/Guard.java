@@ -90,7 +90,7 @@ public class Guard extends Entity
 	}
 	
 	public void update(long elapsedTime){
-		System.out.println("must override");
+		super.update(elapsedTime);
 	}
 	
 	/** adjust yrotation to position of the target */

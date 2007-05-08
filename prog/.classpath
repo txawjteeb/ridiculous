@@ -4,8 +4,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="jogl.jar"/>
 	<classpathentry kind="lib" path="gluegen-rt.jar"/>
-	<classpathentry kind="lib" path="lwjgl.jar"/>
 	<classpathentry kind="lib" path="joal.jar"/>
+	<classpathentry kind="lib" path="lwjgl.jar"/>
 	<classpathentry kind="lib" path="commons-logging-api.jar"/>
 	<classpathentry kind="lib" path="jl1.0.jar"/>
 	<classpathentry kind="lib" path="jogg-0.0.7.jar"/>
