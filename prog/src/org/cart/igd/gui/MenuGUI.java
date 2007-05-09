@@ -29,33 +29,33 @@ public class MenuGUI extends GUI
 			"data/images/menu_gui/MainMenu_sa.png");
 		
 		texMenuButtons[0] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/play_01.png");
+			"data/images/menu_gui/start_button_jh.png");
 		texMenuButtons[1] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/play_02.png");
 		texMenuButtons[2] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/settings_01.png");
+			"data/images/menu_gui/options_button_jh.png");
 		texMenuButtons[3] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/settings_02.png");
 		texMenuButtons[4] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/credits_01.png");
+			"data/images/menu_gui/credits_button_jh.png");
 		texMenuButtons[5] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/credits_02.png");
 		texMenuButtons[6] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/exit_01.png");
+			"data/images/menu_gui/exit_button_jh.png");
 		texMenuButtons[7] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/exit_02.png");
 		
 		btMenu[0] = new GLRolloverButton(texMenuButtons[0],texMenuButtons[1],
-				100,512,256,128);
+				200,536,128,64);
 		
 		btMenu[1] = new GLRolloverButton(texMenuButtons[2],texMenuButtons[3],
-				100,382,256,128);
+				200,426,128,64);
 		
 		btMenu[2] = new GLRolloverButton(texMenuButtons[4],texMenuButtons[5],
-				100,256,256,128);
+				200,316,128,64);
 		
 		btMenu[3] = new GLRolloverButton(texMenuButtons[6],texMenuButtons[7],
-				100,128,256,128);
+				200,206,128,64);
 		
 	}
 	

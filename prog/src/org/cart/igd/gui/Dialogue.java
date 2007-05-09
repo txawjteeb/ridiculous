@@ -17,9 +17,8 @@ public class Dialogue extends GUI {
 	private UserInput input;
 	private Texture[] animalIcons = new Texture[10];
 	private Texture border;
-	private Texture leaf,fog;
-	private Texture leaves1024,background;
-	private float fogdegree  = 0f;
+	private Texture leaf;
+	private Texture background;
 	public float alphaBackground = 0f;
 	public boolean down = false;
 	public InGameState igs = null;
@@ -87,11 +86,8 @@ public class Dialogue extends GUI {
 		}
 		//dialogueBackground = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
 		border = Kernel.display.getRenderer().loadImage("data/images/dialogue/border.png");
-		
-		leaves1024 = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaves1024_cw.png");
+
 		background = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
-		leaf = Kernel.display.getRenderer().loadImage("data/images/dialogue/leaf.png");
-		fog = Kernel.display.getRenderer().loadImage("data/images/dialogue/fog.png");
 	}
 	
 	public void loadSounds(){
