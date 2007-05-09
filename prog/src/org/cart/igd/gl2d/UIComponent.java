@@ -5,8 +5,8 @@ import org.cart.igd.util.*;
 public abstract class UIComponent
 {
 	public String title = "";
-	private int x, y;
-	private int width, height;
+	protected int x, y;
+	protected int width, height;
 	public float[] rgb;
 	public boolean focused;
 	

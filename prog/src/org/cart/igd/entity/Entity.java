@@ -47,6 +47,8 @@ public abstract class Entity
 	
 	public float yRotationRad = 0f;
 	
+	public boolean walking = false;
+	
 	public Entity(Vector3f pos, float fD, float bsr)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
 		globalId = globalIdCounter++;
@@ -102,6 +104,7 @@ public abstract class Entity
 	}
 	
 	public void update(long elapsedTime){
+		walking = false;
 		if(objAnimation != null){
 			objAnimation.update(elapsedTime);
 		}
@@ -186,12 +189,14 @@ public abstract class Entity
 	
 	public final void walkForward(long elapsedTime)
 	{
+		walking = true;
 		position.x += ( ((float)elapsedTime * speed) * (float)Math.cos(facingDirection * 0.0174f) );
 		position.z += ( ((float)elapsedTime * speed) * (float)Math.sin(facingDirection * 0.0174f) );
 	}
 	
 	public final void walkBackward(long elapsedTime)
 	{
+		walking = true;
 		position.x -= ( ((float)elapsedTime * speed) * (float)Math.cos(facingDirection * 0.0174f) );
 		position.z -= ( ((float)elapsedTime * speed) * (float)Math.sin(facingDirection * 0.0174f) );
 	}

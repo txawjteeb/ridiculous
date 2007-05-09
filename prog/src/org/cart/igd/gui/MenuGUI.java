@@ -8,7 +8,9 @@ import org.cart.igd.states.*;
 
 public class MenuGUI extends GUI
 {
-	UILabel menuSelection[] = new UILabel[3];
+	Texture bg;
+	Texture texMenuButtons[] = new Texture[8];
+	GLRolloverButton btMenu[] = new GLRolloverButton[4];
 	
 	/** contains collision detection methods for UIComponents*/
 	private UserInput input;
@@ -23,25 +25,50 @@ public class MenuGUI extends GUI
 	
 	public void loadImages()
 	{
-		menuSelection[0] = new UILabel("Start Game", 200, 400, 200, 16);
-		menuSelection[0].size[0]=4;
-		menuSelection[0].size[1]=4;
-		menuSelection[1] = new UILabel("Options", 200, 300, 200, 16);
-		menuSelection[1].size[0]=4;
-		menuSelection[1].size[1]=4;
-		menuSelection[2] = new UILabel("Quit", 200, 200, 200, 16);
-		menuSelection[2].size[0]=4;
-		menuSelection[2].size[1]=4;
+		bg = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/MainMenu_sa.png");
+		
+		texMenuButtons[0] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/play_01.png");
+		texMenuButtons[1] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/play_02.png");
+		texMenuButtons[2] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/settings_01.png");
+		texMenuButtons[3] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/settings_02.png");
+		texMenuButtons[4] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/credits_01.png");
+		texMenuButtons[5] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/credits_02.png");
+		texMenuButtons[6] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/exit_01.png");
+		texMenuButtons[7] = Kernel.display.getRenderer().loadImage(
+			"data/images/menu_gui/exit_02.png");
+		
+		btMenu[0] = new GLRolloverButton(texMenuButtons[0],texMenuButtons[1],
+				100,512,256,128);
+		
+		btMenu[1] = new GLRolloverButton(texMenuButtons[2],texMenuButtons[3],
+				100,382,256,128);
+		
+		btMenu[2] = new GLRolloverButton(texMenuButtons[4],texMenuButtons[5],
+				100,256,256,128);
+		
+		btMenu[3] = new GLRolloverButton(texMenuButtons[6],texMenuButtons[7],
+				100,128,256,128);
+		
 	}
 	
 	public void update(long elapsedTime)
 	{
-		
+		for(GLRolloverButton b: btMenu){
+			b.update(input, elapsedTime);
+		}
 	}
 	
 	public void handleInput(long elapsedTime)
 	{
-		if(input.isSquareButtonPressed( menuSelection[0] ) )
+		if(input.isSquareButtonPressed( btMenu[0] ) )
 		{
 			System.out.println();
 			gameState.changeGameState("InGameState");
@@ -51,9 +78,10 @@ public class MenuGUI extends GUI
 	public void render(GLGraphics g)
 	{
 		g.glgBegin();
-		menuSelection[0].draw(g);
-		menuSelection[1].draw(g);
-		menuSelection[2].draw(g);
+		g.drawImage(bg, 0, 0);
+		for( GLRolloverButton b: btMenu){
+			b.draw(g);
+		}
 		g.glgEnd();
 	}
 		

@@ -1,5 +1,6 @@
 package org.cart.igd.game;
 
+import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
@@ -49,14 +50,28 @@ public class Animal extends Entity{
 	private InGameState igs;
 	private Vector3f bushLocation;
 	
-	public Animal(String name,int animalId,float fd, float bsr, OBJModel model, Vector3f location,InGameState igs, int itemWanted, Vector3f bushLocation){
+	public Animal(String name,int animalId,float fd, float bsr, OBJModel model, 
+			Vector3f location,InGameState igs, int itemWanted, Vector3f bushLocation){
 		super(location,fd,bsr, model);
 		this.name = name;
 		this.animalId = animalId;
 		this.igs = igs;	
 		this.itemWanted = itemWanted;
 		this.bushLocation = bushLocation;
-	}	
+	}
+	
+	/**
+	 * with OBJAnimation
+	 **/
+	public Animal(String name,int animalId,float fd, float bsr, 
+			OBJAnimation model, Vector3f location,InGameState igs, int itemWanted, Vector3f bushLocation){
+		super(location,fd,bsr, model);
+		this.name = name;
+		this.animalId = animalId;
+		this.igs = igs;	
+		this.itemWanted = itemWanted;
+		this.bushLocation = bushLocation;
+	}
 		
 	public boolean talkable(){
 		if(state==SAVED_BUSH || state == SAVED_PARTY) return false;
@@ -84,6 +99,10 @@ public class Animal extends Entity{
 				Collide = false;
 			}
 		}*/
+	}
+	
+	public void update(long elapsedTime){
+		super.update(elapsedTime);
 	}
 	
 	public int getState(){
