@@ -89,7 +89,8 @@ public class InGameState extends GameState
 	public Sound turnPage[] = new Sound[4];
 	
 	public GuardSquad guardSquad;
-	public OBJAnimation objAnimation;
+	public OBJAnimation flamingoWalk;
+	public OBJAnimation flamingoIdle;
 	
 	public InGameState(GL gl)
 	{
@@ -136,9 +137,10 @@ public class InGameState extends GameState
 		inventory = new Inventory(this);
 		
 		/* create objAnimation of a flamingo*/
-		objAnimation = new OBJAnimation(gl,10,"data/models/flamingo/flamingo_0",300);
+		flamingoWalk = new OBJAnimation(gl,10,"data/models/turtle",105);
+		flamingoIdle = new OBJAnimation(gl,10,"data/models/flamingo",500);
 		
-		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, objAnimation);
+		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, flamingoWalk,flamingoIdle);
 		camera			= new Camera(player, 10f, 4f);
 		
 		/* special entity where animals are hidden after rescue place rescued 
@@ -217,7 +219,7 @@ public class InGameState extends GameState
 */
 		/* add animals to the map */
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
-				new OBJModel(gl,"data/models/turtle", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
@@ -337,6 +339,7 @@ public class InGameState extends GameState
 		for( Entity e : interactiveEntities ){
 			if(e instanceof Animal){
 				((Animal)e).update(player.position);
+				((Animal)e).update(elapsedTime);
 			} else {
 				e.update(elapsedTime);
 			}
@@ -382,9 +385,6 @@ public class InGameState extends GameState
 	 
 	public void update(long elapsedTime)
 	{
-
-		objAnimation.update(elapsedTime);
-
 		player.update(elapsedTime);
 
 		

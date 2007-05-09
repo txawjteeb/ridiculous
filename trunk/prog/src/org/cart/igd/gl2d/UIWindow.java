@@ -6,6 +6,10 @@ import org.cart.igd.Display;
 import org.cart.igd.input.UserInput;
 import org.cart.igd.core.*;
 
+
+/**
+ * Container for GUI Components 
+ **/
 public class UIWindow extends UIComponent
 {
 	public ArrayList<UIComponent> components = new ArrayList<UIComponent>();
