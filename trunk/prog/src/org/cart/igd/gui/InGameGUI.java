@@ -49,8 +49,7 @@ public class InGameGUI extends GUI
 	private Texture texPaw[] = new Texture[10];
 
 	/* button containers */
-	private UIWindow hudBottom;// quest log and item buttons
-	private UIWindow hudLeft; // bush button with animals
+	private UIWindow hudLeft; 
 	private UIWindow hudGroup;
 
 	private UIButton btBushAnimals[] = new UIButton[10];
@@ -533,7 +532,6 @@ public class InGameGUI extends GUI
 	public void loadGUI() {
 		/** ** init gui elements *** */
 		// invisible pane that holds the elements
-		hudBottom = new UIWindow("", 0, 0, false);
 		hudLeft = new UIWindow("", 0, 0, false);
 		hudGroup = new UIWindow("", 0, 0, false);
 		

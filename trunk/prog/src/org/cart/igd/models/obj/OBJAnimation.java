@@ -4,6 +4,12 @@ import javax.media.opengl.GL;
 
 import org.cart.igd.math.Vector3f;
 
+
+/**
+ * OBJAnimation.java
+ * 
+ * Purpose: 
+ */
 public class OBJAnimation {
 	long frameDelay;
 	long timeLeft;

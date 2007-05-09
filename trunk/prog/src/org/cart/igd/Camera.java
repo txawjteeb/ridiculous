@@ -1,15 +1,9 @@
 package org.cart.igd;
 
-import java.awt.Point;
-
 import javax.media.opengl.glu.GLU;
-import javax.media.opengl.GL;
 
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.entity.Entity;
-
-import org.cart.igd.input.*;
-import java.awt.event.MouseEvent;
 
 /**
  * Camera.java
@@ -19,8 +13,6 @@ import java.awt.event.MouseEvent;
  */
 public class Camera
 {
-	/* Instance of player entity. */
-	private Entity player;
 	
 	/* Camera's Position Vector. */
 	private Vector3f cameraPos = new Vector3f();
@@ -50,7 +42,6 @@ public class Camera
 	 */
 	public Camera(Entity player, float distance, float degCameraAngle)
 	{
-		this.player = player;
 		cameraPos = new Vector3f();
 		cameraUp = new Vector3f(0f, 2f, 0f);
 		this.verticalAngle = degCameraAngle*.0174532925f;

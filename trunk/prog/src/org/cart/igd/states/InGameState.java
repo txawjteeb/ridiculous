@@ -94,6 +94,7 @@ public class InGameState extends GameState
 	public GuardSquad guardSquad;
 	public OBJAnimation flamingoWalk;
 	public OBJAnimation flamingoIdle;
+	//public OBJAnimation turtleIdle;
 	
 	public InGameState(GL gl)
 	{
@@ -140,8 +141,10 @@ public class InGameState extends GameState
 		inventory = new Inventory(this);
 		
 		/* create objAnimation of a flamingo*/
-		flamingoWalk = new OBJAnimation(gl,10,"data/models/turtle",105);
+		flamingoWalk = new OBJAnimation(gl,10,"data/models/flamingo",105);
 		flamingoIdle = new OBJAnimation(gl,10,"data/models/flamingo",500);
+		
+		//turtleIdle = new OBJAnimation(gl,10,"data/models/flamingo",500);
 		
 		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, flamingoWalk,flamingoIdle);
 		camera			= new Camera(player, 10f, 4f);
@@ -226,7 +229,7 @@ public class InGameState extends GameState
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
-				flamingoWalk, 
+				flamingoIdle, 
 				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
 				
 		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
@@ -511,9 +514,11 @@ public class InGameState extends GameState
 		terrain.render( gl, player);
 		
 		/* Render GUI */
-		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
 		if(currentGuiState==4){
 			((MiniGamePenguins)gui.get(currentGuiState)).render( gl,getAnimal("Elephant"));
+		}else{
+			gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
+			
 		}
 	}
 	
