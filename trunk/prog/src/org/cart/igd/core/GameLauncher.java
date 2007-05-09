@@ -12,24 +12,50 @@ import javax.swing.JFrame;
 import org.cart.igd.Display;
 import org.cart.igd.DisplaySettings;
 
-public class GameLauncher extends JFrame{
+/**
+ * GamerLauncer.java
+ *
+ * General Function:
+ * A JFrame that allows for custom settings to send to DisplaySettings.
+ */
+public class GameLauncher extends JFrame
+{
+	/* The JFrame's title. */
 	String title = "project ridiculous";
-
+	
+	/* Fullscreen flag. */
 	public boolean fullscreen;
+	
+	/* DisplaySetting width. */
 	public int w;
+	
+	/* DisplaySetting height. */
 	public int h;
 	
+	/* Instance of Kernel class. */
 	private Kernel kernel;
 	
+	/* Java ComboBox */
 	JComboBox jcbResolution;
+	
+	/* Java CheckBox */
 	JCheckBox jcbFullscreen;
+	
+	/* Java Button */
 	JButton jbOk;
 	
-    public GameLauncher(Kernel sanders) {
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of GameLauncher.
+	 */
+    public GameLauncher(Kernel sanders)
+    {
+    	/* INCOMING PUN, NUB! */
     	kernel = sanders;
+    	
     	setLayout(new FlowLayout());
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	//setSize(new Dimension(400,300));
     	setTitle("Game Launcher: Zoo Escape");
     	setSize(400,300);
     	setLocation( 
@@ -47,24 +73,20 @@ public class GameLauncher extends JFrame{
 		};
 		
     	fullscreen = false;
-    	
-    	
     	jcbResolution = new JComboBox(p);
 		jcbResolution.setMaximumRowCount(6);
     	add(jcbResolution);
     	
-    	//causes problme if jcbResolution is not validated after change
-    	jcbResolution.setSelectedIndex(2);//default 1024 by 768
+    	/* Causes problem if jcbResolution is not validated after change */
+    	jcbResolution.setSelectedIndex(2);
     	
-    	//off by default
+    	/* off by default */
     	jcbFullscreen = new JCheckBox("Full Screen Mode",false);
     	add(jcbFullscreen);
     		
-    		
     	jbOk = new JButton("Accept");
     	add(jbOk);
-    	
-    	setVisible(true);
+       	setVisible(true);
     	
     	//this fixed for full screen selection problem when seting a default
     	validate();
@@ -72,8 +94,10 @@ public class GameLauncher extends JFrame{
     	jcbFullscreen.validate();
     	
     	jbOk.addActionListener(
-    		new ActionListener() {
-    			public void actionPerformed(ActionEvent e){
+    		new ActionListener()
+    		{
+    			public void actionPerformed(ActionEvent e)
+    			{
     				updateInfo();
     				kernel.init(new DisplaySettings(w,h,fullscreen));
     			}
@@ -82,29 +106,30 @@ public class GameLauncher extends JFrame{
     	);
     	
     	jcbResolution.addKeyListener(
-        	new KeyAdapter() {
-        		public void keyPressed(KeyEvent e){
-        			if(e.getKeyCode()==KeyEvent.VK_ENTER){
+        	new KeyAdapter()
+        	{
+        		public void keyPressed(KeyEvent e)
+        		{
+        			if(e.getKeyCode()==KeyEvent.VK_ENTER)
+        			{
         				updateInfo();
         				kernel.init(new DisplaySettings(w,h,fullscreen));
         			}
         		}
         	}
         );
-    	
-		
     }
     
-    public void updateInfo(){
-    	//String s=jcbResolution.getSelectedItem().toString();
-		
-		//this did not fix the full screen resolution problem	
+    /**
+     * updateInfo
+     *
+     * General Function: Updates the DisplaySettings.
+     */
+    public void updateInfo()
+    {
     	String s=jcbResolution.getItemAt(jcbResolution.getSelectedIndex()).toString();
-			
     	w = Integer.parseInt(s.substring(0, s.indexOf(" ")));
-    	System.out.println("w"+w);
 		h = Integer.parseInt(s.substring(s.indexOf(" ")+4));
-		System.out.println("h"+h);    	
     	fullscreen = jcbFullscreen.isSelected();
     }
 }
