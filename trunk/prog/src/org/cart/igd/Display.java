@@ -21,19 +21,46 @@ import com.sun.opengl.util.FPSAnimator;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.input.UserInput;
 
+/**
+ * Display.java
+ *
+ * General Function:
+ * Creates the window for OpenGL to draw onto.
+ */
 public class Display implements WindowListener
 {
+	/* Filler variable for DisplayModes */
 	private static final int DONT_CARE = -1;
 	
+	/* Instance of Renderer class. */
 	public Renderer renderer;
 	
+	/* JFrame to render to. */
 	public static JFrame frame;
+	
+	/* GLCanvas attaches to the render frame and is manipulated by GL. */
 	private GLCanvas glCanvas;
+	
+	/* FPSAnimator runs a managed loop for the engine. */
 	private FPSAnimator animator;
+	
+	/* Flag for fullscreen. */
 	private boolean fullscreen;
-	private int width, height;
+	
+	/* Width of the Display window. */
+	private int width
+	
+	/* Height of the Display window. */
+	private int height;
+	
+	/* GraphicsDevice that is being used. */
 	private GraphicsDevice usedDevice;
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Display
+	 */
 	public Display( DisplaySettings disp )
 	{	
 		boolean tmpFs = disp.fullscreen;
@@ -42,25 +69,34 @@ public class Display implements WindowListener
 		createDisplay( disp.title, tmpW,tmpH, tmpFs );
 	}
 	
+	/**
+	 * createDisplay
+	 *
+	 * General Function: Creates a public instance of Display with pre-specified settings.
+	 */
 	public void createDisplay( String title, int width, int height, boolean fullscreen )
 	{
+		/* Setup GLCapabilities for GLCanvas. */
 		GLCapabilities glc = new GLCapabilities();
 		glc.setDoubleBuffered(true);
 		glc.setSampleBuffers(true);
 		glc.setNumSamples(4);
 		
+		/* Initialize GLCanvas to be attached to Display frame. */
 		glCanvas = new GLCanvas( glc );
 		glCanvas.setSize( width, height );
 		glCanvas.setBackground( Color.BLACK );
 		glCanvas.setIgnoreRepaint( true );
 		glCanvas.addGLEventListener( ( renderer = new Renderer() ) );
 		
+		/* Initialize the Display frame. */
 		frame = new JFrame( title );
 		frame.getContentPane().setLayout( new BorderLayout() );
 		frame.getContentPane().add( glCanvas, BorderLayout.CENTER );
 		frame.setResizable(false);
 		frame.setLocation(0, 0);
 		
+		/* Set an invisible cursor of the window. */
 		java.awt.image.BufferedImage tmp = frame.getGraphicsConfiguration().createCompatibleImage(1, 1, java.awt.Transparency.BITMASK);
 		java.awt.Graphics2D g2 = tmp.createGraphics();
 		g2.setBackground(new Color(0,0,0,0));
@@ -72,21 +108,37 @@ public class Display implements WindowListener
 		this.width = width;
 		this.height = height;
 		
-		//make it run at max speed 100fps on pentiums or 64fps on amd64
+		/* Make the engine run at max speed. 100fps on Pentiums or 64fps on AMD64. */
 		animator = new FPSAnimator( glCanvas, 100 );
 		animator.setRunAsFastAsPossible( true );
 		Kernel.displayRunning = true;
 	}
 	
-	public Renderer getRenderer(){
+	/**
+	 * getRenderer
+	 *
+	 * General Function: Return an instance of Renderer.
+	 */
+	public Renderer getRenderer()
+	{
 		return renderer;
 	}
 	
+	/**
+	 * getGLCanvas
+	 *
+	 * General Function: Return an instance of GLCanvas.
+	 */
 	public Component getGLCanvas()
 	{
 		return glCanvas;
 	}
 	
+	/**
+	 * start
+	 *
+	 * General Function: Starts the engine through Display.
+	 */
 	public void start()
 	{
 		try
@@ -134,6 +186,11 @@ public class Display implements WindowListener
 		}
 	}
 	
+	/**
+	 * stop
+	 *
+	 * General Function: Stops the engine and kills Display.
+	 */
 	public void stop()
 	{
 		Kernel.displayRunning = false;
@@ -151,93 +208,156 @@ public class Display implements WindowListener
 		finally { System.exit( 0 ); }
 	}
 	
-	private DisplayMode findDisplayMode( 
-				DisplayMode[] displayModes, 
-				int requestedWidth, 
-				int requestedHeight, 
-				int requestedDepth, 
-				int requestedRefreshRate )
+	/**
+	 * findDisplayMode
+	 *
+	 * General Function: Finds a DisplayMode to use.
+	 */
+	private DisplayMode findDisplayMode( DisplayMode[] displayModes, int requestedWidth, int requestedHeight, int requestedDepth, int requestedRefreshRate )
 	{
-		DisplayMode displayMode = findDisplayModeInternal( 
-				displayModes, 
-				requestedWidth, 
-				requestedHeight, 
-				requestedDepth, 
-				requestedRefreshRate );
+		DisplayMode displayMode = findDisplayModeInternal( displayModes, requestedWidth, requestedHeight, requestedDepth, requestedRefreshRate );
 
-		if(displayMode == null)
-			displayMode = findDisplayModeInternal( 
-				displayModes, 
-				requestedWidth, 
-				requestedHeight, 
-				DONT_CARE, 
-				DONT_CARE );
-			
-		if(displayMode == null)
-			displayMode = findDisplayModeInternal( 
-				displayModes, 
-				requestedWidth, 
-				DONT_CARE, 
-				DONT_CARE, 
-				DONT_CARE );
-		
-		if(displayMode == null)
-			displayMode = findDisplayModeInternal( 
-				displayModes, 
-				DONT_CARE, 
-				DONT_CARE, 
-				DONT_CARE, 
-				DONT_CARE );
+		if(displayMode==null)
+		{
+			displayMode = findDisplayModeInternal( displayModes, requestedWidth, requestedHeight, DONT_CARE, DONT_CARE );
+		}
+		if(displayMode==null)
+		{
+			displayMode = findDisplayModeInternal( displayModes, requestedWidth, DONT_CARE, DONT_CARE, DONT_CARE );
+		}
+		if(displayMode==null)
+		{
+			displayMode = findDisplayModeInternal( displayModes, DONT_CARE, DONT_CARE, DONT_CARE, DONT_CARE );
+		}
 		
 		return displayMode;
-	}// findDisplayMode()
+	}
 	
-	private DisplayMode findDisplayModeInternal( 
-				DisplayMode[] displayModes, 
-				int requestedWidth, 
-				int requestedHeight, 
-				int requestedDepth, 
-				int requestedRefreshRate ) 
+	/**
+	 * findDisplayModeInternal
+	 *
+	 * General Function: Finds a DisplayMode, using the java object DisplayMode.
+	 */
+	private DisplayMode findDisplayModeInternal( DisplayMode[] displayModes, int requestedWidth, int requestedHeight, int requestedDepth, int requestedRefreshRate ) 
 	{
 		DisplayMode displayModeToUse = null;
 		for(int i=0; i<displayModes.length; i++)
 		{
 			DisplayMode displayMode = displayModes[i];
-			if(	(requestedWidth == DONT_CARE || 
-					displayMode.getWidth() == 
-						requestedWidth) &&
-				(requestedHeight == DONT_CARE || 
-					displayMode.getHeight() == 
-						requestedHeight ) &&
-				(requestedHeight == DONT_CARE || 
-					displayMode.getRefreshRate() == 
-						requestedRefreshRate) &&
-				(requestedDepth == DONT_CARE || 
-					displayMode.getBitDepth() == 
-						requestedDepth))
+			if(	(requestedWidth==DONT_CARE || displayMode.getWidth()==requestedWidth) &&
+				(requestedHeight==DONT_CARE || displayMode.getHeight()==requestedHeight ) &&
+				(requestedHeight==DONT_CARE || displayMode.getRefreshRate()==requestedRefreshRate) &&
+				(requestedDepth==DONT_CARE || displayMode.getBitDepth()==requestedDepth))
 			{
 				displayModeToUse = displayMode;
 			}
-					
 		}
-		
-		return displayModeToUse;
-	}// findDisplayModeInternal()
 
-	public String getTitle() { return frame.getTitle(); }
+		return displayModeToUse;
+	}
+
+	/**
+	 * getTitle
+	 *
+	 * General Function: Returns the title of the Display frame.
+	 */
+	public String getTitle()
+	{
+		return frame.getTitle();
+	}
 	
-	public void setTitle( String title ) { frame.setTitle( title ); }
+	/**
+	 * setTitle
+	 *
+	 * General Function: Assigns a new String variable as the Display frame's title.
+	 */
+	public void setTitle( String title )
+	{
+		frame.setTitle( title );
+	}
 	
-	/* fixes mouse click position in windowed mode by getting size of drawable canvas*/
-	public int getScreenWidth() { return glCanvas.getWidth();}
-	public int getScreenHeight() { return glCanvas.getHeight();}
+	/**
+	 * getScreenWidth
+	 *
+	 * General Function: Returns the GLCanvas width.
+	 */
+	public int getScreenWidth()
+	{
+		return glCanvas.getWidth();
+	}
 	
-	public void windowActivated(WindowEvent e) {  }
-	public void windowDeactivated(WindowEvent e) {  }
-	public void windowDeiconified(WindowEvent e) {  }
-	public void windowIconified(WindowEvent e) {  }
-	public void windowClosing(WindowEvent e) { stop(); }
-	public void windowClosed(WindowEvent e) {}
-	public void windowOpened(WindowEvent e) {}
+	/**
+	 * getScreenHeight
+	 *
+	 * General Function: Returns the GLCanvas height.
+	 */
+	public int getScreenHeight()
+	{
+		return glCanvas.getHeight();
+	}
+	
+	/**
+	 * windowActivated
+	 *
+	 * General Function: Required method from WindowListener.
+	 */
+	public void windowActivated(WindowEvent e)
+	{
+	}
+	
+	/**
+	 * windowDeactivated
+	 *
+	 * General Function: Required method from WindowListener.
+	 */
+	public void windowDeactivated(WindowEvent e)
+	{
+	}
+	
+	/**
+	 * windowDeiconified
+	 *
+	 * General Function: Required method from WindowListener.
+	 */
+	public void windowDeiconified(WindowEvent e)
+	{
+	}
+	
+	/**
+	 * windowIconified
+	 *
+	 * General Function: Required method from WindowListener.
+	 */
+	public void windowIconified(WindowEvent e)
+	{
+	}
+	
+	/**
+	 * windowClosing
+	 *
+	 * General Function: Required method from WindowListener. Also stops the engine.
+	 */
+	public void windowClosing(WindowEvent e)
+	{
+		stop();
+	}
+	
+	/**
+	 * windowClosed
+	 *
+	 * General Function: Required method from WindowListener.
+	 */
+	public void windowClosed(WindowEvent e)
+	{
+	}
+	
+	/**
+	 * windowOpened
+	 *
+	 * General Function: Required method from WindowListener.
+	 */
+	public void windowOpened(WindowEvent e)
+	{
+	}
 
 }
