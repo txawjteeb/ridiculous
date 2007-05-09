@@ -1,25 +1,37 @@
-/**
- * @(#)DisplaySettings.java
- *
- *
- * @author Vitaly Maximov
- * @version 1.00 2007/4/5
- */
  package org.cart.igd;
  
- import javax.swing.*;
- import java.awt.event.*;
- import java.awt.*;
- import org.cart.igd.core.*;
- 
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
+import org.cart.igd.core.*;
+
+/**
+ * DisplaySettings.java
+ *
+ * General Function:
+ * Holds the settings for the engine's Display.
+ */
 public class DisplaySettings
 {
+	/* Display frame's title. */
 	public String title;
+	
+	/* Fullscreen flag. */
 	public boolean fullscreen;
+	
+	/* Display's width. */
 	public int w;
+	
+	/* Display's height. */
 	public int h;
 	
-    public DisplaySettings(int w,int h, boolean fs) {	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of DisplaySettings.
+	 */
+    public DisplaySettings(int w,int h, boolean fs)
+    {	
     	this.h = h;
     	this.w = w;
     	fullscreen = fs;

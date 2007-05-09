@@ -1,12 +1,3 @@
-/*
- * Renderer
- *
- * {version info}
- * March 31, 2007 Spencer Allen  (major revision, comments, general function )
- * April 01, 2007 Vitaly Maximov (comments/suggestions(NOTE) for future revision)
- *
- * {copyright}
- */
 package org.cart.igd;
 
 import javax.media.opengl.*;
@@ -19,30 +10,60 @@ import org.cart.igd.states.*;
 import org.cart.igd.util.TextureLoader;
 import org.cart.igd.util.Texture;
 
+/*
+ * Renderer.java
+ *
+ * General Function:
+ * This class handles where to pass game control to,
+ * using a GameStateManager.  The Renderer also keeps
+ * track of FPS and sets of the OpenGL environments.
+ */
 public class Renderer implements GLEventListener
 {
+	/* GameStateManager instance. */
 	private GameStateManager stateManager;
+	
+	/* TextureLoader instance. */
 	private TextureLoader textureLoader;
 
+	/* GLU instance. */
 	private GLU glu = new GLU();
+	
+	/* GLUT instance. */
 	private GLUT glut = new GLUT();
+	
+	/* 2D extension for easier rendering through GL. */
 	private GLGraphics g;
-	private GL gl;
 	
-	private float lightAmbient[] = {0.2f, 0.2f, 0.2f};		// Ambient Light is 20% white
-    private float lightDiffuse[] = {1.0f, 1.0f, 1.0f};		// Diffuse Light is white
-    private float lightPosition[] = {0.0f, 10.0f, 0.0f};	// Position is somewhat in front of screen
+	/* GL instance. */
+	private GL gl;										
 	
+	/* Ambient Light is 20% white */
+	private float lightAmbient[] = {0.2f, 0.2f, 0.2f};
+	
+	/* Diffuse Light is white */
+    private float lightDiffuse[] = {1.0f, 1.0f, 1.0f};
+    
+    /* Position is somewhat in front of screen */
+    private float lightPosition[] = {0.0f, 10.0f, 0.0f};
+	
+	/* Frame count for each second. */
 	public int frameCount = 0;
+	
+	/* Frames per second of the engine. */
 	public int fps = 0;
+	
+	/* The last system time in milliseconds that the FPS was calculated. */
 	public long lastFPSCheck;
+	
+	/* Polygon counter. */
 	public int polyCount = 0;
+	
+	/* Last system time, set by each engine loop. */
 	public long lastTime;
 	
-	public static String info[]= {
-		"","","","","","","","","","","",""
-	};
-	
+	/* Debuging information array */
+	public static String info[] = { "","","","","","","","","","","","" };
 	
 	/*
 	 * Constructor
@@ -53,8 +74,7 @@ public class Renderer implements GLEventListener
 	{
 		textureLoader = new TextureLoader();
 		stateManager = new GameStateManager();
-	}
-	
+	}	
 	
 	/*
 	 * init
@@ -63,27 +83,28 @@ public class Renderer implements GLEventListener
 	 */
 	public void init(GLAutoDrawable drawable)
 	{
+		/* Grab the GL instance from GLAutoDrawable */
 		gl = drawable.getGL();
 		
-		//printAAStats(gl);	// Print out the stats for Multi-Sampling and buffers
-
-		gl.glClearColor( 0f, 0f, 0f, 1f );	// Background
-		gl.glClearDepth(1.0f);				// Depth Buffer Setup
-		gl.glClearStencil(0);				// Clear the Stencil Buffer to 0
+		gl.glClearColor( 0.0f, 0.0f, 0.0f, 1.0f );	/* Background */
+		gl.glClearDepth(1.0f);				/* Depth Buffer Setup */
+		gl.glClearStencil(0);				/* Clear the Stencil Buffer to 0 */
 		
 		gl.glLightModelfv(GL.GL_LIGHT_MODEL_AMBIENT, new float[] {0.25f,0.25f,0.25f,1f}, 0 );
-		gl.glShadeModel(GL.GL_SMOOTH);		// Enable Smooth Shading
-		gl.glDepthFunc(GL.GL_LEQUAL);		// Depth Testing Type
+		gl.glShadeModel(GL.GL_SMOOTH);		/* Enable Smooth Shading */
+		gl.glDepthFunc(GL.GL_LEQUAL);		/* Depth Testing Type */
 		gl.glFrontFace(GL.GL_CCW);
-	    gl.glCullFace(GL.GL_BACK);
-	    gl.glEnable(GL.GL_CULL_FACE);		// Enable Culling of Faces
-		gl.glEnable(GL.GL_DEPTH_TEST);		// Enable Depth Testing
-		gl.glEnable(GL.GL_AUTO_NORMAL);		// Auto-Normal Lighting
-		gl.glEnable(GL.GL_NORMALIZE);		// Normalize for Lighting
-		gl.glEnable(GL.GL_MULTISAMPLE);		// Enable Multi-Sampling
+	    gl.glCullFace(GL.GL_BACK);			/* Set Cull Face to Back faces only */
+	    gl.glEnable(GL.GL_CULL_FACE);		/* Enable Culling of Faces */
+		gl.glEnable(GL.GL_DEPTH_TEST);		/* Enable Depth Testing */
+		gl.glEnable(GL.GL_AUTO_NORMAL);		/* Auto-Normal Lighting */
+		gl.glEnable(GL.GL_NORMALIZE);		/* Normalize for Lighting */
+		gl.glEnable(GL.GL_MULTISAMPLE);		/* Enable Multi-Sampling */
 		
+		/* Set perspective correction to Nicest setting. */
 		gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
 		
+		/* Initialize the 3d environment lighting. */
 		initLighting(gl);
 		
 		/* Create the GLGraphics object for rendering 2D GUI. */
@@ -96,24 +117,33 @@ public class Renderer implements GLEventListener
 	}
 	
 	/** 
-	 * Initialize Game States 
-	 * check for completion of game state before attempting to update 
+	 * initGameStates
+	 * 
+	 * General Function: Checks for completion of game state before attempting to update 
 	 **/
-	public void initGameStates(GL gl){
+	public void initGameStates(GL gl)
+	{
 		stateManager.addGameState(new MenuState(gl),"MenuState");
 		stateManager.addGameState(new InGameState(gl),"InGameState");
 		stateManager.setCurrentState("MenuState");
 		stateManager.initStates(gl, glu);
 	}
 	
-	
-	public GameStateManager getStateManager(){
+	/**
+	 * getStateManager
+	 *
+	 * General Function: Returns the renderer's GameStateManager.
+	 */
+	public GameStateManager getStateManager()
+	{
 		return stateManager;
 	}
 	
-	/** 
-	 * Enable and setup lighting 
-	 **/
+	/**
+	 * initLighting
+	 *
+	 * General Function: Enable and setup lighting.
+	 */
 	private void initLighting(GL gl)
 	{
 		gl.glEnable(GL.GL_LIGHT0);
@@ -130,7 +160,6 @@ public class Renderer implements GLEventListener
 		gl.glLightfv(GL.GL_LIGHT0, GL.GL_POSITION, position, 0);
 	}
 	
-	
 	/*
 	 * display
 	 *
@@ -138,13 +167,16 @@ public class Renderer implements GLEventListener
 	 */
 	public void display(GLAutoDrawable drawable)
 	{
-		gl = drawable.getGL();	// Update GL instance
+		/* Update GL instance */
+		gl = drawable.getGL();
 		
-		long elapsedTime = getElapsedTime();	// calculate elapsed time
+		/* calculate elapsed time */
+		long elapsedTime = getElapsedTime();
 		
 		/* Call current game state methods */
 		GameState currentState = stateManager.getCurrentState();
-		if(currentState.changeState){
+		if(currentState.changeState)
+		{
 			currentState.changeState = false;
 			stateManager.setCurrentState(currentState.nextState);
 			currentState = stateManager.getCurrentState();
@@ -176,7 +208,6 @@ public class Renderer implements GLEventListener
 		gl.glLoadIdentity();
 	}
 	
-	
 	/*
 	 * displayChanged
 	 *
@@ -186,7 +217,6 @@ public class Renderer implements GLEventListener
 	{
 		init(drawable);
 	}
-
 
 	/*
 	 * getElapsedTime
@@ -210,11 +240,8 @@ public class Renderer implements GLEventListener
 		return elapsedTime;
 	}
 	
-	
 	/*
 	 * printAAStats
-	 *
-	 * Expected Input: GL reference object.
 	 *
 	 * General function: Prints out stats that have to deal with Multi-Sampling for anti-aliasing.
 	 */
@@ -236,7 +263,6 @@ public class Renderer implements GLEventListener
 		gl.glGetIntegerv(GL.GL_SAMPLES, sbuf, 0);
 		System.out.println("number of samples is "+sbuf[0]);
 	}
-	
 	
 	/*
 	 * renderStats
@@ -269,14 +295,15 @@ public class Renderer implements GLEventListener
 		glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, "Polygon(s): " + polyCount);
 		
 		int inc = 0;
-		for(String s: info){
+		for(String s: info)
+		{
 			inc ++;
-			if( !s.equals("") && s != null){
+			if( !s.equals("") && s != null)
+			{
 				gl.glRasterPos2f(15, 36+(inc*16));
 				glut.glutBitmapString(GLUT.BITMAP_HELVETICA_12, s);
 			}
 		}
-		
 		
 		gl.glEnable(GL.GL_TEXTURE_2D);
 		gl.glEnable(GL.GL_LIGHTING);
@@ -288,42 +315,71 @@ public class Renderer implements GLEventListener
 		gl.glPopMatrix ();
 	}
 	
-	
+	/**
+	 * getTextureLoader
+	 *
+	 * General Function: Returns a reference to TextureLoader.
+	 */
 	public TextureLoader getTextureLoader()
 	{
 		return textureLoader;
 	}
 	
-	
+	/**
+	 * getGameStateManager
+	 *
+	 * General Function: Return a reference to GameStateManager.
+	 */
 	public GameStateManager getGameStateManager()
 	{
 		return stateManager;
 	}
 	
-	
+	/**
+	 * getGLG
+	 *
+	 * General Function: Returns a reference to GLGraphics.
+	 */
 	public GLGraphics getGLG()
 	{
 		return g;
 	}
 	
-	
+	/**
+	 * getGL
+	 *
+	 * General Function: Returns a reference to GL.
+	 */
 	public GL getGL()
 	{
 		return gl;
 	}
 	
-	
+	/**
+	 * getGLU
+	 * 
+	 * General Function: Returns a reference to GLU.
+	 */
 	public GLU getGLU()
 	{
 		return glu;
 	}
 	
-	
+	/**
+	 * getGLUT
+	 *
+	 * General Function: Returns a reference to GLUT.
+	 */
 	public GLUT getGLUT()
 	{
 		return glut;
 	}
 	
+	/**
+	 * loadImage
+	 *
+	 * General Function: Easy access method for other classes to load an image as a Texture.
+	 */
 	public Texture loadImage(String resourceName)
 	{
 		try
