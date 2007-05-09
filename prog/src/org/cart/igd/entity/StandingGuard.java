@@ -10,6 +10,11 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.game.*;
 
+/**
+ * A more specific implementaion of the Guard class
+ * Stationary, when detects target pursues, when lost target returns to 
+ * original location and faces preset direction for the guard to watch
+ * */
 public class StandingGuard extends Guard
 {
 	private int guardDirection = -1;
@@ -51,6 +56,9 @@ public class StandingGuard extends Guard
 		this.guardDirection = guardDirection;
 	}
 	
+	/**
+	 * Detect Noise entities in a circular area with radius of hearingDistance
+	 */
 	public void listenForNoise()
 	{
 		Renderer.info[7]= "standing guard: no noise";
@@ -71,6 +79,10 @@ public class StandingGuard extends Guard
 		}
 	}
 	
+	/**
+	 * detect Player entity in a circlular area offset forward by the radius
+	 * of the circle in front of the guard 
+	 */
 	public void lookForPlayer()
 	{
 		Vector3f s = getNewPointDeg(facingDirection, visionDistance);
@@ -134,16 +146,6 @@ public class StandingGuard extends Guard
 		
 		Renderer.info[5] = "standing guard: "+position.x+"/"+position.z;
 		
-		if(Collision.stsXZ(position,1f,igs.player.position,igs.player.boundingSphereRadius)){
-			 igs.guardSquad.reset();
-			 igs.player.position = new Vector3f(-20f,0f,-20f);
-			 igs.removePartyAnimals();
-			 Animal a = igs.getAnimal("Turtles");
-			 if(a!=null){
-			 	if(a.state!=Inventory.SAVED_IN_PARTY&&a.state!=Inventory.SAVED_IN_BUSH){
-			 		igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES = 1;
-			 	}
-			 }
-		}
+		capturePlayer();
 	}
 }

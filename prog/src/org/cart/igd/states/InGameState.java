@@ -32,6 +32,9 @@ import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.sound.*;
 
+/**
+ * Handles most of the game play
+ **/
 public class InGameState extends GameState
 {	
 	public String[] infoText = { "", "", "", "", "","","","" };
@@ -223,37 +226,38 @@ public class InGameState extends GameState
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
 				
 		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-40f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
 		
 		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
-				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-50f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
-				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-60f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
 		
 		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
-				new OBJModel(gl,"data/models/giraffe_scaled_2_km", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-70f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
-				new OBJModel(gl,"data/models/meerkat", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-80f),this,Inventory.HOTDOG,new Vector3f(0f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-90f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
-				new OBJModel(gl,"data/models/meerkat_low_poly", 4f,false), 
+				flamingoWalk, 
 				new Vector3f(10f,0f,-100f),this,0,new Vector3f(-10f,0f,-5f)));
 
+		
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-20f), 0f, 3f,

@@ -13,16 +13,25 @@ import org.cart.igd.entity.*;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.*;
 
+
+/**
+ * Object used by player to distract guards by creating a Noise object upon
+ * intersection with the ground 
+ */
 public class PartySnapper extends Entity{
 	float gravitypull = -.2f;
 	InGameState igs;
 	
-	public PartySnapper (Vector3f pos, float fD, float bsr, OBJModel model, InGameState igs){
-		
+	public PartySnapper (Vector3f pos, float fD, float bsr, OBJModel model,
+			InGameState igs){
 		super(pos,fD,bsr, model);
 		this.igs = igs;
 	}
-		public void draw(GL gl){
+	
+	/**
+	 * Render completely with all transformations
+	 */
+	public void draw(GL gl){
 		gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
@@ -30,6 +39,9 @@ public class PartySnapper extends Entity{
 		gl.glPopMatrix();
 	}
 	
+	/**
+	 * update height as the objects makes an arc as it flies
+	 */
 	public void update(long elapsedTime){
 		if(!(position.y<-.1f)){
 			position.y-=gravitypull;
