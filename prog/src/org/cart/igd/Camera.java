@@ -11,21 +11,43 @@ import org.cart.igd.entity.Entity;
 import org.cart.igd.input.*;
 import java.awt.event.MouseEvent;
 
+/**
+ * Camera.java
+ *
+ * General Function:
+ * To set up a virtual camera at which OpenGL views the 3d evironment.
+ */
 public class Camera
 {
+	/* Instance of player entity. */
 	private Entity player;
+	
+	/* Camera's Position Vector. */
 	private Vector3f cameraPos = new Vector3f();
+	
+	/* Camera's Up Vector. */
 	private Vector3f cameraUp = new Vector3f(0f, 1f, 0f);
 	
+	/* Distance of camera to player. */
 	public float distance = 3f;
+	
+	/* Actual camera height. */
 	public float posHeight = 0f;
+	
+	/* Actual camera distance. */
 	public float posDistance = 0f;
 	
+	/* Camera facing offset. */
 	public float facingOffset = 0.0f;
-	public float verticalAngle = .785f;//aprox 45degrees
 	
-	
-	
+	/* Approx 45 degrees. */
+	public float verticalAngle = .785f;
+
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Camera.
+	 */
 	public Camera(Entity player, float distance, float degCameraAngle)
 	{
 		this.player = player;
@@ -35,17 +57,31 @@ public class Camera
 		this.distance = distance;
 	}
 	
-	/** rotate the camera around the charater*/
+	/**
+	 * arcRotateY
+	 *
+	 * General Function: Rotate the camera around the player.
+	 */
 	public void arcRotateY(float amt)
 	{
 		facingOffset+=amt;
 	}
 	
-	public void zoom(float amt){
+	/**
+	 * zoom
+	 *
+	 * General Function: Zooms the camera closer or farther from the player.
+	 */
+	public void zoom(float amt)
+	{
 		distance += amt;
 	}
 	
-	/** return the camera to player's back view position*/
+	/**
+	 * moveToBackView
+	 * 
+	 * General Function: Return the camera to player's back view position.
+	 */
 	public void moveToBackView(float speed)
 	{
 		if(facingOffset>0f && facingOffset<180f)
@@ -61,7 +97,7 @@ public class Camera
 			facingOffset = 0f;
 		}
 		
-		/** Clamp facing offset */
+		/* Clamp facing offset */
 		if(facingOffset<0f)
 		{
 			facingOffset+=360f;
@@ -72,45 +108,91 @@ public class Camera
 		}
 	}
 	
+	/**
+	 * setCameraHeight
+	 *
+	 * General Function: Sets the Camera's height.
+	 */
 	public void setCameraHeight(float height)
 	{
 		posHeight = height;
 	}
 	
+	/**
+	 * getCameraHeight
+	 *
+	 * General Function: Returns the Camera's height.
+	 */
 	public float getCameraHeight()
 	{
 		return posHeight;
 	}
 	
+	/**
+	 * setDistance
+	 *
+	 * General Function: Sets the Camera's distance.
+	 */
 	public void setDistance(float distance)
 	{
 		this.distance = distance;
 	}
 	
+	/**
+	 * getDistance
+	 *
+	 * General Function: Returns the Camera's distance.
+	 */
 	public float getDistance()
 	{
 		return distance;
 	}
 	
+	/**
+	 * setFacingOffset
+	 *
+	 * General Function: Sets the facing offset.
+	 */
 	public void setFacingOffset(float facingOffset)
 	{
 		this.facingOffset = facingOffset;
 	}
 	
+	/**
+	 * getFacingOffset
+	 *
+	 * General Function: Returns the facing offset.
+	 */
 	public float getFacingOffset()
 	{
 		return facingOffset;
 	}
 	
-	/** change the verticalAngle by given amount of degrees */
-	public void changeVerticalAngleDeg(float changeDeg){
+	/**
+	 * changeVerticalAngleDeg
+	 *
+	 * General Function: Change the verticalAngle by given amount of degrees.
+	 */
+	public void changeVerticalAngleDeg(float changeDeg)
+	{
 		verticalAngle += changeDeg*.0174532925f;
 	}
 	
-	public void setVerticalAngleDeg(float setDeg){
+	/**
+	 * setVerticalAngleDeg
+	 *
+	 * General Function: Set the vertical angle.
+	 */
+	public void setVerticalAngleDeg(float setDeg)
+	{
 		verticalAngle = setDeg*.0174532925f;
 	}
 	
+	/**
+	 * lookAt
+	 *
+	 * General Function: Adjusts the GLU camera to Camera's data.
+	 */
 	public void lookAt(GLU glu, Entity player)
 	{
 		posHeight = (float)Math.sin(verticalAngle)*distance;
@@ -129,6 +211,8 @@ public class Camera
 				cameraUp.x, cameraUp.y, cameraUp.z
 			);
 		}
-		catch(Exception e) {}
+		catch(Exception e)
+		{
+		}
 	}
 }
