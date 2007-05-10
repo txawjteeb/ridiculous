@@ -17,6 +17,8 @@ public class BitmapLoader
 	 * loadBitmap
 	 *
 	 * General Function: Loads a specified Bitmap image as a BufferedImage.
+	 *
+	 * @param fn The file name of the image to be loaded.
 	 */
 	public static BufferedImage loadBitmap(String fn) throws IOException
 	{
@@ -70,6 +72,13 @@ public class BitmapLoader
 	 * read8BitBitmap
 	 *
 	 * General Function: Reads an 8-bit Bitmap.
+	 *
+	 * @param nColoursUsed The number of colors used in the image.
+	 * @param nBitCount The image's bit count.
+	 * @param nSizeImage The size of the image.
+	 * @param nWidth The width of the image.
+	 * @param nHeight The height of the image.
+	 * @param input The InputStream of the image.
 	 */
 	private static BufferedImage read8BitBitmap(int nColoursUsed, int nBitCount, int nSizeImage, int nWidth, int nHeight, InputStream input) throws IOException {
         int nNumColors = (nColoursUsed > 0) ? nColoursUsed : (1 & 0xff) << nBitCount;
@@ -154,6 +163,9 @@ public class BitmapLoader
 	 * bytesToInt
 	 *
 	 * General Function: Converts a byte array into an intenger.
+	 *
+	 * @param bytes The byte array to convert to an integer.
+	 * @param index The byte array offset to start from.
 	 */
     private static int bytesToInt(byte[] bytes, int index)
     {
@@ -167,6 +179,9 @@ public class BitmapLoader
 	 * bytesToShort
 	 *
 	 * General Function: Converts a byte array into a short.
+	 *
+	 * @param bytes The byte array to convert to a short.
+	 * @param index The byte array offset to start from.
 	 */
     private static short bytesToShort(byte[] bytes, int index)
     {

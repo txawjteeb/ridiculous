@@ -29,7 +29,7 @@ public class Texture
 	private int texHeight;
 	
 	/* Width Ratio. */
-	private float widthRatio
+	private float widthRatio;
 	
 	/* Height Ratio. */
 	private float heightRatio;
