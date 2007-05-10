@@ -8,8 +8,7 @@ import org.cart.igd.entity.Entity;
 /**
  * Camera.java
  *
- * General Function:
- * To set up a virtual camera at which OpenGL views the 3d evironment.
+ * General Function: To set up a virtual camera at which OpenGL views the 3d evironment.
  */
 public class Camera
 {
@@ -39,6 +38,10 @@ public class Camera
 	 * Constructor
 	 *
 	 * General Function: Creates an instance of Camera.
+	 *
+	 * @param player The player entity reference.
+	 * @param distance The distance from the camera to the player.
+	 * @param degCameraAngle The camera angle in degrees.
 	 */
 	public Camera(Entity player, float distance, float degCameraAngle)
 	{
@@ -52,6 +55,8 @@ public class Camera
 	 * arcRotateY
 	 *
 	 * General Function: Rotate the camera around the player.
+	 *
+	 * @param amt The amount to arc rotate.
 	 */
 	public void arcRotateY(float amt)
 	{
@@ -62,6 +67,8 @@ public class Camera
 	 * zoom
 	 *
 	 * General Function: Zooms the camera closer or farther from the player.
+	 *
+	 * @param amt The amount to zoom the camera.
 	 */
 	public void zoom(float amt)
 	{
@@ -72,6 +79,8 @@ public class Camera
 	 * moveToBackView
 	 * 
 	 * General Function: Return the camera to player's back view position.
+	 *
+	 * @param speed The speed to move the camera.
 	 */
 	public void moveToBackView(float speed)
 	{
@@ -103,6 +112,8 @@ public class Camera
 	 * setCameraHeight
 	 *
 	 * General Function: Sets the Camera's height.
+	 *
+	 * @param height The height of the camera.
 	 */
 	public void setCameraHeight(float height)
 	{
@@ -123,6 +134,8 @@ public class Camera
 	 * setDistance
 	 *
 	 * General Function: Sets the Camera's distance.
+	 *
+	 * @param distance The distance of the camera.
 	 */
 	public void setDistance(float distance)
 	{
@@ -143,6 +156,8 @@ public class Camera
 	 * setFacingOffset
 	 *
 	 * General Function: Sets the facing offset.
+	 *
+	 * @param facingOffset The facing offset of the camera.
 	 */
 	public void setFacingOffset(float facingOffset)
 	{
@@ -163,6 +178,8 @@ public class Camera
 	 * changeVerticalAngleDeg
 	 *
 	 * General Function: Change the verticalAngle by given amount of degrees.
+	 *
+	 * @param changeDeg The angle in degrees to change the verticle angle by.
 	 */
 	public void changeVerticalAngleDeg(float changeDeg)
 	{
@@ -173,6 +190,8 @@ public class Camera
 	 * setVerticalAngleDeg
 	 *
 	 * General Function: Set the vertical angle.
+	 *
+	 * @param setDeg The angle in degress to set the verticle angle to.
 	 */
 	public void setVerticalAngleDeg(float setDeg)
 	{
@@ -183,6 +202,9 @@ public class Camera
 	 * lookAt
 	 *
 	 * General Function: Adjusts the GLU camera to Camera's data.
+	 *
+	 * @param glu The GLU instance to apply the camera transform to.
+	 * @param player The player entity reference.
 	 */
 	public void lookAt(GLU glu, Entity player)
 	{

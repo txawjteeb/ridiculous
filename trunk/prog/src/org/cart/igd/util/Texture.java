@@ -3,15 +3,44 @@ package org.cart.igd.util;
 import java.nio.IntBuffer;
 import javax.media.opengl.GL;
 
+/**
+ * Texture.java
+ *
+ * General Function: Holds texture data for OpenGL use.
+ */
 public class Texture
 {
+	/* Texture Target */
 	private int target;
-	private int textureID;
-	private int height, width;
-	private int texWidth, texHeight;
-	private float widthRatio, heightRatio;
-	public int imageWidth, imageHeight;
 	
+	/* OpengGL Texture ID */
+	private int textureID;
+	
+	/* Height of the Image. */
+	private int height;
+	
+	/* Width of the Image. */
+	private int width;
+	
+	/* Width of the Texture. */
+	private int texWidth;
+	
+	/* Height of the Texture. */
+	private int texHeight;
+	
+	/* Width Ratio. */
+	private float widthRatio
+	
+	/* Height Ratio. */
+	private float heightRatio;
+	
+	/* Simple Image Width. */
+	public int imageWidth;
+	
+	/* Simple Image Height. */
+	public int imageHeight;
+	
+	/* MultTexture GL variables. */
 	private final int[] multiTex = new int[]
 	{
 		GL.GL_TEXTURE0,
@@ -20,12 +49,25 @@ public class Texture
 		GL.GL_TEXTURE3
 	};
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates a Texture instance.
+	 */
 	protected Texture( int target, int textureID )
 	{
 		this.target = target;
 		this.textureID = textureID;
 	}
 	
+	/**
+	 * bindAsMulti
+	 *
+	 * General Function: Binds a texture to GL as a multi-texture.
+	 *
+	 * @param gl The GL instance to render to.
+	 * @param i The GL MultiTexture index.
+	 */
 	public void bindAsMulti(GL gl, int i)
 	{
 		gl.glActiveTexture(multiTex[i]);
@@ -37,16 +79,37 @@ public class Texture
 		gl.glEnable(GL.GL_TEXTURE_GEN_T);
 	}
 	
+	/**
+	 * bind
+	 *
+	 * General Function: Binds a texture to GL.
+	 *
+	 * @param gl The GL instance to render to.
+	 */
 	public void bind(GL gl)
 	{
 		gl.glBindTexture( target, textureID );
 	}
 	
+	/**
+	 * delete
+	 *
+	 * General Function: Deletes a texture from GL space.
+	 *
+	 * @param gl The GL isntance to render to.
+	 */
 	public void delete(GL gl)
 	{
 		gl.glDeleteTextures( 1, IntBuffer.wrap(new int[] {textureID}) );
 	}
 	
+	/**
+	 * setHeight
+	 *
+	 * General Function: Sets the height of the texture.
+	 *
+	 * @param height The height to set.
+	 */
 	public void setHeight(int height)
 	{
 		this.height = height;
