@@ -27,7 +27,7 @@ public class MoviePlayer extends GUI{
 	public Movie movie;
 
 	long timeToUpdate = 0;
-	long updateTime = 100;
+	long updateTime = 30;
 			
 	public MoviePlayer(GameState gameState){
 		super(gameState);
@@ -59,6 +59,7 @@ public class MoviePlayer extends GUI{
 		File dir;
 		String[] frames;
 		Texture movieFrames[];
+		String zeroFill ="";
 		
 		for(int j = 0;j<amountOfMovies;j++){
 				directory = "data/movies/movie" + j + "/";
@@ -68,9 +69,17 @@ public class MoviePlayer extends GUI{
 				} else{
 					movieFrames = new Texture[frames.length-1];
 						for(int i =0;i<frames.length-1;i++){
-								movieFrames[i] = Kernel.display.getRenderer().loadImage(directory + i+ ".png");
-								movies.add(new Movie(movieFrames));
+								if(i<9){
+									zeroFill= "000";
+								} else if(i<99){
+									zeroFill= "00";
+								} else if(i<999){
+									zeroFill= "0";
+								}
+								movieFrames[i] = Kernel.display.getRenderer().loadImage(directory +"0_"+ zeroFill+(i+1)+ ".png");
 						}
+						Texture black = Kernel.display.getRenderer().loadImage("data/movies/black.png");
+						movies.add(new Movie(movieFrames,black));
 				}
 		}
 				
@@ -126,12 +135,14 @@ public class MoviePlayer extends GUI{
 	public void render(GLGraphics g){
 			
 		if(movie!=null){
-			g.glgBegin();
+		//	g.glgBegin();
 			movie.render(g); // WHY IS IT NOT PRINTING?!?
-			g.drawBitmapString("Space to Pause Movie",300,300);
-			g.drawBitmapString("Enter to Skip Movie",300,200);
-			g.drawBitmapString("Control to FastForward Movie",300,100);
+			g.glgBegin();
+			//g.drawBitmapString("Space to Pause Movie",300,300);
+		//	g.drawBitmapString("Enter to Skip Movie",300,200);
+		//	g.drawBitmapString("Control to FastForward Movie",300,100);
 			g.glgEnd();
+		//	g.glgEnd();
 		}
 	}
 	
@@ -140,10 +151,12 @@ public class MoviePlayer extends GUI{
 		int frames;
 		int currentFrame;
 		Texture movie[];
+		Texture black;
 
 		
-		public Movie(Texture movie[]){
+		public Movie(Texture movie[], Texture black){
 			this.movie = movie;
+			this.black = black;
 			this.frames = movie.length;
 			this.currentFrame = 0;
 		}
@@ -160,7 +173,11 @@ public class MoviePlayer extends GUI{
 		
 		public void render(GLGraphics g){
 			g.glgBegin();
-				g.drawImage(movie[currentFrame],0,0);
+				g.drawImage(black,0,0);
+				g.drawImage(black,512,0);
+				g.drawImage(black,0,512);
+				g.drawImage(black,512,512);
+				g.drawImageRotateHueSize(movie[currentFrame],256,200,0,new float[]{1f,1f,1f,1f},new float[]{1f,.7f});
 			g.glgEnd();
 		}
 		
