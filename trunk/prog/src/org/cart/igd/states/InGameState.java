@@ -572,8 +572,8 @@ public class InGameState extends GameState
 			}
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_END]){
-				//((MoviePlayer)gui.get(3)).playMovie(0);
-				this.changeGameState("MiniGame");
+				((MoviePlayer)gui.get(3)).playMovie(0);
+				//this.changeGameState("MiniGame");
 			}			
 		}
 		

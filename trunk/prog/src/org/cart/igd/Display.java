@@ -47,7 +47,7 @@ public class Display implements WindowListener
 	private boolean fullscreen;
 	
 	/* Width of the Display window. */
-	private int width
+	private int width;
 	
 	/* Height of the Display window. */
 	private int height;
