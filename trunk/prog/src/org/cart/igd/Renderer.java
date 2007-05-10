@@ -10,6 +10,8 @@ import org.cart.igd.states.*;
 import org.cart.igd.util.TextureLoader;
 import org.cart.igd.util.Texture;
 
+import java.awt.image.BufferedImage;
+
 /**
  * Renderer.java
  *
@@ -407,6 +409,11 @@ public class Renderer implements GLEventListener
 			//e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public Texture loadImageFromBuffer(BufferedImage bufImg)
+	{
+		return textureLoader.getTexture(bufImg, gl, glu);
 	}
 	
 	/*

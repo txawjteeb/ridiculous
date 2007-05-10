@@ -53,7 +53,7 @@ public class Dialogue extends GUI {
 		input = Kernel.userInput;
 		initInput();
 		loadImages();
-		loadSounds();
+//		loadSounds();
 	}
 	public void initInput()	{
 		input.bindToKey(testChangeGui, KeyEvent.VK_T);
