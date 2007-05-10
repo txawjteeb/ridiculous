@@ -9,7 +9,7 @@ import org.cart.igd.states.*;
 public class MenuGUI extends GUI
 {
 	Texture bg;
-	Texture texMenuButtons[] = new Texture[8];
+	Texture texMenuButtons[] = new Texture[4];
 	GLRolloverButton btMenu[] = new GLRolloverButton[4];
 	
 	/** contains collision detection methods for UIComponents*/
@@ -32,32 +32,35 @@ public class MenuGUI extends GUI
 		
 		texMenuButtons[0] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/start_button_jh.png");
+
 		texMenuButtons[1] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/play_02.png");
-		texMenuButtons[2] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/options_button_jh.png");
-		texMenuButtons[3] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/settings_02.png");
-		texMenuButtons[4] = Kernel.display.getRenderer().loadImage(
+
+		texMenuButtons[2] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/credits_button_jh.png");
-		texMenuButtons[5] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/credits_02.png");
-		texMenuButtons[6] = Kernel.display.getRenderer().loadImage(
+
+		texMenuButtons[3] = Kernel.display.getRenderer().loadImage(
 			"data/images/menu_gui/exit_button_jh.png");
-		texMenuButtons[7] = Kernel.display.getRenderer().loadImage(
-			"data/images/menu_gui/exit_02.png");
 		
-		btMenu[0] = new GLRolloverButton(texMenuButtons[0],texMenuButtons[1],
-				200,536,128,64);
+		btMenu[0] = new GLRolloverButton(texMenuButtons[0],
+				new float[]{ .5f, .5f, .5f, 1f},new float[]{.50f,.50f},
+				new float[]{ 1f, .8f, .8f, 1f}, new float[]{.55f,.55f},
+				300,536,128,64);
 		
-		btMenu[1] = new GLRolloverButton(texMenuButtons[2],texMenuButtons[3],
-				200,426,128,64);
+		btMenu[1] = new GLRolloverButton(texMenuButtons[1],
+				new float[]{ .5f, .5f, .5f, 1f},new float[]{.50f,.50f},
+				new float[]{.8f,1f, .8f,1f}, new float[]{.55f,.55f},
+				300,426,128,64);
 		
-		btMenu[2] = new GLRolloverButton(texMenuButtons[4],texMenuButtons[5],
-				200,316,128,64);
+		btMenu[2] = new GLRolloverButton(texMenuButtons[2],
+				new float[]{ .5f, .5f, .5f, 1f},new float[]{.50f,.50f},
+				new float[]{.8f,.8f, 1f,1f}, new float[]{.55f,.55f},
+				300,316,128,64);
 		
-		btMenu[3] = new GLRolloverButton(texMenuButtons[6],texMenuButtons[7],
-				200,206,128,64);
+		btMenu[3] = new GLRolloverButton(texMenuButtons[3],
+				new float[]{ .5f, .5f, .5f, 1f},new float[]{.50f,.50f},
+				new float[]{1f,.8f, 1f,1f}, new float[]{.55f,.55f},
+				300,206,128,64);
 		
 	}
 	
