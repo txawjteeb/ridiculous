@@ -22,12 +22,27 @@ import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
 
+/**
+ * TextureLoader.java
+ *
+ * General Function: Loads and stores references to Textures.
+ */
 public class TextureLoader
 {
+	/* HashMap that holds Texture objects. */
 	private HashMap<String, Texture> table = new HashMap<String, Texture>();
+	
+	/* Alpha Color Model. */
 	private ColorModel glAlphaColorModel;
+	
+	/* Non-Alpha Color Model. */
 	private ColorModel glColorModel;
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of TextureLoader.
+	 */
 	public TextureLoader()
 	{
 		glAlphaColorModel = new ComponentColorModel
@@ -51,6 +66,13 @@ public class TextureLoader
 			);
 	}
 	
+	/**
+	 * createTextureID
+	 *
+	 * General Function: Generates a texture id from OpenGL.
+	 *
+	 * @param gl The GL instance.
+	 */
 	private int createTextureID(GL gl)
 	{
 		int[] tmp = new int[ 1 ];
@@ -58,6 +80,15 @@ public class TextureLoader
 		return tmp[ 0 ];
 	}
 	
+	/**
+	 * getTexture
+	 *
+	 * General Function: Returns a Texture object of a resource.
+	 *
+	 * @param resourceName The file name of the texture to load.
+	 * @param gl The GL instance.
+	 * @paran glu The GLU instance.
+	 */
 	public Texture getTexture( String resourceName, GL gl, GLU glu ) throws IOException
 	{
 		Texture tex = table.get( resourceName );
@@ -70,16 +101,15 @@ public class TextureLoader
 		return tex;
 	}
 	
-	public Texture getTexture( String resourceName, int angle, GL gl, GLU glu ) throws IOException
-	{
-		Texture tex = table.get( resourceName + "." + angle );
-		if( tex != null ) return tex;
-		tex = getTexture( resourceName, GL.GL_TEXTURE_2D, GL.GL_RGBA, GL.GL_LINEAR, GL.GL_LINEAR, angle, gl, glu );
-		table.put( resourceName + "." + angle, tex );
-		
-		return tex;
-	}
-	
+	/**
+	 * getTexture
+	 *
+	 * General Function: Returns a Texture object of a BufferedImage object.
+	 *
+	 * @param bi The BufferedImage object to convert to Texture object.
+	 * @param gl The GL instance.
+	 * @paran glu The GLU instance.
+	 */
 	public Texture getTexture( BufferedImage bi, GL gl, GLU glu )
 	{
 		final int target = GL.GL_TEXTURE_2D;
@@ -136,6 +166,19 @@ public class TextureLoader
 		return texture;
 	}
 	
+	/**
+	 * getTexture
+	 *
+	 * General Function: Returns a Texture object of a resource.
+	 *
+	 * @param resourceName The file name of the texture to load.
+	 * @param target The target texture settings.
+	 * @param dstPixelFormat The destination pixel format.
+	 * @param minFilter The min filter for the texture.
+	 * @param magFilter The mag filter for the texture.
+	 * @param gl The GL instance.
+	 * @paran glu The GLU instance.
+	 */
 	public Texture getTexture( String resourceName, int target, int dstPixelFormat, int minFilter, int magFilter, GL gl, GLU glu ) throws IOException
 	{
 		int srcPixelFormat = 0;
@@ -189,65 +232,13 @@ public class TextureLoader
 		return texture;
 	}
 	
-	public Texture getTexture( String resourceName, int target, int dstPixelFormat, int minFilter, int magFilter, int angle, GL gl, GLU glu ) throws IOException
-	{
-		int srcPixelFormat = 0;
-		int textureID = createTextureID(gl);
-		Texture texture = new Texture( target, textureID );
-		
-		gl.glBindTexture( target, textureID );
-		
-		BufferedImage bufferedImage = copyImageAndRotate( loadImage( resourceName ), angle );
-		texture.setWidth(  bufferedImage.getWidth()  );
-		texture.setHeight( bufferedImage.getHeight()  );
-		texture.imageWidth = bufferedImage.getWidth();
-		texture.imageHeight = bufferedImage.getHeight();
-		
-		if( bufferedImage.getColorModel().hasAlpha() )
-			srcPixelFormat = GL.GL_RGBA;
-		else
-			srcPixelFormat = GL.GL_RGB;
-		
-		ByteBuffer textureBuffer = convertImageData( bufferedImage, texture );
-		
-		/*
-		if( target == GL.GL_TEXTURE_2D )
-		{
-			gl.glTexParameteri( target, GL.GL_TEXTURE_MIN_FILTER, minFilter );
-			gl.glTexParameteri( target, GL.GL_TEXTURE_MAG_FILTER, magFilter );
-			gl.glTexParameteri( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT );
-			gl.glTexParameteri( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT );
-		}
-		
-		gl.glTexImage2D
-		(
-			target,
-			0,
-			dstPixelFormat,
-			bufferedImage.getWidth(),
-			bufferedImage.getHeight(),
-			0,
-			srcPixelFormat,
-			GL.GL_UNSIGNED_BYTE,
-			textureBuffer
-		);*/
-		//gl.glTexEnvf( GL.GL_TEXTURE_ENV, GL.GL_TEXTURE_ENV_MODE, GL.GL_MODULATE );
-	    gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MIN_FILTER, GL.GL_LINEAR_MIPMAP_NEAREST );
-	    gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_MAG_FILTER, GL.GL_LINEAR );
-	    gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_S, GL.GL_REPEAT );
-	    gl.glTexParameterf( GL.GL_TEXTURE_2D, GL.GL_TEXTURE_WRAP_T, GL.GL_REPEAT );
-	    glu.gluBuild2DMipmaps( GL.GL_TEXTURE_2D, dstPixelFormat, bufferedImage.getWidth(), bufferedImage.getHeight(), srcPixelFormat, GL.GL_UNSIGNED_BYTE, textureBuffer );
-		
-		return texture;
-	}
-	
-//	private int get2Fold( int fold )
-//	{
-	//	int ret = 2;
-////		while( ret<fold ) ret *= 2;
-	//	return ret;
-//	}
-	
+	/**
+	 * copyImage
+	 *
+	 * General Function: Returns a copy of a BufferedImage's data.
+	 *
+	 * @param src The BufferedImage to make a copy of.
+	 */
 	private BufferedImage copyImage( BufferedImage src )
 	{
 		BufferedImage bi = new BufferedImage( src.getHeight(), src.getWidth(), src.getTransparency() );
@@ -255,18 +246,14 @@ public class TextureLoader
 		return bi;
 	}
 	
-	private BufferedImage copyImageAndRotate( BufferedImage src, int angle )
-	{
-		BufferedImage bi = new BufferedImage( src.getHeight(), src.getWidth(), src.getTransparency() );
-
-		Graphics2D g = (Graphics2D) bi.getGraphics();
-		g.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-		g.rotate( Math.toRadians(angle), src.getWidth()/2, src.getWidth()/2 );
-		g.drawImage( src, 0, 0, null );
-		g.dispose();
-		return bi;
-	}
-	
+	/**
+	 * convertImageData
+	 *
+	 * General Function: Returns a ByteBuffer of the BufferedImage's data.
+	 *
+	 * @param bufferedImage
+	 * @param texture
+	 */
 	private ByteBuffer convertImageData( BufferedImage bufferedImage, Texture texture )
 	{
 		WritableRaster raster;
@@ -303,6 +290,13 @@ public class TextureLoader
 		return ByteBuffer.wrap( data );
 	}
 	
+	/**
+	 * loadImage
+	 *
+	 * General Function: Loads a image as a BufferedImage object.
+	 *
+	 * @param ref The file name of the image to load.
+	 */
 	private BufferedImage loadImage( String ref ) throws IOException
 	{
 		BufferedImage bi = ImageIO.read( ResourceRetriever.getResourceAsStream(ref) );

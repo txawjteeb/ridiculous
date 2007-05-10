@@ -31,6 +31,7 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.sound.*;
+import org.cart.igd.media.CutscenePlayer;
 
 /**
  * Handles most of the game play
@@ -39,8 +40,7 @@ public class InGameState extends GameState
 {	
 	public String[] infoText = { "", "", "", "", "","","","" };
 	
-	public List<Entity> entities =
-		Collections.synchronizedList(new ArrayList<Entity>());
+	public List<Entity> entities = Collections.synchronizedList(new ArrayList<Entity>());
 	public ArrayList<Item> items = new ArrayList<Item>();
 	public ArrayList<Entity> interactiveEntities = new ArrayList<Entity>();	
 	public ArrayList<UnnecessaryExplore> unnecessaryExplores = new ArrayList<UnnecessaryExplore>();	
@@ -80,6 +80,7 @@ public class InGameState extends GameState
 	
 	public Inventory inventory;
 	public QuestLog questlog;
+	public CutscenePlayer cutscenePlayer;
 	
 	private Terrain terrain;
 	
@@ -139,6 +140,8 @@ public class InGameState extends GameState
 		questlog.load();
 
 		inventory = new Inventory(this);
+		cutscenePlayer = new CutscenePlayer();
+		cutscenePlayer.loadMovie("data/movies/flamingo_idle.avi");
 		
 		/* create objAnimation of a flamingo*/
 		flamingoWalk = new OBJAnimation(gl,10,"data/models/flamingo",105);
@@ -445,7 +448,13 @@ public class InGameState extends GameState
 	}
 	
 	public synchronized void display(GL gl, GLU glu)
-	{	
+	{
+		if(!cutscenePlayer.isStopped)
+		{
+			cutscenePlayer.render(glg);
+			return;
+		}
+		
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
@@ -548,6 +557,12 @@ public class InGameState extends GameState
 		
 			/* Check for Escape key to end program */
 			if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
+			
+			if(Kernel.userInput.keys[KeyEvent.VK_0])
+			{
+				Kernel.userInput.keys[KeyEvent.VK_0] = false;
+				cutscenePlayer.playMovie();
+			}
 			
 			/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
 			if(Kernel.userInput.keys[KeyEvent.VK_PAGE_UP])

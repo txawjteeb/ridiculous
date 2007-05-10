@@ -126,6 +126,11 @@ public class BitmapLoader
      * read24BitBitmap
      *
      * General Function: Reads a 24-Bit Bitmap.
+     *
+	 * @param nSizeImage The size of the image.
+	 * @param nWidth The width of the image.
+	 * @param nHeight The height of the image.
+	 * @param input The InputStream of the image.
      */
     private static BufferedImage read24BitBitmap(int nSizeImage, int nHeight, int nWidth, InputStream input) throws IOException
     {
@@ -192,6 +197,9 @@ public class BitmapLoader
 	 * readBuffer
 	 *
 	 * General Function: Reads a byte array buffer from an InputStream.
+	 *
+	 * @param in The InputStream to read the buffer from.
+	 * @param buffer The byte array as a buffer.
 	 */
 	private static void readBuffer(InputStream in, byte[] buffer) throws IOException
 	{
