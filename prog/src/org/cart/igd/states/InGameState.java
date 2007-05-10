@@ -70,7 +70,7 @@ public class InGameState extends GameState
 	
 	/** Contain different gui states */
 	public ArrayList<GUI> gui = new ArrayList<GUI>();
-	public int currentGuiState = 0;
+	
 	
 	
 	private GameAction mouseWheelScroll;
@@ -318,7 +318,6 @@ public class InGameState extends GameState
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
 		gui.add(new MoviePlayer(this));
-		gui.add(new MiniGamePenguins(this));
 		backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
 		
 		guardSquad.init( gl, glu );
@@ -514,12 +513,8 @@ public class InGameState extends GameState
 		terrain.render( gl, player);
 		
 		/* Render GUI */
-		if(currentGuiState==4){
-			((MiniGamePenguins)gui.get(currentGuiState)).render( gl,getAnimal("Elephant"));
-		}else{
-			gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
-			
-		}
+		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
+
 	}
 	
 	public synchronized void throwPartyPopper(){
@@ -578,7 +573,7 @@ public class InGameState extends GameState
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_END]){
 				//((MoviePlayer)gui.get(3)).playMovie(0);
-				((MiniGamePenguins)gui.get(4)).startGame();
+				this.changeGameState("MiniGame");
 			}			
 		}
 		

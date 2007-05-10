@@ -15,8 +15,10 @@ public class MenuGUI extends GUI
 	/** contains collision detection methods for UIComponents*/
 	private UserInput input;
 	
-	/** pass in a refference from game state that contains this gui class 
-	 * to allow for game state change and gui state change*/
+	/** 
+	 * Constructor
+	 * @param GameState gameState refference to allow state change 
+	 */
 	public MenuGUI(GameState gameState){
 		super(gameState);//superclass GUI contain ref to GameState
 		input = Kernel.userInput;

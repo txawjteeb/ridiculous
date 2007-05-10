@@ -4,6 +4,11 @@ import org.cart.igd.input.GameEventList;
 import org.cart.igd.input.*;
 import org.cart.igd.*;
 
+/**
+ * Kernel.java
+ * 
+ * General Function: To keep track of all game's operations.
+ */
 public class Kernel
 {
 	public static Display display;
@@ -52,6 +57,8 @@ public class Kernel
 		displayRunning = false;
 		display.stop();
 		init(displaySettings);
+		display = null;
+		userInput = null;
 	}
 	
 	public static void main(String[] args)

@@ -1,7 +1,11 @@
 package org.cart.igd.states;
 
+import java.util.ArrayList;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
+
+import org.cart.igd.gui.GUI;
 
 public abstract class GameState
 {
@@ -9,7 +13,10 @@ public abstract class GameState
 	public boolean changeState = false; 
 	public boolean waitToInit = false;
 	public boolean initialized = false;
-
+	protected ArrayList<GUI> gui = new ArrayList<GUI>();
+	
+	public int currentGuiState = 0;
+	
 	public GameState()
 	{
 		
