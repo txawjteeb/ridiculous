@@ -8,8 +8,7 @@ import org.cart.igd.core.*;
 /**
  * DisplaySettings.java
  *
- * General Function:
- * Holds the settings for the engine's Display.
+ * General Function: Holds the settings for the engine's Display.
  */
 public class DisplaySettings
 {
@@ -29,6 +28,10 @@ public class DisplaySettings
 	 * Constructor
 	 *
 	 * General Function: Creates an instance of DisplaySettings.
+	 *
+	 * @param w The DisplaySetting width.
+	 * @param h The DisplaySetting height.
+	 * @param fs The DisplaySetting fullscreen flag.
 	 */
     public DisplaySettings(int w,int h, boolean fs)
     {	

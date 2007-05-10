@@ -2,22 +2,28 @@ package org.cart.igd.util;
 
 import java.io.*;
 
+/**
+ * BlockDataInputStream.java
+ *
+ * General Function: An InputStream that reads in data as Blocks.
+ */
 public class BlockDataInputStream extends FilterInputStream implements DataInput
 {
-    /** A scratch buffer for byte reading. Grown as needed */
+    /* A scratch buffer for byte reading. Grown as needed */
     private byte[] byteBuff;
 
-    /** A scratch buffer for byte reading. Grown as needed */
+    /* A scratch buffer for byte reading. Grown as needed */
     private byte[] readBuffer;
 
-    /** A scratch buffer for string reading. Grown as needed */
+    /* A scratch buffer for string reading. Grown as needed */
     private char[] lineBuffer;
 
     /**
-     * Creates a BlockDataInputStream that uses the specified
-     * underlying InputStream.
+     * Constructor
      *
-     * @param  in  the specified input stream
+     * General Function: Creates a BlockDataInputStream that uses the specified underlying InputStream.
+     *
+     * @param in Underlying InputStream.
      */
     public BlockDataInputStream(InputStream in)
     {
@@ -27,80 +33,141 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
         readBuffer = new byte[8];
     }
 
-    public int read(byte b[])
-        throws IOException
+	/**
+	 * read
+	 *
+	 * General Function: Fills the byte array with InputStream data.
+	 *
+	 * @param b The array to be filled.
+	 */
+    public int read(byte b[]) throws IOException
     {
         return in.read(b, 0, b.length);
     }
 
-    public int read(byte b[], int off, int len)
-        throws IOException
+	/**
+	 * read
+	 *
+	 * General Function: Fills the byte array with InputStream data, given an array offset.
+	 *
+	 * @param b The array to be filled.
+	 * @param off The array index offset.
+	 * @param len The length of data to fill the array.
+	 */
+    public int read(byte b[], int off, int len) throws IOException
     {
         return in.read(b, off, len);
     }
 
-    public void readFully(byte b[])
-        throws IOException
+	/**
+	 * readFully
+	 *
+	 * General Function: Reads the entire InputStream data into a byte array.
+	 *
+	 * @param b The array to be filled.
+	 */
+    public void readFully(byte b[]) throws IOException
     {
         readFully(b, 0, b.length);
     }
 
-    public void readFully(byte b[], int off, int len)
-        throws IOException
+	/**
+	 * readFully
+	 *
+	 * General Function: Reads the entire InputStream data into a byte array, given an array offset.
+	 *
+	 * @param b The byte array to be filled.
+	 * @param off The array index offset.
+	 * @param len The length of the array to be filled.
+	 */
+    public void readFully(byte b[], int off, int len) throws IOException
     {
-        if (len < 0)
-            throw new IndexOutOfBoundsException();
+        if(len < 0)
+        {
+        	throw new IndexOutOfBoundsException();
+        }
+        
         int n = 0;
-        while (n < len) {
+        while(n < len)
+        {
             int count = in.read(b, off + n, len - n);
-            if (count < 0)
-            throw new EOFException();
+            if(count < 0)
+            {
+            	throw new EOFException();
+            }
             n += count;
         }
     }
 
-    public int skipBytes(int n)
-        throws IOException
+	/**
+	 * skipBytes
+	 *
+	 * General Function: Skips a given number of bytes in the InputStream.
+	 */
+    public int skipBytes(int n) throws IOException
     {
         int total = 0;
         int cur = 0;
 
-        while ((total<n) && ((cur = (int) in.skip(n-total)) > 0)) {
+        while((total<n) && ((cur = (int) in.skip(n-total)) > 0))
+        {
             total += cur;
         }
 
         return total;
     }
 
-    public boolean readBoolean()
-        throws IOException
+	/**
+	 * readBoolean
+	 *
+	 * General Function: Reads and returns a boolean from the InputStream.
+	 */
+    public boolean readBoolean() throws IOException
     {
         int ch = in.read();
-        if (ch < 0)
-            throw new EOFException();
+        if(ch < 0)
+        {
+        	throw new EOFException();
+        }
         return (ch != 0);
     }
 
-    public byte readByte()
-        throws IOException
+	/**
+	 * readByte
+	 *
+	 * General Function: Reads and returns a byte from the InputStream.
+	 */
+    public byte readByte() throws IOException
     {
         int ch = in.read();
-        if (ch < 0)
-            throw new EOFException();
+        if(ch < 0)
+        {
+        	throw new EOFException();
+        }
         return (byte)(ch);
     }
 
-    public int readUnsignedByte()
-        throws IOException
+	/**
+	 * readUnsignedByte
+	 *
+	 * General Function: Reads and returns an unsigned byte from the InputStream.
+	 */
+    public int readUnsignedByte() throws IOException
     {
         int ch = in.read();
-        if (ch < 0)
-            throw new EOFException();
+        if(ch < 0)
+        {
+        	throw new EOFException();
+        }
         return ch;
     }
 
-    public short readShort()
-        throws IOException
+	/**
+	 * readShort
+	 *
+	 * General Function: Reads and returns a short from the InputStream.
+	 */
+    public short readShort() throws IOException
     {
         readFully(byteBuff, 0, 2);
 
@@ -111,62 +178,75 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
         ch2 = (byteBuff[1] & 255);
 
         return (short)((ch1 << 8) + (ch2 << 0));
-/*
-
-        int ch1 = in.read();
-        int ch2 = in.read();
-        if ((ch1 | ch2) < 0)
-            throw new EOFException();
-        return (short)((ch1 << 8) + (ch2 << 0));
-*/
     }
 
-    public int readUnsignedShort()
-        throws IOException
+	/**
+	 * readUnsignedShort
+	 *
+	 * General Function: Reads and returns an unsigned short from the InputStream.
+	 */
+    public int readUnsignedShort() throws IOException
     {
         int ch1 = in.read();
         int ch2 = in.read();
-        if ((ch1 | ch2) < 0)
-            throw new EOFException();
+        if((ch1 | ch2) < 0)
+        {
+        	throw new EOFException();
+        }
         return (ch1 << 8) + ch2;
     }
 
-    public char readChar()
-        throws IOException
+	/**
+	 * readChar
+	 *
+	 * General Function: Reads and returns a char from the InputStream.
+	 */
+    public char readChar() throws IOException
     {
         int ch1 = in.read();
         int ch2 = in.read();
-        if ((ch1 | ch2) < 0)
-            throw new EOFException();
+        if((ch1 | ch2) < 0)
+        {
+        	throw new EOFException();
+        }
         return (char)((ch1 << 8) + ch2);
     }
 
-    public int readInt()
-        throws IOException
+	/**
+	 * readInt
+	 *
+	 * General Function: Reads and returns an integer from the InputStream.
+	 */
+    public int readInt() throws IOException
     {
         int ch1 = in.read();
         int ch2 = in.read();
         int ch3 = in.read();
         int ch4 = in.read();
 
-        if ((ch1 | ch2 | ch3 | ch4) < 0)
-            throw new EOFException();
+        if((ch1 | ch2 | ch3 | ch4) < 0)
+        {
+        	throw new EOFException();
+        }
+        
         return ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + ch4);
     }
 
     /**
-     * Reads n ints into an array.  The array must be preallocated
-     * to at least n size.
+     * readInts
+     *
+     * General Function: Reads n ints into an array.  The array must be preallocated to at least n size.
      *
      * @param data The place to store the data
      * @param len The number of floats to read.
      */
-    public void readInts(int[] data, int len)
-        throws IOException
+    public void readInts(int[] data, int len) throws IOException
     {
         int size = len * 4;
-        if (byteBuff.length < size)
-            byteBuff = new byte[size];
+        if(byteBuff.length < size)
+        {
+        	byteBuff = new byte[size];
+        }
 
         readFully(byteBuff, 0, size);
 
@@ -183,13 +263,16 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
             ch3 = (byteBuff[idx++] & 255);
             ch4 = (byteBuff[idx++] & 255);
 
-            data[i] = ((ch1 << 24) + (ch2 << 16) +
-                  (ch3 << 8) + (ch4 << 0));
+            data[i] = ((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
         }
     }
 
-    public long readLong()
-        throws IOException
+	/**
+	 * readLong
+	 *
+	 * General Function: Reads and returns a long from the InputStream.
+	 */
+    public long readLong() throws IOException
     {
         readFully(readBuffer, 0, 8);
         return (((long)readBuffer[0] << 56) +
@@ -202,8 +285,12 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
                 ((readBuffer[7] & 255) <<  0));
     }
 
-    public float readFloat()
-        throws IOException
+	/**
+	 * readFloat
+	 *
+	 * General Function: Reads and returns a float from the InputStream.
+	 */
+    public float readFloat() throws IOException
     {
         readFully(byteBuff, 0, 4);
 
@@ -217,21 +304,20 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
         ch3 = (byteBuff[2] & 255);
         ch4 = (byteBuff[3] & 255);
 
-        return Float.intBitsToFloat((ch1 << 24) + (ch2 << 16) +
-                  (ch3 << 8) + (ch4 << 0));
+        return Float.intBitsToFloat((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0));
 
         //return Float.intBitsToFloat(readInt());
     }
 
     /**
-     * Reads n floats into an array.  The array must be preallocated
-     * to at least n size.
+     * readFloats
+     *
+     * General Function: Reads n floats into an array.  The array must be preallocated to at least n size.
      *
      * @param data The place to store the data
      * @param len The number of floats to read.
      */
-    public void readFloats(float[] data, int len)
-        throws IOException
+    public void readFloats(float[] data, int len) throws IOException
     {
         int size = len * 4;
         if (byteBuff.length < size)
@@ -252,31 +338,40 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
             ch3 = (byteBuff[idx++] & 255);
             ch4 = (byteBuff[idx++] & 255);
 
-            data[i] = Float.intBitsToFloat(((ch1 << 24) + (ch2 << 16) +
-                  (ch3 << 8) + (ch4 << 0)));
+            data[i] = Float.intBitsToFloat(((ch1 << 24) + (ch2 << 16) + (ch3 << 8) + (ch4 << 0)));
         }
     }
 
-    public double readDouble()
-        throws IOException
+	/**
+	 * readDouble
+	 *
+	 * General Function: Reads and returns a double from the InputStream.
+	 */
+    public double readDouble() throws IOException
     {
         return Double.longBitsToDouble(readLong());
     }
 
-    public String readLine()
-        throws IOException
+	/**
+	 * readLine
+	 *
+	 * General Function: Reads an entire line of the InputStream as a String.
+	 */
+    public String readLine() throws IOException
     {
         char buf[] = lineBuffer;
 
         if(buf == null)
-            buf = lineBuffer = new char[128];
+        {
+        	buf = lineBuffer = new char[128];
+        }
 
         int room = buf.length;
         int offset = 0;
         int c;
 
         loop:
-        while (true)
+        while(true)
         {
             switch (c = in.read())
             {
@@ -289,7 +384,9 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
                     if ((c2 != '\n') && (c2 != -1))
                     {
                         if(!(in instanceof PushbackInputStream))
-                            in = new PushbackInputStream(in);
+                        {
+                        	in = new PushbackInputStream(in);
+                        }
 
                         ((PushbackInputStream)in).unread(c2);
                     }
@@ -310,19 +407,31 @@ public class BlockDataInputStream extends FilterInputStream implements DataInput
         }
 
         if((c == -1) && (offset == 0))
-            return null;
+        {
+        	return null;
+        }
 
         return String.copyValueOf(buf, 0, offset);
     }
 
-    public String readUTF()
-        throws IOException
+	/**
+	 * readUTF
+	 *
+	 * General Function: Reads a UTF encoded String from the InputStream.
+	 */
+    public String readUTF() throws IOException
     {
         return readUTF(this);
     }
 
-    public static String readUTF(DataInput in)
-        throws IOException
+	/**
+	 * readUTF
+	 *
+	 * General Function:
+	 *
+	 * @param in The DataInput to read from.
+	 */
+    public static String readUTF(DataInput in) throws IOException
     {
         int utflen = in.readUnsignedShort();
 

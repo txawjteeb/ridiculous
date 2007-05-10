@@ -6,8 +6,18 @@ import java.awt.image.DataBufferInt;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * BitmapLoader.java
+ *
+ * General Function: Load Bitmap Images.
+ */
 public class BitmapLoader
 {
+	/**
+	 * loadBitmap
+	 *
+	 * General Function: Loads a specified Bitmap image as a BufferedImage.
+	 */
 	public static BufferedImage loadBitmap(String fn) throws IOException
 	{
 		BufferedImage image;
@@ -56,6 +66,11 @@ public class BitmapLoader
         return image;
 	}
 	
+	/**
+	 * read8BitBitmap
+	 *
+	 * General Function: Reads an 8-bit Bitmap.
+	 */
 	private static BufferedImage read8BitBitmap(int nColoursUsed, int nBitCount, int nSizeImage, int nWidth, int nHeight, InputStream input) throws IOException {
         int nNumColors = (nColoursUsed > 0) ? nColoursUsed : (1 & 0xff) << nBitCount;
 
@@ -97,11 +112,19 @@ public class BitmapLoader
 
         return bufferedImage;
     }
-
-    private static BufferedImage read24BitBitmap(int nSizeImage, int nHeight, int nWidth, InputStream input) throws IOException {
+    
+    /**
+     * read24BitBitmap
+     *
+     * General Function: Reads a 24-Bit Bitmap.
+     */
+    private static BufferedImage read24BitBitmap(int nSizeImage, int nHeight, int nWidth, InputStream input) throws IOException
+    {
         int npad = (nSizeImage / nHeight) - nWidth * 3;
-        if (npad == 4 || npad < 0)
-            npad = 0;
+        if(npad==4 || npad<0)
+		{
+			npad = 0;
+		}
         int nindex = 0;
         BufferedImage bufferedImage = new BufferedImage(nWidth, nHeight, BufferedImage.TYPE_4BYTE_ABGR);
         DataBufferByte dataBufferByte = ((DataBufferByte) bufferedImage.getRaster().getDataBuffer());
@@ -110,8 +133,10 @@ public class BitmapLoader
 
         readBuffer(input, brgb);
 
-        for (int j = nHeight - 1; j >= 0; j--) {
-            for (int i = 0; i < nWidth; i++) {
+        for(int j = nHeight - 1; j >= 0; j--)
+        {
+            for(int i = 0; i < nWidth; i++)
+			{
                 int base = (j * nWidth + i) * 4;
                 bankData[0][base] = (byte) 255;
                 bankData[0][base + 1] = brgb[nindex];
@@ -125,22 +150,40 @@ public class BitmapLoader
         return bufferedImage;
     }
 
-    private static int bytesToInt(byte[] bytes, int index) {
-        return (bytes[index + 3] & 0xff) << 24 |
-                (bytes[index + 2] & 0xff) << 16 |
-                (bytes[index + 1] & 0xff) << 8 |
-                bytes[index + 0] & 0xff;
+	/**
+	 * bytesToInt
+	 *
+	 * General Function: Converts a byte array into an intenger.
+	 */
+    private static int bytesToInt(byte[] bytes, int index)
+    {
+        return	(bytes[index + 3] & 0xff) << 24 |
+				(bytes[index + 2] & 0xff) << 16 |
+				(bytes[index + 1] & 0xff) << 8 |
+				bytes[index + 0] & 0xff;
     }
 
-    private static short bytesToShort(byte[] bytes, int index) {
-        return (short) (((bytes[index + 1] & 0xff) << 8) |
-                (bytes[index + 0] & 0xff));
+	/**
+	 * bytesToShort
+	 *
+	 * General Function: Converts a byte array into a short.
+	 */
+    private static short bytesToShort(byte[] bytes, int index)
+    {
+        return (short) (((bytes[index + 1] & 0xff) << 8) | (bytes[index + 0] & 0xff));
     }
 
-    private static void readBuffer(InputStream in, byte[] buffer) throws IOException {
+	/**
+	 * readBuffer
+	 *
+	 * General Function: Reads a byte array buffer from an InputStream.
+	 */
+	private static void readBuffer(InputStream in, byte[] buffer) throws IOException
+	{
         int bytesRead = 0;
         int bytesToRead = buffer.length;
-        while (bytesToRead > 0) {
+        while(bytesToRead > 0)
+        {
             int read = in.read(buffer, bytesRead, bytesToRead);
             bytesRead += read;
             bytesToRead -= read;

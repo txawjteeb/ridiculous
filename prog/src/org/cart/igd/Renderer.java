@@ -80,6 +80,8 @@ public class Renderer implements GLEventListener
 	 * init
 	 *
 	 * General function: Windows Callback for GL initialization
+	 *
+	 * @param drawable The GLAutoDrawable to grab the GL instance from.
 	 */
 	public void init(GLAutoDrawable drawable)
 	{
@@ -120,7 +122,9 @@ public class Renderer implements GLEventListener
 	 * initGameStates
 	 * 
 	 * General Function: Checks for completion of game state before attempting to update 
-	 **/
+	 *
+	 * @param gl The GL instance to render to.
+	 */
 	public void initGameStates(GL gl)
 	{
 		stateManager.addGameState(new MenuState(gl),"MenuState");
@@ -144,6 +148,8 @@ public class Renderer implements GLEventListener
 	 * initLighting
 	 *
 	 * General Function: Enable and setup lighting.
+	 *
+	 * @param gl The GL instance to render to.
 	 */
 	private void initLighting(GL gl)
 	{
@@ -165,6 +171,8 @@ public class Renderer implements GLEventListener
 	 * display
 	 *
 	 * General function: Windows Callback for drawing every frame
+	 *
+	 * @param drawable The GLAutoDrawable to grab the GL instance from.
 	 */
 	public void display(GLAutoDrawable drawable)
 	{
@@ -194,6 +202,12 @@ public class Renderer implements GLEventListener
 	 * reshape
 	 *
 	 * General function: Windows Callback for window reshape
+	 *
+	 * @param drawable The GLAutoDrawable to grab GL from.
+	 * @param x The new x value for the display.
+	 * @param y The new y value for the display.
+	 * @param width The new width for the display.
+	 * @param height The new height for the display.
 	 */
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
 	{

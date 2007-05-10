@@ -24,8 +24,7 @@ import org.cart.igd.input.UserInput;
 /**
  * Display.java
  *
- * General Function:
- * Creates the window for OpenGL to draw onto.
+ * General Function: Creates the window for OpenGL to draw onto.
  */
 public class Display implements WindowListener
 {
@@ -60,6 +59,8 @@ public class Display implements WindowListener
 	 * Constructor
 	 *
 	 * General Function: Creates an instance of Display
+	 *
+	 * @param disp The DisplaySettings to use.
 	 */
 	public Display( DisplaySettings disp )
 	{	
@@ -73,6 +74,11 @@ public class Display implements WindowListener
 	 * createDisplay
 	 *
 	 * General Function: Creates a public instance of Display with pre-specified settings.
+	 *
+	 * @param title The title of the Display window.
+	 * @param width The width of the Display window.
+	 * @param height The height of the Display window.
+	 * @param fullscreen The flag for fullscreen display.
 	 */
 	public void createDisplay( String title, int width, int height, boolean fullscreen )
 	{
@@ -212,6 +218,12 @@ public class Display implements WindowListener
 	 * findDisplayMode
 	 *
 	 * General Function: Finds a DisplayMode to use.
+	 *
+	 * @param displayModes The array of possible DisplayModes.
+	 * @param requestedWidth The requested DisplayMode width.
+	 * @param requestedHeight The requested DisplayMode height.
+	 * @param requestedDepth The requested DisplayMode bit depth.
+	 * @param requestedRefreshRate The requested DisplayMode refresh rate.
 	 */
 	private DisplayMode findDisplayMode( DisplayMode[] displayModes, int requestedWidth, int requestedHeight, int requestedDepth, int requestedRefreshRate )
 	{
@@ -237,6 +249,12 @@ public class Display implements WindowListener
 	 * findDisplayModeInternal
 	 *
 	 * General Function: Finds a DisplayMode, using the java object DisplayMode.
+	 *
+	 * @param displayModes The array of possible DisplayModes.
+	 * @param requestedWidth The requested DisplayMode width.
+	 * @param requestedHeight The requested DisplayMode height.
+	 * @param requestedDepth The requested DisplayMode bit depth.
+	 * @param requestedRefreshRate The requested DisplayMode refresh rate.
 	 */
 	private DisplayMode findDisplayModeInternal( DisplayMode[] displayModes, int requestedWidth, int requestedHeight, int requestedDepth, int requestedRefreshRate ) 
 	{
@@ -270,6 +288,8 @@ public class Display implements WindowListener
 	 * setTitle
 	 *
 	 * General Function: Assigns a new String variable as the Display frame's title.
+	 *
+	 * @param title The title to set the Display frame to.
 	 */
 	public void setTitle( String title )
 	{
