@@ -10,7 +10,7 @@ import org.cart.igd.states.*;
 import org.cart.igd.util.TextureLoader;
 import org.cart.igd.util.Texture;
 
-/*
+/**
  * Renderer.java
  *
  * General Function:
@@ -125,6 +125,7 @@ public class Renderer implements GLEventListener
 	{
 		stateManager.addGameState(new MenuState(gl),"MenuState");
 		stateManager.addGameState(new InGameState(gl),"InGameState");
+		stateManager.addGameState(new MiniGame(gl),"MiniGame");
 		stateManager.setCurrentState("MenuState");
 		stateManager.initStates(gl, glu);
 	}

@@ -21,8 +21,6 @@ import org.cart.igd.states.InGameState;
  * use: to organize guards as a unit, when one guard 
  * sight an animal the whole guard team is alerted
  **/
- 
-
 public class GuardSquad {
 	public boolean reset = false;
 	private InGameState igs;

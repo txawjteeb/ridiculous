@@ -3,6 +3,8 @@ package org.cart.igd.gui;
 import java.io.*;
 import java.util.*;
 import java.awt.event.*;
+
+import org.cart.igd.entity.Player;
 import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
 import org.cart.igd.core.*;
@@ -13,10 +15,10 @@ import org.cart.igd.sound.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 import org.cart.igd.math.*;
+import org.cart.igd.models.obj.OBJModel;
 
 public class MiniGamePenguins extends GUI{
 	
-	public InGameState igs = null;
 	private UserInput input;
 	private GameAction panLeft = new GameAction("",false);
 	private GameAction panRight = new GameAction("",false);
@@ -29,8 +31,14 @@ public class MiniGamePenguins extends GUI{
 	long snowballTime= 0;
 	
 	boolean hasSnowball = false;
+	
+	private InGameState igs;
+	
+	private OBJModel map;
+	/** mini game player with penguin model */
+	private Player player;
 			
-	public MiniGamePenguins(GameState gameState){
+	public MiniGamePenguins( MiniGame gameState){
 		super(gameState);
 		input = Kernel.userInput;
 		initInput();
@@ -48,7 +56,7 @@ public class MiniGamePenguins extends GUI{
 	//	if(igs.getAnimal("Penguin").state !=Inventory.SAVED_IN_PARTY){
 	//		return;
 	//	} 
-		((InGameState)gameState).changeGuiState(4);
+		
 		
 	}
 	
@@ -86,12 +94,16 @@ public class MiniGamePenguins extends GUI{
 	}
 
 	public void render(GL gl,Animal a){
-		a.renderLocation(gl,((InGameState)igs).player.position);
+		a.renderLocation(gl,igs.player.position);
 	//	Animal a = igs.getAnimal("Penguin");
 	//	if(a!=null){
 	//		System.out.println("fine");
 	//		a.render(gl);
 	//	}
+		
+	}
+	
+	public void save(){
 		
 	}
 	
@@ -102,5 +114,4 @@ public class MiniGamePenguins extends GUI{
 	public void update(){
 		
 	}
-	
 }

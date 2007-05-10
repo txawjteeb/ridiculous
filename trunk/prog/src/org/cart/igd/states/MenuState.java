@@ -16,17 +16,16 @@ import org.cart.igd.gl2d.GLGraphics;
 public class MenuState extends GameState
 {
 	private GameAction selectOption = new GameAction("select", false);
-	private GUI gui;
-	
+	private int guiState = 0;
 	public MenuState(GL gl)
 	{
-		gui = new MenuGUI(this);
+		gui.add( new MenuGUI(this) );
 		Kernel.userInput.bindToKey(selectOption, KeyEvent.VK_ENTER);
 	}
 	
 	public void handleInput(long elapsedTime)
 	{
-		gui.handleInput(elapsedTime);
+		gui.get(guiState).handleInput(elapsedTime);
 		if(selectOption.isPressed()){
 			changeGameState("InGameState");
 		}
@@ -35,12 +34,12 @@ public class MenuState extends GameState
 	public void update(long elapsedTime)
 	{
 		handleInput(elapsedTime);
-		gui.update(elapsedTime);
+		gui.get(guiState).update(elapsedTime);
 	}
 	
 	public void display(GL gl,GLU glu)
 	{
-		gui.render( Kernel.display.getRenderer().getGLG() );
+		gui.get(guiState).render( Kernel.display.getRenderer().getGLG() );
 		GLGraphics glg = Kernel.display.getRenderer().getGLG();
 		glg.glgBegin();
 		glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]);
