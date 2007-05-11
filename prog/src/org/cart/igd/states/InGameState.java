@@ -31,63 +31,112 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.sound.*;
-//import org.cart.igd.media.CutscenePlayer;
+import org.cart.igd.media.CutscenePlayer;
 
 /**
- * Handles most of the game playS
- **/
+ * InGameState.java
+ *
+ * General Function: Handles almost all of the game play.
+ */
 public class InGameState extends GameState
 {	
 	public String[] infoText = { "", "", "", "", "","","","" };
 	
+	/* Collection of all in-game entities. */
 	public List<Entity> entities = Collections.synchronizedList(new ArrayList<Entity>());
+	
+	/* Collection of items. */
 	public ArrayList<Item> items = new ArrayList<Item>();
-	public ArrayList<Entity> interactiveEntities = new ArrayList<Entity>();	
+	
+	/* Collection of interactive entities in-game. */
+	public ArrayList<Entity> interactiveEntities = new ArrayList<Entity>();
+	
+	/* Collection of unnecessary explorable objects. */
 	public ArrayList<UnnecessaryExplore> unnecessaryExplores = new ArrayList<UnnecessaryExplore>();	
 
+	/* Collection of entities to remove from the all-entity collection. */
 	public ArrayList<Entity> removeList = new ArrayList<Entity>();
 	
+	/* The player entity. */
 	public Entity player;
 	
-	public  Camera camera;
-	public int previousCameraZoom;
-	private OBJModel playerSprite;
-	private OBJModel partySnapper;
-	private OBJModel bushModel;
-	private OBJModel zoopaste;
-	private OBJModel explorationBox,waterAffinity,foodAffinity;
+	/* The in-game camera. */
+	public Camera camera;
 	
+	/* Previous camera zoom. */
+	public int previousCameraZoom;
+	
+	/* Player OBJ Model Data. */
+	private OBJModel playerSprite;
+	
+	/* Party Snapper OBJ Model Data. */
+	private OBJModel partySnapper;
+	
+	/* Bush OBJ Model Data. */
+	private OBJModel bushModel;
+	
+	/* Toothpaste OBJ Model Data. */
+	private OBJModel zoopaste;
+	
+	/* ExplorationBox OBJ Model Data. */
+	private OBJModel explorationBox;
+	
+	/* WaterAffinity OBJ Model Data. */
+	private OBJModel waterAffinity;
+	
+	/* FoodAffinity OBJ Model Data. */
+	private OBJModel foodAffinity;
+	
+	/* 3DSMax File Parser. */
 	private MaxParser maxParser;
+	
+	/* Test 3DS model data. */
 	private Model test3ds;
+	
+	/* Guard 3DS model data. */
 	private Model guard3ds;
 	
+	/* Constant gravity variable. */
 	private final float GRAVITY = 0.025f;
 	
+	/* Player's state. */
 	private int playerState = 0;
 	
+	/* Game GUI index. */
 	public static final int GUI_GAME = 1;
+	
+	/* Dialogue GUI index. */
 	public static final int GUI_DIALOGUE = 0;
 	
-	/** Contain different gui states */
+	/* Collection of GUI states */
 	public ArrayList<GUI> gui = new ArrayList<GUI>();
 	
-	
-	
+	/* The GameAction that handles mouse wheel scrolling. */
 	private GameAction mouseWheelScroll;
 	
+	/* Bush entity. */
 	public Entity bush;
+	
+	/* Flag that says if the player is near the bush. */
 	public boolean nearBush = false;
 	
+	/* Instance of Inventory object. */
 	public Inventory inventory;
-	public QuestLog questlog;
-	//public CutscenePlayer cutscenePlayer;
 	
+	/* Instance of QuestLog object. */
+	public QuestLog questlog;
+	
+	/* Instance of CutscenePlayer object. */
+	public CutscenePlayer cutscenePlayer;
+	
+	/* Instance of Terrain object. */
 	private Terrain terrain;
 	
 	private boolean loaded = false;
-	boolean showInfoText = true;
+	private boolean showInfoText = true;
 	
-	GLGraphics glg;
+	/* Instance of GLGraphics object. */
+	private GLGraphics glg;
 
 	public Sound backgroundMusic,throwPopper,popPopper,giveItem,openQuestLog, closeQuestLog,questLogMusic,freeAnimalTune;
 	public Sound turnPage[] = new Sound[4];
@@ -105,7 +154,7 @@ public class InGameState extends GameState
 			maxParser = new MaxParser();
 			
 			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
-			
+			guard3ds = new Model(maxParser.getObjectMesh("data/models/guard_aw.3DS"));
 			backgroundMusic = new Sound("data/sounds/music/zoo_music.ogg");
 			questLogMusic = new Sound("data/sounds/music/questlog_music.ogg");
 			throwPopper = new Sound("data/sounds/effects/throw_popper.ogg");
@@ -122,6 +171,7 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 		bushModel	= new OBJModel(gl,"data/models/bush");
+		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
@@ -139,8 +189,8 @@ public class InGameState extends GameState
 		questlog.load();
 
 		inventory = new Inventory(this);
-		//cutscenePlayer = new CutscenePlayer();
-		//cutscenePlayer.loadMovie("data/movies/flamingo_idle.avi");
+		cutscenePlayer = new CutscenePlayer();
+		cutscenePlayer.loadMovie("data/movies/flamingo_idle.avi");
 		
 		/* create objAnimation of a flamingo*/
 		flamingoWalk = new OBJAnimation(gl,10,"data/models/flamingo",105);
@@ -320,7 +370,7 @@ public class InGameState extends GameState
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
 		gui.add(new MoviePlayer(this));
-		//backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
+		backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
 		
 		guardSquad.init( gl, glu );
 		
@@ -448,11 +498,11 @@ public class InGameState extends GameState
 	
 	public synchronized void display(GL gl, GLU glu)
 	{
-		//if(!cutscenePlayer.isStopped)
-		//{
-		//	cutscenePlayer.render(glg);
-		//	return;
-		//}
+		if(!cutscenePlayer.isStopped)
+		{
+			cutscenePlayer.render(glg);
+			return;
+		}
 		
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
@@ -560,7 +610,7 @@ public class InGameState extends GameState
 			if(Kernel.userInput.keys[KeyEvent.VK_0])
 			{
 				Kernel.userInput.keys[KeyEvent.VK_0] = false;
-			//	cutscenePlayer.playMovie();
+				cutscenePlayer.playMovie();
 			}
 			
 			/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
@@ -583,7 +633,6 @@ public class InGameState extends GameState
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 				throwPartyPopper();
-				Kernel.userInput.keys[KeyEvent.VK_CONTROL]=false;
 			}
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_END]){
