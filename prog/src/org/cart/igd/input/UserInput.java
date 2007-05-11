@@ -1,8 +1,4 @@
-/**
- * UserInput
- * in its current state its a hybrid and can be used to check global input events
- * or local events via GameEvent classes
- **/
+
 package org.cart.igd.input;
 
 import java.awt.Component;
@@ -16,6 +12,13 @@ import org.cart.igd.gl2d.UIComponent;
 import org.cart.igd.game.Inventory;
 
 
+/**
+ * UserInput.java
+ * 
+ * General Purpose:
+ * In its current state its a hybrid input helper and can be used to check 
+ * global input events or local events via GameEvent classes.
+ */
 public class UserInput implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener
 {
 	public boolean[] keys     = new boolean[600];
@@ -26,7 +29,7 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	public int[] mouseDragged = new int[] { 0, 0 };
 	
 	
-	public GameAction keyActions[] = new GameAction[512];
+	public GameAction keyActions[] = new GameAction[600];
 	public GameAction mouseActions[] = new GameAction[20];
 	public GameAction buttonActions[] = new GameAction[50];
 	

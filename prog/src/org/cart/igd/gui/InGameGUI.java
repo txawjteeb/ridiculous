@@ -1,12 +1,3 @@
-
-
-
-
-
-
-
-
-
 package org.cart.igd.gui;
 
 
@@ -30,6 +21,12 @@ import java.awt.event.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
+/**
+ * InGameGUI.java
+ * 
+ * General Purpose: 
+ * Handles input and rendering of GUI for most of the InGameState
+ */
 public class InGameGUI extends GUI
 {
 	private UserInput input;
@@ -222,7 +219,7 @@ public class InGameGUI extends GUI
 		
 	//	System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
 	//	System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
-		System.out.println("PSYCH_CAUGHT_BEFORE_FREEING_TURTLES "+igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES);			
+	//System.out.println("PSYCH_CAUGHT_BEFORE_FREEING_TURTLES "+igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES);			
 		
 
 		/* W/S - Move player forward/back. Resets camera offset to back view*/

@@ -31,10 +31,10 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.sound.*;
-import org.cart.igd.media.CutscenePlayer;
+//import org.cart.igd.media.CutscenePlayer;
 
 /**
- * Handles most of the game play
+ * Handles most of the game playS
  **/
 public class InGameState extends GameState
 {	
@@ -80,7 +80,7 @@ public class InGameState extends GameState
 	
 	public Inventory inventory;
 	public QuestLog questlog;
-	public CutscenePlayer cutscenePlayer;
+	//public CutscenePlayer cutscenePlayer;
 	
 	private Terrain terrain;
 	
@@ -105,7 +105,7 @@ public class InGameState extends GameState
 			maxParser = new MaxParser();
 			
 			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
-			guard3ds = new Model(maxParser.getObjectMesh("data/models/guard_aw.3DS"));
+			
 			backgroundMusic = new Sound("data/sounds/music/zoo_music.ogg");
 			questLogMusic = new Sound("data/sounds/music/questlog_music.ogg");
 			throwPopper = new Sound("data/sounds/effects/throw_popper.ogg");
@@ -122,7 +122,6 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 		bushModel	= new OBJModel(gl,"data/models/bush");
-		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
@@ -140,8 +139,8 @@ public class InGameState extends GameState
 		questlog.load();
 
 		inventory = new Inventory(this);
-		cutscenePlayer = new CutscenePlayer();
-		cutscenePlayer.loadMovie("data/movies/flamingo_idle.avi");
+		//cutscenePlayer = new CutscenePlayer();
+		//cutscenePlayer.loadMovie("data/movies/flamingo_idle.avi");
 		
 		/* create objAnimation of a flamingo*/
 		flamingoWalk = new OBJAnimation(gl,10,"data/models/flamingo",105);
@@ -321,7 +320,7 @@ public class InGameState extends GameState
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
 		gui.add(new MoviePlayer(this));
-		backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
+		//backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
 		
 		guardSquad.init( gl, glu );
 		
@@ -449,11 +448,11 @@ public class InGameState extends GameState
 	
 	public synchronized void display(GL gl, GLU glu)
 	{
-		if(!cutscenePlayer.isStopped)
-		{
-			cutscenePlayer.render(glg);
-			return;
-		}
+		//if(!cutscenePlayer.isStopped)
+		//{
+		//	cutscenePlayer.render(glg);
+		//	return;
+		//}
 		
 		gl.glDisable(GL.GL_TEXTURE_2D);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
@@ -561,7 +560,7 @@ public class InGameState extends GameState
 			if(Kernel.userInput.keys[KeyEvent.VK_0])
 			{
 				Kernel.userInput.keys[KeyEvent.VK_0] = false;
-				cutscenePlayer.playMovie();
+			//	cutscenePlayer.playMovie();
 			}
 			
 			/* PAGEUP/PAGEDOWN - Inc./Dec. how far above the ground the camera is. */
@@ -584,6 +583,7 @@ public class InGameState extends GameState
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 				throwPartyPopper();
+				Kernel.userInput.keys[KeyEvent.VK_CONTROL]=false;
 			}
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_END]){

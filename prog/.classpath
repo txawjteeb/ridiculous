@@ -14,5 +14,9 @@
 	<classpathentry kind="lib" path="mp3spi1.9.4.jar"/>
 	<classpathentry kind="lib" path="tritonus_share.jar"/>
 	<classpathentry kind="lib" path="vorbisspi1.0.2.jar"/>
+	<classpathentry kind="lib" path="customizer.jar"/>
+	<classpathentry kind="lib" path="jmf.jar"/>
+	<classpathentry kind="lib" path="mediaplayer.jar"/>
+	<classpathentry kind="lib" path="multiplayer.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

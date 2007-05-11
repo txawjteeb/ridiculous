@@ -7,11 +7,10 @@ import org.cart.igd.states.GameState;
 public class InputHandler extends Thread{
 	private Profiler profiler;
 	public int sleepTime = 1;
-	private long lastTime = System.currentTimeMillis();
-	public long currentTime = System.currentTimeMillis();
+	private long lastTime;
+	public long currentTime;
 	
 	public boolean running = false;
-	private GameState gameState;
 	
 	public InputHandler(Profiler profiler){
 		this.profiler = profiler;
