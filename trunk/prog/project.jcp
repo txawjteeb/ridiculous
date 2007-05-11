@@ -877,20 +877,20 @@
 		<todotaskitem>
 			<description>TODO: enable when sound fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>375</line>
-			<timestamp>1178915243</timestamp>
+			<line>374</line>
+<<<<<<< .mine			<timestamp>1178918567</timestamp>=======			<timestamp>1178915243</timestamp>>>>>>>> .r732
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: make sure to call this once */</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>450</line>
-			<timestamp>1178915243</timestamp>
+			<line>453</line>
+<<<<<<< .mine			<timestamp>1178918567</timestamp>=======			<timestamp>1178915243</timestamp>>>>>>>> .r732
 		</todotaskitem>
-		<todotaskitem>
+<<<<<<< .mine=======		<todotaskitem>
 			<description>TODO: re-enable when sound is fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
 			<line>585</line>
 			<timestamp>1178915243</timestamp>
 		</todotaskitem>
-	</tasks>
+>>>>>>> .r732	</tasks>
 </project>

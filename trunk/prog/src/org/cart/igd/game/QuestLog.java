@@ -134,7 +134,12 @@ public class QuestLog{
 							}
 							//igs.backgroundMusic.stop();
 							//igs.questLogMusic.loop(1f,.5f);
-							igs.openQuestLog.play();
+							if(igs.openQuestLog != null){
+								igs.openQuestLog.play();
+							} else {
+								System.out.println("QuestLog: igs.openQuestLog is null");
+							}
+							
 							swingBookAlpha = 0f;
 							leftBook=true;
 							degreeBook = 0;

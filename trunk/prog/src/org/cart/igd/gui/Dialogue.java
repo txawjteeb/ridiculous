@@ -35,12 +35,6 @@ public class Dialogue extends GUI
 	private Sound pandaVoiceOvers[] = new Sound[7]; 
 	private Sound questLogUpdated;
 	private Sound backgroundMusic[] = new Sound[9];	
-						
-	/**
-	 * param1 informative string
-	 * param2 continuous action
-	 **/
-	private GameAction testChangeGui = new GameAction("test swap",false);
 	
 	/** 
 	 * pass in a refference from game state that contains this gui class 
@@ -53,27 +47,34 @@ public class Dialogue extends GUI
 		input = Kernel.userInput;
 		initInput();
 		loadImages();
-//		loadSounds();
+		
 	}
 	public void initInput()	{
-		input.bindToKey(testChangeGui, KeyEvent.VK_T);
+
 	}
 	
 	public void createDialogue(Animal animal,InGameState igs){
 		down = false;
 		this.igs = igs;
 		alphaBackground = 0f;
+		loadSounds(animal.animalId);
 		animal.facingDirection = igs.player.facingDirection + 180f;
 		new ActiveDialogue(animal,igs).start();
-		igs.backgroundMusic.stop();
-		if(animal.state!=6){
-			backgroundMusic[animal.animalId-1].loop(1f,.5f);
-		} else{
-			igs.freeAnimalTune.play(1.5f,.8f);
+		if(igs.backgroundMusic != null){
+			igs.backgroundMusic.stop();
+		} else {
+			System.out.println("Dialogue: igs.backgroundMusic is null ");
 		}
+		
+		//if(animal.state!=6){
+		//	backgroundMusic[animal.animalId-1].loop(1f,.5f);
+		//} else{
+		//	igs.freeAnimalTune.play(1.5f,.8f);
+		//}
 			
 			
 		igs.camera.distance = 5;
+		
 		
 	
 	}
@@ -90,42 +91,89 @@ public class Dialogue extends GUI
 		background = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
 	}
 	
-	public void loadSounds(){
+	public void loadSounds(int aId){
 		try{
-			for(int i = 0;i< turtleVoiceOvers.length;i++){
-				turtleVoiceOvers[i] = new Sound("data/sounds/voices/turtles/turtles-" + (i+1) + ".ogg");
+			switch ( aId ){
+				case 1:
+					for(int i = 0;i< turtleVoiceOvers.length;i++){
+						turtleVoiceOvers[i] = new Sound("data/sounds/voices/turtles/turtles-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				
+				case 2:
+					for(int i = 0;i< elephantVoiceOvers.length;i++){
+						elephantVoiceOvers[i] = new Sound("data/sounds/voices/elephant/elephant-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				
+				case 3:
+					for(int i = 0;i< woodpeckerVoiceOvers.length;i++){
+						woodpeckerVoiceOvers[i] = new Sound("data/sounds/voices/woodpecker/woodpecker-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				
+				case 4:
+					for(int i = 0;i< meerkatVoiceOvers.length;i++){
+						meerkatVoiceOvers[i] = new Sound("data/sounds/voices/meerkat/meerkat-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				
+				case 5:
+					for(int i = 0;i< penguinVoiceOvers.length;i++){
+						penguinVoiceOvers[i] = new Sound("data/sounds/voices/penguins/penguins-" + (i+1) + ".ogg");
+					} 
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				
+				case 6:
+					for(int i = 0;i< tigerVoiceOvers.length;i++){
+						tigerVoiceOvers[i] = new Sound("data/sounds/voices/tiger/tiger-" + (i+1) + ".ogg");
+					} 
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				
+				case 7:
+					for(int i = 0;i< giraffeVoiceOvers.length;i++){
+						giraffeVoiceOvers[i] = new Sound("data/sounds/voices/giraffe/giraffe-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				case 8:
+					for(int i = 0;i< kangarooVoiceOvers.length;i++){
+						kangarooVoiceOvers[i] = new Sound("data/sounds/voices/kangaroo/kangaroo-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;
+				
+				case 9:
+					for(int i = 0;i< pandaVoiceOvers.length;i++){
+						pandaVoiceOvers[i] = new Sound("data/sounds/voices/panda/panda-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+				break;	
+				
+				
+				
 			}
-			for(int i = 0;i< elephantVoiceOvers.length;i++){
-				elephantVoiceOvers[i] = new Sound("data/sounds/voices/elephant/elephant-" + (i+1) + ".ogg");
-			}
-			for(int i = 0;i< woodpeckerVoiceOvers.length;i++){
-				woodpeckerVoiceOvers[i] = new Sound("data/sounds/voices/woodpecker/woodpecker-" + (i+1) + ".ogg");
-			}
-			for(int i = 0;i< meerkatVoiceOvers.length;i++){
-				meerkatVoiceOvers[i] = new Sound("data/sounds/voices/meerkat/meerkat-" + (i+1) + ".ogg");
-			}
-			for(int i = 0;i< penguinVoiceOvers.length;i++){
-				penguinVoiceOvers[i] = new Sound("data/sounds/voices/penguins/penguins-" + (i+1) + ".ogg");
-			} 
-			for(int i = 0;i< tigerVoiceOvers.length;i++){
-				tigerVoiceOvers[i] = new Sound("data/sounds/voices/tiger/tiger-" + (i+1) + ".ogg");
-			} 
-			for(int i = 0;i< giraffeVoiceOvers.length;i++){
-				giraffeVoiceOvers[i] = new Sound("data/sounds/voices/giraffe/giraffe-" + (i+1) + ".ogg");
-			}
-			for(int i = 0;i< kangarooVoiceOvers.length;i++){
-				kangarooVoiceOvers[i] = new Sound("data/sounds/voices/kangaroo/kangaroo-" + (i+1) + ".ogg");
-			}
-			for(int i = 0;i< pandaVoiceOvers.length;i++){
-				pandaVoiceOvers[i] = new Sound("data/sounds/voices/panda/panda-" + (i+1) + ".ogg");
-			}
-			questLogUpdated = new Sound("data/sounds/voices/questlog/questlogupdated.ogg");
-			for(int i = 0;i< backgroundMusic.length;i++){
-				backgroundMusic[i] = new Sound("data/sounds/cages/cage-" + (i+1) + ".ogg");
+			} catch (Exception e){
+				e.printStackTrace();
 			}
 		
+		try{
+			questLogUpdated = new Sound("data/sounds/voices/questlog/questlogupdated.ogg");
 		} catch(Exception e){
-			
+			e.printStackTrace();
 		}
 		
 	}
@@ -135,9 +183,7 @@ public class Dialogue extends GUI
 	}
 	
 	public void handleInput(long elapsedTime){
-		if(testChangeGui.isActive()){
-			((InGameState)gameState).changeGuiState(0);
-		}
+		
 	}
 
 	public void render(GLGraphics g){
@@ -509,11 +555,10 @@ public class Dialogue extends GUI
 		}
 		
 		public void run(){
-			
-
+		
 
 			switch(animal.animalId){
-	case 9: // elephant
+			case 9: // elephant
 	
 				
 
@@ -1208,8 +1253,13 @@ public class Dialogue extends GUI
 			igs.camera.distance = 10;
 			igs.gui.get(InGameState.GUI_GAME).picked = false;
 			((InGameState)gameState).changeGuiState(0);
-			backgroundMusic[animal.animalId-1].stop();
-			igs.backgroundMusic.loop(1f,.5f);
+			backgroundMusic[animal.animalId].stop();
+			if(igs.backgroundMusic != null){
+				igs.backgroundMusic.loop(1f,.5f);
+			} else {
+				System.out.println("Dialogue: igs.backrgoundMusic is null");
+			}
+			
 			((InGameGUI)igs.gui.get(0)).ph.inSelectionMode = false;
 			
 			
