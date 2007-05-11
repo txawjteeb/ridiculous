@@ -111,6 +111,7 @@ public class Renderer implements GLEventListener
 		
 		/* Initialize the 3d environment lighting. */
 		initLighting(gl);
+		addFog(gl);
 		
 		/* Create the GLGraphics object for rendering 2D GUI. */
 		g = new GLGraphics(gl,glu,glut);
@@ -159,10 +160,10 @@ public class Renderer implements GLEventListener
 		gl.glEnable(GL.GL_LIGHT0);
 		gl.glEnable(GL.GL_LIGHTING);
 		
-		float[] ambientLight	= new float[] { 0.2f, 0.2f, 0.2f, 1.0f };
-		float[] diffuseLight	= new float[] { 0.8f, 0.8f, 0.8f, 1.0f };
+		float[] ambientLight	= new float[] { 0.5f, 0.5f, 0.5f, 1.0f };
+		float[] diffuseLight	= new float[] { 0.5f, 0.5f, 0.5f, 1.0f };
 		float[] specularLight	= new float[] { 0.5f, 0.5f, 0.5f, 1.0f };
-		float[] position		= new float[] { 0.0f, 0.0f, 5.0f, 1.0f };
+		float[] position		= new float[] { 0.0f, 0.0f, 10.0f, 1.0f };
 		
 		gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0);
 		gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0);
@@ -412,21 +413,33 @@ public class Renderer implements GLEventListener
 		return null;
 	}
 	
+	/**
+	 * loadImageFromBuffer
+	 *
+	 * General Function: Loads a Texture from a BufferedImage.
+	 *
+	 * @param bufImg The BufferedImage to load as a Texture.
+	 */
 	public Texture loadImageFromBuffer(BufferedImage bufImg)
 	{
 		return textureLoader.getTexture(bufImg, gl, glu);
 	}
 	
-	/*
+	/**
+	 * addFog
+	 *
+	 * General Function: Adds OpenGL fog to the 3d scene.
+	 *
+	 * @param gl The GL instance.
+	 */
 	public void addFog(GL gl)
 	{
 		gl.glFogi(GL.GL_FOG_MODE, GL.GL_EXP);
-		gl.glFogfv(GL.GL_FOG_COLOR, ColorRGBA.Gray.rgba, 0);
-		gl.glFogf(GL.GL_FOG_DENSITY, 0.0005f); 
+		gl.glFogfv(GL.GL_FOG_COLOR, org.cart.igd.util.ColorRGBA.Blue.rgba, 0);
+		gl.glFogf(GL.GL_FOG_DENSITY, 0.005f); 
 		gl.glFogf(GL.GL_FOG_START, 0f);  // start depth
 		gl.glFogf(GL.GL_FOG_END, 5f);	   // end depth
 		gl.glHint(GL.GL_FOG_HINT, GL.GL_NICEST);
 		gl.glEnable(GL.GL_FOG);
 	}
-	*/
 }

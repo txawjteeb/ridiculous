@@ -10,8 +10,8 @@ import org.cart.igd.states.*;
 import org.cart.igd.game.*;
 import org.cart.igd.sound.*;
 
-public class Dialogue extends GUI {
-	
+public class Dialogue extends GUI
+{
 	ArrayList <DialogueInfo> renderDialogue = new ArrayList <DialogueInfo>();
 	static ArrayList <Leaf> renderLeaves = new ArrayList <Leaf>();
 	private UserInput input;
