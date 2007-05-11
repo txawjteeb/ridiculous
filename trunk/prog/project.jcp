@@ -85,6 +85,9 @@
 			<folderitem>
 				<path>src\org\cart\igd\internet</path>
 			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media</path>
+			</folderitem>
 			<fileitem>
 				<path>build.xml</path>
 				<source>false</source>
@@ -94,12 +97,21 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>customizer.jar</path>
+			</fileitem>
+			<fileitem>
 				<path>gluegen-rt.jar</path>
 				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jl1.0.jar</path>
 				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>jmf.jar</path>
+			</fileitem>
+			<fileitem>
+				<path>jmf.properties</path>
 			</fileitem>
 			<fileitem>
 				<path>joal.jar</path>
@@ -126,8 +138,14 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>mediaplayer.jar</path>
+			</fileitem>
+			<fileitem>
 				<path>mp3spi1.9.4.jar</path>
 				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>multiplayer.jar</path>
 			</fileitem>
 			<fileitem>
 				<path>tritonus_share.jar</path>
@@ -762,6 +780,10 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\util\JMFSnapper.java</path>
+				<folder>src\org\cart\igd\util</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\util\ResourceRetriever.java</path>
 				<folder>src\org\cart\igd\util</folder>
 				<source>false</source>
@@ -851,32 +873,30 @@
 				<folder>src\org\cart\igd\internet</folder>
 				<source>false</source>
 			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\media\CutscenePlayer.java</path>
+				<folder>src\org\cart\igd\media</folder>
+			</fileitem>
 		</include>
 	</files>
 	<tasks>
 		<todotaskitem>
 			<description>TODO: enable when sound fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>323</line>
-			<timestamp>1178827343</timestamp>
+			<line>326</line>
+			<timestamp>1178833714</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: make sure to call this once */</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>398</line>
-			<timestamp>1178827343</timestamp>
+			<line>401</line>
+			<timestamp>1178833714</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: re-enable when sound is fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>526</line>
-			<timestamp>1178827343</timestamp>
-		</todotaskitem>
-		<todotaskitem>
-			<description>TODO: lol fix this vitaly</description>
-			<filepath>src\org\cart\igd\gui\MoviePlayer.java</filepath>
-			<line>129</line>
-			<timestamp>1178830400</timestamp>
+			<line>535</line>
+			<timestamp>1178833714</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

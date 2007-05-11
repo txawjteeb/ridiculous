@@ -477,6 +477,33 @@
 				<path>src\org\cart\igd\.svn\tmp\text-base</path>
 			</folderitem>
 			<folderitem>
+				<path>src\org\cart\igd\media</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\prop-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\props</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\text-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\tmp</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\tmp\prop-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\tmp\props</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\media\.svn\tmp\text-base</path>
+			</folderitem>
+			<folderitem>
 				<path>src\org\cart\.svn</path>
 			</folderitem>
 			<folderitem>
@@ -573,6 +600,108 @@
 				<path>.svn\tmp\text-base</path>
 			</folderitem>
 			<folderitem>
+				<path>data</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\buttons</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\dialogue</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\dialogue\old</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\font</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\fonts</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\fonts\myriad</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\fonts\new font</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\gui</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\gui\cursors</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\gui\New Folder</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\gui\questlog</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\menu_gui</path>
+			</folderitem>
+			<folderitem>
+				<path>data\images\new fsont</path>
+			</folderitem>
+			<folderitem>
+				<path>data\models</path>
+			</folderitem>
+			<folderitem>
+				<path>data\movies</path>
+			</folderitem>
+			<folderitem>
+				<path>data\movies\movie0</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\cages</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\effects</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\music</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\elephant</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\giraffe</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\kangaroo</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\meerkat</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\panda</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\penguins</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\questlog</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\tiger</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\turtles</path>
+			</folderitem>
+			<folderitem>
+				<path>data\sounds\voices\woodpecker</path>
+			</folderitem>
+			<folderitem>
+				<path>data\textures</path>
+			</folderitem>
+			<folderitem>
 				<path>docs</path>
 			</folderitem>
 			<folderitem>
@@ -598,6 +727,63 @@
 			</folderitem>
 			<folderitem>
 				<path>docs\.svn\tmp\text-base</path>
+			</folderitem>
+			<folderitem>
+				<path>org</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\collision</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\core</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\discreet</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\entity</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\game</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\gl2d</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\gui</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\input</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\internet</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\math</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\models</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\models\m3ds</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\models\obj</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\sound</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\states</path>
+			</folderitem>
+			<folderitem>
+				<path>org\cart\igd\util</path>
 			</folderitem>
 			<folderitem>
 				<path>ref</path>
@@ -684,27 +870,39 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\states\InGameState.java</path>
+			<path>src\org\cart\igd\util\TextureLoader.java</path>
 			<source>true</source>
 			<index>9</index>
-			<active>true</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\states\MiniGame.java</path>
-			<source>true</source>
-			<index>10</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\gui\MoviePlayer.java</path>
+			<path>src\org\cart\igd\media\CutscenePlayer.java</path>
+			<source>true</source>
+			<index>10</index>
+			<active>true</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\util\JMFSnapper.java</path>
 			<source>true</source>
 			<index>11</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
+			<path>src\org\cart\igd\states\InGameState.java</path>
 			<source>true</source>
 			<index>12</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gui\Dialogue.java</path>
+			<source>true</source>
+			<index>13</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
+			<source>true</source>
+			<index>14</index>
 			<active>false</active>
 		</docitem>
 	</open_files>

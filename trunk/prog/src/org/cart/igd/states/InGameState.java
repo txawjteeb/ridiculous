@@ -190,7 +190,7 @@ public class InGameState extends GameState
 
 		inventory = new Inventory(this);
 		cutscenePlayer = new CutscenePlayer();
-		cutscenePlayer.loadMovie("data/movies/flamingo_idle.avi");
+		cutscenePlayer.loadMovie("data/movies/test.avi");
 		
 		/* create objAnimation of a flamingo*/
 		flamingoWalk = new OBJAnimation(gl,10,"data/models/flamingo",105);
