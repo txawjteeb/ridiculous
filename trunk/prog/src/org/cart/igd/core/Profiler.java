@@ -1,16 +1,13 @@
-/**
- * @(#)Profiler.java
- *
- *
- * @author Vitaly Maximov
- * @version 1.00 2007/4/2
- */
 package org.cart.igd.core;
 
 /**
- * qwfasdfasdf
- **/
-
+ * Profile.java
+ * 
+ * General Function: 
+ * Access timer to get updated time for use by other time sensitive game engine
+ * components.  
+ * Keeping track of some statistical data.
+ */
 public class Profiler extends Thread
 {
 	public long currentTime = System.currentTimeMillis();

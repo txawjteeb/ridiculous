@@ -5,6 +5,7 @@ import javax.media.opengl.glu.*;
 import java.awt.event.KeyEvent;
 import com.sun.opengl.util.GLUT;
 
+import org.cart.igd.core.Kernel;
 import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.states.*;
 import org.cart.igd.util.TextureLoader;
@@ -244,13 +245,13 @@ public class Renderer implements GLEventListener
 	{
 		polyCount = 0;
 		frameCount++;
-		long currTime = System.currentTimeMillis();
+		long currTime = Kernel.profiler.currentTime;
 		long elapsedTime = currTime-lastFPSCheck;
 		if(elapsedTime>=1000)
 		{
 			fps = frameCount;
 			frameCount = 0;
-			lastFPSCheck = System.currentTimeMillis();
+			lastFPSCheck = Kernel.profiler.currentTime;
 		}
 		elapsedTime = currTime - lastTime;
 		lastTime = currTime;
