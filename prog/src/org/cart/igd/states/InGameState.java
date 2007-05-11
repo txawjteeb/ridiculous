@@ -66,9 +66,6 @@ public class InGameState extends GameState
 	/* Previous camera zoom. */
 	public int previousCameraZoom;
 	
-	/* Player OBJ Model Data. */
-	private OBJModel playerSprite;
-	
 	/* Party Snapper OBJ Model Data. */
 	private OBJModel partySnapper;
 	
@@ -138,7 +135,9 @@ public class InGameState extends GameState
 	/* Instance of GLGraphics object. */
 	private GLGraphics glg;
 
-	public Sound backgroundMusic,throwPopper,popPopper,giveItem,openQuestLog, closeQuestLog,questLogMusic,freeAnimalTune;
+	public Sound backgroundMusic = null,throwPopper = null,popPopper = null,giveItem = null,
+	openQuestLog = null, closeQuestLog = null,questLogMusic = null,freeAnimalTune = null;
+	
 	public Sound turnPage[] = new Sound[4];
 	
 	public GuardSquad guardSquad;
@@ -154,7 +153,6 @@ public class InGameState extends GameState
 			maxParser = new MaxParser();
 			
 			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
-			guard3ds = new Model(maxParser.getObjectMesh("data/models/guard_aw.3DS"));
 			backgroundMusic = new Sound("data/sounds/music/zoo_music.ogg");
 			questLogMusic = new Sound("data/sounds/music/questlog_music.ogg");
 			throwPopper = new Sound("data/sounds/effects/throw_popper.ogg");
@@ -171,7 +169,6 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 		bushModel	= new OBJModel(gl,"data/models/bush");
-		playerSprite	= new OBJModel(gl, "data/models/flamingo_walking_cs",1.2f,false);
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
@@ -369,8 +366,13 @@ public class InGameState extends GameState
 		gui.add(new InGameGUI(this,gl,glu));
 		gui.add(new Dialogue(this));
 		gui.add(new PauseMenu(this));
-		gui.add(new MoviePlayer(this));
-		backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
+		
+		if(backgroundMusic != null){
+			backgroundMusic.loop(1f,.5f);//TODO: enable when sound fixed
+		} else {
+			System.out.println("backgroundMusic loop is null");
+		}
+	
 		
 		guardSquad.init( gl, glu );
 		
@@ -579,7 +581,11 @@ public class InGameState extends GameState
 		for(int i = 0;i<inventory.items.size();i++){
 			Item item = inventory.items.get(i);
 			if(item.itemId ==8 && item.amount>0){
-				throwPopper.play((new Random()).nextFloat() + .5f,(new Random()).nextFloat() + .5f);//TODO: re-enable when sound is fixed
+				if(throwPopper != null){
+					throwPopper.play((new Random()).nextFloat() 
+						+ .5f,(new Random()).nextFloat() + .5f);
+				}
+				
 				entities.add(new PartySnapper(
 					new Vector3f(player.position.x, player.position.y, player.position.z),
 					player.facingDirection, 
@@ -633,11 +639,6 @@ public class InGameState extends GameState
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 				throwPartyPopper();
-			}
-			
-			if(Kernel.userInput.keys[KeyEvent.VK_END]){
-				((MoviePlayer)gui.get(3)).playMovie(0);
-				//this.changeGameState("MiniGame");
 			}
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_M]){
