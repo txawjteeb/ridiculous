@@ -21,6 +21,8 @@ import java.awt.event.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
 
+import org.cart.igd.util.ColorRGBA;
+
 /**
  * InGameGUI.java
  * 
@@ -128,7 +130,7 @@ public class InGameGUI extends GUI
 		g.glgBegin();
 
 		if((Kernel.userInput.isRoundButtonPressed(900,50,45,Kernel.userInput.mousePos[0],Kernel.userInput.mousePos[1]))){
-			g.drawImageRotateHueSize(texPaw[0], 850,0,0,new float[]{1f,.4f,.4f,1f},new float[]{1.1f,1.1f});
+			g.drawImageRotateHueSize(texPaw[0], 850,0,0,ColorRGBA.Green.getRGBA(),new float[]{1.1f,1.1f});
 		} else{
 			g.drawImage(texPaw[0], 855,5);
 		}

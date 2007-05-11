@@ -1,13 +1,10 @@
-/**
- * @(#)GameEvent.java
- *
- *
- * @author Vitaly Maximov
- * @version 1.00 2007/3/27
- */
 package org.cart.igd.input;
 
-/** not directly connected to game input use for general game logic*/
+/**
+ * GameEvent.java
+ *
+ * General Function: Not directly connected to game input use for general game logic.
+ */
 public class GameEvent {
 	/** discriptive name of what the game event does */
 	private String name="";
