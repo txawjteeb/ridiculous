@@ -90,7 +90,9 @@ public class Material
 		// alpha
 		if(d != 1.0f)
 		{
-			// not implemented
+			gl.glEnable(GL.GL_BLEND);
+			gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA);
+			gl.glColor4f(1.0f, 1.0f, 1.0f, d);
 		}
 	}
 

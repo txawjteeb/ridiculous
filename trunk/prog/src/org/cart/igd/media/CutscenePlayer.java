@@ -43,8 +43,8 @@ public class CutscenePlayer
 			isStopped = true;
 			
 		glg.glgBegin();
-		glg.drawImage(frame, 0, 0, new float[] {(Kernel.display.getScreenWidth()/frame.imageWidth), (Kernel.display.getScreenHeight()/frame.imageHeight)});
-		glg.drawBitmapString(""+i, 0, 0, ColorRGBA.White.getRGBA());
+		glg.drawImage(frame, 0, 0, ((float)Kernel.display.getScreenWidth()/(float)frame.imageWidth), ((float)Kernel.display.getScreenHeight()/(float)frame.imageHeight));
+		//glg.drawBitmapString(""+i, 0, 0, ColorRGBA.White.getRGBA());
 		i++;
 		glg.glgEnd();
 	}

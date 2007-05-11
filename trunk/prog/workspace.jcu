@@ -453,30 +453,6 @@
 				<path>src\org\cart\igd\internet\.svn\tmp\text-base</path>
 			</folderitem>
 			<folderitem>
-				<path>src\org\cart\igd\.svn</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\prop-base</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\props</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\text-base</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\tmp</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\tmp\prop-base</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\tmp\props</path>
-			</folderitem>
-			<folderitem>
-				<path>src\org\cart\igd\.svn\tmp\text-base</path>
-			</folderitem>
-			<folderitem>
 				<path>src\org\cart\igd\media</path>
 			</folderitem>
 			<folderitem>
@@ -502,6 +478,30 @@
 			</folderitem>
 			<folderitem>
 				<path>src\org\cart\igd\media\.svn\tmp\text-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\prop-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\props</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\text-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\tmp</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\tmp\prop-base</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\tmp\props</path>
+			</folderitem>
+			<folderitem>
+				<path>src\org\cart\igd\.svn\tmp\text-base</path>
 			</folderitem>
 			<folderitem>
 				<path>src\org\cart\.svn</path>
@@ -768,6 +768,9 @@
 				<path>org\cart\igd\math</path>
 			</folderitem>
 			<folderitem>
+				<path>org\cart\igd\media</path>
+			</folderitem>
+			<folderitem>
 				<path>org\cart\igd\models</path>
 			</folderitem>
 			<folderitem>
@@ -816,94 +819,16 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>src\org\cart\igd\util\BlockDataInputStream.java</path>
+			<path>src\org\cart\igd\Renderer.java</path>
 			<source>true</source>
 			<index>0</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>src\org\cart\igd\util\BitmapLoader.java</path>
-			<source>true</source>
-			<index>1</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\ColorRGBA.java</path>
-			<source>true</source>
-			<index>2</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\ResourceRetriever.java</path>
-			<source>true</source>
-			<index>3</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\Texture.java</path>
-			<source>true</source>
-			<index>4</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\Camera.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\Display.java</path>
-			<source>true</source>
-			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\DisplaySettings.java</path>
-			<source>true</source>
-			<index>7</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\Renderer.java</path>
-			<source>true</source>
-			<index>8</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\TextureLoader.java</path>
-			<source>true</source>
-			<index>9</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\media\CutscenePlayer.java</path>
-			<source>true</source>
-			<index>10</index>
-			<active>true</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\util\JMFSnapper.java</path>
-			<source>true</source>
-			<index>11</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
 			<path>src\org\cart\igd\states\InGameState.java</path>
 			<source>true</source>
-			<index>12</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\gui\Dialogue.java</path>
-			<source>true</source>
-			<index>13</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
-			<source>true</source>
-			<index>14</index>
-			<active>false</active>
+			<index>1</index>
+			<active>true</active>
 		</docitem>
 	</open_files>
 </workspace_user>
