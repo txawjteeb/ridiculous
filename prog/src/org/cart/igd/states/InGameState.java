@@ -505,6 +505,7 @@ public class InGameState extends GameState
 		}
 		
 		gl.glDisable(GL.GL_TEXTURE_2D);
+		gl.glColor3f(1f, 1f, 1f);
 		gl.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 		gl.glLoadIdentity();
 		

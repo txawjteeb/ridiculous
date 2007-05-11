@@ -162,7 +162,7 @@ public class Renderer implements GLEventListener
 		float[] ambientLight	= new float[] { 0.2f, 0.2f, 0.2f, 1.0f };
 		float[] diffuseLight	= new float[] { 0.8f, 0.8f, 0.8f, 1.0f };
 		float[] specularLight	= new float[] { 0.5f, 0.5f, 0.5f, 1.0f };
-		float[] position		= new float[] { -1.5f, 1.0f, -4.0f, 1.0f };
+		float[] position		= new float[] { 0.0f, 0.0f, 5.0f, 1.0f };
 		
 		gl.glLightfv(GL.GL_LIGHT0, GL.GL_AMBIENT, ambientLight, 0);
 		gl.glLightfv(GL.GL_LIGHT0, GL.GL_DIFFUSE, diffuseLight, 0);

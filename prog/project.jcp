@@ -68,9 +68,6 @@
 				<path>src\org\cart\igd\models</path>
 			</folderitem>
 			<folderitem>
-				<path>src\org\cart\igd\models\m3ds</path>
-			</folderitem>
-			<folderitem>
 				<path>src\org\cart\igd\models\obj</path>
 			</folderitem>
 			<folderitem>
@@ -451,6 +448,10 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\entity\PowerBox.java</path>
+				<folder>src\org\cart\igd\entity</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\entity\SlushiBall.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 				<source>false</source>
@@ -504,6 +505,10 @@
 				<path>src\org\cart\igd\game\QuestLog.java</path>
 				<folder>src\org\cart\igd\game</folder>
 				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\SlushyBall.java</path>
+				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Terrain.java</path>
@@ -601,11 +606,6 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
-				<path>src\org\cart\igd\gui\MoviePlayer.java</path>
-				<folder>src\org\cart\igd\gui</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
 				<path>src\org\cart\igd\gui\PauseMenu.java</path>
 				<folder>src\org\cart\igd\gui</folder>
 				<source>false</source>
@@ -683,21 +683,6 @@
 			<fileitem>
 				<path>src\org\cart\igd\math\VectorTex3f.java</path>
 				<folder>src\org\cart\igd\math</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\models\m3ds\Chunk.java</path>
-				<folder>src\org\cart\igd\models\m3ds</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\models\m3ds\Face.java</path>
-				<folder>src\org\cart\igd\models\m3ds</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\models\m3ds\Mesh.java</path>
-				<folder>src\org\cart\igd\models\m3ds</folder>
 				<source>false</source>
 			</fileitem>
 			<fileitem>
@@ -878,25 +863,34 @@
 				<folder>src\org\cart\igd\media</folder>
 			</fileitem>
 		</include>
+		<exclude>
+			<folderitem>
+				<path>src\org\cart\igd\models\m3ds</path>
+				<dir/>
+			</folderitem>
+			<fileitem>
+				<path>src\org\cart\igd\gui\MoviePlayer.java</path>
+			</fileitem>
+		</exclude>
 	</files>
 	<tasks>
 		<todotaskitem>
 			<description>TODO: enable when sound fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>326</line>
-			<timestamp>1178833714</timestamp>
+			<line>375</line>
+			<timestamp>1178914638</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: make sure to call this once */</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>401</line>
-			<timestamp>1178833714</timestamp>
+			<line>450</line>
+			<timestamp>1178914638</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: re-enable when sound is fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>535</line>
-			<timestamp>1178833714</timestamp>
+			<line>584</line>
+			<timestamp>1178914638</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>
