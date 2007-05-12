@@ -85,13 +85,10 @@ public class InGameState extends GameState
 	private OBJModel foodAffinity;
 	
 	/* 3DSMax File Parser. */
-	private MaxParser maxParser;
+	//private MaxParser maxParser;
 	
 	/* Test 3DS model data. */
-	private Model test3ds;
-	
-	/* Guard 3DS model data. */
-	private Model guard3ds;
+	//private Model test3ds;
 	
 	/* Constant gravity variable. */
 	private final float GRAVITY = 0.025f;
@@ -135,24 +132,38 @@ public class InGameState extends GameState
 	/* Instance of GLGraphics object. */
 	private GLGraphics glg;
 
-	public Sound backgroundMusic = null,throwPopper = null,popPopper = null,giveItem = null,
-	openQuestLog = null, closeQuestLog = null,questLogMusic = null,freeAnimalTune = null;
+	public Sound backgroundMusic = null,throwPopper = null,popPopper = null,
+		giveItem = null,openQuestLog = null, closeQuestLog = null,
+		questLogMusic = null,freeAnimalTune = null;
 	
 	public Sound turnPage[] = new Sound[4];
 	
 	public GuardSquad guardSquad;
 	public OBJAnimation flamingoWalk;
 	public OBJAnimation flamingoIdle;
-	//public OBJAnimation turtleIdle;
+	public OBJAnimation turtleIdle;
+	public OBJAnimation kangarooIdle;
+	public OBJAnimation giraffeIdle;//NOT exported yet
+	public OBJAnimation pandaIdle;
+	public OBJAnimation tigerIdle;//NOT exported yet
+	public OBJAnimation penguinIdle;
+	public OBJAnimation meerkatIdle;
+	public OBJAnimation woodpeckerIdle;
+	public OBJAnimation elephantIdle;
 	
 	public InGameState(GL gl)
 	{
 		super(gl);
 		try
 		{
-			maxParser = new MaxParser();
-			
-			test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));
+			//maxParser = new MaxParser();
+			//test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));	
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		/* load common sounds */
+		try{
 			backgroundMusic = new Sound("data/sounds/music/zoo_music.ogg");
 			questLogMusic = new Sound("data/sounds/music/questlog_music.ogg");
 			throwPopper = new Sound("data/sounds/effects/throw_popper.ogg");
@@ -164,14 +175,13 @@ public class InGameState extends GameState
 			for(int i = 0;i<turnPage.length;i++){
 				turnPage[i] = new Sound("data/sounds/effects/turn_page-" + i + ".ogg");
 			}
-			
-		} catch(Exception e) {
+		}catch (Exception e){
 			e.printStackTrace();
 		}
+		
 		bushModel	= new OBJModel(gl,"data/models/bush");
 		partySnapper = new OBJModel(gl,"data/models/party_snapper");
 		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
-		OBJModel treeModel = new OBJModel(gl,"data/models/tree2",8f,false);
 		
 		explorationBox = new OBJModel(gl,"data/models/exploration_box",5f,false);
 		waterAffinity = new OBJModel(gl,"data/models/water_affinity",5f,false);
@@ -189,11 +199,18 @@ public class InGameState extends GameState
 		cutscenePlayer = new CutscenePlayer();
 		cutscenePlayer.loadMovie("data/movies/test.avi");
 		
-		/* create objAnimation of a flamingo*/
-		flamingoWalk = new OBJAnimation(gl,10,"data/models/flamingo",105);
-		flamingoIdle = new OBJAnimation(gl,10,"data/models/flamingo",500);
-		
-		//turtleIdle = new OBJAnimation(gl,10,"data/models/flamingo",500);
+		/* create objAnimations */
+		flamingoWalk = new OBJAnimation(gl,10,"data/meshes/flamingo",105);
+		flamingoIdle = new OBJAnimation(gl,10,"data/meshes/flamingo",500);
+		turtleIdle = new OBJAnimation(gl,10,"data/meshes/turtle",300);
+		kangarooIdle = new OBJAnimation(gl,10,"data/meshes/kangaroo",300);
+		giraffeIdle = new OBJAnimation(gl,1,"data/models/giraffe",1000);
+		tigerIdle = new OBJAnimation(gl,1,"data/models/tiger",1000);
+		penguinIdle = new OBJAnimation(gl,10,"data/meshes/penguin",300);
+		pandaIdle = new OBJAnimation(gl,10,"data/meshes/panda",300);
+		meerkatIdle = new OBJAnimation(gl,10,"data/meshes/meerkat",300);
+		woodpeckerIdle = new OBJAnimation(gl,10,"data/meshes/woodpecker",300);
+		elephantIdle = new OBJAnimation(gl,10,"data/meshes/elephant",300);
 		
 		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, flamingoWalk,flamingoIdle);
 		camera			= new Camera(player, 10f, 4f);
@@ -255,8 +272,6 @@ public class InGameState extends GameState
 				partySnapper,
 				new Vector3f(-15f,0f,60f),true,true));
 				
-				
-				
 		items.add(new Item("Party Snapper Hidden",Inventory.POPPERS,50,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,80f),true,true));
@@ -274,39 +289,39 @@ public class InGameState extends GameState
 */
 		/* add animals to the map */
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
-				flamingoWalk, 
+				turtleIdle, 
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
-				flamingoIdle, 
+				pandaIdle, 
 				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
 				
 		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
-				flamingoWalk, 
+				kangarooIdle, 
 				new Vector3f(10f,0f,-40f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
 		
 		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
-				flamingoWalk, 
+				giraffeIdle, 
 				new Vector3f(10f,0f,-50f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
-				flamingoWalk, 
+				tigerIdle, 
 				new Vector3f(10f,0f,-60f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
 		
 		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
-				flamingoWalk, 
+				penguinIdle, 
 				new Vector3f(10f,0f,-70f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
-				flamingoWalk, 
+				meerkatIdle, 
 				new Vector3f(10f,0f,-80f),this,Inventory.HOTDOG,new Vector3f(0f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
-				flamingoWalk, 
+				woodpeckerIdle, 
 				new Vector3f(10f,0f,-90f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
-				flamingoWalk, 
+				elephantIdle, 
 				new Vector3f(10f,0f,-100f),this,0,new Vector3f(-10f,0f,-5f)));
 
 		
@@ -355,7 +370,7 @@ public class InGameState extends GameState
 		Kernel.userInput.bindToMouse(mouseWheelScroll,UserInput.MOUSE_WHEEL_DOWN);
 		
 		/* Test 3ds Data */
-		test3ds.printData();
+		//test3ds.printData();
 	}
 	
 	public void init(GL gl, GLU glu)
@@ -639,6 +654,7 @@ public class InGameState extends GameState
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_CONTROL]){
 				throwPartyPopper();
+				Kernel.userInput.keys[KeyEvent.VK_CONTROL] = false;
 			}
 			
 			if(Kernel.userInput.keys[KeyEvent.VK_M]){

@@ -181,9 +181,8 @@ public class UIWindow extends UIComponent
 		components.add( c ); 
 	}
 
-	@Override
 	public void activate() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 }
