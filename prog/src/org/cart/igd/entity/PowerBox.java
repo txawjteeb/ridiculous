@@ -7,7 +7,7 @@ public class PowerBox extends Entity{
 
 	public PowerBox(Vector3f pos, float fD, float bsr, OBJModel model) {
 		super(pos, fD, bsr, model);
-		// TODO Auto-generated constructor stub
+		
 	}
 
 }

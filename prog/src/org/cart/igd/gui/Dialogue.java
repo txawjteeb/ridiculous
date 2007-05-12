@@ -34,7 +34,7 @@ public class Dialogue extends GUI
 	private Sound kangarooVoiceOvers[] = new Sound[8]; 
 	private Sound pandaVoiceOvers[] = new Sound[7]; 
 	private Sound questLogUpdated;
-	private Sound backgroundMusic[] = new Sound[9];	
+	private Sound backgroundMusic[] = new Sound[10];	
 	
 	/** 
 	 * pass in a refference from game state that contains this gui class 
@@ -57,7 +57,10 @@ public class Dialogue extends GUI
 		down = false;
 		this.igs = igs;
 		alphaBackground = 0f;
+		
+		backgroundMusic[0]=igs.backgroundMusic;//assign default music
 		loadSounds(animal.animalId);
+		
 		animal.facingDirection = igs.player.facingDirection + 180f;
 		new ActiveDialogue(animal,igs).start();
 		if(igs.backgroundMusic != null){
@@ -91,6 +94,7 @@ public class Dialogue extends GUI
 		background = Kernel.display.getRenderer().loadImage("data/images/dialogue/background.png");
 	}
 	
+	/** load only the sounds that are needed for current dialogue session */
 	public void loadSounds(int aId){
 		try{
 			switch ( aId ){
@@ -98,69 +102,69 @@ public class Dialogue extends GUI
 					for(int i = 0;i< turtleVoiceOvers.length;i++){
 						turtleVoiceOvers[i] = new Sound("data/sounds/voices/turtles/turtles-" + (i+1) + ".ogg");
 					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
 				
 				case 2:
-					for(int i = 0;i< elephantVoiceOvers.length;i++){
-						elephantVoiceOvers[i] = new Sound("data/sounds/voices/elephant/elephant-" + (i+1) + ".ogg");
+					for(int i = 0;i< pandaVoiceOvers.length;i++){
+						pandaVoiceOvers[i] = new Sound("data/sounds/voices/panda/panda-" + (i+1) + ".ogg");
 					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
 				
-				case 3:
+				case 8:
 					for(int i = 0;i< woodpeckerVoiceOvers.length;i++){
 						woodpeckerVoiceOvers[i] = new Sound("data/sounds/voices/woodpecker/woodpecker-" + (i+1) + ".ogg");
 					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
-				break;
-				
-				
-				case 4:
-					for(int i = 0;i< meerkatVoiceOvers.length;i++){
-						meerkatVoiceOvers[i] = new Sound("data/sounds/voices/meerkat/meerkat-" + (i+1) + ".ogg");
-					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
-				break;
-				
-				
-				case 5:
-					for(int i = 0;i< penguinVoiceOvers.length;i++){
-						penguinVoiceOvers[i] = new Sound("data/sounds/voices/penguins/penguins-" + (i+1) + ".ogg");
-					} 
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
-				break;
-				
-				
-				case 6:
-					for(int i = 0;i< tigerVoiceOvers.length;i++){
-						tigerVoiceOvers[i] = new Sound("data/sounds/voices/tiger/tiger-" + (i+1) + ".ogg");
-					} 
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
 				
 				case 7:
+					for(int i = 0;i< meerkatVoiceOvers.length;i++){
+						meerkatVoiceOvers[i] = new Sound("data/sounds/voices/meerkat/meerkat-" + (i+1) + ".ogg");
+					}
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
+				break;
+				
+				
+				case 6:
+					for(int i = 0;i< penguinVoiceOvers.length;i++){
+						penguinVoiceOvers[i] = new Sound("data/sounds/voices/penguins/penguins-" + (i+1) + ".ogg");
+					} 
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
+				break;
+				
+				
+				case 5:
+					for(int i = 0;i< tigerVoiceOvers.length;i++){
+						tigerVoiceOvers[i] = new Sound("data/sounds/voices/tiger/tiger-" + (i+1) + ".ogg");
+					} 
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
+				break;
+				
+				
+				case 4:
 					for(int i = 0;i< giraffeVoiceOvers.length;i++){
 						giraffeVoiceOvers[i] = new Sound("data/sounds/voices/giraffe/giraffe-" + (i+1) + ".ogg");
 					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
-				case 8:
+				case 3:
 					for(int i = 0;i< kangarooVoiceOvers.length;i++){
 						kangarooVoiceOvers[i] = new Sound("data/sounds/voices/kangaroo/kangaroo-" + (i+1) + ".ogg");
 					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
 				case 9:
-					for(int i = 0;i< pandaVoiceOvers.length;i++){
-						pandaVoiceOvers[i] = new Sound("data/sounds/voices/panda/panda-" + (i+1) + ".ogg");
+					for(int i = 0;i< elephantVoiceOvers.length;i++){
+						elephantVoiceOvers[i] = new Sound("data/sounds/voices/elephant/elephant-" + (i+1) + ".ogg");
 					}
-					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId+1) + ".ogg");
+					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;	
 				
 				
@@ -559,9 +563,6 @@ public class Dialogue extends GUI
 
 			switch(animal.animalId){
 			case 9: // elephant
-	
-				
-
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
 						elephantVoiceOvers[0].playLoud();

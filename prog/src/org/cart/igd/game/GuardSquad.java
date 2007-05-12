@@ -31,7 +31,7 @@ public class GuardSquad {
 	public void init(GL gl, GLU glu)
 	{
 		/* create an OBJModel used for guard */
-		OBJModel guard = new OBJModel(gl, "data/models/guard_vm",1.5f,false);
+		OBJModel guard = new OBJModel(gl, "data/models/guard_km",1.5f,false);
 		
 		
 		/* create and add test guard */

@@ -54,7 +54,7 @@ public class MiniGame extends GameState
 		gui.add( new MiniGamePenguins( this ) );
 		
 		OBJAnimation penguinIdle = 
-			new OBJAnimation(gl,1,"data/models/flamingo",90);
+			new OBJAnimation(gl,10,"data/meshes/penguin",250);
 		
 		map = new OBJModel( gl, "data/models/cage_elephant" );
 		
@@ -66,7 +66,7 @@ public class MiniGame extends GameState
 		player = new Player(new Vector3f(3.5f,0f,-50f), 0f, .2f, penguinIdle,penguinIdle);
 		player.facingDirection = 90f;
 		camera = new Camera(player, 10f, 4f);
-		camera.distance = .1f;
+		camera.distance = 5f;
 		
 	}
 	
@@ -99,8 +99,9 @@ public class MiniGame extends GameState
 		
 	}
 	
-	public synchronized void update(long elapsedTime) {
-		// TODO Auto-generated method stub
+	public synchronized void update(long elapsedTime)
+	{
+		player.update(elapsedTime);
 		/* D/A - Rotate the player on y axis */
 		if(Kernel.userInput.keys[KeyEvent.VK_D])
 			player.turnRight(elapsedTime);
