@@ -1,7 +1,7 @@
 package org.cart.igd.core;
 
-import org.cart.igd.input.GameEventList;
 import org.cart.igd.input.*;
+import org.cart.igd.sound.SoundSettings;
 import org.cart.igd.*;
 
 /**
@@ -19,6 +19,8 @@ public class Kernel
 	 * keep track of time and performance statistics
 	 **/
 	public static Profiler profiler;
+	
+	public static SoundSettings soundSettings;
 	
 	public static volatile boolean displayRunning = false;
 	
@@ -43,6 +45,7 @@ public class Kernel
 	
 	public void init(DisplaySettings ds)
 	{
+		soundSettings = new SoundSettings(50f,50f,200f,false);
 		gameLauncher.setVisible(false);
 		displaySettings = ds;
 		display = new Display(ds);

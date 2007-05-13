@@ -36,8 +36,8 @@ public class Dialogue extends GUI
 	private Sound questLogUpdated;
 	private Sound backgroundMusic[] = new Sound[10];	
 	
-	
-	private SoundManager sm = new SoundManager(6f,5f,8f);
+	/** create a sound manager with current sound settings */
+	private SoundManager sm = new SoundManager(Kernel.soundSettings);
 	/** 
 	 * @param GameState refference to container state
 	 */
@@ -938,7 +938,7 @@ public class Dialogue extends GUI
 	 		case 4: // giraffe
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						giraffeVoiceOvers[0].playLoud();
+						sm.playVoice(giraffeVoiceOvers[0]);
 						add("Why are you bothering an old man?");
 						add("Sorry, Giraffe, but I needed to tell you that we need to leave before the zoo is sold!");
 						add("I really didn't mean to, in any case, I'll be on my way.");
@@ -947,13 +947,13 @@ public class Dialogue extends GUI
 							case 2:
 							break;
 							case 1:
-								giraffeVoiceOvers[1].playLoud();
+								sm.playVoice(giraffeVoiceOvers[1]);
 								add("Well why should I go?  I'm just gonna let 'em move me to a new zoo.");
 								add("We've all been sold and I need your help to get everyone out of here!");
 								add("They're selling us too!  We're going to be made into food!");
 								switch(selection()){
 									case 1:
-										giraffeVoiceOvers[2].playLoud();
+										sm.playVoice(giraffeVoiceOvers[2]);
 										add("I'll do my best, youngin, but I don't know how much my back can take.  If you could find me something to fix my back, I could help you!");
 										add("Alright, I'll be back as soon as I can get something.");
 										switch(selection()){}
@@ -962,7 +962,7 @@ public class Dialogue extends GUI
 										questLogUpdated.playLoud();
 									break;
 									case 2:
-										giraffeVoiceOvers[3].playLoud();
+										sm.playVoice(giraffeVoiceOvers[3]);
 										add("Well...in that case, I guess I can make these tired old legs work for just a little bit longer.");
 										add("(Done)");
 										switch(selection()){}
@@ -976,19 +976,19 @@ public class Dialogue extends GUI
 						
 					break;
 					case WAITING_FOR_ITEM:
-						giraffeVoiceOvers[4].playLoud();
+						sm.playVoice(giraffeVoiceOvers[4]);
 						add("What's takin' ya so long, sonny?  My back's still hurtin'!");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case READY_TO_SAVE:
-						giraffeVoiceOvers[6].playLoud();
+						sm.playVoice(giraffeVoiceOvers[6]);
 						add("Yer' slower than I am laddie, hurry up and get me out of here.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_GAVE_ITEM:
-						giraffeVoiceOvers[5].playLoud();
+						sm.playVoice(giraffeVoiceOvers[5]);
 						add("Ah, thanks, that's alot better.  Now I feel fit as a fiddle.");
 						add("(Done)");
 						switch(selection()){}
@@ -997,7 +997,7 @@ public class Dialogue extends GUI
 						questLogUpdated.play();
 					break;
 					case JUST_SAVED:
-						giraffeVoiceOvers[7].playLoud();
+						sm.playVoice(giraffeVoiceOvers[7]);
 						add("Thanks, sonny.  I think it's time for us to get on out of here now.");
 						add("(Done)");
 						switch(selection()){}

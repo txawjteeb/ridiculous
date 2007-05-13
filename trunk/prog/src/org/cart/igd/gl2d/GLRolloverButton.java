@@ -10,6 +10,8 @@ public class GLRolloverButton extends UIComponent{
 	public boolean mouseOver = false;
 	Texture tex[] = new Texture[2];
 	
+	private float[] rgba = new float[]{1f,1f,1f,1f};
+	
 	private float[] rgbaNormal = new float[]{.5f,.5f,.5f,1f};
 	private float[] rgbaRollover = new float[]{1f,.9f,.9f,1f};
 	
@@ -18,6 +20,7 @@ public class GLRolloverButton extends UIComponent{
 	
 	public GLRolloverButton(Texture tex1,Texture tex2, int x, int y, int w, int h){
 		super(x,y,w,h);
+		this.size=new float[]{1f,1f};
 		tex[0]=tex1;
 		tex[1]=tex2;
 	}
@@ -33,11 +36,20 @@ public class GLRolloverButton extends UIComponent{
 	}
 
 	public void draw(GLGraphics g) {
-		if(mouseOver){
-			g.drawImage( tex[0], x, y, 64, 64, 2, rgbaRollover, sizeRollover );
+		if(tex[1]==null){
+			if(mouseOver){
+				g.drawImage( tex[0], x, y, 64, 64, 2, rgbaRollover, sizeRollover );
+			} else {
+				g.drawImage( tex[0], x, y, 64, 64, 0, rgbaNormal, sizeNormal );
+			}
 		} else {
-			g.drawImage( tex[0], x, y, 64, 64, 0, rgbaNormal, sizeNormal );
+			if(focused){
+				g.drawImage( tex[0], x, y, 32, 32, 0, rgba, rgba );
+			} else {
+				g.drawImage( tex[1], x, y, 32, 32, 0, rgba, rgba );
+			}
 		}
+		
 	}
 	
 	public void update(UserInput ui, long elapsedTime){

@@ -209,6 +209,8 @@ public class SoundStore {
         if (gain == 0) { 
             gain = 0.001f; 
         } 
+        
+        System.out.println("gain"+gain);
         if (soundWorks) { 
             if (sounds) { 
                 int nextSource = findFreeSource(); 

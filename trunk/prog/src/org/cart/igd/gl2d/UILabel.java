@@ -14,7 +14,6 @@ public class UILabel extends UIComponent
 	{
 		super(x,y,width,height);
 		this.text = value;
-		
 		this.rgb = new float[] { 0f,0f,0f };
 	}
 	

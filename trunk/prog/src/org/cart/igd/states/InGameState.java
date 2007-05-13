@@ -151,7 +151,8 @@ public class InGameState extends GameState
 	public OBJAnimation woodpeckerIdle;
 	public OBJAnimation elephantIdle;
 	
-	private SoundManager sm = new SoundManager(6f,1f,8f);
+	/** create a sound manager with current sound settings */
+	private SoundManager sm = new SoundManager(Kernel.soundSettings);
 	
 	public InGameState(GL gl)
 	{
@@ -206,7 +207,7 @@ public class InGameState extends GameState
 		flamingoIdle = new OBJAnimation(gl,10,"flamingo",500);
 		turtleIdle = new OBJAnimation(gl,10,"turtle",300);
 		kangarooIdle = new OBJAnimation(gl,10,"kangaroo",300);
-		giraffeIdle = new OBJAnimation(gl,1,"giraffe",1000);
+		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000);
 		tigerIdle = new OBJAnimation(gl,1,"tiger",1000);
 		penguinIdle = new OBJAnimation(gl,10,"penguin",300);
 		pandaIdle = new OBJAnimation(gl,10,"panda",300);
