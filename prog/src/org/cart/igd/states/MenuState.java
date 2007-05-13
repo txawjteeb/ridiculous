@@ -42,7 +42,7 @@ public class MenuState extends GameState
 		gui.get(guiState).render( Kernel.display.getRenderer().getGLG() );
 		GLGraphics glg = Kernel.display.getRenderer().getGLG();
 		glg.glgBegin();
-		glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]);
+		glg.drawImage(GLGraphics.Cursor, Kernel.userInput.mousePos[0], Kernel.userInput.mousePos[1]-32);
 		glg.glgEnd();
 	}
 	

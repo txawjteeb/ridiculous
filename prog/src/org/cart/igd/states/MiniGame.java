@@ -32,6 +32,7 @@ public class MiniGame extends GameState
 	
 	public  Camera camera;
 	private OBJModel map;
+	private OBJModel ground;
 	
 	private float shoootAngleIncrement = 1f;
 	
@@ -57,6 +58,7 @@ public class MiniGame extends GameState
 			new OBJAnimation(gl,10,"penguin",250);
 		
 		map = new OBJModel( gl, "cage_elephant" );
+		ground = new OBJModel( gl, "ground_cc", 500, false);	
 		
 		slushyBall = new OBJModel(gl,"party_snapper");
 		mPowerBox = new OBJModel(gl,"party_snapper");

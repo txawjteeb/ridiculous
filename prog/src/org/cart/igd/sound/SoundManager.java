@@ -9,19 +9,28 @@ package org.cart.igd.sound;
 public class SoundManager
 {
 	/** background music volume */
-	public float bgVol = 3f;
+	public float bgVol;
 	
 	/** special effects sound volume */
-	public float seVol = 1f;
+	public float seVol;
 	
 	/** dialogue voice volume */
-	public float voVol = 8f;
+	public float voVol;
+	
+	public boolean mute = false;
 	
 	
 	public SoundManager(float music,float sound,float voice){
 		this.bgVol = music;
 		this.seVol = sound;
 		this.voVol = voice;
+	}
+	
+	public SoundManager(SoundSettings ss){
+		this.bgVol = ss.bgVol;
+		this.seVol = ss.seVol;
+		this.voVol = ss.voVol;
+		this.mute = ss.mute;
 	}
 	
 	public void playVoice(Sound voice){
@@ -46,7 +55,6 @@ public class SoundManager
 		} else {
 			System.out.println("SoundManager.loopMusic(Sound music) is null");
 		}
-		
 	}
 	
 	public void loopMusic(Sound music){
@@ -55,7 +63,6 @@ public class SoundManager
 		} else {
 			System.out.println("SoundManager.loopMusic(Sound music) is null");
 		}
-		
 	}
 	
 }
