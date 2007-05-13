@@ -72,7 +72,7 @@ public class PickingHandler
 		this.gl=gl;
 		this.glu = glu;
 		this.entities = entities;
-		this.pickingBox = new OBJModel(gl,"data/models/picking_box", 5f,false);
+		this.pickingBox = new OBJModel(gl,"picking_box", 5f,false);
 	}
 	
 	/**

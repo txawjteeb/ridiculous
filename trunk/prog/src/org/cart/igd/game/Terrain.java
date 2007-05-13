@@ -22,12 +22,12 @@ public class Terrain
 	
 	public void load(GL gl){
 		skyDome	 = new SkyDome( 0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
-		worldMap = new OBJModel( gl, "data/models/zoo_map_vm", 500, false);	
+		worldMap = new OBJModel( gl, "zoo_map_vm", 500, false);	
 		
-		OBJModel tree0 = new OBJModel(gl, "data/models/tree0",4f,false);
-		OBJModel tree1 = new OBJModel(gl, "data/models/tree1",4f,false);
-		OBJModel tree2 = new OBJModel(gl, "data/models/tree2",4f, false);
-		OBJModel tree3 = new OBJModel(gl, "data/models/tree3",4f,false);	
+		OBJModel tree0 = new OBJModel(gl, "tree0",4f,false);
+		OBJModel tree1 = new OBJModel(gl, "tree1",4f,false);
+		OBJModel tree2 = new OBJModel(gl, "tree2",4f, false);
+		OBJModel tree3 = new OBJModel(gl, "tree3",4f,false);	
 		
 		trees.add( new Tree(0f,3f,tree0, new Vector3f(0f,0f,20f)));		
 		trees.add( new Tree(0f,3f,tree2, new Vector3f(1f,0f,-35f)));

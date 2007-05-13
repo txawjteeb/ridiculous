@@ -36,19 +36,18 @@ public class Dialogue extends GUI
 	private Sound questLogUpdated;
 	private Sound backgroundMusic[] = new Sound[10];	
 	
+	
+	private SoundManager sm = new SoundManager(6f,5f,8f);
 	/** 
-	 * pass in a refference from game state that contains this gui class 
-	 * to allow for game state change and gui state change
-	 * @param GameState refference to container
-	 **/
-	 
+	 * @param GameState refference to container state
+	 */
 	public Dialogue(GameState gameState){
 		super(gameState);//superclass GUI contain ref to GameState
 		input = Kernel.userInput;
 		initInput();
 		loadImages();
-		
 	}
+	
 	public void initInput()	{
 
 	}
@@ -63,23 +62,16 @@ public class Dialogue extends GUI
 		
 		animal.facingDirection = igs.player.facingDirection + 180f;
 		new ActiveDialogue(animal,igs).start();
-		if(igs.backgroundMusic != null){
-			igs.backgroundMusic.stop();
-		} else {
-			System.out.println("Dialogue: igs.backgroundMusic is null ");
+		
+		sm.stopMusic(igs.backgroundMusic);
+		
+		if(animal.state!=6){
+			sm.loopMusic(backgroundMusic[animal.animalId]);
+		} else{
+			sm.playSound(igs.freeAnimalTune);
 		}
-		
-		//if(animal.state!=6){
-		//	backgroundMusic[animal.animalId-1].loop(1f,.5f);
-		//} else{
-		//	igs.freeAnimalTune.play(1.5f,.8f);
-		//}
 			
-			
-		igs.camera.distance = 5;
-		
-		
-	
+		igs.camera.distance = 4;
 	}
 
 	
@@ -1181,7 +1173,7 @@ public class Dialogue extends GUI
 			case 1: // turtle
 				switch(animal.state) { // find out what state it is in
 					case NOT_TALKED_TO://not talked to
-						turtleVoiceOvers[0].playLoud();
+						sm.playVoice( turtleVoiceOvers[0] );
 						add("What do you want, Flamingo?  We're trying to swim here!");
 						add("Oh sorry, I'll let you guys get back to swimming.");
 						add("We need to get out of here NOW!");
@@ -1190,13 +1182,13 @@ public class Dialogue extends GUI
 							case 1:
 							break;
 							case 2:
-								turtleVoiceOvers[1].playLoud();
+								sm.playVoice( turtleVoiceOvers[1] );
 								add("What are you going on about now, ya durn whimpersnapper?");
 								add("They're going to sell us for food tomorrow!  We're all going to be eaten if we don't leave!");
 								add("Well, I was going to say that we're all going to be sold tomorrow and I'm here to help you escape, but I think I've changed my mind.");
 								switch(selection()){
 									case 1:
-										turtleVoiceOvers[2].playLoud();
+										sm.playVoice( turtleVoiceOvers[2] );
 										add("Well why didn't ya say so in the first place! Come on, boys, we gotta get outta here!");
 										add("(Done)");
 										switch(selection()){}
@@ -1205,7 +1197,7 @@ public class Dialogue extends GUI
 										questLogUpdated.playLoud();
 									break;
 									case 2:
-										turtleVoiceOvers[3].playLoud();
+										sm.playVoice( turtleVoiceOvers[3] );
 										add("Now, now, don't be so hasty!  Respect yer elders and get us out of here.");
 										add("(Done)");
 										switch(selection()){}
@@ -1220,7 +1212,7 @@ public class Dialogue extends GUI
 					break;
 					
 					case READY_TO_SAVE://in cage waiting
-						turtleVoiceOvers[4].playLoud();
+						sm.playVoice( turtleVoiceOvers[4] );
 						add("What's takin' ya so gol' durn' long!  Hurry up and get us out of here!");
 						add("(Done)");
 						switch(selection()){}
@@ -1228,7 +1220,7 @@ public class Dialogue extends GUI
 					break;
 					
 					case JUST_SAVED:
-						turtleVoiceOvers[5].playLoud();
+						sm.playVoice( turtleVoiceOvers[5] );
 						add("Thanks, nice to see some of you youngin's still have respect fer the old folks.");
 						add("(Done)");
 						switch(selection()){}
@@ -1254,16 +1246,12 @@ public class Dialogue extends GUI
 			igs.camera.distance = 10;
 			igs.gui.get(InGameState.GUI_GAME).picked = false;
 			((InGameState)gameState).changeGuiState(0);
-			backgroundMusic[animal.animalId].stop();
-			if(igs.backgroundMusic != null){
-				igs.backgroundMusic.loop(1f,.5f);
-			} else {
-				System.out.println("Dialogue: igs.backrgoundMusic is null");
-			}
+			
+			sm.stopMusic( backgroundMusic[animal.animalId] );
+				
+			sm.loopMusic(igs.backgroundMusic);
 			
 			((InGameGUI)igs.gui.get(0)).ph.inSelectionMode = false;
-			
-			
 		}
 		
 		

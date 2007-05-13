@@ -17,6 +17,8 @@ public class Material
 	private String texFnm;
 	private Texture texture;
 	
+	public String texDir = "data/obj/textures/";
+	
 	public Material(String nm)
 	{
 		name = nm;
@@ -100,7 +102,7 @@ public class Material
 	{
 		try
 		{
-			texture = Kernel.display.getRenderer().loadImage("data/textures/"+fnm);
+			texture = Kernel.display.getRenderer().loadImage(texDir+fnm);
 		}
 		catch(Exception e)
 		{
