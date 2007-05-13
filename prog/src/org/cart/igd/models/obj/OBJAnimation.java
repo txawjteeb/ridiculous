@@ -24,7 +24,17 @@ public class OBJAnimation {
 		timeLeft = delay;
 		model = new OBJModel[numFrames];
 		for(int i = 0; i<model.length; i++){
-			model[i] = new OBJModel(gl,filePath+i);
+			model[i] = new OBJModel(gl,filePath+i, 2f, true);
+		}
+	}
+	public OBJAnimation( GL gl, int numFrames, String filePath, long delay, 
+			float scale)
+	{
+		frameDelay = delay;
+		timeLeft = delay;
+		model = new OBJModel[numFrames];
+		for(int i = 0; i<model.length; i++){
+			model[i] = new OBJModel(gl,filePath+i, scale, true);
 		}
 	}
 	

@@ -151,13 +151,15 @@ public class InGameState extends GameState
 	public OBJAnimation woodpeckerIdle;
 	public OBJAnimation elephantIdle;
 	
+	private SoundManager sm = new SoundManager(6f,1f,8f);
+	
 	public InGameState(GL gl)
 	{
 		super(gl);
 		try
 		{
 			//maxParser = new MaxParser();
-			//test3ds = new Model(maxParser.getObjectMesh("data/models/walk.3DS"));	
+			//test3ds = new Model(maxParser.getObjectMesh("walk.3DS"));	
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -179,13 +181,13 @@ public class InGameState extends GameState
 			e.printStackTrace();
 		}
 		
-		bushModel	= new OBJModel(gl,"data/models/bush");
-		partySnapper = new OBJModel(gl,"data/models/party_snapper");
-		OBJModel partySnapper = new OBJModel(gl,"data/models/party_snapper");
+		bushModel	= new OBJModel(gl,"bush");
+		partySnapper = new OBJModel(gl,"party_snapper");
+		OBJModel partySnapper = new OBJModel(gl,"party_snapper");
 		
-		explorationBox = new OBJModel(gl,"data/models/exploration_box",5f,false);
-		waterAffinity = new OBJModel(gl,"data/models/water_affinity",5f,false);
-		foodAffinity = new OBJModel(gl,"data/models/food_Affinity",5f,false);
+		explorationBox = new OBJModel(gl,"exploration_box",5f,false);
+		waterAffinity = new OBJModel(gl,"water_affinity",5f,false);
+		foodAffinity = new OBJModel(gl,"food_Affinity",5f,false);
 		
 		
 		/* init container/gamelocic classes*/
@@ -200,20 +202,24 @@ public class InGameState extends GameState
 		cutscenePlayer.loadMovie("data/movies/test.avi");
 		
 		/* create objAnimations */
-		flamingoWalk = new OBJAnimation(gl,10,"data/meshes/flamingo",105);
-		flamingoIdle = new OBJAnimation(gl,10,"data/meshes/flamingo",500);
-		turtleIdle = new OBJAnimation(gl,10,"data/meshes/turtle",300);
-		kangarooIdle = new OBJAnimation(gl,10,"data/meshes/kangaroo",300);
-		giraffeIdle = new OBJAnimation(gl,1,"data/models/giraffe",1000);
-		tigerIdle = new OBJAnimation(gl,1,"data/models/tiger",1000);
-		penguinIdle = new OBJAnimation(gl,10,"data/meshes/penguin",300);
-		pandaIdle = new OBJAnimation(gl,10,"data/meshes/panda",300);
-		meerkatIdle = new OBJAnimation(gl,10,"data/meshes/meerkat",300);
-		woodpeckerIdle = new OBJAnimation(gl,10,"data/meshes/woodpecker",300);
-		elephantIdle = new OBJAnimation(gl,10,"data/meshes/elephant",300);
+		flamingoWalk = new OBJAnimation(gl,10,"flamingo",105);
+		flamingoIdle = new OBJAnimation(gl,10,"flamingo",500);
+		turtleIdle = new OBJAnimation(gl,10,"turtle",300);
+		kangarooIdle = new OBJAnimation(gl,10,"kangaroo",300);
+		giraffeIdle = new OBJAnimation(gl,1,"giraffe",1000);
+		tigerIdle = new OBJAnimation(gl,1,"tiger",1000);
+		penguinIdle = new OBJAnimation(gl,10,"penguin",300);
+		pandaIdle = new OBJAnimation(gl,10,"panda",300);
+		meerkatIdle = new OBJAnimation(gl,10,"meerkat",300);
+		woodpeckerIdle = new OBJAnimation(gl,10,"woodpecker",300);
+		elephantIdle = new OBJAnimation(gl,10,"elephant",300);
 		
-		player			= new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, flamingoWalk,flamingoIdle);
-		camera			= new Camera(player, 10f, 4f);
+		OBJAnimation flamingoTest = 
+			new OBJAnimation(gl,1,"flamingo_w_vertex_colors_io",200);
+		
+		player = new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, 
+				flamingoWalk,flamingoIdle);
+		camera = new Camera(player, 10f, 4f);
 		
 		/* special entity where animals are hidden after rescue place rescued 
 		 * animals in a position relative to this */
@@ -293,7 +299,7 @@ public class InGameState extends GameState
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
-				pandaIdle, 
+				flamingoTest, 
 				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
 				
 		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
@@ -328,42 +334,42 @@ public class InGameState extends GameState
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-20f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this));
 				
 				
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(30f,0f,-20f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this,true));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this,true));
 				
 				
 						
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-30f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.PANDA,Inventory.TURTLES,this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.PANDA,Inventory.TURTLES,this));
 				
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-40f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.KANGAROO,Inventory.TURTLES,this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.KANGAROO,Inventory.TURTLES,this));
 				
 				
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-50f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.GIRAFFE,Inventory.TURTLES,this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.GIRAFFE,Inventory.TURTLES,this));
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-60f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.TIGER,new int[]{Inventory.GIRAFFE,Inventory.PANDA},this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TIGER,new int[]{Inventory.GIRAFFE,Inventory.PANDA},this));
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-70f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.PENGUIN,Inventory.TIGER,this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.PENGUIN,Inventory.TIGER,this));
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-80f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.MEERKAT,new int[]{Inventory.GIRAFFE,Inventory.KANGAROO},this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.MEERKAT,new int[]{Inventory.GIRAFFE,Inventory.KANGAROO},this));
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-90f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.WOODPECKER,Inventory.MEERKAT,this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.WOODPECKER,Inventory.MEERKAT,this));
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-100f), 0f, 3f,
-				new OBJModel(gl,"data/models/save_animal_thing", 2f,false),Inventory.ELEPHANT,new int[]{Inventory.WOODPECKER,Inventory.PENGUIN},this));
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.ELEPHANT,new int[]{Inventory.WOODPECKER,Inventory.PENGUIN},this));
 		
 		mouseWheelScroll = new GameAction("zoom out", false);
 		

@@ -27,6 +27,7 @@ public class OBJModel
 
   private int modelDispList;  // the model's display list
 
+  public String meshDir = "data/obj/meshes/"; 
 
 	public OBJModel(GL gl, String nm)
 	{
@@ -35,11 +36,11 @@ public class OBJModel
 	
 	public OBJModel(GL gl, String nm, float sz, boolean showDetails)
 	{
-		modelNm = nm;
+		modelNm = meshDir + nm;
 		maxSize = sz;
-		initModelData(modelNm);
+		initModelData( modelNm );
 		
-		loadModel(modelNm);
+		loadModel( modelNm );
 		centerScale();
 		drawToList(gl);
 		

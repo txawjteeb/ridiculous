@@ -54,12 +54,12 @@ public class MiniGame extends GameState
 		gui.add( new MiniGamePenguins( this ) );
 		
 		OBJAnimation penguinIdle = 
-			new OBJAnimation(gl,10,"data/meshes/penguin",250);
+			new OBJAnimation(gl,10,"penguin",250);
 		
-		map = new OBJModel( gl, "data/models/cage_elephant" );
+		map = new OBJModel( gl, "cage_elephant" );
 		
-		slushyBall = new OBJModel(gl,"data/models/party_snapper");
-		mPowerBox = new OBJModel(gl,"data/models/party_snapper");
+		slushyBall = new OBJModel(gl,"party_snapper");
+		mPowerBox = new OBJModel(gl,"party_snapper");
 		
 		powerBox = new PowerBox(new Vector3f(-14f,0f,-22f), 0,2f, mPowerBox );
 		
