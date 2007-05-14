@@ -414,22 +414,12 @@ public class InGameGUI extends GUI
 	/** load texture for the gui components */
 	public void loadImages()
 	{
-		
-		
 		for(int i = 0;i<texPaw.length;i++){
 			texPaw[i] = Kernel.display.getRenderer().loadImage(
 			"data/images/gui/paw" + i + ".png");
 		}
 
 		
-		
-		
-		
-		
-		
-		
-		
-			
 		for(int i = 0;i<texAnimalCursors.length;i++){
 			texAnimalCursors[i] = Kernel.display.getRenderer().loadImage(
 			"data/images/gui/cursors/" + i + ".png");

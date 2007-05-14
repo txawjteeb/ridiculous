@@ -1,6 +1,5 @@
 package org.cart.igd.entity;
 
-import org.cart.igd.discreet.Model;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
@@ -10,12 +9,6 @@ public class Bush extends Entity
 	private InGameState igs;
 	
 	public Bush(Vector3f pos, float bsr, OBJModel model, InGameState igs)//, int id, File meshFile, File skinFile)// throws EntityException
-	{
-		super(pos,0,bsr,model);
-		this.igs = igs;
-	}
-	
-	public Bush(Vector3f pos, float bsr, Model model, InGameState igs)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
 		super(pos,0,bsr,model);
 		this.igs = igs;

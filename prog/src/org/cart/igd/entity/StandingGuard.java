@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import org.cart.igd.Renderer;
 import org.cart.igd.collision.Collision;
-import org.cart.igd.discreet.Model;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
@@ -18,25 +17,6 @@ import org.cart.igd.game.*;
 public class StandingGuard extends Guard
 {
 	private int guardDirection = -1;
-	
-	
-	/**
-	 * Create a guard with 3DSModel 
-	 * @param Vector3f pos: location of the entity 
-	 * @param float fD: direction entity is facing ( y rotation )
-	 * @param float bsr: bounding sphere radius used for collision detection
-	 * @param Model model: .3ds format file data
-	 * @param InGameState refference the game
-	 * @param float speed units per millisecond
-	 * @param int guardDirection direction the guad faces when standing
-	 **/
-	public StandingGuard(Vector3f pos, float fD, float bsr, Model model, 
-			InGameState igs, float speed, int guardDirection)
-	{
-		super(pos,fD,bsr,model,igs,speed);
-		target = home;
-		this.guardDirection = guardDirection;
-	}
 	
 	/**
 	 * Create a guard with OBJModel

@@ -10,7 +10,6 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
-import org.cart.igd.discreet.Model;
 import java.util.*;
 //import org.cart.igd.model.ModelManager;
 //import org.cart.igd.bsp.BSPObject;
@@ -32,8 +31,6 @@ public abstract class Entity
 	
 	public OBJAnimation objAnimation;
 	public OBJModel modelObj;
-	public Model model3ds;
-
 	protected float deltaTime;
 	protected float animationSpeed = 7.0f;
 	
@@ -86,13 +83,6 @@ public abstract class Entity
 	{
 		this(pos,fD,bsr);
 		this.modelObj = model;
-		globalId = globalIdCounter++;
-	}
-	
-	public Entity(Vector3f pos, float fD, float bsr, Model model)//, int id, File meshFile, File skinFile)// throws EntityException
-	{
-		this(pos,fD,bsr);
-		this.model3ds = model;
 		globalId = globalIdCounter++;
 	}
 	
@@ -227,14 +217,6 @@ public abstract class Entity
 	 * render the model depending on which type was asigned
 	 * */
 	public void render(GL gl){
-		if(model3ds!= null){
-			gl.glPushMatrix();
-			gl.glTranslatef(position.x, position.y, position.z);
-			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			//gl.glScalef(.1f,.1f,.1f);
-			model3ds.render(gl);
-			gl.glPopMatrix();
-		}
 		if(modelObj!= null){
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y -2f, position.z);
@@ -249,14 +231,6 @@ public abstract class Entity
 	}
 	
 	public void renderLocation(GL gl, Vector3f position){
-		if(model3ds!= null){
-			gl.glPushMatrix();
-			gl.glTranslatef(position.x, position.y, position.z);
-			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			//gl.glScalef(.1f,.1f,.1f);
-			model3ds.render(gl);
-			gl.glPopMatrix();
-		}
 		if(modelObj!= null){
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y -2f, position.z);

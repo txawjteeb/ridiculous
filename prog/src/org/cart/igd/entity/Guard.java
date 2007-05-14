@@ -3,7 +3,6 @@ package org.cart.igd.entity;
 import java.util.ArrayList;
 
 import org.cart.igd.collision.Collision;
-import org.cart.igd.discreet.Model;
 import org.cart.igd.game.Animal;
 import org.cart.igd.game.Inventory;
 import org.cart.igd.math.Vector3f;
@@ -65,25 +64,6 @@ public class Guard extends Entity
 		this.player = igs.player;
 		this.speed = speed;
 		target = home;
-	}
-	
-	/**
-	 * Create a guard with 3DSModel 
-	 * @param Vector3f pos: location of the entity 
-	 * @param float fD: direction entity is facing ( y rotation )
-	 * @param float bsr: bounding sphere radius used for collision detection
-	 * @param Model model: .3ds format file data
-	 * @param InGameState refference the game
-	 * @param float scale of the model
-	 */
-	public Guard(Vector3f pos, float fD, float bsr, Model model, 
-			InGameState igs,float speed)
-	{
-		super(pos,fD,bsr,model);
-		this.igs = igs;
-		home = new GuardFlag( new Vector3f( pos.x, pos.y, pos.z ), 1f, 1f );
-		this.player = igs.player;
-		this.speed = speed;
 	}
 	
 	/**
