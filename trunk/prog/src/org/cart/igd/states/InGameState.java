@@ -350,9 +350,6 @@ public class InGameState extends GameState
 		mouseWheelScroll = new GameAction("zoom out", false);
 		
 		Kernel.userInput.bindToMouse(mouseWheelScroll,UserInput.MOUSE_WHEEL_DOWN);
-		
-		/* Test 3ds Data */
-		//test3ds.printData();
 	}
 	
 	public void init(GL gl, GLU glu)
