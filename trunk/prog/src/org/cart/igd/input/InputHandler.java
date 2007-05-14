@@ -4,6 +4,11 @@ import org.cart.igd.core.Kernel;
 import org.cart.igd.core.Profiler;
 import org.cart.igd.states.GameState;
 
+/**
+ * InputHandler.java
+ *
+ * General Function: Separate thread that monitors input.
+ */
 public class InputHandler extends Thread
 {
 	private Profiler profiler;
@@ -13,6 +18,11 @@ public class InputHandler extends Thread
 	
 	public boolean running = false;
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of InputHandler.
+	 */
 	public InputHandler(Profiler profiler)
 	{
 		this.profiler = profiler;
@@ -21,6 +31,11 @@ public class InputHandler extends Thread
 		running = true;
 	}
 	
+	/**
+	 * run
+	 *
+	 * General Function: Thread start method.
+	 */
 	public void run()
 	{
 		while(running)

@@ -1,13 +1,10 @@
-/**
- * @(#)GUIEvent.java
- *
- *
- * @author Vitaly Maximov
- * I don't know yet whether this will be useful in the long run
- * @version 1.00 2007/4/1
- */
 package org.cart.igd.input;
 
+/**
+ * GUIEvent.java
+ *
+ * General Function: GUIEvent IDs.
+ */
 public class GUIEvent
 {
 	/* important buttons */

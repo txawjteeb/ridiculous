@@ -6,34 +6,66 @@ import java.util.*;
 import javax.media.opengl.*;
 import org.cart.igd.math.Vector3f;
 
+/**
+ * OBJModel.java
+ *
+ * General Function: Hold the model data of an OBJ Model.
+ */
 public class OBJModel
 {
-  private static final float DUMMY_Z_TC = -5.0f;
+	private static final float DUMMY_Z_TC = -5.0f;
 
-  // collection of vertices, normals and texture coords for the model
-  private ArrayList<Tuple3> verts;
-  private ArrayList<Tuple3> normals;
-  private ArrayList<Tuple3> texCoords;
-  private boolean hasTCs3D = true;  
-        // whether the model uses 3D or 2D tex coords
+	/* Collection of vertices. */
+	private ArrayList<Tuple3> verts;
+  
+	/* Collection of normals. */
+	private ArrayList<Tuple3> normals;
+  
+	/* Collection of texture coords. */
+	private ArrayList<Tuple3> texCoords;
+  
+	/* Whether the model uses 3D or 2D tex coords. */
+	private boolean hasTCs3D = true;  
 
-  private Faces faces;              // model faces
-  private FaceMaterials faceMats;   // materials used by faces
-  private Materials materials;      // materials defined in MTL file
-  private ModelDimensions modelDims;  // model dimensions
+	/* Model faces. */
+	private Faces faces;
+	
+	/* Materials used by faces. */
+	private FaceMaterials faceMats;
+	
+	/* Materials defined in MTL file. */
+	private Materials materials;
+	
+	/* Model dimensions. */
+	private ModelDimensions modelDims;
 
-  private String modelNm;    // without path or ".OBJ" extension
-  private float maxSize;     // for scaling the model
+	/* Model filename. */
+	private String modelNm;
+	
+	/* For scaling the model. */
+	private float maxSize;
 
-  private int modelDispList;  // the model's display list
+	/* The model's display list. */
+	private int modelDispList;
 
-  public String meshDir = "data/obj/meshes/"; 
+	/* The mesh directory. */
+	public String meshDir = "data/obj/meshes/"; 
 
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of OBJModel.
+	 */
 	public OBJModel(GL gl, String nm)
 	{
 		this(gl, nm, 1.0f, false);
 	}
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of OBJModel.
+	 */
 	public OBJModel(GL gl, String nm, float sz, boolean showDetails)
 	{
 		modelNm = meshDir + nm;
@@ -47,6 +79,11 @@ public class OBJModel
 		if(showDetails) reportOnModel();
 	}
 
+	/**
+	 * initModelData
+	 *
+	 * General Function: Initializes collections and objects.
+	 */
 	private void initModelData(String modelNm)
 	{
 		verts = new ArrayList<Tuple3>();
@@ -58,6 +95,11 @@ public class OBJModel
 		modelDims = new ModelDimensions();
 	}
 	
+	/**
+	 * height
+	 *
+	 * General Function: Returns the height.
+	 */
 	public Vector3f height(Vector3f v)
 	{
 		Iterator<Tuple3> i = verts.iterator();
@@ -73,7 +115,11 @@ public class OBJModel
 		return v;
 	}
 
-
+	/**
+	 * loadModel
+	 *
+	 * General Function: Loads The model data.
+	 */
 	private void loadModel(String modelNm)
 	{
 		String fnm = modelNm + ".obj";
@@ -91,6 +137,11 @@ public class OBJModel
 		}
 	}
 
+	/**
+	 * readModel
+	 *
+	 * General Function: Reads the model data.
+	 */
 	private void readModel(BufferedReader br)
 	{
 		boolean isLoaded = true;   // hope things will go okay
@@ -152,9 +203,12 @@ public class OBJModel
 			System.exit(1);
 		}
 	}
-
-
-
+	
+	/**
+	 * addVert
+	 *
+	 * General Function: Adds vertices to the collection.
+	 */
 	private boolean addVert(String line, boolean isFirstCoord)
 	{
 		Tuple3 vert = readTuple3(line);
@@ -168,6 +222,11 @@ public class OBJModel
 		return false;
 	}
 
+	/**
+	 * readTuple3
+	 *
+	 * General Function: Reads a Tuple3f from a String line.
+	 */
 	private Tuple3 readTuple3(String line)
 	{
 		StringTokenizer tokens = new StringTokenizer(line, " ");
@@ -188,9 +247,12 @@ public class OBJModel
 		
 		return null;   // means an error occurred
 	}
-
-
-
+	
+	/**
+	 * addTexCoord
+	 *
+	 * General Function: Adds a Texture Coord to the collection.
+	 */
 	private boolean addTexCoord(String line, boolean isFirstTC)
 	{
 		if(isFirstTC)
@@ -208,14 +270,22 @@ public class OBJModel
 		return false;
 	}
 
-
+	/**
+	 * checkTC3D
+	 *
+	 * General Function: Checks for Texture Coords 3D is flagged.
+	 */
 	private boolean checkTC3D(String line)
 	{
 		String[] tokens = line.split("\\s+");
 		return (tokens.length == 4);
 	}
 
-
+	/**
+	 * readTCTuple
+	 *
+	 * General Function: Reads a Texture Coord Tuple3.
+	 */
 	private Tuple3 readTCTuple(String line)
 	{
 		StringTokenizer tokens = new StringTokenizer(line, " ");
@@ -237,7 +307,11 @@ public class OBJModel
 		return null;   // means an error occurred
 	}
 
-
+	/**
+	 * addNormal
+	 *
+	 * General Function: Adds a normal to the collection.
+	 */
 	private boolean addNormal(String line)
 	{
 		Tuple3 normCoord = readTuple3(line);
@@ -248,9 +322,12 @@ public class OBJModel
 		}
 		return false;
 	}
-
-
-
+	
+	/**
+	 * centerScale
+	 *
+	 * General Function: Centers the scale.
+	 */
 	private void centerScale()
 	{
 		Tuple3 center = modelDims.getCenter();
@@ -275,6 +352,11 @@ public class OBJModel
 		}
 	}
 	
+	/**
+	 * drawToList
+	 *
+	 * General Function: Creates a display list.
+	 */
 	private void drawToList(GL gl)
 	{
 		modelDispList = gl.glGenLists(1);
@@ -293,12 +375,22 @@ public class OBJModel
 		gl.glEndList();
 	}
 	
+	/**
+	 * draw
+	 *
+	 * General Function: Renders the display list.
+	 */
 	public void draw(GL gl)
 	{
 		gl.glCallList(modelDispList);
 		org.cart.igd.core.Kernel.display.getRenderer().polyCount += faces.getNumFaces();
 	}
 	
+	/**
+	 * reportOnModel
+	 *
+	 * General Function: Prints a report onthe OBJModel.
+	 */
 	private void reportOnModel()
 	{
 		System.out.println("No. of vertices: " + verts.size());

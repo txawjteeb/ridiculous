@@ -3,18 +3,38 @@ package org.cart.igd.models.obj;
 import java.util.*;
 import javax.media.opengl.*;
 
+/**
+ * Faces.java
+ *
+ * General Function: Holds all face information for an Object Model.
+ */
 public class Faces
 {
 	private static final float DUMMY_Z_TC = -5.0f;
 	
+	/* Collection of face vertex indices. */
 	private ArrayList<int[]> facesVertIdxs;
+	
+	/* Collection of face texture indices. */
 	private ArrayList<int[]> facesTexIdxs;
+	
+	/* Collection of face normal indices. */
 	private ArrayList<int[]> facesNormIdxs;
 	
+	/* Collection of vertices. */
 	private ArrayList<Tuple3> verts;
+	
+	/* Collection of normals. */
 	private ArrayList<Tuple3> normals;
+	
+	/* Collection of texture coords. */
 	private ArrayList<Tuple3> texCoords;
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Faces.
+	 */
 	public Faces(ArrayList<Tuple3> vs, ArrayList<Tuple3> ns, ArrayList<Tuple3> ts)
 	{
 		verts = vs;
@@ -26,6 +46,11 @@ public class Faces
 		facesNormIdxs = new ArrayList<int[]>();
 	}
 	
+	/**
+	 * addFace
+	 *
+	 * General Function: Adds a face to the collection.
+	 */
 	public boolean addFace(String line)
 	{
 		try
@@ -65,6 +90,11 @@ public class Faces
 		return true;
 	}
 	
+	/**
+	 * addFaceVals
+	 *
+	 * General Function: Creates values from a string.
+	 */
 	private String addFaceVals(String faceStr)
 	{
 		char chars[] = faceStr.toCharArray();
@@ -81,6 +111,11 @@ public class Faces
 		return sb.toString();
 	}
 	
+	/**
+	 * renderFace
+	 *
+	 * General Function: Renders the face to GL.
+	 */
 	public void renderFace(GL gl, int i)
 	{
 		if(i >= facesVertIdxs.size()) return;
@@ -123,6 +158,11 @@ public class Faces
 		gl.glEnd();
 	}
 
+	/**
+	 * getNumFaces
+	 *
+	 * General Function: Returns the number of faces.
+	 */
 	public int getNumFaces()
 	{
 		return facesVertIdxs.size();
