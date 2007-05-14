@@ -1,5 +1,7 @@
 package org.cart.igd.sound;
 
+import org.cart.igd.core.Kernel;
+
 /**
  * SoundManager.java
  * 
@@ -35,7 +37,9 @@ public class SoundManager
 	
 	public void playVoice(Sound voice){
 		if(voice != null){
-			voice.play(1f, voVol);
+			voice.play(1f, Kernel.soundSettings.voVol);
+			System.out.println(voice.sndFilepath + "voice vol: "
+					+Kernel.soundSettings.voVol);
 		} else {
 			System.out.println("SoundManager.playVoice(Sound voice) is null");
 		}
@@ -43,7 +47,9 @@ public class SoundManager
 	
 	public void playSound(Sound effect){
 		if(effect != null){
-			effect.play(1f, voVol);
+			effect.play(1f, Kernel.soundSettings.seVol);
+			System.out.println(effect.sndFilepath + "sound effect vol: "
+					+Kernel.soundSettings.seVol);
 		} else {
 			System.out.println("SoundManager.playSound(Sound effect) is null");
 		}
@@ -59,7 +65,9 @@ public class SoundManager
 	
 	public void loopMusic(Sound music){
 		if( music != null ){
-			music.loop(1f, bgVol);
+			music.loop(1f, Kernel.soundSettings.bgVol);
+			System.out.println(music.sndFilepath + "musci vol: "
+					+Kernel.soundSettings.bgVol);
 		} else {
 			System.out.println("SoundManager.loopMusic(Sound music) is null");
 		}

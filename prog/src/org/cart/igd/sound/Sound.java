@@ -1,11 +1,13 @@
 package org.cart.igd.sound;
 public class Sound { 
-    private InternalSound sound; 
-     
-    public Sound(String ref) throws Exception { 
-        SoundStore.get().init(); 
-         
-        try { 
+	private InternalSound sound; 
+    	
+    public String sndFilepath = "";
+	
+	public Sound(String ref) throws Exception { 
+		SoundStore.get().init(); 
+		sndFilepath = ref;
+		try { 
             if (ref.toLowerCase().endsWith(".ogg")) { 
                 sound = SoundStore.get().getOgg(ref); 
             } else if (ref.toLowerCase().endsWith(".wav")) { 
@@ -22,11 +24,11 @@ public class Sound {
      
 
     public void play() { 
-        play(1.0f,1.0f); 
+        play(1.0f,.5f); 
     }
     
     public void playLoud() { 
-        play(1.0f,2.0f); 
+        play(1.0f,1.0f); 
     }  
      
     public void play(float pitch, float volume) { 

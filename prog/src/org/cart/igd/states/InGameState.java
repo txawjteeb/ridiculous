@@ -282,18 +282,7 @@ public class InGameState extends GameState
 		items.add(new Item("Party Snapper Hidden",Inventory.POPPERS,50,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,80f),true,true));
-/*
- 	public static final int FLAMINGO = 0;
-	public static final int TURTLES = 1; 
-	public static final int PANDA = 2; 
-	public static final int KANGAROO = 3; 
-	public static final int GIRAFFE = 4; 
-	public static final int TIGER = 5; 
-	public static final int PENGUIN = 6; 
-	public static final int MEERKAT = 7; 
-	public static final int WOODPECKER = 8;
-	public static final int ELEPHANT = 9;  
-*/
+
 		/* add animals to the map */
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
 				turtleIdle, 

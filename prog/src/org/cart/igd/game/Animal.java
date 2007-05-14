@@ -3,40 +3,40 @@ package org.cart.igd.game;
 import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import javax.media.opengl.GL;
-import javax.media.opengl.glu.GLU;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.entity.*;
-import org.cart.igd.gl2d.*;
-import org.cart.igd.util.*;
-import org.cart.igd.gui.*;
 import org.cart.igd.states.*;
 
 
+/**
+ * Animal.java
+ * 
+ * General Purpose: 
+ * represent animals as entities and render them at locations
+ * based on the progression of the game
+ */
+public class Animal extends Entity
+{
+ 	public static final int FLAMINGO = 0;
+	public static final int TURTLES = 1; 
+	public static final int PANDA = 2; 
+	public static final int KANGAROO = 3; 
+	public static final int GIRAFFE = 4; 
+	public static final int TIGER = 5; 
+	public static final int PENGUIN = 6; 
+	public static final int MEERKAT = 7; 
+	public static final int WOODPECKER = 8;
+	public static final int ELEPHANT = 9;  
 
-public class Animal extends Entity{
-	/*
-	//			 states
-	 //0 = incage not talked to
-	 //1 = incage waiting for item
-	 //2 = incage ready to be saved
-	 //3 = incage ready to be saved after item given
-	 //4 = saved by bush
-	 //5 = saved in party
-	 
-	 
-	 
-	 ids
-	 0 flamingo
-	 1 turtles
-	 2 panda
-	 3 kangaroo
-	 4 giraffe
-	 5 tiger
-	 6 penguin
-	 7 meerkat
-	 8 woodpecker 
-	 9 elephant
-	 */
+	
+	/* states
+	0 = incage not talked to
+	1 = incage waiting for item
+	2 = incage ready to be saved
+	3 = incage ready to be saved after item given
+	4 = saved by bush
+	5 = saved in party
+	*/
 	public static final int SAVED_BUSH = 4;
 	public static final int SAVED_PARTY = 5;
 	
