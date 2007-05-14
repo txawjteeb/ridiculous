@@ -728,9 +728,6 @@
 			</fileitem>
 		</include>
 		<exclude>
-			<folderitem>
-				<path>src\org\cart\igd\models\m3ds</path>
-			</folderitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\MoviePlayer.java</path>
 				<source>true</source>

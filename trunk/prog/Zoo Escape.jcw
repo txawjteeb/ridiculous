@@ -1,0 +1,16 @@
+<?xml?>
+<workspace>
+	<settings>
+		<label>Zoo Escape</label>
+	</settings>
+	<users>
+		<user>
+			<path>Zoo Escape.jcu</path>
+		</user>
+	</users>
+	<projects>
+		<project>
+			<path>Zoo Escape.jcp</path>
+		</project>
+	</projects>
+</workspace>
