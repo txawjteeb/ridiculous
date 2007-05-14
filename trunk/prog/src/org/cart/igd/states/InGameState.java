@@ -17,7 +17,6 @@ import java.util.Random;
 import org.cart.igd.Camera;
 import org.cart.igd.Renderer;
 import org.cart.igd.core.Kernel;
-import org.cart.igd.discreet.*;
 import org.cart.igd.entity.Entity;
 import org.cart.igd.gl2d.GLGraphics;
 import org.cart.igd.gui.Dialogue;
@@ -83,12 +82,6 @@ public class InGameState extends GameState
 	
 	/* FoodAffinity OBJ Model Data. */
 	private OBJModel foodAffinity;
-	
-	/* 3DSMax File Parser. */
-	//private MaxParser maxParser;
-	
-	/* Test 3DS model data. */
-	//private Model test3ds;
 	
 	/* Constant gravity variable. */
 	private final float GRAVITY = 0.025f;
@@ -157,13 +150,6 @@ public class InGameState extends GameState
 	public InGameState(GL gl)
 	{
 		super(gl);
-		try
-		{
-			//maxParser = new MaxParser();
-			//test3ds = new Model(maxParser.getObjectMesh("walk.3DS"));	
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
 		
 		/* load common sounds */
 		try{
