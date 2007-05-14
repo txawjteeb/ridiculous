@@ -418,7 +418,6 @@ public class InGameGUI extends GUI
 			texPaw[i] = Kernel.display.getRenderer().loadImage(
 			"data/images/gui/paw" + i + ".png");
 		}
-
 		
 		for(int i = 0;i<texAnimalCursors.length;i++){
 			texAnimalCursors[i] = Kernel.display.getRenderer().loadImage(

@@ -189,17 +189,17 @@ public class InGameState extends GameState
 		cutscenePlayer.loadMovie("data/movies/test.avi");
 		
 		/* create objAnimations */
-		flamingoWalk = new OBJAnimation(gl,10,"flamingo",105);
-		flamingoIdle = new OBJAnimation(gl,10,"flamingo",500);
-		turtleIdle = new OBJAnimation(gl,10,"turtle",300);
-		kangarooIdle = new OBJAnimation(gl,10,"kangaroo",300);
+		flamingoWalk = new OBJAnimation(gl,1,"flamingo",105);
+		flamingoIdle = new OBJAnimation(gl,1,"flamingo",500);
+		turtleIdle = new OBJAnimation(gl,1,"turtle",300);
+		kangarooIdle = new OBJAnimation(gl,1,"kangaroo",300);
 		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000);
 		tigerIdle = new OBJAnimation(gl,1,"tiger",1000);
-		penguinIdle = new OBJAnimation(gl,10,"penguin",300);
-		pandaIdle = new OBJAnimation(gl,10,"panda",300);
-		meerkatIdle = new OBJAnimation(gl,10,"meerkat",300);
-		woodpeckerIdle = new OBJAnimation(gl,10,"woodpecker",300);
-		elephantIdle = new OBJAnimation(gl,10,"elephant",300);
+		penguinIdle = new OBJAnimation(gl,1,"penguin",300);
+		pandaIdle = new OBJAnimation(gl,1,"panda",300);
+		meerkatIdle = new OBJAnimation(gl,1,"meerkat",300);
+		woodpeckerIdle = new OBJAnimation(gl,1,"woodpecker",300);
+		elephantIdle = new OBJAnimation(gl,1,"elephant",300);
 		
 		OBJAnimation flamingoTest = 
 			new OBJAnimation(gl,1,"flamingo_w_vertex_colors_io",200);

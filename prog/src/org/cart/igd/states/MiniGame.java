@@ -47,12 +47,17 @@ public class MiniGame extends GameState
 	
 	Entity powerBox;
 	
+	OBJAnimation penguinThrow;
+	
 	public MiniGame(GL gl){
 		
 	}
 	
 	public void init(GL gl, GLU glu){
 		gui.add( new MiniGamePenguins( this ) );
+		
+		penguinThrow = 
+			new OBJAnimation(gl,6,"penguin_throw_",250);
 		
 		OBJAnimation penguinIdle = 
 			new OBJAnimation(gl,10,"penguin",250);
@@ -65,7 +70,7 @@ public class MiniGame extends GameState
 		
 		powerBox = new PowerBox(new Vector3f(-14f,0f,-22f), 0,2f, mPowerBox );
 		
-		player = new Player(new Vector3f(3.5f,0f,-50f), 0f, .2f, penguinIdle,penguinIdle);
+		player = new Player(new Vector3f(3.5f,0f,-50f), 0f, .2f, penguinThrow,penguinThrow);
 		player.facingDirection = 90f;
 		camera = new Camera(player, 10f, 4f);
 		camera.distance = 5f;
@@ -146,6 +151,7 @@ public class MiniGame extends GameState
 			
 			throwSlushyBall();
 			Kernel.userInput.keys[KeyEvent.VK_SPACE]=false;
+			player.objAnimation = penguinThrow;
 		}
 		/* Check for Escape key to end program */
 		if(Kernel.userInput.keys[KeyEvent.VK_ESCAPE]) Kernel.display.stop();
