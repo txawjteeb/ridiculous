@@ -17,7 +17,6 @@ public class UITextField extends UIComponent
 		super(x,y,width,height);
 		this.gl = gl;
 		this.text = value;
-		this.rgb = new float[] { 0f,0f,0f };
 		this.password = password;
 	}
 	
@@ -31,7 +30,7 @@ public class UITextField extends UIComponent
 		
 		if(focused){
 			g.fillRect(getX(), getY(), getWidth(), getHeight(), 
-					new float[]{rgb[0],rgb[1],rgb[2]});
+					new float[]{rgbaDefault[0],rgbaDefault[1],rgbaDefault[2]});
 		}
 		
 		gl.glColor3f(fontColor[0], fontColor[1], fontColor[2]);
@@ -64,12 +63,10 @@ public class UITextField extends UIComponent
 	public void getFocus() { 
 		focused=true; 
 		fontColor = new float[] {1f,1f,1f}; 
-		rgb = new float[] { (0f/255f), (16f/255f), (51f/255f) }; 
 	}
 	
 	public void dropFocus() {
 		focused=false; 
 		fontColor = new float[] {0f,0f,0f}; 
-		rgb = new float[] {0f,0f,0f}; 
 	}
 }

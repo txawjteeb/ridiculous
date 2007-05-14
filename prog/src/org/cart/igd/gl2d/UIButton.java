@@ -47,7 +47,6 @@ public class UIButton extends UIComponent
 	{
 		super(x,y,width,height);
 		this.toolTip = value;
-		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
 	public UIButton(Texture tex, GameAction action, int x, int y, 
@@ -56,7 +55,6 @@ public class UIButton extends UIComponent
 		super(x,y,width,height);
 		setTexture( tex );
 		setAction( action );
-		this.rgb = new float[] { 1f,1f,1f };
 	}
 	
 	/**

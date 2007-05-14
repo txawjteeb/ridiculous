@@ -3,6 +3,8 @@ package org.cart.igd.input;
 import java.awt.Component;
 import java.awt.event.*;
 import java.awt.Robot;
+import java.util.ArrayList;
+
 import javax.swing.SwingUtilities;
 
 import org.cart.igd.Display;
@@ -59,6 +61,8 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
     /* Mouse wheel movement. */
     public int mouseWheelMoved = 0;
 
+    public ArrayList<UIComponent> guiElements = new ArrayList<UIComponent>();
+    
 	/**
 	 * Constructor
 	 *
@@ -82,6 +86,10 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 		{
 			e.printStackTrace();
 		}
+	}
+	
+	public void addComponentForListening(UIComponent c){
+		guiElements.add(c);
 	}
 	
 	/**
@@ -239,10 +247,20 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	 */
 	public void keyPressed(KeyEvent e)
 	{
+		
 		if(keyActions[e.getKeyCode()]!= null)
 		{
 			keyActions[e.getKeyCode()].activate();
 		}
+		
+		System.out.println("key pressed: "+e.getKeyChar());
+		for(UIComponent c: guiElements){
+			if(c.focused){
+				System.out.println("key press sent");
+				c.keyPressed(e);
+			}
+		}
+		
 		keys[e.getKeyCode()] = true;
 		e.consume();
 	}

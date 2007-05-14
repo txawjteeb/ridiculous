@@ -1,4 +1,6 @@
 package org.cart.igd.gl2d;
+import java.awt.event.KeyEvent;
+
 import org.cart.igd.input.GameAction;
 import org.cart.igd.util.*;
 
@@ -7,8 +9,9 @@ public abstract class UIComponent
 	public String title = "";
 	protected int x, y;
 	protected int width, height;
-	public float[] rgb;
 	public boolean focused;
+	
+	public float rgbaDefault[] = new float[]{1f,1f,1f,1f,}; 
 	
 	public float alpha = 1f;
 	
@@ -48,6 +51,11 @@ public abstract class UIComponent
 		if(gameAction != null){
 			gameAction.activate();
 		}
+	}
+	
+	/** called by user input if added to guiElement list and is focused*/
+	public void keyPressed(KeyEvent e){
+		
 	}
 	
 	/** returns x location relative to the canvas takes 
