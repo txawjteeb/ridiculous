@@ -14,14 +14,13 @@ public class UILabel extends UIComponent
 	{
 		super(x,y,width,height);
 		this.text = value;
-		this.rgb = new float[] { 0f,0f,0f };
 	}
 	
 	public void draw(GLGraphics g)
 	{
 		if(size[0] == 1f){
 			g.drawBitmapStringStroke( text, getX(), getY(), 1, 
-					new float[] {rgb[0],rgb[1],rgb[2],alpha}, 
+					rgbaDefault,
 					ColorRGBA.White.getRGBA() );
 		} else {
 			g.drawBitmapString( text, getX(), getY(), new float[]{1,1,1,}, 

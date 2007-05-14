@@ -33,6 +33,9 @@ public class MenuGUI extends GUI
 	/** contains collision detection methods for UIComponents*/
 	private UserInput input;
 	
+	private GTextField gtfUserName;
+	private GLRolloverButton startGame;
+	
 	/** 
 	 * Constructor
 	 * @param GameState gameState refference to allow state change 
@@ -40,6 +43,9 @@ public class MenuGUI extends GUI
 	public MenuGUI(GameState gameState){
 		super(gameState);//superclass GUI contain ref to GameState
 		input = Kernel.userInput;
+		
+		
+		
 		loadImages();
 	}
 	
@@ -108,6 +114,14 @@ public class MenuGUI extends GUI
 			btVol[VOICE][i].focused = true;
 		}
 		
+		/* play menu */
+		this.startGame = new GLRolloverButton(texMenuButtons[0],
+				new float[]{ .5f, .5f, .5f, 1f},new float[]{.50f,.50f},
+				new float[]{1f,.8f, 1f,1f}, new float[]{.55f,.55f},
+				564,406,128,64);
+		
+		gtfUserName = new GTextField(input, 564,500,128,32);
+		gtfUserName.focused = false;
 
 	}
 	
@@ -122,26 +136,22 @@ public class MenuGUI extends GUI
 	{
 		if(input.isSquareButtonPressed( btMenu[0] ) )
 		{
-			System.out.println();
-			gameState.changeGameState("InGameState");
+			selection = PLAY;
 		}
 		
 		if(input.isSquareButtonPressed( btMenu[1] ) )
 		{
 			selection = OPTIONS;
-			System.out.println("selection: "+selection);
 		}
 		
 		if(input.isSquareButtonPressed( btMenu[2] ) )
 		{
 			selection = 3;
-			System.out.println("selection: "+selection);
 		}
 		
 		if(input.isSquareButtonPressed( btMenu[3] ) )
 		{
 			selection = 4;
-			System.out.println("selection: "+selection);
 		}
 		
 		/* sub menus */
@@ -182,6 +192,20 @@ public class MenuGUI extends GUI
 				}
 			break;
 			
+			case PLAY:
+				if(input.isSquareButtonPressed( gtfUserName ) 
+						&& !gtfUserName.focused )
+				{
+					gtfUserName.focused = true;
+					System.out.println("gtfUserName pressed");
+				}
+				if(input.isSquareButtonPressed( startGame ) )
+				{
+					gameState.changeGameState("InGameState");
+				}
+				
+			break;
+			
 		}
 	}
 	
@@ -205,6 +229,12 @@ public class MenuGUI extends GUI
 					}
 				}		
 			break;	
+			
+			case PLAY:
+				g.drawBitmapString("user name", 564, 532);
+				gtfUserName.draw(g);
+				startGame.draw(g);
+			break;
 		}
 		
 		
