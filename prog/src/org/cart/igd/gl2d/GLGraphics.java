@@ -8,6 +8,11 @@ import org.cart.igd.util.Texture;
 
 import com.sun.opengl.util.GLUT;
 
+/**
+ * GLGraphics.java
+ *
+ * General Function: Supplies easy to use 2D OpenGL functions. Some intense stuff here.
+ */
 public class GLGraphics
 {
 	private static Texture[] Font = new Texture[94];
@@ -16,9 +21,9 @@ public class GLGraphics
 	public static final int DEFAULT_BLEND = GL.GL_ONE_MINUS_SRC_ALPHA;
 	public static int BLENDING=1;
 	
-	GL gl;
-	GLU glu;
-	GLUT glut;
+	private GL gl;
+	private GLU glu;
+	private GLUT glut;
 	
 	public GLGraphics(GL gl,GLU glu, GLUT glut)
 	{

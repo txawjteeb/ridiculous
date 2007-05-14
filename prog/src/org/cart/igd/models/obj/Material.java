@@ -7,18 +7,37 @@ import org.cart.igd.util.Texture;
 
 public class Material
 {
+	/* Material name. */
 	private String name;
 	
-	// colour info
-	private Tuple3 ka, kd, ks;   // ambient, diffuse, specular colours
-	private float ns, d;   // shininess and alpha
+	/* Ambient color. */
+	private Tuple3 ka;
 	
-	// texture info
+	/* Diffuse color. */
+	private Tuple3 kd;
+	
+	/* Specular color. */
+	private Tuple3 ks;
+	
+	/* Shininess value. */
+	private float ns;
+	
+	/* Alpha value. */
+	private float d;
+	
+	/* Texture file name. */
 	private String texFnm;
+	
+	/* Texture reference. */
 	private Texture texture;
 	
 	public String texDir = "data/obj/textures/";
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Material.
+	 */
 	public Material(String nm)
 	{
 		name = nm;
@@ -30,7 +49,11 @@ public class Material
 		texture = null;
 	}
 
-
+	/**
+	 * showMaterial
+	 *
+	 * General Function: Prints of the Material information.
+	 */
 	public void showMaterial()
 	{
 		System.out.println(name);
@@ -42,27 +65,118 @@ public class Material
 		if(texFnm != null) System.out.println("  Texture file: " + texFnm);
 	}
 
+	/**
+	 * hasName
+	 *
+	 * General Function: Returns whether the material has a name value.
+	 */
+	public boolean hasName(String nm)
+	{
+		return name.equals(nm);
+	}
 
-	public boolean hasName(String nm) { return name.equals(nm); }
-
-
-  // --------- set/get methods for colour info --------------
-
-	public void setD(float val)		{ d = val; }
+	/**
+	 * setD
+	 *
+	 * General Function: Sets the alpha value.
+	 */
+	public void setD(float val)
+	{
+		d = val;
+	}
+	
+	/**
+	 * getD
+	 *
+	 * General Function: Gets the alpha value.
+	 */
 	public float getD()				{ return d; }
 	
-	public void setNs(float val)	{ ns = val; }
-	public float getNs()			{ return ns; }
+	/**
+	 * setNs
+	 *
+	 * General Function: Sets the shininess value.
+	 */
+	public void setNs(float val)
+	{
+		ns = val;
+	}
 	
-	public void setKa(Tuple3 t)		{ ka = t; }
-	public Tuple3 getKa()			{ return ka; }
+	/**
+	 * getNs
+	 *
+	 * General Function: Gets the shininess value.
+	 */
+	public float getNs()
+	{
+		return ns;
+	}
 	
-	public void setKd(Tuple3 t)		{ kd = t; }
-	public Tuple3 getKd()			{ return kd; }
+	/**
+	 * setKa
+	 *
+	 * General Function: Sets the ambient value.
+	 */
+	public void setKa(Tuple3 t)
+	{
+		ka = t;
+	}
 	
-	public void setKs(Tuple3 t)		{ ks = t; }
-	public Tuple3 getKs()			{ return ks; }
+	/**
+	 * getKa
+	 *
+	 * General Function: Gets the ambient value.
+	 */
+	public Tuple3 getKa()
+	{
+		return ka;
+	}
 	
+	/**
+	 * setKd
+	 *
+	 * General Function: Sets the diffuse value.
+	 */
+	public void setKd(Tuple3 t)
+	{
+		kd = t;
+	}
+	
+	/**
+	 * getKd
+	 *
+	 * General Function: Gets the diffuse value.
+	 */
+	public Tuple3 getKd()
+	{
+		return kd;
+	}
+	
+	/**
+	 * setKs
+	 *
+	 * General Function: Sets the specular value.
+	 */
+	public void setKs(Tuple3 t)
+	{
+		ks = t;
+	}
+	
+	/**
+	 * getKs
+	 *
+	 * General Function: Gets the specular value.
+	 */
+	public Tuple3 getKs()
+	{
+		return ks;
+	}
+	
+	/**
+	 * setMaterialColors
+	 *
+	 * General Function: Sets colors in GL.
+	 */
 	public void setMaterialColors(GL gl)
 	{
 		// ambient color
@@ -98,6 +212,11 @@ public class Material
 		}
 	}
 
+	/**
+	 * loadTexture
+	 *
+	 * General Function: Loads a texture.
+	 */
 	public void loadTexture(String fnm)
 	{
 		try
@@ -110,6 +229,23 @@ public class Material
 		}
 	}
 	
-	public void setTexture(Texture t)	{ texture = t; }
-	public Texture getTexture()			{ return texture; }
+	/**
+	 * setTexture
+	 *
+	 * General Function: Sets the texture object.
+	 */
+	public void setTexture(Texture t)
+	{
+		texture = t;
+	}
+	
+	/**
+	 * getTexture
+	 *
+	 * General Function: Returns the Texture.
+	 */
+	public Texture getTexture()
+	{
+		return texture;
+	}
 }

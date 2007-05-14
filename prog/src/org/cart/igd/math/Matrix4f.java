@@ -1,28 +1,79 @@
 package org.cart.igd.math;
 
-public class Matrix4f {
-    float M00;
-    float M10;
-    float M20;
-    float M30;
-    float M01;
-    float M11;
-    float M21;
-    float M31;
-    float M02;
-    float M12;
-    float M22;
-    float M32;
-    float M03;
-    float M13;
-    float M23;
-    float M33;
+/**
+ * Matrix4f.java
+ *
+ * General Function: A math Matrix object.
+ */
+public class Matrix4f
+{
+	/* Matrix value 0x0 */
+	private float M00;
+	
+	/* Matrix value 1x0 */
+	private float M10;
+	
+	/* Matrix value 2x0 */
+    private float M20;
+    
+    /* Matrix value 3x0 */
+    private float M30;
+    
+    /* Matrix value 0x1 */
+    private float M01;
+    
+    /* Matrix value 1x1 */
+    private float M11;
+    
+    /* Matrix value 2x1 */
+    private float M21;
+    
+    /* Matrix value 3x1 */
+    private float M31;
+    
+    /* Matrix value 0x2 */
+    private float M02;
+    
+    /* Matrix value 1x2 */
+    private float M12;
+    
+    /* Matrix value 2x2 */
+    private float M22;
+    
+    /* Matrix value 3x2 */
+    private float M32;
+    
+    /* Matrix value 0x3 */
+    private float M03;
+    
+    /* Matrix value 1x3 */
+    private float M13;
+    
+    /* Matrix value 2x3 */
+    private float M23;
+    
+    /* Matrix value 3x3 */
+    private float M33;
 
-    public Matrix4f() {
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Matrix4f.
+	 */
+    public Matrix4f()
+    {
         setIdentity();
     }
 
-    public void get(float[] dest) {
+	/**
+	 * get
+	 *
+	 * General Function: Sets Matrix values to the destination array.
+	 *
+	 * @param dest The destination float array.
+	 */
+    public void get(float[] dest)
+    {
         dest[0] = M00;
         dest[1] = M10;
         dest[2] = M20;
@@ -41,16 +92,36 @@ public class Matrix4f {
         dest[15] = M33;
     }
 
-    public void setZero() {
+	/**
+	 * setZero
+	 *
+	 * General Function: Sets all values to zero.
+	 */
+    public void setZero()
+    {
         M00 = M01 = M02 = M03 = M10 = M11 = M12 = M13 = M20 = M21 = M22 = M23 = M30 = M31 = M32 = M33 = 0.0f;
     }
 
-    public void setIdentity() {
+	/**
+	 * setIdentity
+	 *
+	 * General Function: Sets identity of the matrix.
+	 */
+    public void setIdentity()
+    {
         setZero();
         M00 = M11 = M22 = M33 = 1.0f;
     }
 
-    public void setRotation(Quat4f q1) {
+	/**
+	 * setRotation
+	 *
+	 * General Function: Sets the rotation quaternion.
+	 *
+	 * @param q1 The supplied Quaternion to use.
+	 */
+    public void setRotation(Quat4f q1)
+    {
         float n, s;
         float xs, ys, zs;
         float wx, wy, wz;
@@ -91,7 +162,15 @@ public class Matrix4f {
         M33 = 1f;
     }
 
-    public final void set(Matrix4f m1) {
+	/**
+	 * set
+	 *
+	 * General Function: Sets 16 values to the same as given Matrix.
+	 *
+	 * @param m1 The matrix to copy.
+	 */
+    public final void set(Matrix4f m1)
+    {
         M00 = m1.M00; M01 = m1.M01; M02 = m1.M02; M03 = m1.M03;
         M10 = m1.M10; M11 = m1.M11; M12 = m1.M12; M13 = m1.M13;
         M20 = m1.M20; M21 = m1.M21; M22 = m1.M22; M23 = m1.M23;
@@ -99,13 +178,16 @@ public class Matrix4f {
     }
 
     /**
-     * Sets the value of this matrix to the result of multiplying
+     * mul
+     *
+     * General Function: Sets the value of this matrix to the result of multiplying
      * the two argument matrices together.
      *
      * @param m1 the first matrix
      * @param m2 the second matrix
      */
-    public final void mul(Matrix4f m1, Matrix4f m2) {
+    public final void mul(Matrix4f m1, Matrix4f m2)
+    {
         // alias-safe way.
         set(
                 m1.M00 * m2.M00 + m1.M01 * m2.M10 + m1.M02 * m2.M20 + m1.M03 * m2.M30,
@@ -131,12 +213,15 @@ public class Matrix4f {
     }
 
     /**
-     * Sets 16 values
+     * set
+     *
+     * General Function: Sets 16 values.
      */
     private void set(float m00, float m01, float m02, float m03,
                      float m10, float m11, float m12, float m13,
                      float m20, float m21, float m22, float m23,
-                     float m30, float m31, float m32, float m33) {
+                     float m30, float m31, float m32, float m33)
+	{
         this.M00 = m00;
         this.M01 = m01;
         this.M02 = m02;

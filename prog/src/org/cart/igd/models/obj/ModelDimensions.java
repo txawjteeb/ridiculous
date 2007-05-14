@@ -2,6 +2,11 @@ package org.cart.igd.models.obj;
 
 import java.text.DecimalFormat;
 
+/**
+ * ModelDimensions.java
+ *
+ * General Function: Holds object model dimensions.
+ */
 public class ModelDimensions
 {
 	// edge coordinates
@@ -10,7 +15,11 @@ public class ModelDimensions
 	private float farPt, nearPt;     // on z-axis
 	private DecimalFormat df = new DecimalFormat("0.##");  // 2 dp
 
-
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of ModelDimensions.
+	 */
 	public ModelDimensions()
 	{
 		leftPt = 0.0f;  rightPt = 0.0f;
@@ -18,7 +27,11 @@ public class ModelDimensions
 		farPt = 0.0f;  nearPt = 0.0f;
 	}
 
-
+	/**
+	 * set
+	 *
+	 * General Function: Sets the dimensions values.
+	 */
 	public void set(Tuple3 vert)
 	{
 		rightPt		= vert.getX();
@@ -31,7 +44,11 @@ public class ModelDimensions
 		farPt		= vert.getZ();
 	}
 
-
+	/**
+	 * update
+	 *
+	 * General Function: Updates the dimension values.
+	 */
 	public void update(Tuple3 vert)
 	{
 		if(vert.getX() > rightPt) rightPt = vert.getX();
@@ -44,16 +61,41 @@ public class ModelDimensions
 		if(vert.getZ() < farPt) farPt = vert.getZ();
 	}
 
+	/**
+	 * getWidth
+	 *
+	 * General Function: Returns the width.
+	 */
+	public float getWidth()
+	{
+		return (rightPt - leftPt);
+	}
 
-  // ------------- use the edge coordinates ----------------------------
+	/**
+	 * getHeight
+	 *
+	 * General Function: Returns the height.
+	 */
+	public float getHeight()
+	{
+		return (topPt - bottomPt);
+	}
 
-	public float getWidth() { return (rightPt - leftPt); }
+	/**
+	 * getDepth
+	 *
+	 * General Function: Returns the depth.
+	 */
+	public float getDepth()
+	{
+		return (nearPt - farPt);
+	}
 
-	public float getHeight() { return (topPt - bottomPt); }
-
-	public float getDepth() { return (nearPt - farPt); } 
-
-
+	/**
+	 * getLargest
+	 *
+	 * General Function: Returns the largest dimension.
+	 */
 	public float getLargest()
 	{
 		float height = getHeight();
@@ -66,7 +108,11 @@ public class ModelDimensions
 		return largest;
 	}
 
-
+	/**
+	 * getCenter
+	 *
+	 * General Function: Returns the center Tuple3.
+	 */
 	public Tuple3 getCenter()
 	{
 		float xc = (rightPt + leftPt)/2.0f; 
@@ -75,7 +121,11 @@ public class ModelDimensions
 		return new Tuple3(xc, yc, zc);
 	}
 
-
+	/**
+	 * reportDimensions
+	 *
+	 * General Function: Prints out a report of the dimensions.
+	 */
 	public void reportDimensions()
 	{
 		Tuple3 center = getCenter();

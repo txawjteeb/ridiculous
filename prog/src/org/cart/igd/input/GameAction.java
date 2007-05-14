@@ -91,7 +91,7 @@ public class GameAction
     }
     
     /** 
-     * Caled by UserInput when mouse or key is released
+     * Called by UserInput when mouse or key is released.
      **/
     public void deactivate()
     {

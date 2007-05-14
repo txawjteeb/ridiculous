@@ -1,22 +1,100 @@
 package org.cart.igd.models.obj;
 
+/**
+ * Tuple3.java
+ *
+ * General Function: Simple three float vector.
+ */
 public class Tuple3 
 {
-	private float x, y, z;
+	/* X-Axis value. */
+	private float x;
 	
-	public Tuple3(float xc, float yc, float zc) { x = xc; y = yc; z = zc; }
+	/* Y-Axis value. */
+	private float y;
 	
-	public String toString()	{ return "( " + x + ", " + y + ", " + z + " )"; }
+	/* Z-Axis value. */
+	private float z;
 	
-	public void setX(float xc)	{ x = xc; }
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Tuple3.
+	 */
+	public Tuple3(float xc, float yc, float zc)
+	{
+		x = xc;
+		y = yc;
+		z = zc;
+	}
 	
-	public float getX()			{ return x; }
+	/**
+	 * toString
+	 *
+	 * General Function: Returns a String of the contained data.
+	 */
+	public String toString()
+	{
+		return "( " + x + ", " + y + ", " + z + " )";
+	}
 	
-	public void setY(float yc)	{ y = yc; }
+	/**
+	 * setX
+	 *
+	 * General Function: Sets the x value.
+	 */
+	public void setX(float xc)
+	{
+		x = xc;
+	}
 	
-	public float getY()			{ return y; }
+	/**
+	 * getX
+	 *
+	 * General Function: Gets the x value.
+	 */
+	public float getX()
+	{
+		return x;
+	}
 	
-	public void setZ(float zc)	{ z = zc; }
+	/**
+	 * setY
+	 *
+	 * General Function: Sets the y value.
+	 */
+	public void setY(float yc)
+	{
+		y = yc;
+	}
 	
-	public float getZ()			{ return z; }
+	/**
+	 * getY
+	 *
+	 * General Function: Gets the y value.
+	 */
+	public float getY()
+	{
+		return y;
+	}
+	
+	/**
+	 * setZ
+	 *
+	 * General Function: Sets the z value.
+	 */
+	public void setZ(float zc)
+	{
+		z = zc;
+	}
+	
+	/**
+	 * getZ
+	 *
+	 * General Function: Gets the z value.
+	 */
+	public float getZ()
+	{
+		return z;
+	}
 }

@@ -6,13 +6,27 @@ import java.util.*;
 import javax.media.opengl.*;
 import org.cart.igd.util.Texture;
 
-
+/**
+ * Materials.java
+ *
+ * General Function: Holds the collection of all materials.
+ */
 public class Materials
 {
+	/* Collection of Material objects. */
 	private ArrayList<Material> materials;
+	
+	/* The material name to render. */
 	private String renderMatName = null;
+	
+	/* The flag that says to use texture or not. */
 	private boolean usingTexture = false;
 	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of Materials.
+	 */
 	public Materials(String mtlFnm)
 	{
 		materials = new ArrayList<Material>();
@@ -30,7 +44,12 @@ public class Materials
 			System.out.println(e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * readMaterials
+	 *
+	 * General Function: Reads in the material data.
+	 */
 	private void readMaterials(BufferedReader br)
 	{
 		try
@@ -103,7 +122,11 @@ public class Materials
 		}
 	}
 
-
+	/**
+	 * readTuple3
+	 *
+	 * General Function: Reads in a Tuple3.
+	 */
 	private Tuple3 readTuple3(String line)
 	{
 		StringTokenizer tokens = new StringTokenizer(line, " ");
@@ -125,7 +148,11 @@ public class Materials
 		return null;   // means an error occurred
 	}
 
-
+	/**
+	 * showMaterials
+	 *
+	 * General Function: Prints of all the material data.
+	 */
 	public void showMaterials()
 	{
 		System.out.println("No. of materials: " + materials.size());
@@ -138,6 +165,11 @@ public class Materials
 		}
 	}
 
+	/**
+	 * renderWithMaterials
+	 *
+	 * General Function: Renders to GL with materials applied.
+	 */
 	public void renderWithMaterial(GL gl, String faceMat)
 	{
 		if(!faceMat.equals(renderMatName))
@@ -155,6 +187,11 @@ public class Materials
 		}
 	}
 
+	/**
+	 * switchOffTex
+	 *
+	 * General Function: Switches off textures.
+	 */
 	public void switchOffTex(GL gl)
 	{
 		if(usingTexture)
@@ -163,7 +200,12 @@ public class Materials
 			usingTexture = false;
 		}
 	}
-
+	
+	/**
+	 * switchOnTex
+	 *
+	 * General Function: Switches on textures.
+	 */
 	private void switchOnTex(GL gl, Texture tex)
 	{
 		gl.glEnable(GL.GL_TEXTURE_2D);
@@ -171,6 +213,11 @@ public class Materials
 		tex.bind(gl);
 	}
 
+	/**
+	 * getTexture
+	 *
+	 * General Function: Returns the texture of the given material name.
+	 */
 	private Texture getTexture(String matName) 
 	{
 		Material m;
@@ -182,6 +229,11 @@ public class Materials
 		return null;
 	}
 
+	/**
+	 * setMaterialColors
+	 *
+	 * General Function: Sets all materials' colors.
+	 */
 	private void setMaterialColors(GL gl, String matName)
 	{
 		Material m;
