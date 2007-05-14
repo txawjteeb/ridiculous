@@ -158,17 +158,17 @@ public class MenuGUI extends GUI
 		switch(selection){
 			case OPTIONS:
 				for(int iSound = 0; iSound<btVol.length; iSound++){
-					for(int iMusic = 0; iMusic<btVol[0].length; iMusic++){
-						if(input.isSquareButtonPressed(btVol[iSound][iMusic]) )
+					for(int iVol = 0; iVol<btVol[0].length; iVol++){
+						if(input.isSquareButtonPressed(btVol[iSound][iVol]) )
 						{
 							/* select/deselect buttons to make it look 
 							 * like a percentage bar */
-							int i = iMusic;
+							int i = iVol;
 							while(i<btVol[iSound].length){
 								btVol[iSound][i].focused = false;
 								i++;
 							}
-							i = iMusic;
+							i = iVol;
 							while(i >= 0){
 								btVol[iSound][i].focused = true;
 								i--;
@@ -176,15 +176,18 @@ public class MenuGUI extends GUI
 							/* set the volume in the sound settings */
 							switch(iSound){
 							case SOUND:
-								Kernel.soundSettings.seVol = (iMusic*10);break;
+								Kernel.soundSettings.seVol = ((float)iVol*.1f);
+								break;
 							case MUSIC:
-								Kernel.soundSettings.bgVol = (iMusic*10);break;
+								Kernel.soundSettings.bgVol = ((float)iVol*.1f);
+								break;
 							case VOICE:
-								Kernel.soundSettings.voVol = (iMusic*10);break;
+								Kernel.soundSettings.voVol = ((float)iVol*.1f);
+								break;
 							}
 							
 						}
-						iMusic++;
+						iVol++;
 					}
 					if(input.isSquareButtonPressed(btVol[iSound][0])){
 						btVol[iSound][0].focused = false;

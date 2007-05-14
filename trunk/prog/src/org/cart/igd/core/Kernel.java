@@ -45,7 +45,7 @@ public class Kernel
 	
 	public void init(DisplaySettings ds)
 	{
-		soundSettings = new SoundSettings(50f,50f,200f,false);
+		soundSettings = new SoundSettings(.5f,1f,1f,false);
 		gameLauncher.setVisible(false);
 		displaySettings = ds;
 		display = new Display(ds);

@@ -10,6 +10,11 @@ import org.cart.igd.states.*;
 import org.cart.igd.game.*;
 import org.cart.igd.sound.*;
 
+/**
+ * 
+ */
+
+//TODO: *make sure all sounds are played through SoundManager
 public class Dialogue extends GUI
 {
 	ArrayList <DialogueInfo> renderDialogue = new ArrayList <DialogueInfo>();
@@ -110,6 +115,7 @@ public class Dialogue extends GUI
 					for(int i = 0;i< woodpeckerVoiceOvers.length;i++){
 						woodpeckerVoiceOvers[i] = new Sound("data/sounds/voices/woodpecker/woodpecker-" + (i+1) + ".ogg");
 					}
+					if(backgroundMusic[aId]==null);
 					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
@@ -140,8 +146,10 @@ public class Dialogue extends GUI
 				
 				case 4:
 					for(int i = 0;i< giraffeVoiceOvers.length;i++){
+						if(giraffeVoiceOvers[i]==null);
 						giraffeVoiceOvers[i] = new Sound("data/sounds/voices/giraffe/giraffe-" + (i+1) + ".ogg");
 					}
+					if(backgroundMusic[aId] == null);
 					backgroundMusic[aId] = new Sound("data/sounds/cages/cage-" + (aId) + ".ogg");
 				break;
 				
@@ -557,15 +565,15 @@ public class Dialogue extends GUI
 			case 9: // elephant
 				switch(animal.state){ // find out what state it is in
 					case NOT_TALKED_TO:
-						elephantVoiceOvers[0].playLoud();
+						sm.playVoice(elephantVoiceOvers[0]);
 						add("What do you vish of me, comrade?");
 						add("We're all getting out of here, Vladikov. We need your help!");
 						switch(selection()){}
-						elephantVoiceOvers[1].playLoud();
+						sm.playVoice(elephantVoiceOvers[1]);
 						add("Then get me out of here, little birdie, and I vill CRUSH Vhatever is in the vay.");
 						add("Why haven't you already broken out?");
 						switch(selection()){}
-						elephantVoiceOvers[2].playLoud();
+						sm.playVoice(elephantVoiceOvers[2]);
 						add("Fence is electrified, Poncho. I can't touch it with the generator running.");
 						add("I'm on it");
 						switch(selection()){}
@@ -574,13 +582,13 @@ public class Dialogue extends GUI
 						questLogUpdated.playLoud();
 					break;
 					case READY_TO_SAVE:
-						elephantVoiceOvers[2].playLoud();
+						sm.playVoice(elephantVoiceOvers[2]);
 						add("Fence is electrified, Poncho. I can't touch it with the generator running.");
 						add("(Done)");
 						switch(selection()){}
 					break;
 					case JUST_SAVED:
-						elephantVoiceOvers[3].playLoud();
+						sm.playVoice(elephantVoiceOvers[3]);
 						add("Now, ve charge gates and sqvish puny little ones!");
 						add("(Done)");
 						switch(selection()){}
