@@ -93,7 +93,7 @@ public class MiniGame extends GameState
 			new OBJAnimation(gl,7,"penguin_throw_",200,2f,false);
 		
 		penguinIdle = 
-			new OBJAnimation(gl,10,"penguin",250);
+			new OBJAnimation(gl,10,"penguin_idle_",250);
 		
 		map = new OBJModel( gl, "cage_elephant", 50,false );
 		ground = new OBJModel( gl, "ground_cc", 100, false);	
