@@ -111,7 +111,7 @@ public class Renderer implements GLEventListener
 		
 		/* Initialize the 3d environment lighting. */
 		initLighting(gl);
-		addFog(gl);
+	//	addFog(gl);
 		
 		/* Create the GLGraphics object for rendering 2D GUI. */
 		g = new GLGraphics(gl,glu,glut);
