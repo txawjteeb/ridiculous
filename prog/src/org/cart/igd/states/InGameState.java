@@ -189,20 +189,17 @@ public class InGameState extends GameState
 		cutscenePlayer.loadMovie("data/movies/test.avi");
 		
 		/* create objAnimations */
-		flamingoWalk = new OBJAnimation(gl,1,"flamingo",105);
-		flamingoIdle = new OBJAnimation(gl,1,"flamingo",500);
-		turtleIdle = new OBJAnimation(gl,1,"turtle",300);
-		kangarooIdle = new OBJAnimation(gl,1,"kangaroo",300);
+		flamingoWalk = new OBJAnimation(gl,1,"flamingo_walking_",105);
+		flamingoIdle = new OBJAnimation(gl,1,"flamingo_idle_",500);
+		turtleIdle = new OBJAnimation(gl,1,"turtle_idle_",300);
+		kangarooIdle = new OBJAnimation(gl,1,"kangaroo_idle_",300);
 		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000);
-		tigerIdle = new OBJAnimation(gl,1,"tiger",1000);
-		penguinIdle = new OBJAnimation(gl,1,"penguin",300);
-		pandaIdle = new OBJAnimation(gl,1,"panda",300);
-		meerkatIdle = new OBJAnimation(gl,1,"meerkat",300);
-		woodpeckerIdle = new OBJAnimation(gl,1,"woodpecker",300);
-		elephantIdle = new OBJAnimation(gl,1,"elephant",300);
-		
-		OBJAnimation flamingoTest = 
-			new OBJAnimation(gl,1,"flamingo_w_vertex_colors_io",200);
+		tigerIdle = new OBJAnimation(gl,10,"tiger_idle_",1000);
+		penguinIdle = new OBJAnimation(gl,1,"penguin_idle_",300);
+		pandaIdle = new OBJAnimation(gl,1,"panda_idle_",200);
+		meerkatIdle = new OBJAnimation(gl,1,"meerkat_idle_",300);
+		woodpeckerIdle = new OBJAnimation(gl,1,"woodpecker_idle_",300);
+		elephantIdle = new OBJAnimation(gl,1,"elephant_idle_",100);
 		
 		player = new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, 
 				flamingoWalk,flamingoIdle);
@@ -275,7 +272,7 @@ public class InGameState extends GameState
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
 				
 		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
-				flamingoTest, 
+				pandaIdle, 
 				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
 				
 		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,

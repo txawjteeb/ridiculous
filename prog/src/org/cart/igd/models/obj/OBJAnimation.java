@@ -11,20 +11,22 @@ import org.cart.igd.math.Vector3f;
  */
 public class OBJAnimation
 {
-	/* Frame delay. */
+	/** Frame delay. */
 	private long frameDelay;
 	
-	/* Time left. */
+	/** Time left. */
 	private long timeLeft;
 	
-	/* Current index. */
+	/** Current index. */
 	public int modelIndex = 0;
 	
+	/** determine whether the animation cycles. */
 	private boolean looping = true;
 	
+	/** unly used for non looping animations to determine when ends*/
 	public boolean finished = false;
 	
-	/* OBJModel array. */
+	/** OBJModel array. */
 	private OBJModel model[];
 	
 	/* pause animation */
