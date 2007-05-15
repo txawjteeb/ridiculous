@@ -1,13 +1,8 @@
 package org.cart.igd.game;
 
-import org.cart.igd.models.obj.OBJModel;
-import javax.media.opengl.GL;
-import javax.media.opengl.glu.GLU;
-import org.cart.igd.math.Vector3f;
-import org.cart.igd.entity.*;
 import org.cart.igd.gl2d.*;
 import org.cart.igd.util.*;
-import org.cart.igd.input.*;
+import org.cart.igd.sound.SoundManager;
 import org.cart.igd.states.*;
 import org.cart.igd.core.*;
 import java.util.*;
@@ -47,7 +42,7 @@ public class QuestLog{
 		boolean leftBook = true;
 		float swingBookAlpha = 0f;
 
-
+	private SoundManager sm = new SoundManager(Kernel.soundSettings);
 
 	public QuestLog(String name,int x, int y){
 		this.name = name;
@@ -114,9 +109,9 @@ public class QuestLog{
 						Kernel.userInput.mousePress[0] = -100;
 						Kernel.userInput.mousePress[1] = -100;
 						if(open){
-							//igs.backgroundMusic.loop(1f,.5f);
-							//igs.questLogMusic.stop();
-							igs.closeQuestLog.play();
+							sm.stopMusic(igs.questLogMusic);
+							sm.loopMusic(igs.backgroundMusic);
+							sm.playSound(igs.closeQuestLog);
 							open=false;
 							swingingBook = true;
 							degreeBook = 0;
@@ -132,10 +127,10 @@ public class QuestLog{
 								}
 								 igs.inventory.currentItem =-1;
 							}
-							//igs.backgroundMusic.stop();
-							//igs.questLogMusic.loop(1f,.5f);
+							sm.stopMusic(igs.backgroundMusic);
+							sm.loopMusic(igs.questLogMusic);
 							if(igs.openQuestLog != null){
-								igs.openQuestLog.play();
+								sm.playSound(igs.openQuestLog);
 							} else {
 								System.out.println("QuestLog: igs.openQuestLog is null");
 							}
@@ -386,7 +381,7 @@ public class QuestLog{
 						Kernel.userInput.mousePress[0] = -100;
 						Kernel.userInput.mousePress[1] = -100;
 						selected = true;
-						igs.turnPage[(new Random()).nextInt(4)].play();
+						sm.playSound(igs.turnPage[(new Random()).nextInt(4)]);
 					}
 				} else {
 					if(Kernel.userInput.mousePos[0]>x &&Kernel.userInput.mousePos[0]<x+100&&Kernel.userInput.mousePos[1]>y&&Kernel.userInput.mousePos[1]<y+100){

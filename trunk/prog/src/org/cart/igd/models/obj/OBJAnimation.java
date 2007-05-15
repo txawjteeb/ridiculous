@@ -20,6 +20,10 @@ public class OBJAnimation
 	/* Current index. */
 	private int modelIndex = 0;
 	
+	private boolean looping = true;
+	
+	public boolean finished = false;
+	
 	/* OBJModel array. */
 	private OBJModel model[];
 	
@@ -44,7 +48,8 @@ public class OBJAnimation
 	 *
 	 * General Function: Creates an instance of OBJAnimation.
 	 */
-	public OBJAnimation( GL gl, int numFrames, String filePath, long delay, float scale)
+	public OBJAnimation( GL gl, int numFrames, String filePath, long delay,
+			float scale)
 	{
 		frameDelay = delay;
 		timeLeft = delay;
@@ -53,6 +58,35 @@ public class OBJAnimation
 		{
 			model[i] = new OBJModel(gl,filePath+i, scale, true);
 		}
+	}
+	
+	/**
+	 * Constructor
+	 *
+	 * General Function: Creates an instance of OBJAnimation.
+	 */
+	public OBJAnimation( GL gl, int numFrames, String filePath, long delay, 
+			float scale, boolean loop)
+	{
+		frameDelay = delay;
+		timeLeft = delay;
+		model = new OBJModel[numFrames];
+		looping = loop;
+		for(int i = 0; i<model.length; i++)
+		{
+			model[i] = new OBJModel(gl,filePath+i, scale, true);
+		}
+	}
+	
+	public void start(){
+		if(!looping){
+			finished = false;
+			modelIndex = 0;
+		}
+	}
+	
+	public boolean isLooping(){
+		return looping;
 	}
 	
 	/**
@@ -71,6 +105,9 @@ public class OBJAnimation
 			else
 			{
 				modelIndex = 0;
+				if (!looping){
+					finished = true;
+				}
 			}
 			
 			timeLeft = frameDelay;
@@ -87,7 +124,6 @@ public class OBJAnimation
 		gl.glPushMatrix();
 		gl.glTranslatef(pos.x, pos.y -2f, pos.z);
 		gl.glRotatef( fd , 0f, -1f, 0f);
-		//gl.glScalef(scale.x,scale.y,scale.z);
 		model[modelIndex].draw(gl);
 		gl.glPopMatrix();
 	}
