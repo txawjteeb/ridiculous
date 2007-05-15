@@ -18,7 +18,7 @@ public class OBJAnimation
 	private long timeLeft;
 	
 	/* Current index. */
-	private int modelIndex = 0;
+	public int modelIndex = 0;
 	
 	private boolean looping = true;
 	
@@ -26,6 +26,9 @@ public class OBJAnimation
 	
 	/* OBJModel array. */
 	private OBJModel model[];
+	
+	/* pause animation */
+	public boolean pause = false;
 	
 	/**
 	 * Constructor
@@ -96,22 +99,26 @@ public class OBJAnimation
 	 */
 	public void update(long elapsedTime)
 	{
-		timeLeft -=elapsedTime;
-		if(timeLeft < 0){
-			if(modelIndex < model.length-1)
-			{
-				modelIndex ++;
-			}
-			else
-			{
-				modelIndex = 0;
-				if (!looping){
-					finished = true;
+		if(!pause)
+		{
+			timeLeft -=elapsedTime;
+			if(timeLeft < 0){
+				if(modelIndex < model.length-1)
+				{
+					modelIndex ++;
 				}
-			}
-			
-			timeLeft = frameDelay;
+				else
+				{
+					modelIndex = 0;
+					if (!looping){
+						finished = true;
+					}
+				}
+				
+				timeLeft = frameDelay;
+			}			
 		}
+
 	}
 	
 	/**
