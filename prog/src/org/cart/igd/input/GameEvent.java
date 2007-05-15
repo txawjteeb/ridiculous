@@ -10,12 +10,6 @@ public class GameEvent
 	/* Discriptive name of what the game event does. */
 	private String name="";
 	
-	/**
-	 * determines this event happened once as well as how many times it happened increment
-	 * ex: pressing a button to activate something once
-	 */
-	private int type = 0;
-	
 	/** 
 	 * determines if the event is happening 
 	 * ex: continuous event like walking forward 
@@ -30,17 +24,6 @@ public class GameEvent
     public GameEvent(String name)
     {
     	this.name=name;
-    }
-    
-    /**
-	 * Constructor
-	 *
-	 * General Function: Creates an instance of GameEvent.
-	 */
-    public GameEvent(String name, int type)
-    {
-    	this.name=name;
-    	this.type = type;
     }
     
     /** 

@@ -23,13 +23,7 @@ public class Sound {
     } 
      
 
-    public void play() { 
-        play(1.0f,.5f); 
-    }
-    
-    public void playLoud() { 
-        play(1.0f,1.0f); 
-    }  
+   
      
     public void play(float pitch, float volume) { 
        sound.playAsSoundEffect(pitch, volume, false); 

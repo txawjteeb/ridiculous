@@ -19,17 +19,16 @@ public class Player extends Entity
 		this.idle = idle;
 	}
 	
-	public void update(long elapsedTime){
-		
-		
-		
-		
+	public void update(long elapsedTime){	
 		this.objAnimation.update(elapsedTime);
 		
-		if(walking){
-			this.objAnimation = walk;
-		} else {
-			this.objAnimation = idle;
+		if(objAnimation.isLooping() || objAnimation.finished ){
+			if(walking){
+				
+				this.objAnimation = walk;
+			} else {
+				this.objAnimation = idle;
+			}
 		}
 		
 		super.update(elapsedTime);

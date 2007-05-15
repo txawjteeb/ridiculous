@@ -11,6 +11,7 @@ import org.cart.igd.gl2d.UIButton;
 import org.cart.igd.gl2d.UIComponent;
 import org.cart.igd.gl2d.UIWindow;
 import org.cart.igd.input.*;
+import org.cart.igd.sound.SoundManager;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.states.GameState;
 import org.cart.igd.game.*;
@@ -64,9 +65,6 @@ public class InGameGUI extends GUI
 	private GameAction mouseCameraRotate;
 	private GameAction pressQuestLog;
 
-	/* other gui components */
-	private UIComponent selectedButton;
-
 	private GUITextList textList = new GUITextList(100, 600, 16, 20);
 	
 	private InGameState igs;
@@ -75,6 +73,7 @@ public class InGameGUI extends GUI
 	
 	private float rgbaCursor[]={1f,1f,1f,1f};
 
+	private SoundManager sm = new SoundManager(Kernel.soundSettings);
 	
 	
 	
@@ -201,29 +200,6 @@ public class InGameGUI extends GUI
 	/** updates gui, called by Renderer thread*/
 	public void update(long elapsedTime)
 	{	  
-		
-	  
-	//	System.out.println("PSYCH_FIRST_ANIMAL_TALKED_TO "+igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO);
-	//	System.out.println("PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER "+igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER);
-	//	System.out.println("PSYCH_FOUND_HIDDEN_POPPERS "+igs.inventory.PSYCH_FOUND_HIDDEN_POPPERS);
-	//	System.out.println("PSYCH_FOUND_FAKE_SOLUTION "+igs.inventory.PSYCH_FOUND_FAKE_SOLUTION);
-	//	System.out.println("PSYCH_UNNECESSARY_CLICKS "+igs.inventory.PSYCH_UNNECESSARY_CLICKS);
-	//	System.out.println("PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP "+igs.inventory.PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP);
-	//	System.out.println("PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP "+igs.inventory.PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP);
-	//	System.out.println("PSYCH_FOOD_WATER_AFFINITY "+igs.inventory.PSYCH_FOOD_WATER_AFFINITY);
-	//	System.out.println("PSYCH_AMOUNT_OF_ITEMS_COLLECTED "+igs.inventory.PSYCH_AMOUNT_OF_ITEMS_COLLECTED);
-	//	System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE);
-	//	System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO);
-		
-		//System.out.println("PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN);
-		//System.out.println("PSYCH_PREFERABLE_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_PREFERABLE_QUADRANT_OF_SCREEN);
-	//	System.out.println("PSYCH_TOTAL_CLICKS "+ igs.inventory.PSYCH_TOTAL_CLICKS[0]+ " " + igs.inventory.PSYCH_TOTAL_CLICKS[1] + " " + igs.inventory.PSYCH_TOTAL_CLICKS[2] + " " +igs.inventory.PSYCH_TOTAL_CLICKS[3]);
-		
-	//	System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
-	//	System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
-	//System.out.println("PSYCH_CAUGHT_BEFORE_FREEING_TURTLES "+igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES);			
-		
-
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
 		{
@@ -280,15 +256,8 @@ public class InGameGUI extends GUI
 			pick();
 		}
 		
-		boolean animalPickedUp = false;
-		if (mouseSelect.isActive()) {
-
-			/* make sure the button is not still attached when its not dropped 
-			 * off at a proper location in the paw button */
-			if (!animalPickedUp) {
-				selectedButton = null;
-			}
-			
+		if (mouseSelect.isActive())
+		{
 			/* ----------- handle picking selection of entities ------------ */
 			Entity e = null;
 			if(picked){
@@ -342,7 +311,7 @@ public class InGameGUI extends GUI
 					if(xDiff < a.boundingSphereRadius && zDiff<a.boundingSphereRadius){
 						if(a.state == Inventory.WAITING_FOR_ITEM&&a.itemWanted == igs.inventory.currentItem){
 							a.state = Inventory.JUST_GAVE_ITEM;
-							igs.giveItem.play();
+							sm.playSound(igs.giveItem);
 							((Dialogue)igs.gui.get(1)).createDialogue(a,igs);
 							igs.changeGuiState(1);
 							boolean found = false;
@@ -387,17 +356,6 @@ public class InGameGUI extends GUI
 			((InGameState)gameState).changeGuiState(2);
 		}
 		
-		boolean animalPickedUp = false;
-
-		/* check for click on the gui elements once */
-		
-		
-		
-
-		
-		/** camera mouse rotation */
-
-		
 			if(mouseCameraRotate.isActive())
 			{
 				igs.camera.arcRotateY( - Kernel.userInput.getXDif()*0.5f );
@@ -441,7 +399,6 @@ public class InGameGUI extends GUI
 			texAnimalIcoQuestLog[i] = Kernel.display.getRenderer().loadImage(
 			"data/images/dialogue/old/" + i + ".png");
 		}
-		
 
 		
 		texQuestDone = Kernel.display.getRenderer().loadImage(
@@ -477,21 +434,7 @@ public class InGameGUI extends GUI
 				"data/images/gui/toothpaste_sp.png");
 		texItemIco[8] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/party_snappers64_cw.png");
-
 		
-
-		/*
-	 	public static final int FLAMINGO = 0;
-		public static final int TURTLES = 1; 
-		public static final int PANDA = 2; 
-		public static final int KANGAROO = 3; 
-		public static final int GIRAFFE = 4; 
-		public static final int TIGER = 5; 
-		public static final int PENGUIN = 6; 
-		public static final int MEERKAT = 7; 
-		public static final int WOODPECKER = 8;
-		public static final int ELEPHANT = 9;  
-	*/
 		
 		texAnimalIco[0] = Kernel.display.getRenderer().loadImage(
 				"data/images/gui/flamingo_vm.png");
@@ -567,4 +510,28 @@ public class InGameGUI extends GUI
 			hudGroup.add(b);
 		}
 	}// end load gui
+	
+	/** get all current psych data */
+	public void printPsychData()
+	{
+		System.out.println("PSYCH_FIRST_ANIMAL_TALKED_TO "+igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO);
+		System.out.println("PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER "+igs.inventory.PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER);
+		System.out.println("PSYCH_FOUND_HIDDEN_POPPERS "+igs.inventory.PSYCH_FOUND_HIDDEN_POPPERS);
+		System.out.println("PSYCH_FOUND_FAKE_SOLUTION "+igs.inventory.PSYCH_FOUND_FAKE_SOLUTION);
+		System.out.println("PSYCH_UNNECESSARY_CLICKS "+igs.inventory.PSYCH_UNNECESSARY_CLICKS);
+		System.out.println("PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP "+igs.inventory.PSYCH_TIME_IN_UNIMPORTANT_PLACES_ON_MAP);
+		System.out.println("PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP "+igs.inventory.PSYCH_ENTERED_UNIMPORTANT_PLACES_ON_MAP);
+		System.out.println("PSYCH_FOOD_WATER_AFFINITY "+igs.inventory.PSYCH_FOOD_WATER_AFFINITY);
+		System.out.println("PSYCH_AMOUNT_OF_ITEMS_COLLECTED "+igs.inventory.PSYCH_AMOUNT_OF_ITEMS_COLLECTED);
+		System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_ONE);
+		System.out.println("PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO "+igs.inventory.PSYCH_AMOUNT_OF_DIALOGUE_CHOICE_TWO);
+			
+		System.out.println("PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_FIRST_CLICKED_QUADRANT_OF_SCREEN);
+		System.out.println("PSYCH_PREFERABLE_QUADRANT_OF_SCREEN "+igs.inventory.PSYCH_PREFERABLE_QUADRANT_OF_SCREEN);
+		System.out.println("PSYCH_TOTAL_CLICKS "+ igs.inventory.PSYCH_TOTAL_CLICKS[0]+ " " + igs.inventory.PSYCH_TOTAL_CLICKS[1] + " " + igs.inventory.PSYCH_TOTAL_CLICKS[2] + " " +igs.inventory.PSYCH_TOTAL_CLICKS[3]);
+			
+		System.out.println("PSYCH_WASTED_POPPERS "+igs.inventory.PSYCH_WASTED_POPPERS);	
+		System.out.println("PSYCH_FIRST_DIRECTION "+igs.inventory.PSYCH_FIRST_DIRECTION);		
+		System.out.println("PSYCH_CAUGHT_BEFORE_FREEING_TURTLES "+igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES);			
+	}
 }
