@@ -13,6 +13,7 @@ import org.cart.igd.entity.PartySnapper;
 import org.cart.igd.entity.StandingGuard;
 import org.cart.igd.entity.WalkingGuard;
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
 
@@ -31,11 +32,13 @@ public class GuardSquad {
 	public void init(GL gl, GLU glu)
 	{
 		/* create an OBJModel used for guard */
-		OBJModel guard = new OBJModel(gl, "guard_km",1.5f,false);
-		
+		OBJAnimation guardIdle = new OBJAnimation(gl,10, 
+				"guard_idle_",150,1.5f,true);
+		OBJAnimation guardWalk = new OBJAnimation(gl,10, 
+				"guard_notice_",150,1.5f, true);
 		
 		/* create and add test guard */
-		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,.5f,guard,igs,.004f));
+		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f));
 		
 		/* create paths for the guard to follow*/
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,10f),1f,1f));
@@ -43,7 +46,7 @@ public class GuardSquad {
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(-10,0f,-10f),1f,1f));
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
 		
-		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,guard,igs,.004f,90));
+		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,guardWalk,guardIdle,igs,.004f,90));
 	}
 	
 	public void reset(){

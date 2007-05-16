@@ -90,7 +90,7 @@ public class MiniGame extends GameState
 		gui.add( new MiniGamePenguins( this ) );
 		
 		penguinThrow = 
-			new OBJAnimation(gl,7,"penguin_throw_",200,2f,false);
+			new OBJAnimation(gl,7,"penguin_toss_",200,2f,false);
 		
 		penguinIdle = 
 			new OBJAnimation(gl,10,"penguin_idle_",250);
@@ -186,7 +186,7 @@ public class MiniGame extends GameState
 		}
 		
 		if(player.objAnimation.equals(penguinThrow)&&Kernel.userInput.keys[KeyEvent.VK_SPACE]){
-			if(player.objAnimation.modelIndex==4){
+			if(player.objAnimation.modelIndex==3){
 				if(new Random().nextInt(5)==0){
 					Vector3f sp = getNewPointDeg(player.position,
 					player.facingDirection-30,1.5f);	
