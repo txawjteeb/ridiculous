@@ -13,12 +13,14 @@ import javax.media.opengl.GL;
 public class Cage extends Entity{
 	InGameState igs;
 	int id;
+	int cageId;
 
 	public Cage(int id,Vector3f pos, float fD, float bsr, OBJModel model,InGameState igs){
 		super(pos, fD, bsr, model);
 
 		this.igs = igs;
 		this.id = id;
+		cageId = id;
 	}
 	
 	public void display(GL gl){

@@ -80,6 +80,7 @@ public class InGameState extends GameState
 	private OBJModel medicinebottle;
 	private OBJModel zoopaste;
 	private OBJModel bucketoffish;
+	private OBJModel paddleball; 
 
 	/* Bush OBJ Model Data. */
 	private OBJModel bushModel;
@@ -182,11 +183,12 @@ public class InGameState extends GameState
 		bushModel	= new OBJModel(gl,"bush");
 		partySnapper = new OBJModel(gl,"party_popper_bh");
 		
-		sunglasses= new OBJModel(gl,"sunglasses_bh");
+		sunglasses= new OBJModel(gl,"disguiseglasses");
 		hotdog= new OBJModel(gl,"hot_dog_bh");
 		medicinebottle= new OBJModel(gl,"medicine_bottle_bh");
 		zoopaste= new OBJModel(gl,"tooth_paste_bh");
 		bucketoffish= new OBJModel(gl,"bucket_of_fish_bh");
+		paddleball= new OBJModel(gl,"paddle-ball");
 		
 		OBJModel partySnapper = new OBJModel(gl,"party_popper_bh");
 		
@@ -222,7 +224,7 @@ public class InGameState extends GameState
 		flamingoIdle = new OBJAnimation(gl,1,"flamingo_idle_",500,2f);
 		turtleIdle = new OBJAnimation(gl,1,"turtle_idle_",300,4f);
 		kangarooIdle = new OBJAnimation(gl,1,"kangaroo_idle_",300,4f);
-		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000,12f);
+		giraffeIdle = new OBJAnimation(gl,10,"giraffe_idle_",1000,12f);
 		tigerIdle = new OBJAnimation(gl,1,"tiger_idle_",1000,40f);
 		penguinIdle = new OBJAnimation(gl,1,"penguin_idle_",300,4f);
 		pandaIdle = new OBJAnimation(gl,1,"panda_idle_",300,4f);
@@ -267,7 +269,7 @@ public class InGameState extends GameState
 			
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
 				bucketoffish,
-				new Vector3f(-15f,0f,0f),true,true));
+				new Vector3f(-15f,0f,100f),true,true));
 				
 		items.add(new Item("Hotdog",Inventory.HOTDOG,1,0f,1f,
 				hotdog,
@@ -282,12 +284,10 @@ public class InGameState extends GameState
 				new Vector3f(-15f,0f,30f),true,true));
 				
 		items.add(new Item("Paddle Ball",Inventory.PADDLEBALL,1,0f,1f,
-				partySnapper,
+				paddleball,
 				new Vector3f(-15f,0f,40f),false,false));
 				
-		items.add(new Item("Zoo Paste",Inventory.ZOOPASTE,1,0f,1f,
-				zoopaste,
-				new Vector3f(-15f,0f,50f),false,false));
+
 				
 		items.add(new Item("Party Snapper",Inventory.POPPERS,50,0f,1f,
 				partySnapper,
@@ -296,7 +296,9 @@ public class InGameState extends GameState
 		items.add(new Item("Party Snapper Hidden",Inventory.POPPERS,50,0f,1f,
 				partySnapper,
 				new Vector3f(-15f,0f,80f),true,true));
-
+		items.add(new Item("Zoo Paste",Inventory.ZOOPASTE,1,0f,1f,
+				zoopaste,
+				new Vector3f(-15f,0f,50f),false,false));
 		/* add animals to the map */
 		/*
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
@@ -348,25 +350,25 @@ public class InGameState extends GameState
 				kangarooIdle, 
 				new Vector3f(130f,3f,-75f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
 		
-		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
+		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,180f,5f,
 				giraffeIdle, 
-				new Vector3f(-10f,5f,210f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
+				new Vector3f(-27f,5f,208f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
 				tigerIdle, 
-				new Vector3f(-30f,0f,210f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
+				new Vector3f(40f,3f,210f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
 		
-		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
+		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,90f,5f,
 				penguinIdle, 
-				new Vector3f(-80f,20f,-180f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
+				new Vector3f(-80f,9f,-181f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
 				
 		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,9f,
 				meerkatIdle, 
 				new Vector3f(130f,0f,130f),this,Inventory.HOTDOG,new Vector3f(0f,2f,-10f)));
 				
-		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
+		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,180f,3f,
 				woodpeckerIdle, 
-				new Vector3f(200f,0,-20f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
+				new Vector3f(190f,8f,-25f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,180f,40f,
 				elephantIdle, 
@@ -380,7 +382,7 @@ public class InGameState extends GameState
 		cages.add(new Cage(6,new Vector3f(-80f,6f,-180f),1f,14f,new OBJModel(gl,"6",40.2f,false),this));
 		
 		
-		cages.add(new Cage(5,new Vector3f(39f,20f,210f),1f,14f,new OBJModel(gl,"5",40.2f,false),this));
+		cages.add(new Cage(5,new Vector3f(39f,8f,210f),1f,14f,new OBJModel(gl,"5",40.2f,false),this));
 		cages.add(new Cage(4,new Vector3f(-30f,5f,210f),1f,14f,new OBJModel(gl,"4",40.2f,false),this));
 		
 		cages.add(new Cage(3,new Vector3f(130f,.1f,-80f),90f,14f,new OBJModel(gl,"3",40.2f,false),this));
@@ -390,7 +392,7 @@ public class InGameState extends GameState
 	
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-20f), 0f, 3f,
+				new Vector3f(-80f,2f,170f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this));
 				
 				
