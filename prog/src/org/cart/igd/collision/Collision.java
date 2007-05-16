@@ -2,6 +2,12 @@ package org.cart.igd.collision;
 
 import org.cart.igd.math.*;
 
+/**
+ *Collision.java
+ *
+ * General Function:
+ * common collision test between objects
+ */
 public class Collision
 {
 	// if result < 0 then collision

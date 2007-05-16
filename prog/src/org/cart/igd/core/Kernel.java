@@ -43,6 +43,9 @@ public class Kernel
 		gameLauncher = new GameLauncher(this);
 	}
 	
+	/**
+	 * initialized the engine and game
+	 */
 	public void init(DisplaySettings ds)
 	{
 		soundSettings = new SoundSettings(.5f,1f,1f,false);
@@ -56,6 +59,9 @@ public class Kernel
 		gameEventList = new GameEventList();
 	}
 	
+	/**
+	 * restart the game engine 
+	 */
 	public void reset(){
 		displayRunning = false;
 		display.stop();

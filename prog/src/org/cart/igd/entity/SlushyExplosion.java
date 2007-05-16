@@ -7,8 +7,8 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.MiniGame;
 import java.util.*;
 
-public class SlushyExplosion extends Entity {
-
+public class SlushyExplosion extends Entity
+{
 	private float gravityPull = -.2f;
 	private MiniGame mg;
 	/** speed per millisecond */
