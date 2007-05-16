@@ -604,6 +604,10 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
+				<path>src\org\cart\igd\states\CutsceneState.java</path>
+				<folder>src\org\cart\igd\states</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\org\cart\igd\states\GameState.java</path>
 				<folder>src\org\cart\igd\states</folder>
 				<source>false</source>
@@ -689,14 +693,14 @@
 		<todotaskitem>
 			<description>TODO: enable when sound fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>454</line>
-			<timestamp>1179305598</timestamp>
+			<line>448</line>
+			<timestamp>1179352185</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: make sure to call this once */</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>533</line>
-			<timestamp>1179305598</timestamp>
+			<line>527</line>
+			<timestamp>1179352185</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>
