@@ -11,9 +11,7 @@
 		<ant_ref/>
 	</settings>
 	<ant_events/>
-	<run_items>
-		<item run="org.cart.igd.core.Kernel"/>
-	</run_items>
+	<run_items/>
 	<runtimes>
 		<runtime>
 			<label>&lt;Default&gt;</label>
@@ -86,473 +84,599 @@
 			</folderitem>
 			<fileitem>
 				<path>build.xml</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>commons-logging-api.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>customizer.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>gluegen-rt.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jl1.0.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jmf.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jmf.properties</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>joal.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jogg-0.0.7.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jogl.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jorbis-0.0.15.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>jspeex0.9.7.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>lwjgl.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>mediaplayer.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>mp3spi1.9.4.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>multiplayer.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>tritonus_share.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>vorbisspi1.0.2.jar</path>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\Camera.java</path>
 				<folder>src\org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\Display.java</path>
 				<folder>src\org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\DisplaySettings.java</path>
 				<folder>src\org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\Renderer.java</path>
 				<folder>src\org\cart\igd</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\collision\Collision.java</path>
 				<folder>src\org\cart\igd\collision</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\core\GameLauncher.java</path>
 				<folder>src\org\cart\igd\core</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\core\Kernel.java</path>
 				<folder>src\org\cart\igd\core</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\core\Profiler.java</path>
 				<folder>src\org\cart\igd\core</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\Bush.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\Entity.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\EntityInterface.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\Guard.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\GuardFlag.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\Node.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\NodeInterface.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\Noise.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\PartySnapper.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\Player.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\PowerBox.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\SlushyBall.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\SlushyBallCharge.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\SlushyExplosion.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\StandingGuard.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\entity\WalkingGuard.java</path>
 				<folder>src\org\cart\igd\entity</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Animal.java</path>
+				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
+			</fileitem>
+			<fileitem>
+				<path>src\org\cart\igd\game\Cage.java</path>
 				<folder>src\org\cart\igd\game</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\GameObjective.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\GuardSquad.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Inventory.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Item.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\PlayerState.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\PlayerStateManager.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\QuestLog.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Terrain.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\TerrainEntity.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Tree.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\UnnecessaryExplore.java</path>
 				<folder>src\org\cart\igd\game</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\ButtonSlot.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\GLGraphics.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\GLRolloverButton.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\GTextField.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\GUITextList.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\UIButton.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\UIComponent.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\UILabel.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\UITextField.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gl2d\UIWindow.java</path>
 				<folder>src\org\cart\igd\gl2d</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\Dialogue.java</path>
 				<folder>src\org\cart\igd\gui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\GUI.java</path>
 				<folder>src\org\cart\igd\gui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\InGameGUI.java</path>
 				<folder>src\org\cart\igd\gui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\MenuGUI.java</path>
 				<folder>src\org\cart\igd\gui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\MiniGamePenguins.java</path>
 				<folder>src\org\cart\igd\gui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\gui\PauseMenu.java</path>
 				<folder>src\org\cart\igd\gui</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\GameAction.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\GameEvent.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\GameEventList.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\GUIEvent.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\InputHandler.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\PickingHandler.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\input\UserInput.java</path>
 				<folder>src\org\cart\igd\input</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\internet\Connect.java</path>
 				<folder>src\org\cart\igd\internet</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\Matrix4f.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\Point2d.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\Point2f.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\Quat4f.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\Vector3f.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\Vector4f.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\math\VectorTex3f.java</path>
 				<folder>src\org\cart\igd\math</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\media\CutscenePlayer.java</path>
 				<folder>src\org\cart\igd\media</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\FaceMaterials.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\Faces.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\Material.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\Materials.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\ModelDimensions.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\OBJAnimation.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\OBJModel.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\models\obj\Tuple3.java</path>
 				<folder>src\org\cart\igd\models\obj</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\DeferredSound.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\InternalSound.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\Log.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\Music.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\OggData.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\OggDecoder.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\ResourceLoader.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\Sound.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\SoundManager.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\SoundSettings.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\SoundStore.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\SoundTesting.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\sound\WaveData.java</path>
 				<folder>src\org\cart\igd\sound</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\states\GameState.java</path>
 				<folder>src\org\cart\igd\states</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\states\GameStateManager.java</path>
 				<folder>src\org\cart\igd\states</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\states\InGameState.java</path>
 				<folder>src\org\cart\igd\states</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\states\MenuState.java</path>
 				<folder>src\org\cart\igd\states</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\states\MiniGame.java</path>
 				<folder>src\org\cart\igd\states</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\BitmapLoader.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\BlockDataInputStream.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\ColorRGBA.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\JMFSnapper.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\ResourceRetriever.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\SkyDome.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\Texture.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\TextureLoader.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\TextureReader.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\util\WinDataInputStream.java</path>
 				<folder>src\org\cart\igd\util</folder>
+				<source>false</source>
 			</fileitem>
 		</include>
 		<exclude>
@@ -561,5 +685,18 @@
 			</fileitem>
 		</exclude>
 	</files>
-	<tasks/>
+	<tasks>
+		<todotaskitem>
+			<description>TODO: enable when sound fixed</description>
+			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
+			<line>454</line>
+			<timestamp>1179305598</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: make sure to call this once */</description>
+			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
+			<line>533</line>
+			<timestamp>1179305598</timestamp>
+		</todotaskitem>
+	</tasks>
 </project>

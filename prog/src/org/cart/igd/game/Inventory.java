@@ -142,7 +142,7 @@ public class Inventory{
 	
 	public static boolean canPick = true;
 	public boolean pickedUpPoppers = false;
-		
+	public boolean inCage = false;		
 	public int currentItem = -1;
 	public int currentCursor = 0;
 	

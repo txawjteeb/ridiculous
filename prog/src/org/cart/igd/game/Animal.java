@@ -110,6 +110,12 @@ public class Animal extends Entity
 	}
 	
 	public void display(GL gl){
-		if(state!=SAVED_PARTY)super.render(gl);
+		if(animalId==1){
+			if(state!=SAVED_PARTY)super.render(gl);
+			if(state!=SAVED_PARTY)super.renderLocation(gl,new Vector3f(position.x+3f,position.y,position.z+3f),140f);
+			if(state!=SAVED_PARTY)super.renderLocation(gl,new Vector3f(position.x+3f,position.y,position.z-3f),45f);
+		}else{
+			if(state!=SAVED_PARTY)super.render(gl);
+		}
 	}
 }

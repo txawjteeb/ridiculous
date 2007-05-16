@@ -9,20 +9,25 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.util.ColorRGBA;
 import org.cart.igd.util.SkyDome;
+import org.cart.igd.states.*;
 /* class for containment all non interactive objecets */
 public class Terrain
 {
 	public boolean loaded = false;
-	
+	InGameState igs;
 	private SkyDome skyDome;
 	private OBJModel worldMap;
 	
 	ArrayList <Tree> trees = new ArrayList<Tree>();
 	
 	
+	public Terrain(InGameState igs){
+		this.igs = igs;
+	}
+	
 	public void load(GL gl){
 		skyDome	 = new SkyDome( 0, 90, 300f, new ColorRGBA( 0, 51, 51 ), gl);
-		worldMap = new OBJModel( gl, "zoo_map_vm", 500, false);	
+		worldMap = new OBJModel( gl, "gamemap", 500, false);	
 		
 		OBJModel tree0 = new OBJModel(gl, "tree0",4f,false);
 		OBJModel tree1 = new OBJModel(gl, "tree1",4f,false);
@@ -61,7 +66,7 @@ public class Terrain
 	public void render(GL gl, Entity player){
 		/* Render Land Map */
 		gl.glPushMatrix();
-			gl.glTranslatef(0f, 6f, 0f);
+			gl.glTranslatef(0f, -3f, 0f);
 			worldMap.draw(gl);
 		gl.glPopMatrix();
 		
@@ -71,7 +76,14 @@ public class Terrain
 			tree.render(gl);
 		}
 		
+		/* Render cages */
+		for(int i = 0;i<igs.cages.size();i++){
+			System.out.println("cage" + i);
+			igs.cages.get(i).render(gl);
+		}
+		
 		/* Render SkyDome */
+		/*
 		gl.glPushMatrix();
 			gl.glDisable(GL.GL_LIGHTING);
 			gl.glDisable(GL.GL_LIGHT0);
@@ -83,5 +95,6 @@ public class Terrain
 			gl.glEnable(GL.GL_LIGHTING);
 			gl.glEnable(GL.GL_LIGHT0);
 		gl.glPopMatrix();
+		*/
 	}
 }

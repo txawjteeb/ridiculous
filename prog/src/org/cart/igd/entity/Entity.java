@@ -26,7 +26,7 @@ public abstract class Entity
 	public float facingDirection = 0.0f;
 	public int id = 0;
 	
-	public float speed = 0.01f;
+	public float speed = 0.1f;
 	public float turnSpeed = 0.1f;
 	
 	public OBJAnimation objAnimation;
@@ -241,6 +241,20 @@ public abstract class Entity
 		}
 		if(objAnimation != null){
 			objAnimation.render(gl, position, facingDirection);
+		}
+	}
+	
+	public void renderLocation(GL gl, Vector3f position,float fd){
+		if(modelObj!= null){
+			gl.glPushMatrix();
+			gl.glTranslatef(position.x, position.y -2f, position.z);
+			gl.glRotatef(fd, 0f, -1f, 0f);
+			//gl.glScalef(scale.x,scale.y,scale.z);
+			modelObj.draw(gl);
+			gl.glPopMatrix();
+		}
+		if(objAnimation != null){
+			objAnimation.render(gl, position, fd);
 		}
 	}
 	
