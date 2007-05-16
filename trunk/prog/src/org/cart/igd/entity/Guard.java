@@ -6,6 +6,7 @@ import org.cart.igd.collision.Collision;
 import org.cart.igd.game.Animal;
 import org.cart.igd.game.Inventory;
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
 
@@ -46,6 +47,9 @@ public class Guard extends Entity
 	
 	public boolean investigating = false;
 	
+	OBJAnimation walk;
+	OBJAnimation idle;
+	
 	/**
 	 * Create a guard with OBJModel
 	 * @param Vector3f pos: location of the entity 
@@ -55,10 +59,12 @@ public class Guard extends Entity
 	 * @param InGameState refference the game
 	 * @param float scale of the model
 	 */
-	public Guard(Vector3f pos, float fD, float bsr, OBJModel model, 
-			InGameState igs,float speed)
+	public Guard(Vector3f pos, float fD, float bsr, OBJAnimation idle, 
+			OBJAnimation walk, InGameState igs,float speed)
 	{
-		super(pos,fD,bsr,model);
+		super(pos,fD,bsr,idle);
+		this.idle = idle;
+		this.walk = walk;
 		this.igs = igs;
 		home = new GuardFlag( new Vector3f( pos.x, pos.y, pos.z ), 1f, 1f );
 		this.player = igs.player;

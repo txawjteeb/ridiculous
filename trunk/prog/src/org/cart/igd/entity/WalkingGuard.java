@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.cart.igd.Renderer;
 import org.cart.igd.collision.Collision;
 import org.cart.igd.math.Vector3f;
+import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
 import org.cart.igd.game.*;
@@ -26,10 +27,10 @@ public class WalkingGuard extends Guard
 	 * @param InGameState refference the game
 	 * @param float scale of the model
 	 */
-	public WalkingGuard(Vector3f pos, float fD, float bsr, OBJModel model, 
-			InGameState igs,float speed)
+	public WalkingGuard(Vector3f pos, float fD, float bsr, OBJAnimation walk,
+			OBJAnimation idle, InGameState igs,float speed)
 	{
-		super(pos,fD,bsr,model,igs,speed);
+		super(pos,fD,bsr,walk,idle,igs,speed);
 
 		target = home;
 	}
