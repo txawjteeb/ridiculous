@@ -4,6 +4,9 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.states.InGameState;
 
+/**
+ * no longer used, to be removed
+ */
 public class Bush extends Entity
 {
 	private InGameState igs;

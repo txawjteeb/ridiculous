@@ -1,6 +1,6 @@
 package org.cart.igd.entity;
 
-import java.io.File;
+import java.util.ArrayList;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;
@@ -10,10 +10,13 @@ import org.cart.igd.math.Vector3f;
 import org.cart.igd.core.Kernel;
 import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
-import java.util.*;
-//import org.cart.igd.model.ModelManager;
-//import org.cart.igd.bsp.BSPObject;
 
+/**
+ * Entity.java
+ *
+ * General Function:
+ * Represends all objects that can be either selected or moved
+ */
 public abstract class Entity
 {
 	public static ArrayList <Entity>allEntities = new ArrayList<Entity>();
@@ -74,6 +77,7 @@ public abstract class Entity
 	}
 	
 	/**
+	 * Constructor creates entity object
 	 * @param Vector3f pos: location of the entity 
 	 * @param float fD: direction entity is facing ( y rotation )
 	 * @param float bsr: bounding sphere radius used for collision detection
@@ -86,6 +90,13 @@ public abstract class Entity
 		globalId = globalIdCounter++;
 	}
 	
+	/**
+	 * Constructor creates entity object
+	 * @param Vector3f pos: location of the entity 
+	 * @param float fD: direction entity is facing ( y rotation )
+	 * @param float bsr: bounding sphere radius used for collision detection
+	 * @param Model model: .obj format file data
+	 **/
 	public Entity(Vector3f pos, float fD, float bsr, OBJAnimation model)//, int id, File meshFile, File skinFile)// throws EntityException
 	{
 		this(pos,fD,bsr);
@@ -93,6 +104,9 @@ public abstract class Entity
 		globalId = globalIdCounter++;
 	}
 	
+	/**
+	 * update the entity animation it it has one
+	 */
 	public void update(long elapsedTime){
 		walking = false;
 		if(objAnimation != null){
@@ -100,67 +114,31 @@ public abstract class Entity
 		}
 	}
 	
-	/*
-	public Entity(float[] position, float facingDirection, float bsr, int id, File meshFile, File skinFile) //throws EntityException
-	{
-		this(new Vector3f(position[0], position[1], position[2]), facingDirection, bsr, id, meshFile, skinFile);
-	}
-	
-	public final animate(float deltaTime)
-	{
-		onAnimate(deltaTime);
-		if(hasChild())
-			((Entity)childNode).animate(deltaSpeed);
-		if(hasParent() ** !isLastChild())
-			((Entity)nextNode).animate(deltaSpeed);
-		
-		if(isDead)
-			this.detach();
-	}
-	
-	public final void draw(Vector3f cameraPosition)
-	{
-		gl.glPushMatrix();
-			onDraw(cameraPosition);
-			if(hasChild())
-				((Entity)childNode).draw(cameraPosition);
-		gl.glPopMatrix();
-		
-		if(hasParent() && !isLastChild())
-			((Entity)nextNode).draw(cameraPosition);
-	}
-	
-	public final Entity findRoot()
-	{
-		if(parentNode!=null)
-			return ((Entity)parentNode).findRoot();
-		return this;
-	}
-	*/
-	
+	/** get id used by the picking handler to detect selection */
 	public final int getID()
 	{
 		return id;
 	}
 	
-	/*
-	protected boolean isVisible(Vector3f cameraPosition)
-	{
-		return Driver.display.renderer.sphereInFrustrum(position, boundingSphereRadius) && Driver.display.renderer.getWorld().getTerrain().lineOfSight(position, cameraPosition);
-	}
-	*/
-	
+	/**
+	 * get the position of the entity
+	 * @param position location of the entity 
+	 */
 	public final Vector3f getPosition()
 	{
 		return position;
 	}
 	
+	/**
+	 * y rotation of the object in degrees
+	 * @param int facingDirection in degrees
+	 */
 	public final float getFacingDirection()
 	{
 		return facingDirection;
 	}
 	
-	
+	/* not implemented methods */
 	public final void setYRotationDeg(float deg){
 		yRotationRad = deg*0.0174532925f;
 	}
@@ -177,6 +155,7 @@ public abstract class Entity
 		return yRotationRad;
 	}
 	
+	/** move the entity forward based on facing direction */
 	public final void walkForward(long elapsedTime)
 	{
 		walking = true;
@@ -184,6 +163,7 @@ public abstract class Entity
 		position.z += ( ((float)elapsedTime * speed) * (float)Math.sin(facingDirection * 0.0174f) );
 	}
 	
+	/** move the entity forward based on facing direction */
 	public final void walkBackward(long elapsedTime)
 	{
 		walking = true;
@@ -191,37 +171,40 @@ public abstract class Entity
 		position.z -= ( ((float)elapsedTime * speed) * (float)Math.sin(facingDirection * 0.0174f) );
 	}
 	
+	/** move the entity left based on facing direction */
 	public final void strafeLeft(long elapsedTime)
 	{
 		position.x += ( ((float)elapsedTime * speed) * (float)Math.cos((facingDirection-90) * 0.0174f) );
 		position.z += ( ((float)elapsedTime * speed) * (float)Math.sin((facingDirection-90) * 0.0174f) );
 	}
 	
+	/** move the entity right based on facing direction */
 	public final void strafeRight(long elapsedTime)
 	{
 		position.x += ( ((float)elapsedTime * speed) * (float)Math.cos((facingDirection+90) * 0.0174f) );
 		position.z += ( ((float)elapsedTime * speed) * (float)Math.sin((facingDirection+90) * 0.0174f) );
 	}
 	
+	/** change the facingDirection(yRotation of the model)*/
 	public final void turnRight(long elapsedTime)
 	{
 		facingDirection += ((float)elapsedTime * turnSpeed);
 	}
 	
+	/** change the facingDirection(yRotation of the model)*/
 	public final void turnLeft(long elapsedTime)
 	{
 		facingDirection -= ((float)elapsedTime * turnSpeed);
 	}
 	
 	/**
-	 * render the model depending on which type was asigned
-	 * */
+	 * render the model at its location depending on which type was asigned
+	 */
 	public void render(GL gl){
 		if(modelObj!= null){
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y -2f, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			//gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
@@ -230,12 +213,14 @@ public abstract class Entity
 		}
 	}
 	
+	/**
+	 * Render the entity at a location other than its current location 
+	 */
 	public void renderLocation(GL gl, Vector3f position){
 		if(modelObj!= null){
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y -2f, position.z);
 			gl.glRotatef(facingDirection, 0f, -1f, 0f);
-			//gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
@@ -244,12 +229,15 @@ public abstract class Entity
 		}
 	}
 	
+	/**
+	 * Render the entity at a location other than its current location 
+	 * and facing a certain direction
+	 */
 	public void renderLocation(GL gl, Vector3f position,float fd){
 		if(modelObj!= null){
 			gl.glPushMatrix();
 			gl.glTranslatef(position.x, position.y -2f, position.z);
 			gl.glRotatef(fd, 0f, -1f, 0f);
-			//gl.glScalef(scale.x,scale.y,scale.z);
 			modelObj.draw(gl);
 			gl.glPopMatrix();
 		}
@@ -258,6 +246,9 @@ public abstract class Entity
 		}
 	}
 	
+	/**
+	 * debug text for finding location of the entity 
+	 */
 	public String getName(){
 		return "obj @ x: "+position.x+" y: "+position.y+" z "+position.z;
 	}

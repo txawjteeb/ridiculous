@@ -34,8 +34,6 @@ public class Animal extends Entity
 	1 = incage waiting for item
 	2 = incage ready to be saved
 	3 = incage ready to be saved after item given
-	4 = saved by bush
-	5 = saved in party
 	*/
 	public static final int SAVED_BUSH = 4;
 	public static final int SAVED_PARTY = 5;

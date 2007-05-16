@@ -13,6 +13,7 @@ public class Profiler extends Thread
 	public long currentTime = System.currentTimeMillis();
 	public int sleepTime = 1;
 	
+	/* keep track of statistics */
 	public int ihTimedHits = 0;
 	public int ihAllHits = 0;
 	
@@ -23,14 +24,12 @@ public class Profiler extends Thread
     	running = true;
     }
     
+    /** starts the thread */
     public void run()
     {
     	while(running)
     	{
     		currentTime = System.currentTimeMillis();
-    		
-    		
-    		//System.out.println("profiler cycle");
     		
     		try {
     			Thread.sleep(sleepTime);
