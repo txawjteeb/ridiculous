@@ -50,6 +50,7 @@ public class SlushyBall extends Entity {
 				
 				
 		} else {
+			mg.slushiHit.play(1f,.4f);
 			mg.removeList.add(this);
 			mg.addList.add(new SlushyExplosion(
 				new Vector3f(position.x, position.y, position.z),

@@ -31,6 +31,15 @@ import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.sound.*;
 import org.cart.igd.media.CutscenePlayer;
+/*
+ -Get all models in game
+ -Finish all music
+ -Get all music in game
+ -Finish Menu
+ -Get all animal cage solutions
+ -Finish  AVI state 
+ -Server printout 
+ */
 
 /**
  * InGameState.java
@@ -65,14 +74,17 @@ public class InGameState extends GameState
 	/* Previous camera zoom. */
 	public int previousCameraZoom;
 	
-	/* Party Snapper OBJ Model Data. */
+	/* Item Models*/
 	private OBJModel partySnapper;
-	
+	private OBJModel sunglasses;
+	private OBJModel hotdog;
+	private OBJModel medicinebottle;
+	private OBJModel zoopaste;
+	private OBJModel bucketoffish;
+
 	/* Bush OBJ Model Data. */
 	private OBJModel bushModel;
 	
-	/* Toothpaste OBJ Model Data. */
-	private OBJModel zoopaste;
 	
 	/* ExplorationBox OBJ Model Data. */
 	private OBJModel explorationBox;
@@ -124,6 +136,9 @@ public class InGameState extends GameState
 	
 	/* Instance of GLGraphics object. */
 	private GLGraphics glg;
+	
+	/* Collection of cages. */
+	public ArrayList<Cage> cages = new ArrayList<Cage>();	
 
 	public Sound backgroundMusic = null,throwPopper = null,popPopper = null,
 		giveItem = null,openQuestLog = null, closeQuestLog = null,
@@ -169,8 +184,15 @@ public class InGameState extends GameState
 		}
 		
 		bushModel	= new OBJModel(gl,"bush");
-		partySnapper = new OBJModel(gl,"party_snapper");
-		OBJModel partySnapper = new OBJModel(gl,"party_snapper");
+		partySnapper = new OBJModel(gl,"party_popper_bh");
+		
+		sunglasses= new OBJModel(gl,"sunglasses_bh");
+		hotdog= new OBJModel(gl,"hot_dog_bh");
+		medicinebottle= new OBJModel(gl,"medicine_bottle_bh");
+		zoopaste= new OBJModel(gl,"tooth_paste_bh");
+		bucketoffish= new OBJModel(gl,"bucket_of_fish_bh");
+		
+		OBJModel partySnapper = new OBJModel(gl,"party_popper_bh");
 		
 		explorationBox = new OBJModel(gl,"exploration_box",5f,false);
 		waterAffinity = new OBJModel(gl,"water_affinity",5f,false);
@@ -178,7 +200,7 @@ public class InGameState extends GameState
 		
 		
 		/* init container/gamelocic classes*/
-		terrain = new Terrain();
+		terrain = new Terrain(this);
 		terrain.load(gl);
 
 		questlog = new QuestLog("Quest Log",20,10);
@@ -189,17 +211,30 @@ public class InGameState extends GameState
 		cutscenePlayer.loadMovie("data/movies/test.avi");
 		
 		/* create objAnimations */
-		flamingoWalk = new OBJAnimation(gl,1,"flamingo_walking_",105);
-		flamingoIdle = new OBJAnimation(gl,1,"flamingo_idle_",500);
-		turtleIdle = new OBJAnimation(gl,1,"turtle_idle_",300);
-		kangarooIdle = new OBJAnimation(gl,1,"kangaroo_idle_",300);
+		/*
+		flamingoWalk = new OBJAnimation(gl,10,"flamingo_walking_",105);
+		flamingoIdle = new OBJAnimation(gl,10,"flamingo_idle_",500);
+		turtleIdle = new OBJAnimation(gl,10,"turtle_idle_",300);
+		kangarooIdle = new OBJAnimation(gl,10,"kangaroo_idle_",300);
 		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000);
 		tigerIdle = new OBJAnimation(gl,10,"tiger_idle_",1000);
-		penguinIdle = new OBJAnimation(gl,1,"penguin_idle_",300);
-		pandaIdle = new OBJAnimation(gl,1,"panda_idle_",200);
-		meerkatIdle = new OBJAnimation(gl,1,"meerkat_idle_",300);
-		woodpeckerIdle = new OBJAnimation(gl,1,"woodpecker_idle_",300);
-		elephantIdle = new OBJAnimation(gl,1,"elephant_idle_",100);
+		penguinIdle = new OBJAnimation(gl,10,"penguin_idle_",300);
+		pandaIdle = new OBJAnimation(gl,10,"panda_idle_",200);
+		meerkatIdle = new OBJAnimation(gl,10,"meerkat_idle_",300);
+		woodpeckerIdle = new OBJAnimation(gl,10,"woodpecker_idle_",300);
+		elephantIdle = new OBJAnimation(gl,10,"elephant_idle_",100);
+*/
+		flamingoWalk = new OBJAnimation(gl,1,"flamingo_walking_",105,2f);
+		flamingoIdle = new OBJAnimation(gl,1,"flamingo_idle_",500,2f);
+		turtleIdle = new OBJAnimation(gl,1,"turtle_idle_",300,4f);
+		kangarooIdle = new OBJAnimation(gl,1,"kangaroo_idle_",300,4f);
+		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000,12f);
+		tigerIdle = new OBJAnimation(gl,1,"tiger_idle_",1000,40f);
+		penguinIdle = new OBJAnimation(gl,1,"penguin_idle_",300,4f);
+		pandaIdle = new OBJAnimation(gl,1,"panda_idle_",300,4f);
+		meerkatIdle = new OBJAnimation(gl,1,"meerkat_idle_",300,2f);
+		woodpeckerIdle = new OBJAnimation(gl,1,"woodpecker_idle_",300,4f);
+		elephantIdle = new OBJAnimation(gl,1,"elephant_idle_",300,22f);
 		
 		player = new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, 
 				flamingoWalk,flamingoIdle);
@@ -233,21 +268,23 @@ public class InGameState extends GameState
 		unnecessaryExplores.add(new UnnecessaryExplore("Up",new Vector3f(21f,0f,0f),0f,20f,foodAffinity,this,false));
 		unnecessaryExplores.add(new UnnecessaryExplore("Down",new Vector3f(-21f,0f,0f),0f,20f,foodAffinity,this,false));
 		
+
 		
+			
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
-				partySnapper,
+				bucketoffish,
 				new Vector3f(-15f,0f,0f),true,true));
 				
 		items.add(new Item("Hotdog",Inventory.HOTDOG,1,0f,1f,
-				partySnapper,
+				hotdog,
 				new Vector3f(-15f,0f,10f),true,true));
 				
 		items.add(new Item("Disguise Glasses",Inventory.DISGUISEGLASSES,1,0f,1f,
-				partySnapper,
+				sunglasses,
 				new Vector3f(-15f,0f,20f),true,true));
 				
 		items.add(new Item("Medication",Inventory.MEDICATION,1,0f,1f,
-				partySnapper,
+				medicinebottle,
 				new Vector3f(-15f,0f,30f),true,true));
 				
 		items.add(new Item("Paddle Ball",Inventory.PADDLEBALL,1,0f,1f,
@@ -255,7 +292,7 @@ public class InGameState extends GameState
 				new Vector3f(-15f,0f,40f),false,false));
 				
 		items.add(new Item("Zoo Paste",Inventory.ZOOPASTE,1,0f,1f,
-				partySnapper,
+				zoopaste,
 				new Vector3f(-15f,0f,50f),false,false));
 				
 		items.add(new Item("Party Snapper",Inventory.POPPERS,50,0f,1f,
@@ -267,6 +304,7 @@ public class InGameState extends GameState
 				new Vector3f(-15f,0f,80f),true,true));
 
 		/* add animals to the map */
+		/*
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
 				turtleIdle, 
 				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
@@ -302,8 +340,60 @@ public class InGameState extends GameState
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
 				elephantIdle, 
 				new Vector3f(10f,0f,-100f),this,0,new Vector3f(-10f,0f,-5f)));
-
+*/
+		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,30f,
+				turtleIdle, 
+				new Vector3f(-80f,3f,180f),this,0,new Vector3f(10f,0f,10f)));
 		
+				
+		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
+				pandaIdle, 
+				new Vector3f(30f,0f,-180f),this,0,new Vector3f(10f,0f,5f)));
+				
+		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,180f,20f,
+				kangarooIdle, 
+				new Vector3f(130f,3f,-75f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
+		
+		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
+				giraffeIdle, 
+				new Vector3f(-10f,5f,210f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
+				
+		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
+				tigerIdle, 
+				new Vector3f(-30f,0f,210f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
+		
+		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
+				penguinIdle, 
+				new Vector3f(-80f,20f,-180f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
+				
+		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,9f,
+				meerkatIdle, 
+				new Vector3f(130f,0f,130f),this,Inventory.HOTDOG,new Vector3f(0f,2f,-10f)));
+				
+		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
+				woodpeckerIdle, 
+				new Vector3f(200f,0,-20f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
+				
+		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,180f,40f,
+				elephantIdle, 
+				new Vector3f(160f,5f,80f),this,0,new Vector3f(-10f,0f,-5f)));
+ 
+ 
+		/* add all cages*/
+		cages.add(new Cage(9,new Vector3f(160f,6f,80f),45f,21f,new OBJModel(gl,"9",70.2f,false),this));
+		cages.add(new Cage(8,new Vector3f(200f,13f,-20f),20f,14f,new OBJModel(gl,"8",70.2f,false),this));
+		cages.add(new Cage(7,new Vector3f(130f,-2f,130f),1f,1.2f,new OBJModel(gl,"7",10f,false),this));
+		cages.add(new Cage(6,new Vector3f(-80f,6f,-180f),1f,14f,new OBJModel(gl,"6",40.2f,false),this));
+		
+		
+		cages.add(new Cage(5,new Vector3f(39f,20f,210f),1f,14f,new OBJModel(gl,"5",40.2f,false),this));
+		cages.add(new Cage(4,new Vector3f(-30f,5f,210f),1f,14f,new OBJModel(gl,"4",40.2f,false),this));
+		
+		cages.add(new Cage(3,new Vector3f(130f,.1f,-80f),90f,14f,new OBJModel(gl,"3",40.2f,false),this));
+		cages.add(new Cage(2,new Vector3f(30f,0f,-180f),1f,14f,new OBJModel(gl,"2",40.2f,false),this));
+		cages.add(new Cage(1,new Vector3f(-80f,2f,180f),1f,14f,new OBJModel(gl,"1",40.2f,false),this));
+		cages.add(new Cage(0,new Vector3f(0f,8f,0f),1f,14f,new OBJModel(gl,"0",40.2f,false),this));
+	
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-20f), 0f, 3f,

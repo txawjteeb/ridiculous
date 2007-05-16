@@ -22,6 +22,7 @@ import org.cart.igd.models.obj.OBJAnimation;
 import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.collision.Collision;
 import org.cart.igd.entity.*;
+import org.cart.igd.sound.*;
 
 /**
  * MiniGame.java
@@ -49,7 +50,10 @@ public class MiniGame extends GameState
 	/** Energy of throw */
 	private float energy = 0f;
 	
-
+	/** Sounds of Slushi */
+	public Sound slushiHit;
+	public Sound slushiThrow[]= new Sound[4];
+	
 /*	public  List <Entity> entities = 
 		Collections.synchronizedList(new ArrayList<Entity>());
 	
@@ -113,6 +117,17 @@ public class MiniGame extends GameState
 		player.facingDirection = 90f;
 		camera = new Camera(player, 10f, 4f);
 		camera.distance = 5f;
+		
+		try{
+	 	 slushiHit= new Sound("data/sounds/effects/slushy_hit.ogg");
+	 	 for(int i = 0;i<slushiThrow.length;i++){
+	 	 	
+	 	 	slushiThrow[i]= new Sound("data/sounds/effects/slushy_throw-"+(i+1)+".ogg");
+	 	 }
+	 				
+		} catch(Exception e){
+			
+		}
 		
 	}
 	
@@ -246,7 +261,7 @@ public class MiniGame extends GameState
 		Vector3f sp = getNewPointDeg(player.position,
 				player.facingDirection-30,1.5f);
 		
-		
+		slushiThrow[new Random().nextInt(4)].play(1f,.5f);
 		entities.add(new SlushyBall(
 			new Vector3f(sp.x, sp.y, sp.z),
 			player.facingDirection, 

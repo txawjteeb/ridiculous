@@ -203,18 +203,40 @@ public class InGameGUI extends GUI
 		/* W/S - Move player forward/back. Resets camera offset to back view*/
 		if(Kernel.userInput.keys[KeyEvent.VK_W])
 		{
-			igs.player.walkForward(elapsedTime);
-			
-			if(!mouseCameraRotate.isActive() && igs.camera.facingOffset!=0f)
-			{
-				if(igs.player.position.x==igs.player.lastPosition.x && 
-						igs.player.position.z==igs.player.lastPosition.z)
-					{
-						igs.camera.moveToBackView(8f);
-					}
+			boolean collide = false;
+			for(int i = 0;i<igs.cages.size();i++){
+				collide = igs.cages.get(i).collide(igs.player.position,true,elapsedTime,igs.player.facingDirection,igs.player.speed);
+				if(collide)break;
 			}
+			if(collide){
+
+			} else{
+				igs.player.walkForward(elapsedTime);
+			
+				if(!mouseCameraRotate.isActive() && igs.camera.facingOffset!=0f)
+				{
+					if(igs.player.position.x==igs.player.lastPosition.x && 
+							igs.player.position.z==igs.player.lastPosition.z)
+						{
+							igs.camera.moveToBackView(8f);
+						}
+				}
+			}
+			
+			
+			
 		}else if(Kernel.userInput.keys[KeyEvent.VK_S]){
-			igs.player.walkBackward(elapsedTime);
+			boolean collide = false;
+			for(int i = 0;i<igs.cages.size();i++){
+				collide = igs.cages.get(i).collide(igs.player.position,false,elapsedTime,igs.player.facingDirection,igs.player.speed);
+				if(collide)break;
+			}
+			if(collide){
+
+			} else{
+				igs.player.walkBackward(elapsedTime);
+			}
+			
 		}
 			
 		/* D/A - Rotate the player on y axis */
