@@ -136,6 +136,7 @@ public class Renderer implements GLEventListener
 		stateManager.addGameState(new MiniGame(gl),"MiniGame");
 		stateManager.addGameState(new CutsceneState(gl),"CutscenePlayer");
 		stateManager.setCurrentState("CutscenePlayer");
+	//stateManager.setCurrentState("InGameState");
 		stateManager.initStates(gl, glu);
 	}
 	

@@ -10,10 +10,17 @@ public class Connect {
 	BufferedReader in;
 	PrintWriter	   out;
 	Socket 		   socket;	
+	boolean connected = false;
+	
 	
 	public Connect(){
 		
 	}
+	
+	void update(long elapsedTime){
+		
+	}
+	
 	
 	public boolean connectToServer(String ip, int port, String name){
 		try {

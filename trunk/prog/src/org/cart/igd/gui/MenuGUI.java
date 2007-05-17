@@ -204,6 +204,7 @@ public class MenuGUI extends GUI
 				}
 				if(input.isSquareButtonPressed( startGame ) )
 				{
+					
 					gameState.changeGameState("InGameState");
 				}
 				

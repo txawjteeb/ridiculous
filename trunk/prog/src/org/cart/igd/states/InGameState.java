@@ -207,19 +207,7 @@ public class InGameState extends GameState
 		inventory = new Inventory(this);
 		
 		/* create objAnimations */
-		/*
-		flamingoWalk = new OBJAnimation(gl,10,"flamingo_walking_",105);
-		flamingoIdle = new OBJAnimation(gl,10,"flamingo_idle_",500);
-		turtleIdle = new OBJAnimation(gl,10,"turtle_idle_",300);
-		kangarooIdle = new OBJAnimation(gl,10,"kangaroo_idle_",300);
-		giraffeIdle = new OBJAnimation(gl,1,"giraffe_idle_",1000);
-		tigerIdle = new OBJAnimation(gl,10,"tiger_idle_",1000);
-		penguinIdle = new OBJAnimation(gl,10,"penguin_idle_",300);
-		pandaIdle = new OBJAnimation(gl,10,"panda_idle_",200);
-		meerkatIdle = new OBJAnimation(gl,10,"meerkat_idle_",300);
-		woodpeckerIdle = new OBJAnimation(gl,10,"woodpecker_idle_",300);
-		elephantIdle = new OBJAnimation(gl,10,"elephant_idle_",100);
-*/
+
 		flamingoWalk = new OBJAnimation(gl,1,"flamingo_walking_",105,2f);
 		flamingoIdle = new OBJAnimation(gl,1,"flamingo_idle_",500,2f);
 		turtleIdle = new OBJAnimation(gl,1,"turtle_idle_",300,4f);
@@ -300,43 +288,7 @@ public class InGameState extends GameState
 				zoopaste,
 				new Vector3f(-15f,0f,50f),false,false));
 		/* add animals to the map */
-		/*
-		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,3f,
-				turtleIdle, 
-				new Vector3f(10f,0f,-20f),this,0,new Vector3f(10f,0f,10f)));
-				
-		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
-				pandaIdle, 
-				new Vector3f(10f,0f,-30f),this,0,new Vector3f(10f,0f,5f)));
-				
-		interactiveEntities.add(new Animal("Kangaroo",Inventory.KANGAROO,0f,3f,
-				kangarooIdle, 
-				new Vector3f(10f,0f,-40f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
-		
-		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,0f,5f,
-				giraffeIdle, 
-				new Vector3f(10f,0f,-50f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
-				
-		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
-				tigerIdle, 
-				new Vector3f(10f,0f,-60f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
-		
-		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,0f,5f,
-				penguinIdle, 
-				new Vector3f(10f,0f,-70f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
-				
-		interactiveEntities.add(new Animal("Meerkat",Inventory.MEERKAT,0f,3f,
-				meerkatIdle, 
-				new Vector3f(10f,0f,-80f),this,Inventory.HOTDOG,new Vector3f(0f,0f,-10f)));
-				
-		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,0f,3f,
-				woodpeckerIdle, 
-				new Vector3f(10f,0f,-90f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
-				
-		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,0f,3f,
-				elephantIdle, 
-				new Vector3f(10f,0f,-100f),this,0,new Vector3f(-10f,0f,-5f)));
-*/
+
 		interactiveEntities.add(new Animal("Turtles",Inventory.TURTLES,0f,30f,
 				turtleIdle, 
 				new Vector3f(-80f,3f,180f),this,0,new Vector3f(10f,0f,10f)));
@@ -710,9 +662,63 @@ public class InGameState extends GameState
 			if(Kernel.userInput.keys[KeyEvent.VK_M]){
 				//((MoviePlayer)gui.get(3)).playMovie(0);
 				this.changeGameState("MiniGame");
-			}	
+			}
+			
+			entityMover();
 		}
 		
 
 	}
+	
+	/*
+	 entity placement	 
+	 */
+	 int currentId =0;	
+	 	
+	public void entityMover(){
+		System.out.println("Current ID = " + currentId);
+		if(Kernel.userInput.keys[KeyEvent.VK_H]){
+				currentId++;
+		} else if(Kernel.userInput.keys[KeyEvent.VK_G]){
+				currentId--;
+		}
+		
+		if(Kernel.userInput.keys[KeyEvent.VK_RIGHT]){
+				if(entities.size()>currentId){
+					entities.get(currentId).position.x+=1f;
+					
+				}
+		} else if(Kernel.userInput.keys[KeyEvent.VK_LEFT]){
+				if(entities.size()>currentId){
+					entities.get(currentId).position.x-=1f;
+				}
+		} else if(Kernel.userInput.keys[KeyEvent.VK_UP]){
+				if(entities.size()>currentId){
+					entities.get(currentId).position.z+=1f;
+				}
+		} else if(Kernel.userInput.keys[KeyEvent.VK_DOWN]){
+				if(entities.size()>currentId){
+					entities.get(currentId).position.z-=1f;
+				}
+		} else if(Kernel.userInput.keys[KeyEvent.VK_Y]){
+				if(entities.size()>currentId){
+					entities.get(currentId).position.y+=1f;
+				}
+		} else if(Kernel.userInput.keys[KeyEvent.VK_T]){
+				if(entities.size()>currentId){
+					entities.get(currentId).position.y-=1f;
+				}
+		}
+		if(entities.size()>currentId){
+				System.out.println("Entity is at location " + entities.get(currentId).position.x + " " + entities.get(currentId).position.y + " " + entities.get(currentId).position.z);
+		}
+		
+	}
+	
+	
+
+	 
+	 
+	
+	
 }
