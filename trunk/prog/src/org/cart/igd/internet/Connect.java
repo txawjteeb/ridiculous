@@ -62,6 +62,7 @@ public class Connect {
 		sendPacket(inv.PSYCH_FIRST_ANIMAL_TALKED_TO_LETTER);	
 		sendPacket(inv.PSYCH_FOUND_HIDDEN_POPPERS);	
 		sendPacket(inv.PSYCH_FOUND_FAKE_SOLUTION);	
+		sendPacket(inv.PSYCH_SAVED_KANGAROO);
 	}
 }
 

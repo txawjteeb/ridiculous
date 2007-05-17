@@ -18,7 +18,7 @@ import org.cart.igd.game.*;
 public class StandingGuard extends Guard
 {
 	private int guardDirection = -1;
-	
+	public int color = 0;
 	/**
 	 * Create a guard with OBJModel
 	 * @param Vector3f pos: location of the entity 
@@ -30,11 +30,12 @@ public class StandingGuard extends Guard
 	 * @param int guardDirection direction the guad faces when standing
 	 **/
 	public StandingGuard(Vector3f pos, float fD, float bsr, OBJAnimation walk,
-			OBJAnimation idle, InGameState igs,float scale,int guardDirection)
+			OBJAnimation idle, InGameState igs,float scale,int guardDirection, int color)
 	{
 		super(pos,fD,bsr,walk,idle,igs,scale);
 		target = home;
 		this.guardDirection = guardDirection;
+		this.color = color;
 	}
 	
 	/**
@@ -127,6 +128,6 @@ public class StandingGuard extends Guard
 		
 		Renderer.info[5] = "standing guard: "+position.x+"/"+position.z;
 		
-		capturePlayer();
+		capturePlayer(color);
 	}
 }

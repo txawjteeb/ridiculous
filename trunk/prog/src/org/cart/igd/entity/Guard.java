@@ -102,7 +102,7 @@ public class Guard extends Entity
 	 * check if the guard is close enough to catch the player to be 
 	 * returned to the cage
 	 **/
-	public void capturePlayer(){
+	public void capturePlayer(int color){
 		if(Collision.stsXZ(position,1f,igs.player.position,
 				igs.player.boundingSphereRadius)){
 			 igs.guardSquad.reset();
@@ -115,7 +115,25 @@ public class Guard extends Entity
 			 		igs.inventory.PSYCH_CAUGHT_BEFORE_FREEING_TURTLES = 1;
 			 	}
 			 }
+			 
+			switch(color){
+		  	case 1:
+		  		igs.inventory.PSYCH_CAUGHT_ORANGE++;
+		  		break;
+		  	case 2:
+		  		igs.inventory.PSYCH_CAUGHT_BLUE++;
+		  		break;
+		  	case 3:
+		  		igs.inventory.PSYCH_CAUGHT_RED++;
+		  		break;
+		  	case 4:
+		  		igs.inventory.PSYCH_CAUGHT_YELLOW++;
+		  		break;
+		  }			 
+			 
+			 
 		}
+
 	}
 	
 	/** adjust yrotation to position of the target */

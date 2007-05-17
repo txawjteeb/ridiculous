@@ -36,6 +36,7 @@ public class CutscenePlayer
 	 */
 	public void loadMovie(String fnm)
 	{
+		isStopped = false;
 		snapper = new JMFSnapper(fnm);
 	}
 	

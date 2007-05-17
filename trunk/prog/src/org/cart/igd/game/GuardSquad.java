@@ -36,9 +36,26 @@ public class GuardSquad {
 				"guard_idle_",150,1.5f,true);
 		OBJAnimation guardWalk = new OBJAnimation(gl,10, 
 				"guard_notice_",150,1.5f, true);
+				
+				
+				/*
+				 	  /// orange = 1 blue = 2 red = 3 yellow = 4
+	  public int PSYCH_CAUGHT_ORANGE = 0;
+	  public int PSYCH_CAUGHT_BLUE = 0;
+	  public int PSYCH_CAUGHT_RED = 0;
+	  public int PSYCH_CAUGHT_YELLOW = 0;
+				 */
+		OBJAnimation orangeGuard = new OBJAnimation(gl,1, 
+				"orange_guard",150,1.5f, true);
+		OBJAnimation blueGuard = new OBJAnimation(gl,1, 
+				"blue_guard",150,1.5f, true);
+		OBJAnimation redGuard = new OBJAnimation(gl,1, 
+				"red_guard",150,1.5f, true);
+		OBJAnimation yellowGuard = new OBJAnimation(gl,1, 
+				"yellow_guard",150,1.5f, true);
 		
 		/* create and add test guard */
-		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f));
+		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1));
 		
 		/* create paths for the guard to follow*/
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,10f),1f,1f));
@@ -46,7 +63,7 @@ public class GuardSquad {
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(-10,0f,-10f),1f,1f));
 		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
 		
-		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,guardWalk,guardIdle,igs,.004f,90));
+		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,blueGuard,blueGuard,igs,.004f,90,2));
 	}
 	
 	public void reset(){

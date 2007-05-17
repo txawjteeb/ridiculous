@@ -12,7 +12,7 @@ import org.cart.igd.util.ColorRGBA;
 
 public class CutsceneState extends GameState
 {
-	private CutscenePlayer player;
+	public CutscenePlayer player;
 	
 	public CutsceneState(GL gl)
 	{
@@ -37,7 +37,10 @@ public class CutsceneState extends GameState
 	
 	public void update(long elapsedTime)
 	{
-		
+		if(player.isStopped)
+		{
+			Kernel.display.renderer.stateManager.setCurrentState("InGameState");
+		}
 	}
 	
 	public void handleInput(long elapsedTime)
@@ -48,6 +51,6 @@ public class CutsceneState extends GameState
 				player.playMovie();
 			else
 				player.stopMovie();
-		}
+		}		
 	}
 }

@@ -24,7 +24,7 @@ import java.awt.image.BufferedImage;
 public class Renderer implements GLEventListener
 {
 	/* GameStateManager instance. */
-	private GameStateManager stateManager;
+	public GameStateManager stateManager;
 	
 	/* TextureLoader instance. */
 	private TextureLoader textureLoader;
@@ -135,8 +135,8 @@ public class Renderer implements GLEventListener
 		stateManager.addGameState(new InGameState(gl),"InGameState");
 		stateManager.addGameState(new MiniGame(gl),"MiniGame");
 		stateManager.addGameState(new CutsceneState(gl),"CutscenePlayer");
-		stateManager.setCurrentState("CutscenePlayer");
-	//stateManager.setCurrentState("InGameState");
+	//	stateManager.setCurrentState("CutscenePlayer");
+		stateManager.setCurrentState("InGameState");
 		stateManager.initStates(gl, glu);
 	}
 	

@@ -18,6 +18,7 @@ import org.cart.igd.game.*;
  */
 public class WalkingGuard extends Guard
 {	
+	int color = 0;
 	/**
 	 * Create a guard with OBJModel
 	 * @param Vector3f pos: location of the entity 
@@ -28,11 +29,12 @@ public class WalkingGuard extends Guard
 	 * @param float scale of the model
 	 */
 	public WalkingGuard(Vector3f pos, float fD, float bsr, OBJAnimation walk,
-			OBJAnimation idle, InGameState igs,float speed)
+			OBJAnimation idle, InGameState igs,float speed, int color)
 	{
 		super(pos,fD,bsr,walk,idle,igs,speed);
 
 		target = home;
+		this.color = color;
 	}
 	
 	/**
@@ -64,7 +66,7 @@ public class WalkingGuard extends Guard
 		
 		Renderer.info[6] = "walking guard: "+position.x+"/"+position.z;
 		
-		capturePlayer();
+		capturePlayer(color);
 	}
 	
 	/**
