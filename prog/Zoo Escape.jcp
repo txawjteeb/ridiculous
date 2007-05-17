@@ -205,11 +205,6 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
-				<path>src\org\cart\igd\entity\EntityInterface.java</path>
-				<folder>src\org\cart\igd\entity</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
 				<path>src\org\cart\igd\entity\Guard.java</path>
 				<folder>src\org\cart\igd\entity</folder>
 				<source>false</source>
@@ -282,10 +277,6 @@
 			<fileitem>
 				<path>src\org\cart\igd\game\Cage.java</path>
 				<folder>src\org\cart\igd\game</folder>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\game\GameObjective.java</path>
-				<folder>src\org\cart\igd\game</folder>
 				<source>false</source>
 			</fileitem>
 			<fileitem>
@@ -300,16 +291,6 @@
 			</fileitem>
 			<fileitem>
 				<path>src\org\cart\igd\game\Item.java</path>
-				<folder>src\org\cart\igd\game</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\game\PlayerState.java</path>
-				<folder>src\org\cart\igd\game</folder>
-				<source>false</source>
-			</fileitem>
-			<fileitem>
-				<path>src\org\cart\igd\game\PlayerStateManager.java</path>
 				<folder>src\org\cart\igd\game</folder>
 				<source>false</source>
 			</fileitem>
@@ -604,10 +585,6 @@
 				<source>false</source>
 			</fileitem>
 			<fileitem>
-				<path>src\org\cart\igd\states\CutsceneState.java</path>
-				<folder>src\org\cart\igd\states</folder>
-			</fileitem>
-			<fileitem>
 				<path>src\org\cart\igd\states\GameState.java</path>
 				<folder>src\org\cart\igd\states</folder>
 				<source>false</source>
@@ -693,14 +670,14 @@
 		<todotaskitem>
 			<description>TODO: enable when sound fixed</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>448</line>
-			<timestamp>1179352185</timestamp>
+			<line>402</line>
+			<timestamp>1179390429</timestamp>
 		</todotaskitem>
 		<todotaskitem>
 			<description>TODO: make sure to call this once */</description>
 			<filepath>src\org\cart\igd\states\InGameState.java</filepath>
-			<line>527</line>
-			<timestamp>1179352185</timestamp>
+			<line>481</line>
+			<timestamp>1179390429</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>
