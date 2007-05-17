@@ -53,6 +53,13 @@ public class Inventory{
 	  ///
 	  public int PSYCH_FOUND_FAKE_SOLUTION = 0;
 	  ///
+	  public int PSYCH_SAVED_KANGAROO = 0;
+	  /// orange = 1 blue = 2 red = 3 yellow = 4
+	  public int PSYCH_CAUGHT_ORANGE = 0;
+	  public int PSYCH_CAUGHT_BLUE = 0;
+	  public int PSYCH_CAUGHT_RED = 0;
+	  public int PSYCH_CAUGHT_YELLOW = 0;
+	  
 	  
 	  
 	  /*

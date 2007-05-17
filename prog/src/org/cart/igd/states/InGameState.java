@@ -30,6 +30,7 @@ import org.cart.igd.models.obj.OBJModel;
 import org.cart.igd.game.*;
 import org.cart.igd.entity.*;
 import org.cart.igd.sound.*;
+import org.cart.igd.media.*;
 /*
  -Get all models in game
  -Finish all music
@@ -132,7 +133,7 @@ public class InGameState extends GameState
 	private boolean showInfoText = true;
 	
 	/* Instance of GLGraphics object. */
-	private GLGraphics glg;
+	public GLGraphics glg;
 	
 	/* Collection of cages. */
 	public ArrayList<Cage> cages = new ArrayList<Cage>();	
@@ -159,9 +160,14 @@ public class InGameState extends GameState
 	/** create a sound manager with current sound settings */
 	private SoundManager sm = new SoundManager(Kernel.soundSettings);
 	
+	public boolean playingMovie = false;
+	public	CutscenePlayer cp;
+	
 	public InGameState(GL gl)
 	{
 		super(gl);
+		cp = new CutscenePlayer();
+		
 		
 		/* load common sounds */
 		try{
@@ -218,7 +224,7 @@ public class InGameState extends GameState
 		pandaIdle = new OBJAnimation(gl,1,"panda_idle_",300,4f);
 		meerkatIdle = new OBJAnimation(gl,1,"meerkat_idle_",300,2f);
 		woodpeckerIdle = new OBJAnimation(gl,1,"woodpecker_idle_",300,4f);
-		elephantIdle = new OBJAnimation(gl,1,"elephant_idle_",300,22f);
+		elephantIdle = new OBJAnimation(gl,1,"elephant_idle_",300,22f);;
 		
 		player = new Player(new Vector3f(-20f,0f,-20f), 0f, .2f, 
 				flamingoWalk,flamingoIdle);
@@ -251,9 +257,6 @@ public class InGameState extends GameState
 		unnecessaryExplores.add(new UnnecessaryExplore("Right",new Vector3f(0f,0f,21f),0f,20f,foodAffinity,this,false));
 		unnecessaryExplores.add(new UnnecessaryExplore("Up",new Vector3f(21f,0f,0f),0f,20f,foodAffinity,this,false));
 		unnecessaryExplores.add(new UnnecessaryExplore("Down",new Vector3f(-21f,0f,0f),0f,20f,foodAffinity,this,false));
-		
-
-		
 			
 		items.add(new Item("Fish",Inventory.FISH,1,0f,1f,
 				bucketoffish,
@@ -294,7 +297,7 @@ public class InGameState extends GameState
 				new Vector3f(-80f,3f,180f),this,0,new Vector3f(10f,0f,10f)));
 		
 				
-		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,3f,
+		interactiveEntities.add(new Animal("Panda",Inventory.PANDA,0f,20f,
 				pandaIdle, 
 				new Vector3f(30f,0f,-180f),this,0,new Vector3f(10f,0f,5f)));
 				
@@ -302,15 +305,15 @@ public class InGameState extends GameState
 				kangarooIdle, 
 				new Vector3f(130f,3f,-75f),this,Inventory.DISGUISEGLASSES,new Vector3f(5f,0f,10f)));
 		
-		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,180f,5f,
+		interactiveEntities.add(new Animal("Giraffe",Inventory.GIRAFFE,180f,10f,
 				giraffeIdle, 
 				new Vector3f(-27f,5f,208f),this,Inventory.MEDICATION,new Vector3f(10f,0f,0f)));
 				
-		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,5f,
+		interactiveEntities.add(new Animal("Tiger",Inventory.TIGER,0f,10f,
 				tigerIdle, 
 				new Vector3f(40f,3f,210f),this,Inventory.ZOOPASTE,new Vector3f(0f,0f,10f)));
 		
-		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,90f,5f,
+		interactiveEntities.add(new Animal("Penguin",Inventory.PENGUIN,90f,10f,
 				penguinIdle, 
 				new Vector3f(-80f,9f,-181f),this,Inventory.FISH,new Vector3f(-10f,0f,0f)));
 				
@@ -318,9 +321,9 @@ public class InGameState extends GameState
 				meerkatIdle, 
 				new Vector3f(130f,0f,130f),this,Inventory.HOTDOG,new Vector3f(0f,2f,-10f)));
 				
-		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,180f,3f,
+		interactiveEntities.add(new Animal("WoodPecker",Inventory.WOODPECKER,90f,20f,
 				woodpeckerIdle, 
-				new Vector3f(190f,8f,-25f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
+				new Vector3f(200f,8f,-27f),this,Inventory.PADDLEBALL,new Vector3f(-10f,0f,-10f)));
 				
 		interactiveEntities.add(new Animal("Elephant",Inventory.ELEPHANT,180f,40f,
 				elephantIdle, 
@@ -332,11 +335,8 @@ public class InGameState extends GameState
 		cages.add(new Cage(8,new Vector3f(200f,13f,-20f),20f,14f,new OBJModel(gl,"8",70.2f,false),this));
 		cages.add(new Cage(7,new Vector3f(130f,-2f,130f),1f,1.2f,new OBJModel(gl,"7",10f,false),this));
 		cages.add(new Cage(6,new Vector3f(-80f,6f,-180f),1f,14f,new OBJModel(gl,"6",40.2f,false),this));
-		
-		
 		cages.add(new Cage(5,new Vector3f(39f,8f,210f),1f,14f,new OBJModel(gl,"5",40.2f,false),this));
-		cages.add(new Cage(4,new Vector3f(-30f,5f,210f),1f,14f,new OBJModel(gl,"4",40.2f,false),this));
-		
+		cages.add(new Cage(4,new Vector3f(-30f,5f,210f),1f,14f,new OBJModel(gl,"4",40.2f,false),this));	
 		cages.add(new Cage(3,new Vector3f(130f,.1f,-80f),90f,14f,new OBJModel(gl,"3",40.2f,false),this));
 		cages.add(new Cage(2,new Vector3f(30f,0f,-180f),1f,14f,new OBJModel(gl,"2",40.2f,false),this));
 		cages.add(new Cage(1,new Vector3f(-80f,2f,180f),1f,14f,new OBJModel(gl,"1",40.2f,false),this));
@@ -345,9 +345,7 @@ public class InGameState extends GameState
 		/* add interactive terrain items*/
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(-80f,2f,170f), 0f, 3f,
-				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this));
-				
-				
+				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this));				
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(30f,0f,-20f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TURTLES,Inventory.FLAMINGO,this,true));
@@ -355,28 +353,28 @@ public class InGameState extends GameState
 				
 						
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-30f), 0f, 3f,
+				new Vector3f(20f,0f,-180f), 0f, 5f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.PANDA,Inventory.TURTLES,this));
 				
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-40f), 0f, 3f,
+				new Vector3f(130f,.1f,-80f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.KANGAROO,Inventory.TURTLES,this));
 				
 				
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-50f), 0f, 3f,
+				new Vector3f(-30f,5f,210f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.GIRAFFE,Inventory.TURTLES,this));
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-60f), 0f, 3f,
+				new Vector3f(39f,8f,210f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.TIGER,new int[]{Inventory.GIRAFFE,Inventory.PANDA},this));
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-70f), 0f, 3f,
+				new Vector3f(-80f,6f,-180f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.PENGUIN,Inventory.TIGER,this));
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-80f), 0f, 3f,
+				new Vector3f(130f,-2f,130f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.MEERKAT,new int[]{Inventory.GIRAFFE,Inventory.KANGAROO},this));
 		interactiveEntities.add(new TerrainEntity(
-				new Vector3f(20f,0f,-90f), 0f, 3f,
+				new Vector3f(200f,13f,-20f), 0f, 3f,
 				new OBJModel(gl,"save_animal_thing", 2f,false),Inventory.WOODPECKER,Inventory.MEERKAT,this));
 		interactiveEntities.add(new TerrainEntity(
 				new Vector3f(20f,0f,-100f), 0f, 3f,
@@ -597,6 +595,17 @@ public class InGameState extends GameState
 		
 		/* Render GUI */
 		gui.get(currentGuiState).render( Kernel.display.getRenderer().getGLG() );
+		if(playingMovie){
+			System.out.println("Moving is Playing in IGS");
+			cp.render(glg);
+			if(cp.isStopped){
+				System.out.println("Movie was Stopped in IGS");
+				playingMovie = false;
+			}
+		}
+		
+
+		
 
 	}
 	
@@ -664,7 +673,7 @@ public class InGameState extends GameState
 				this.changeGameState("MiniGame");
 			}
 			
-			entityMover();
+		//	entityMover();
 		}
 		
 

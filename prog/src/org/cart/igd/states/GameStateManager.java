@@ -51,6 +51,11 @@ public class GameStateManager
 		currentStateKey = key;
 	}
 	
+	public GameState getState(String key)
+	{
+		return states.get(key);
+	}
+	
 	/**
 	 * addGameState
 	 *

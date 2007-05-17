@@ -9,6 +9,7 @@ import org.cart.igd.input.*;
 import org.cart.igd.states.*;
 import org.cart.igd.game.*;
 import org.cart.igd.sound.*;
+import org.cart.igd.media.*;
 
 /**
  * 
@@ -1086,6 +1087,7 @@ public class Dialogue extends GUI
 						sm.playSound(questLogUpdated);
 					break;
 					case JUST_SAVED:
+						
 						sm.playVoice(kangarooVoiceOvers[7]);
 						add("Thanks! Now we can save everybody else and get the heck out of here.");
 						add("(Done)");
@@ -1094,9 +1096,11 @@ public class Dialogue extends GUI
 						switch(selection()){}
 						animal.relocateToBush();
 						if(igs.inventory.animals.size()<3){
+							igs.inventory.PSYCH_SAVED_KANGAROO = 1;
 							igs.inventory.animals.add(animal);
 							animal.state = SAVED_IN_PARTY;
 						} else {
+							igs.inventory.PSYCH_SAVED_KANGAROO = 1;
 							animal.state = SAVED_IN_BUSH;
 						}		
 					break;
@@ -1227,6 +1231,12 @@ public class Dialogue extends GUI
 					break;
 					
 					case JUST_SAVED:
+						igs.playingMovie = true;
+						igs.cp.loadMovie("data/movies/movie01/movie.avi");
+						while(igs.playingMovie){
+							pause(500);
+						}
+						
 						sm.playVoice( turtleVoiceOvers[5] );
 						add("Thanks, nice to see some of you youngin's still have respect fer the old folks.");
 						add("(Done)");
@@ -1240,7 +1250,8 @@ public class Dialogue extends GUI
 						} else {
 							animal.state = SAVED_IN_BUSH;
 						}
-					
+
+						
 						
 							
 					break;
