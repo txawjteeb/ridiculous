@@ -17,6 +17,7 @@ public class Player extends Entity
 		super(pos,fD,bsr,idle);
 		this.walk = walk;
 		this.idle = idle;
+		this.speed = .012f;
 	}
 	
 	public void update(long elapsedTime){	

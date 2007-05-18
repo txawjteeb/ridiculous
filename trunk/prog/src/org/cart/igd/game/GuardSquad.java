@@ -56,15 +56,51 @@ public class GuardSquad {
 		
 		/* create and add test guard */
 		WalkingGuard g1 = new WalkingGuard(
-				new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1); 
+				new Vector3f(0f,8f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1); 
 		WalkingGuard g2 = new WalkingGuard(
-				new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+				new Vector3f(-80f,2f,180f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g3 = new WalkingGuard(
+				new Vector3f(30f,0f,-180f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g4 = new WalkingGuard(
+				new Vector3f(200f,13f,-20f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g5 = new WalkingGuard(
+				new Vector3f(130f,.1f,-80f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g6 = new WalkingGuard(
+				new Vector3f(-30f,5f,210f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g7 = new WalkingGuard(
+				new Vector3f(130f,-2f,130f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g8 = new WalkingGuard(
+				new Vector3f(39f,8f,210f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
+		WalkingGuard g9 = new WalkingGuard(
+				new Vector3f(-80f,6f,-180f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
 		
+
 		igs.entities.add(g1);
-		createPath(g1, new Vector3f(10f,0f,10f),17f);
+		createPath(g1, g1.position,10f);
 		
 		igs.entities.add(g2);
-		createPath(g2, new Vector3f(-10f,0f,-10f),8f);
+		createPath(g2, g2.position,10f);
+		
+		igs.entities.add(g3);
+		createPath(g3, g3.position,10f);
+		
+		igs.entities.add(g4);
+		createPath(g4, g4.position,10f);
+		
+		igs.entities.add(g5);
+		createPath(g5, g5.position,10f);
+		
+		igs.entities.add(g6);
+		createPath(g6, g6.position,10f);
+		
+		igs.entities.add(g7);
+		createPath(g7, g7.position,10f);
+		
+		igs.entities.add(g8);
+		createPath(g8, g8.position,10f);
+		
+		igs.entities.add(g9);
+		createPath(g9, g9.position,10f);
 		
 		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,blueGuard,blueGuard,igs,.004f,90,2));
 	}
