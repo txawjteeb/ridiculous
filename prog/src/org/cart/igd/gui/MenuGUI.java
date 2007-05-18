@@ -204,7 +204,12 @@ public class MenuGUI extends GUI
 				}
 				if(input.isSquareButtonPressed( startGame ) )
 				{
-					
+					String name = gtfUserName.text;
+					if(name.equals("")){
+						name = "undef_user_name";
+					}
+					//TODO: add proper parameters for server connection
+					Kernel.connect.connectToServer("12.123.123.12", 6666, name);
 					gameState.changeGameState("InGameState");
 				}
 				
