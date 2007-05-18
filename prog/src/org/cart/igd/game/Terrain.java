@@ -77,10 +77,10 @@ public class Terrain
 		}
 		
 		/* Render cages */
-	//	gl.glDisable(GL.GL_CULL_FACE);
+		//gl.glDisable(GL.GL_CULL_FACE);
 		for(int i = 0;i<igs.cages.size();i++){
 			if(igs.cages.get(i).cageId == 6)gl.glEnable(GL.GL_CULL_FACE);
-		//	igs.cages.get(i).render(gl);
+			igs.cages.get(i).render(gl);
 			gl.glDisable(GL.GL_CULL_FACE);
 		}
 	//	gl.glEnable(GL.GL_CULL_FACE);
