@@ -247,20 +247,20 @@ public class UserInput implements KeyListener, MouseListener, MouseMotionListene
 	 */
 	public void keyPressed(KeyEvent e)
 	{
-		
+		/* activate game action if exist */
 		if(keyActions[e.getKeyCode()]!= null)
 		{
 			keyActions[e.getKeyCode()].activate();
 		}
 		
-		System.out.println("key pressed: "+e.getKeyChar());
+		/* send a KeyEvent to gui element */
 		for(UIComponent c: guiElements){
 			if(c.focused){
-				System.out.println("key press sent");
 				c.keyPressed(e);
 			}
 		}
 		
+		/* update array of key presses */
 		keys[e.getKeyCode()] = true;
 		e.consume();
 	}

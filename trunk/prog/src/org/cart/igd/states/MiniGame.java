@@ -1,9 +1,6 @@
 package org.cart.igd.states;
 
 import java.awt.event.KeyEvent;
-import java.util.Collections;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.*;
 
 import javax.media.opengl.GL;
@@ -16,6 +13,7 @@ import org.cart.igd.entity.Entity;
 import org.cart.igd.entity.Player;
 import org.cart.igd.entity.PowerBox;
 import org.cart.igd.entity.SlushyBall;
+import org.cart.igd.game.Inventory;
 import org.cart.igd.gui.MiniGamePenguins;
 import org.cart.igd.math.Vector3f;
 import org.cart.igd.models.obj.OBJAnimation;
@@ -181,7 +179,15 @@ public class MiniGame extends GameState
 		for(Entity e: entities){
 			boolean collide = Collision.stsXZ(e.position, e.boundingSphereRadius, 
 					powerBox.position, powerBox.boundingSphereRadius);
-			if(collide)System.out.println("collision");
+			if(collide){
+				removeList.add(e);
+				Kernel.global.isElephantRescued = true;
+				//TODO: use this to determine what cutscene to play
+				Kernel.global.nextMovieIndex = Inventory.ELEPHANT;
+				this.changeGameState("CutscenePlayer");
+			}
+			
+			
 		}
 		
 		if(Kernel.userInput.keys[KeyEvent.VK_W])

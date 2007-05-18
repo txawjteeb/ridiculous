@@ -213,12 +213,15 @@ public class InGameGUI extends GUI
 			} else{
 				igs.player.walkForward(elapsedTime);
 			
+				
 				if(!mouseCameraRotate.isActive() && igs.camera.facingOffset!=0f)
 				{
+					igs.camera.moveToBackView(8f);
+					
 					if(igs.player.position.x==igs.player.lastPosition.x && 
 							igs.player.position.z==igs.player.lastPosition.z)
 						{
-							igs.camera.moveToBackView(8f);
+							
 						}
 				}
 			}

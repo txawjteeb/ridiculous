@@ -30,9 +30,9 @@ public class StandingGuard extends Guard
 	 * @param int guardDirection direction the guad faces when standing
 	 **/
 	public StandingGuard(Vector3f pos, float fD, float bsr, OBJAnimation walk,
-			OBJAnimation idle, InGameState igs,float scale,int guardDirection, int color)
+			OBJAnimation idle, InGameState igs,float speed,int guardDirection, int color)
 	{
-		super(pos,fD,bsr,walk,idle,igs,scale);
+		super(pos,fD,bsr,walk,idle,igs,speed);
 		target = home;
 		this.guardDirection = guardDirection;
 		this.color = color;

@@ -20,12 +20,7 @@ public class Sound {
             Log.error(e); 
             throw new Exception("Failed to load sound: "+ref); 
         } 
-    } 
-     
-
-    public void play() { 
-        play(1.0f,1.0f); 
-    }
+    }  
      
     public void play(float pitch, float volume) { 
        sound.playAsSoundEffect(pitch, volume, false); 

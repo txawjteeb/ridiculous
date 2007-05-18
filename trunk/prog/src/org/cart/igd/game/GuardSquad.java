@@ -55,15 +55,31 @@ public class GuardSquad {
 				"yellow_guard",150,1.5f, true);
 		
 		/* create and add test guard */
-		igs.entities.add(new WalkingGuard(new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1));
+		WalkingGuard g1 = new WalkingGuard(
+				new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1); 
+		WalkingGuard g2 = new WalkingGuard(
+				new Vector3f(0f,0f,0f),0f,.5f,guardIdle,guardWalk,igs,.004f,1);
 		
-		/* create paths for the guard to follow*/
-		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,10f),1f,1f));
-		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(-10f,0f,10f),1f,1f));
-		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(-10,0f,-10f),1f,1f));
-		((Guard)igs.entities.get(0)).path.add(new GuardFlag(new Vector3f(10f,0f,-10f),1f,1f));
+		igs.entities.add(g1);
+		createPath(g1, new Vector3f(10f,0f,10f),17f);
+		
+		igs.entities.add(g2);
+		createPath(g2, new Vector3f(-10f,0f,-10f),8f);
 		
 		igs.entities.add(new StandingGuard(new Vector3f(0f,0f,0f),0f,.5f,blueGuard,blueGuard,igs,.004f,90,2));
+	}
+	
+	/**
+	 * @param g walking guard path asigned
+	 *@param p center point of the patrol area
+	 *@param s size of the patrol perimiter 
+	 */
+	public void createPath(Guard g, Vector3f p, float s){
+		/* create paths for the guard to follow*/
+		g.path.add(new GuardFlag(new Vector3f(p.x+s,0f,p.y+s),1f,1f));
+		g.path.add(new GuardFlag(new Vector3f(p.x-s,0f,p.y+s),1f,1f));
+		g.path.add(new GuardFlag(new Vector3f(p.x-s,0f,p.y-s),1f,1f));
+		g.path.add(new GuardFlag(new Vector3f(p.x+s,0f,p.y-s),1f,1f));
 	}
 	
 	public void reset(){

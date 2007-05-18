@@ -26,6 +26,19 @@ public class CutsceneState extends GameState
 		player.loadMovie(fn);
 	}
 	
+	public void loadCutscene(int index)
+	{
+		String path = "data/movies/movie02/1.avi";
+		
+		if(index <10){
+			path = "data/movies/movie0"+ Kernel.global.nextMovieIndex+"/1.avi";
+		} else {
+			path = "data/movies/movie"+ Kernel.global.nextMovieIndex+"/1.avi";
+		}
+		
+		player.loadMovie(path);
+	}
+	
 	public void display(GL gl, GLU glu)
 	{
 		if(!player.isStopped)
@@ -41,16 +54,18 @@ public class CutsceneState extends GameState
 		{
 			Kernel.display.renderer.stateManager.setCurrentState("InGameState");
 		}
-	}
-	
-	public void handleInput(long elapsedTime)
-	{
-		if(Kernel.userInput.keys[KeyEvent.VK_SPACE])
+		
+		if(Kernel.userInput.keys[KeyEvent.VK_ENTER])
 		{
 			if(player.isStopped)
 				player.playMovie();
 			else
 				player.stopMovie();
-		}		
+		}	
+	}
+	
+	public void handleInput(long elapsedTime)
+	{
+			
 	}
 }

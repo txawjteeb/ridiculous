@@ -6,7 +6,7 @@ import org.cart.igd.input.UserInput;
 
 public class GTextField extends UIComponent
 {
-	private String text = "";
+	public String text = "";
 	public GTextField(UserInput ui,int x, int y, int w, int h) {
 		super(x, y, w, h);
 		ui.addComponentForListening(this);
@@ -28,7 +28,11 @@ public class GTextField extends UIComponent
 		if(e.getKeyCode()==KeyEvent.VK_BACK_SPACE){
 			text = text.substring(0, text.length()-1);
 		} else {
-			text = (text+e.getKeyChar());
+			char key = e.getKeyChar();
+			if(key>33&&key<126){
+				text = (text+key);
+			}
+			
 		}
 	}
 

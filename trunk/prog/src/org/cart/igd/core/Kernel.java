@@ -1,6 +1,9 @@
 package org.cart.igd.core;
 
-import org.cart.igd.input.*;
+import org.cart.igd.game.Global;
+import org.cart.igd.input.InputHandler;
+import org.cart.igd.input.UserInput;
+import org.cart.igd.internet.Connect;
 import org.cart.igd.sound.SoundSettings;
 import org.cart.igd.*;
 
@@ -27,10 +30,12 @@ public class Kernel
 	public GameLauncher gameLauncher;
 	
 	/** 
-	 * collection of all the game event 
-	 * note: refer to this for game logic 
+	 * sotore important variables for logic
 	 **/
-	public static GameEventList gameEventList;
+	public static Global global;
+	
+	/** connection to server */
+	public static Connect connect;
 	
 	public Kernel()
 	{
@@ -56,7 +61,8 @@ public class Kernel
 		
 		userInput = new UserInput( display.getGLCanvas() );
 		
-		gameEventList = new GameEventList();
+		global = new Global();
+		connect= new Connect();
 	}
 	
 	/**
