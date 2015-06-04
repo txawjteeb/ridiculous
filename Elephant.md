@@ -1,0 +1,3 @@
+> Inarguably the most massive animal in the zoo, Vladikov is strong and, due to his life being spent in a cage, bad tempered.  He is constantly looking for a way out, and will be forever grateful if the animals can help him escape from the zoo.
+
+![http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/elephant.jpg](http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/elephant.jpg)

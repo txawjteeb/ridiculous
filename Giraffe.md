@@ -1,0 +1,3 @@
+> The oldest animal in the zoo, Marvin is constantly complaining about his bad back.  He also complains about his bad neck.  As a matter of fact, he complains about everything.  He wants to see the outside of the zoo before he dies, however, so even though he has a habit of trying to weasel his way out of doing anything, he will still gladly help the other animals.
+
+> ![http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/gireffe.jpg](http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/gireffe.jpg)

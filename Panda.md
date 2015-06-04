@@ -1,0 +1,3 @@
+> One of the oldest animals at the zoo, Mei Ling is a slow and cautious mammal. She thinks every action through as systematically as possible.  She never does anything without first considering every outcome and spontaneity is not part of her charm.  This doesn’t change the fact that she is a valuable asset, however, because she still has incredible strength and a cool mind.
+
+> ![http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/panda.jpg](http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/panda.jpg)

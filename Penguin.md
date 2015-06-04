@@ -1,0 +1,3 @@
+> Billy is a prankster, and loves to play jokes on other animals.  His most recent effort has been trying to get a snowball from his enclosure to hit Abella.  He is somewhat annoying to the other animals because of his love of practical jokes, but he views all of them as good friends, and will do whatever he must to save them from being made into meals.
+
+> ![http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/penguin.jpg](http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/penguin.jpg)

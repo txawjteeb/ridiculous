@@ -1,0 +1,3 @@
+> Youthful and energetic, Roxy is excited at the prospect of being a hero, and is literally jumping with anticipation every time he thinks he has a chance.  He looks to the other animals as older siblings, and is more than glad to help them in any way he can.
+
+> ![http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/kangaroo.jpg](http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/kangaroo.jpg)

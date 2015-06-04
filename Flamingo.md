@@ -1,0 +1,3 @@
+> Poncho the Flamingo is a very serious bird.  Throughout his life, he has been teased for having a rather large head, which has resulted in him having slight feelings of dislike for the other animals.  He would never, however, wish for their demise, and immediately sets out to save them after he learns of the plot to sell the zoo animals.He sometimes seems demanding, but has only the best intentions at heart.
+
+> ![http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/Untitled-1.jpg](http://img.photobucket.com/albums/v230/loveofthesword13/project%20ridiculous/Untitled-1.jpg)
